@@ -1,13 +1,15 @@
 <?php
 session_start();
-	$db_handle = mysqli_connect("localhost","root","redhat111111","bluenethack");
-var_dump($_SESSION);
-//Check connection
-	if (mysqli_connect_errno()) {
-	  	echo "Failed to connect to MySQL: " . mysqli_connect_error();
-	}
+
+require_once "dbConnection.php";
+
 
 	$status = $_GET["status"];
+    
+    if($status == null) $status = "open";
+
+    $user_id = $_SESSION['user_id'];
+
 	/*if (!isset($_SESSION['user_id'])) {  
 		header('Location: index.php');
 	}*/
@@ -25,11 +27,12 @@ var_dump($_SESSION);
 			//header("Location: #"); 
 		}
 	}
+var_dump($_SESSION,$_POST,$_GET);
 
-    if($status == "cem_open" && $_SESSION["employee_type"] != "cem") {
+   /* if($status == "cem_open" && $_SESSION["employee_type"] != "cem") {
         echo "<h1> Brother you are at worrg place</h1>";
         exit;
-    }
+    }*/
 ?>
 
 <!DOCTYPE html>
@@ -144,7 +147,7 @@ var_dump($_SESSION);
             <?php } ?>
 
             <?php if ($_SESSION["employee_type"] ==  "me" ) { ?>
-              <li><a href="request.php?status=cem_open">
+              <li><a href="home.php?status=open">
                 <div class="icon-bg bg-pink"></div><i class="glyphicon glyphicon-user"></i>
                 <span class="menu-title">Open</span></a>   
               </li>
@@ -152,7 +155,7 @@ var_dump($_SESSION);
             <?php } ?>
 
             <?php if ($_SESSION["employee_type"] ==  "me" ) { ?>
-              <li><a href="request.php?status=cem_open">
+              <li><a href="home.php?status=me_picked">
                 <div class="icon-bg bg-pink"></div><i class="glyphicon glyphicon-user"></i>
                 <span class="menu-title">Picked</span></a>   
               </li>
@@ -160,7 +163,7 @@ var_dump($_SESSION);
             <?php } ?>
 
             <?php if ($_SESSION["employee_type"] ==  "me" ) { ?>
-              <li><a href="request.php?status=cem_open">
+              <li><a href="home.php?status=cem_open">
                 <div class="icon-bg bg-pink"></div><i class="glyphicon glyphicon-user"></i>
                 <span class="menu-title">Done</span></a>   
               </li>
@@ -262,11 +265,132 @@ var_dump($_SESSION);
 
 
 <script type="text/javascript">
+
+        function genericEmptyFieldValidator(fields){
+          returnBool = true;
+          $.each(fields, function( index, value ) {
+            console.log(value);
+            if($('#'+value).val() == "" || $('#'+value).val() == null){
+              $('#'+value).keypress(function() {
+                  genericEmptyFieldValidator([value]);
+              });
+
+              $('#'+value).css("border-color", "red");
+              
+              returnBool = false;
+            }else{
+              $('#'+value).css("border-color", "blue");
+            }
+          });
+
+          return returnBool;
+      }
+
+      function postWorkerDetails(fields, languagesArray, skillsArray) {
+        var dataString = "";
+        var working_slots = "";
+        var free_slots = "";
+        //timings, home_town, remarks, police
+        dataString = "first_name=" + $('#'+fields[0]).val() + "&last_name=" + $('#'+fields[1]).val() +
+            "&address_proof_name=" + $('#'+fields[2]).val() + "&address_proof_id=" + $('#'+fields[3]).val() + 
+            "&id_proof_name=" + $('#'+fields[4]).val() + "&id_proof_id=" +  $('#'+fields[5]).val() + 
+            "&mobile=" +  $('#'+fields[6]).val() + "&education=" +  $('#'+fields[7]).val() + 
+            "&experience=" +  $('#'+fields[8]).val() + "&working_domain=" + $('#'+fields[9]).val() +
+            "&current_working_city=" + $('#'+fields[10]).val() + "&current_working_area=" +  $('#'+fields[11]).val() + 
+            "&preferred_working_city=" + $('#'+fields[12]).val() + "&preferred_working_area=" + $('#'+fields[13]).val()+ 
+            "&birth_date=" +  $('#'+fields[14]).val() + "&address=" + $('#'+fields[15]).val() +
+            "&gender=" + $("input[name='gender']:checked").val() +
+            "&working_slots=" + $('#'+fields[17]).val() +
+            "&free_slots=" + $('#'+fields[18]).val() +
+            "&languages=" + languagesArray + 
+            "&skills=" + skillsArray +
+            "&emergancy_mobile=" + $('#emergancy_mobile').val()+
+            "&timings=" + $('#timings').val() +
+            "&home_town=" + $('#home_town').val() +
+            "&remarks=" + $('#remarks').val() +
+            "&police=" + $("input[name='police']:checked").val() ;
+        //alert(dataString);
+        console.log(dataString);
+          $.ajax({
+          type: "POST",
+          url: "ajax/addNewWorker.php",
+          data: dataString,
+          cache: false,
+          success: function(result){
+            //alert(result);
+            console.log(result);
+            $(fields).each(function(i, idVal){ 
+              $("#"+idVal).val(""); 
+            });
+            $('#languages').val("");
+            $('#skills').val("");
+            $('#emergancy_mobile').val(""); 
+            alert("Added Successfully");
+            location.reload();
+          },
+          error: function(result){
+            alert(result);
+            return false;
+          }
+        });
+      }
+
+      function validateWorkerDetails(){
+          
+           fields = ["first_name","last_name","address_proof_name", "address_proof_id", 
+                "id_proof_name", "id_proof_id", "mobile", 
+                "education", "experience", "working_domain", 
+                "current_working_city", "current_working_area", "preferred_working_city", 
+                "preferred_working_area", "birth_date", "address" ];
+                /*, "working_slot1_from", "working_slot1_to", "free_slot1_from", 
+                "free_slot1_to"*/
+           //emergancy_mobile not compulsary
+          /*var languagesArray = []; 
+          $('#languages :selected').each(function(i, selected){ 
+            languagesArray[i] = $(selected).val(); 
+          });*/
+
+          var languagesArray = []; 
+          $('#languages').each(function(i, selected){ 
+            languagesArray[i] = $(selected).val(); 
+          });
+
+          var skillsArray = []; 
+          $('#skills').each(function(i, selected){ 
+            skillsArray[i] = $(selected).val(); 
+          });
+
+          
+          if(genericEmptyFieldValidator(fields)){
+            
+            //var phoneVal = $('#mobile').val();
+                    
+            /*var stripped = phoneVal.replace(/[\(\)\.\-\ ]/g, '');    
+            if (isNaN(parseInt(stripped))) {
+              //error("Contact No", "The mobile number contains illegal characters");
+              $('#mobile').css("border", "1px solid OrangeRed");
+              return false;
+            }
+            else if (phoneVal.length != 10) {
+              //error("Contact No", "Make sure you included valid contact number");
+              $('#mobile').css("border", "1px solid OrangeRed");
+              return false;
+            }*/
+            
+            postWorkerDetails(fields, languagesArray, skillsArray);
+
+          }
+          return false;
+      }
+
+
+
+
       function ChangeServiceRequestStatus(id, oldStatus, newStatus) {
         
         
         var dataString = "";
-        dataString = "id=" + id + "&old_status=" + oldStatus + "&new_status=" + newStatus;
+        dataString = "sr_id=" + id + "&old_status=" + oldStatus + "&new_status=" + newStatus;
 
         $.ajax({
             type: "POST",

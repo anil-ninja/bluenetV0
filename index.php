@@ -1,13 +1,10 @@
 <?php
 session_start();
-	$db_handle = mysqli_connect("localhost","root","redhat111111","bluenethack");
 
-//Check connection
-	if (mysqli_connect_errno()) {
-	  	echo "Failed to connect to MySQL: " . mysqli_connect_error();
-	}
+require_once "dbConnection.php";
+
 	if (isset($_SESSION['user_id'])) {  
-		header('Location: request.php');
+		header('Location: home.php');
 	}
 	if (isset($_POST['request'])) {
 	
@@ -29,7 +26,7 @@ session_start();
 				$_SESSION['user_id'] = $user_create_id;
 				$_SESSION['first_name'] = $firstname ;
 				$_SESSION['email'] = $email;
-				header("Location: request.php");
+				header("Location: home.php");
 			}
 		}
 		else {  
