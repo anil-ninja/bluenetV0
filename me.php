@@ -191,87 +191,65 @@ session_start();
         <div class="page-content">
           <div id="tab-general">
             <div class="row mbl">
-				<div class="col-lg-10">
-					<div class="panel-primary">
-						<div class="note note-success">
+				<div class="col-lg-8">
+					
+						<div class="list-group">
                         	<p style="font-size:20px;padding-left: 2em;">
-                        	Area  <span style="padding-left: 9em">Chakkarpur</span><br/>
-                        	Requirements <span style="padding-left: 5em">Maid</span><br/>
-                        	Timings <span style="padding-left: 8em">7am to 7pm</span><br/>
-                        	Working Time <span style="padding-left: 5em">12 hours</span><br/>
-                        	Salary Criteria <span style="padding-left: 5em">7k to 9k</span> <br/>
-                        	Remarks <span style="padding-left: 7em">Female, age between 35 to 45</span><br/>
-                        	Skills <span style="padding-left: 9em">Ironing, pet care, helping</span> 
-                        	<form method="post">
-                        		<input type="submit" class="btn btn-primary pull-right" value="Pick">
-                        	</form>  <br/></p>
+                        		<a href="#" class="list-group-item active">	Area  <span style="padding-left: 9em">Chakkarpur</span></a>
+                        		<a href="#" class="list-group-item">Requirements <span style="padding-left: 5em">Maid</span></a>
+                        		<a href="#" class="list-group-item">Timings <span style="padding-left: 8em">7am to 7pm</span></a>
+                        		<a href="#" class="list-group-item">Working Time <span style="padding-left: 5em">12 hours</span></a>
+                        		<a href="#" class="list-group-item">Salary Criteria <span style="padding-left: 5em">7k to 9k</span></a>
+                        		<a href="#" class="list-group-item">Remarks <span style="padding-left: 7em">Female, age between 35 to 45</span></a>
+                        		<a href="#" class="list-group-item">Skills <span style="padding-left: 9em">Ironing, pet care, helping</span></a>
+		                        <a href="#" class="list-group-item">
+		                        		<input type="submit" class="btn btn-primary" style="margin-left: 80%" value="Pick">
+		                        </a>
+		                    </p>
                         </div>
-                        <div class="note note-success">
+                        <div class="list-group">
                         	<p style="font-size:20px;padding-left: 2em;">
-                        	Area  <span style="padding-left: 9em">Chakkarpur</span><br/>
-                        	Requirements <span style="padding-left: 5em">Maid</span><br/>
-                        	Timings <span style="padding-left: 8em">7am to 7pm</span><br/>
-                        	Working Time <span style="padding-left: 5em">12 hours</span><br/>
-                        	Salary Criteria <span style="padding-left: 5em">7k to 9k</span> <br/>
-                        	Remarks <span style="padding-left: 7em">Female, age between 35 to 45</span><br/>
-                        	Skills <span style="padding-left: 9em">Ironing, pet care, helping</span> 
-                        	<form method="post">
-                        		<input type="submit" class="btn btn-primary pull-right" value="Pick">
-                        	</form>  <br/></p>
+                        		<a href="#" class="list-group-item active">	Area  <span style="padding-left: 9em">Chakkarpur</span></a>
+                        		<a href="#" class="list-group-item">Requirements <span style="padding-left: 5em">Maid</span></a>
+                        		<a href="#" class="list-group-item">Timings <span style="padding-left: 8em">7am to 7pm</span></a>
+                        		<a href="#" class="list-group-item">Working Time <span style="padding-left: 5em">12 hours</span></a>
+                        		<a href="#" class="list-group-item">Salary Criteria <span style="padding-left: 5em">7k to 9k</span></a>
+                        		<a href="#" class="list-group-item">Remarks <span style="padding-left: 7em">Female, age between 35 to 45</span></a>
+                        		<a href="#" class="list-group-item">Skills <span style="padding-left: 9em">Ironing, pet care, helping</span></a>
+		                        <a href="#" class="list-group-item">
+		                        		<input type="submit" class="btn btn-primary" style="margin-left: 80%" value="Pick">
+		                        </a>
+		                    </p>
                         </div>
-                        <div class="note note-success">
+                        <div class="list-group">
                         	<p style="font-size:20px;padding-left: 2em;">
-                        	Area  <span style="padding-left: 9em">Chakkarpur</span><br/>
-                        	Requirements <span style="padding-left: 5em">Maid</span><br/>
-                        	Timings <span style="padding-left: 8em">7am to 7pm</span><br/>
-                        	Working Time <span style="padding-left: 5em">12 hours</span><br/>
-                        	Salary Criteria <span style="padding-left: 5em">7k to 9k</span> <br/>
-                        	Remarks <span style="padding-left: 7em">Female, age between 35 to 45</span><br/>
-                        	Skills <span style="padding-left: 9em">Ironing, pet care, helping</span> 
-                        	<form method="post">
-                        		<input type="submit" class="btn btn-primary pull-right" value="Pick">
-                        	</form>  <br/></p>
+                        		<a href="#" class="list-group-item active">	Area  <span style="padding-left: 9em">Chakkarpur</span></a>
+                        		<a href="#" class="list-group-item">Requirements <span style="padding-left: 5em">Maid</span></a>
+                        		<a href="#" class="list-group-item">Timings <span style="padding-left: 8em">7am to 7pm</span></a>
+                        		<a href="#" class="list-group-item">Working Time <span style="padding-left: 5em">12 hours</span></a>
+                        		<a href="#" class="list-group-item">Salary Criteria <span style="padding-left: 5em">7k to 9k</span></a>
+                        		<a href="#" class="list-group-item">Remarks <span style="padding-left: 7em">Female, age between 35 to 45</span></a>
+                        		<a href="#" class="list-group-item">Skills <span style="padding-left: 9em">Ironing, pet care, helping</span></a>
+		                        <a href="#" class="list-group-item">
+		                        		<input type="submit" class="btn btn-primary" style="margin-left: 80%" value="Pick">
+		                        </a>
+		                    </p>
                         </div>
-                        <div class="note note-success">
+                        <div class="list-group">
                         	<p style="font-size:20px;padding-left: 2em;">
-                        	Area  <span style="padding-left: 9em">Chakkarpur</span><br/>
-                        	Requirements <span style="padding-left: 5em">Maid</span><br/>
-                        	Timings <span style="padding-left: 8em">7am to 7pm</span><br/>
-                        	Working Time <span style="padding-left: 5em">12 hours</span><br/>
-                        	Salary Criteria <span style="padding-left: 5em">7k to 9k</span> <br/>
-                        	Remarks <span style="padding-left: 7em">Female, age between 35 to 45</span><br/>
-                        	Skills <span style="padding-left: 9em">Ironing, pet care, helping</span> 
-                        	<form method="post">
-                        		<input type="submit" class="btn btn-primary pull-right" value="Pick">
-                        	</form>  <br/></p>
+                        		<a href="#" class="list-group-item active">	Area  <span style="padding-left: 9em">Chakkarpur</span></a>
+                        		<a href="#" class="list-group-item">Requirements <span style="padding-left: 5em">Maid</span></a>
+                        		<a href="#" class="list-group-item">Timings <span style="padding-left: 8em">7am to 7pm</span></a>
+                        		<a href="#" class="list-group-item">Working Time <span style="padding-left: 5em">12 hours</span></a>
+                        		<a href="#" class="list-group-item">Salary Criteria <span style="padding-left: 5em">7k to 9k</span></a>
+                        		<a href="#" class="list-group-item">Remarks <span style="padding-left: 7em">Female, age between 35 to 45</span></a>
+                        		<a href="#" class="list-group-item">Skills <span style="padding-left: 9em">Ironing, pet care, helping</span></a>
+		                        <a href="#" class="list-group-item">
+		                        		<input type="submit" class="btn btn-primary" style="margin-left: 80%" value="Pick">
+		                        </a>
+		                    </p>
                         </div>
-                        <div class="note note-success">
-                        	<p style="font-size:20px;padding-left: 2em;">
-                        	Area  <span style="padding-left: 9em">Chakkarpur</span><br/>
-                        	Requirements <span style="padding-left: 5em">Maid</span><br/>
-                        	Timings <span style="padding-left: 8em">7am to 7pm</span><br/>
-                        	Working Time <span style="padding-left: 5em">12 hours</span><br/>
-                        	Salary Criteria <span style="padding-left: 5em">7k to 9k</span> <br/>
-                        	Remarks <span style="padding-left: 7em">Female, age between 35 to 45</span><br/>
-                        	Skills <span style="padding-left: 9em">Ironing, pet care, helping</span> 
-                        	<form method="post">
-                        		<input type="submit" class="btn btn-primary pull-right" value="Pick">
-                        	</form>  <br/></p>
-                        </div>
-                        <div class="note note-success">
-                        	<p style="font-size:20px;padding-left: 2em;">
-                        	Area  <span style="padding-left: 9em">Chakkarpur</span><br/>
-                        	Requirements <span style="padding-left: 5em">Maid</span><br/>
-                        	Timings <span style="padding-left: 8em">7am to 7pm</span><br/>
-                        	Working Time <span style="padding-left: 5em">12 hours</span><br/>
-                        	Salary Criteria <span style="padding-left: 5em">7k to 9k</span> <br/>
-                        	Remarks <span style="padding-left: 7em">Female, age between 35 to 45</span><br/>
-                        	Skills <span style="padding-left: 9em">Ironing, pet care, helping</span> 
-                        	<form method="post">
-                        		<input type="submit" class="btn btn-primary pull-right" value="Pick">
-                        	</form>  <br/></p>
-                        </div>
-                    </div>
+                    
 				</div>
 			</div>
 		 </div>

@@ -352,5 +352,7 @@ $db_handle = mysqli_connect("localhost","root","redhat111111","bluenethack");
     <script src="script/responsive-tabs.js"></script>
     <!--CORE JAVASCRIPT-->
     <script src="script/main.js"></script>
+
+    
 </body>
 </html>
