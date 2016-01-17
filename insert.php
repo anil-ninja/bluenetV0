@@ -3,15 +3,15 @@ session_start();
 $start = time() ;
 $config['host'] = "localhost" ;
 $config['user'] = "root" ;
-$config['password'] = "redhat@111111p" ;
+$config['password'] = "redhat111111" ;
 $config['database'] = "bluenethack" ;
 $db_handle = mysqli_connect($config['host'], $config['user'], $config['password'], $config['database']);
 if (mysqli_connect_errno()) {
 	echo "Failed to connect to MySQL: " . mysqli_connect_error();
 }
-if (!isset($_SESSION['user_id'])) {  
+/*if (!isset($_SESSION['user_id'])) {  
 		header('Location: index.php');
-	}
+	}*/
 if (isset($_POST['insert'])) {
 	$name = $_POST['name'];
 	$mobile = $_POST['mobile'];

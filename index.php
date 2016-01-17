@@ -1,6 +1,6 @@
 <?php
 session_start();
-	$db_handle = mysqli_connect("localhost","root","redhat@11111p","bluenethack");
+	$db_handle = mysqli_connect("localhost","root","redhat111111","bluenethack");
 
 //Check connection
 	if (mysqli_connect_errno()) {
@@ -48,12 +48,15 @@ session_start();
 			$responseRow = mysqli_fetch_array($response);
 			$_SESSION['first_name'] = $responseRow['first_name'] ;
 			$_SESSION['email'] = $responseRow['email'];
-			$_SESSION['user_id'] = $responseRow['id'];
+            $_SESSION['user_id'] = $responseRow['id'];
+			$_SESSION['employee_type'] = $responseRow['employee_type'];
+
 			echo $responseRow['id'];
-			header("Location: request.php");
+
+			header("Location: home.php");
 		}
 		else {
-			echo "Sorry! Invalid username or password!";      
+			echo "<center ><b>Sorry! Invalid username or password!</b></center>";      
 		}
 }
 
@@ -84,7 +87,36 @@ session_start();
 </head>
 <body>
 <div class="row" style="background-image: url(img/collaboration.jpg); margin-top:0px; margin-left:0px; height: 600px; width: 100%;">
-        <div class = "col-xs-7 col-ls-8"></div>	
+        <div class = "col-xs-3 col-ls-3"></div>
+        <div class = "col-xs-2 col-ls-4" style="width:350px; margin-top:85px; background-color: #F8F8F8 ;">
+        <ul class="nav nav-tabs" role="tablist" style="font-size:14px; margin-bottom: 0px; margin-top: 12px;">
+                <li role="presentation" class="active" id="signup_modal">
+                    <a href="#tabSignup" role="tab" data-toggle="tab">
+                        SignIn
+                    </a>
+                </li>
+                
+            </ul>
+   <div class="tab-content" style="margin-bottom: 12px">         
+ <div role="tabpanel" class="row tab-pane active" id="tabSignup" style="line-height: 2;" >
+                    <p align="center"><font size="5" >Sign In for Blueteam</font></p></br>
+                        <form method="post">
+                        <div class="input-group">
+                            <span class="input-group-addon">Email</span>
+                            <input type="text" class="form-control" name="username" placeholder="Email ">
+                        </div>
+                        <br/>
+                        <div class="input-group">
+                            <span class="input-group-addon">Password&nbsp;</span>
+                            <input type="password" class="form-control" name="passwordlogin" placeholder="Password">
+                        </div><br/>
+                        <input type="submit" class="btn btn-success btn-lg" name = "login" value = "Log in" >
+                    </form>
+                  </div>  
+                  </div>  
+
+        </div>	
+        <div class = "col-xs-1 col-ls-1"></div>
         <div class = "col-xs-2 col-ls-4" style="width:350px; margin-top:85px; background-color: #F8F8F8 ;">
 <!-- signin signup nav tabs starts ---->            
             <ul class="nav nav-tabs" role="tablist" style="font-size:14px; margin-bottom: 0px; margin-top: 12px;">
@@ -93,11 +125,7 @@ session_start();
                         SignUp 
                     </a>
                 </li>
-                <li role="presentation" id="signin_modal">
-                    <a href="#tabSignIn" role="tab" data-toggle="tab">
-                        SignIn
-                    </a>
-                </li>
+                
             </ul>
 
             <div class="tab-content" style="margin-bottom: 12px">
@@ -126,21 +154,7 @@ session_start();
                     </form>
                 </div>     
                 
-                <div role="tabpanel" class="row tab-pane" id="tabSignIn" >
-                    <p align="center"><font size="5" >Sign In for Blueteam</font></p></br>
-                        <form method="post">
-                        <div class="input-group">
-                            <span class="input-group-addon">Email</span>
-                            <input type="text" class="form-control" name="username" placeholder="Email ">
-                        </div>
-                        <br/>
-                        <div class="input-group">
-                            <span class="input-group-addon">Password&nbsp;</span>
-                            <input type="password" class="form-control" name="passwordlogin" placeholder="Password">
-                        </div><br/>
-                        <input type="submit" class="btn btn-success btn-lg" name = "login" value = "Log in" >
-                    </form>
-                  </div>        
+                      
             </div>
         </div>
     </div>

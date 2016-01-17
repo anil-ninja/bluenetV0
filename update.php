@@ -1,15 +1,15 @@
 <?php
 
 	session_start();
-$db_handle = mysqli_connect("localhost","root","redhat@11111p","bluenethack");
+$db_handle = mysqli_connect("localhost","root","redhat111111","bluenethack");
 
 //Check connection
 	if (mysqli_connect_errno()) {
 	  	echo "Failed to connect to MySQL: " . mysqli_connect_error();
 	}
-	if (!isset($_SESSION['user_id'])) {  
+	/*if (!isset($_SESSION['user_id'])) {  
 		header('Location: index.php');
-	}
+	}*/
 	$sr_id = $_GET['sr_id'];
 	if(!isset($sr_id)){
 		header("Location: index.php"); 

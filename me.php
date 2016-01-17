@@ -25,11 +25,6 @@ session_start();
 			//header("Location: #"); 
 		}
 	}
-
-	if($status == "cem_open" && $_SESSION["employee_type"] != "cem") {
-        echo "<h1> Brother you are at worrg place</h1>";
-        exit;
-    }
 ?>
 
 <!DOCTYPE html>
@@ -196,84 +191,87 @@ session_start();
         <div class="page-content">
           <div id="tab-general">
             <div class="row mbl">
-				<div class="col-lg-12">
-					<div class="panel" >
-						<div class="panel-body">
-							<table id="example1" class="display" cellspacing="0" >
-								<thead>
-									<tr>
-										<th class="row_style">Name</th>
-										<th class="row_style">Mobile</th>
-										<th class="row_style">Requirement</th>
-										<th class="row_style">Gender</th>
-										<th class="row_style">Timing</th>
-										<th class="row_style">Salary</th>
-										<th class="row_style">Address</th>
-										<th class="row_style">Remarks</th>
-										<th class="row_style">Work Time</th>
-										<th class="row_style">Created Date</th>
-										<th class="row_style">Date</th>
-										<th class="row_style">Match 1</th>
-										<th class="row_style">Match 2</th>	
-										<th class="row_style">Status</th>
-										<th class="row_style">Edit</th>
-									</tr>
-								</thead>
-								<tbody>
-									<?php
-										if(isset($status)){
-											$srs = mysqli_query($db_handle, "SELECT * FROM service_request WHERE status = '$status' AND work_time !='24'; ") ;
-										}
-										else {
-											$srs = mysqli_query($db_handle, "SELECT * FROM service_request ") ;
-										}
-										while ($srsrow = mysqli_fetch_array($srs)){
-									?>
-									<tr>					
-										<td class="row_style"><?= $srsrow['name'] ?> </td>
-										<td class="row_style"><?= $srsrow['mobile'] ?> </td>
-										<td class="row_style"><?= $srsrow['requirements'] ?> </td>
-										<td class="row_style"><?= $srsrow['gender'] ?> </td>
-										<td class="row_style"><?= $srsrow['timings'] ?> </td>
-										<td class="row_style"><?= $srsrow['expected_salary'] ?> </td>
-										<td class="row_style"><?= $srsrow['address'] ?> </td>
-										<td class="row_style"><?= $srsrow['remarks'] ?> </td>
-										<td class="row_style"><?= $srsrow['work_time'] ?> </td>
-										<td class="row_style"><?= $srsrow['created_time'] ?> </td>
-										<td class="row_style"><?= $srsrow['date'] ?> </td>
-										<td class="row_style"><?= $srsrow['match_name'] ?> <?= $srsrow['match_mobile'] ?> </td>
-										<td class="row_style"><?= $srsrow['match2_name'] ?> <?= $srsrow['match2_mobile'] ?> </td>
-										<td class="row_style">
-											<form method="POST" action="">
-												<select name="new_status">
-													<option value="<?= $srsrow['status'] ?>" selected><?= $srsrow['status'] ?></option>
-													<option value="open">Open</option>
-													<option value="followback">Followback</option>
-													<option value="cem_open" >CEM - Open</option>
-													<option value="salary_issue" >Salary Issues</option>
-													<option value="not_interested" >Not Interested</option>
-													<option value="done" >Done</option>
-													<option value="decay" >Decay</option>
-													<option value="delete" >Delete</option>
-												</select>
-												<input type="hidden" name="sr_id" value="<?= $srsrow['id'] ?>">
-												<input type="hidden" name="old_status" value="<?= $srsrow['status'] ?>">
-												<button type="submit" name="update_status" class="btn btn-primary"> Update </button>
-											</form>
-										</td>
-										<td class="row_style">
-											<form method="post" action="update.php?sr_id=<?= $srsrow['id'] ?>">
-												<button type="submit" name="update_sr" class="btn btn-primary"> Edit </button>
-											</form>
-										</td>
-									</tr>
-									<?php
-										}
-									?>
-								</tbody>
-							</table>
-						</div>
-					</div>
+				<div class="col-lg-10">
+					<div class="panel-primary">
+						<div class="note note-success">
+                        	<p style="font-size:20px;padding-left: 2em;">
+                        	Area  <span style="padding-left: 9em">Chakkarpur</span><br/>
+                        	Requirements <span style="padding-left: 5em">Maid</span><br/>
+                        	Timings <span style="padding-left: 8em">7am to 7pm</span><br/>
+                        	Working Time <span style="padding-left: 5em">12 hours</span><br/>
+                        	Salary Criteria <span style="padding-left: 5em">7k to 9k</span> <br/>
+                        	Remarks <span style="padding-left: 7em">Female, age between 35 to 45</span><br/>
+                        	Skills <span style="padding-left: 9em">Ironing, pet care, helping</span> 
+                        	<form method="post">
+                        		<input type="submit" class="btn btn-primary pull-right" value="Pick">
+                        	</form>  <br/></p>
+                        </div>
+                        <div class="note note-success">
+                        	<p style="font-size:20px;padding-left: 2em;">
+                        	Area  <span style="padding-left: 9em">Chakkarpur</span><br/>
+                        	Requirements <span style="padding-left: 5em">Maid</span><br/>
+                        	Timings <span style="padding-left: 8em">7am to 7pm</span><br/>
+                        	Working Time <span style="padding-left: 5em">12 hours</span><br/>
+                        	Salary Criteria <span style="padding-left: 5em">7k to 9k</span> <br/>
+                        	Remarks <span style="padding-left: 7em">Female, age between 35 to 45</span><br/>
+                        	Skills <span style="padding-left: 9em">Ironing, pet care, helping</span> 
+                        	<form method="post">
+                        		<input type="submit" class="btn btn-primary pull-right" value="Pick">
+                        	</form>  <br/></p>
+                        </div>
+                        <div class="note note-success">
+                        	<p style="font-size:20px;padding-left: 2em;">
+                        	Area  <span style="padding-left: 9em">Chakkarpur</span><br/>
+                        	Requirements <span style="padding-left: 5em">Maid</span><br/>
+                        	Timings <span style="padding-left: 8em">7am to 7pm</span><br/>
+                        	Working Time <span style="padding-left: 5em">12 hours</span><br/>
+                        	Salary Criteria <span style="padding-left: 5em">7k to 9k</span> <br/>
+                        	Remarks <span style="padding-left: 7em">Female, age between 35 to 45</span><br/>
+                        	Skills <span style="padding-left: 9em">Ironing, pet care, helping</span> 
+                        	<form method="post">
+                        		<input type="submit" class="btn btn-primary pull-right" value="Pick">
+                        	</form>  <br/></p>
+                        </div>
+                        <div class="note note-success">
+                        	<p style="font-size:20px;padding-left: 2em;">
+                        	Area  <span style="padding-left: 9em">Chakkarpur</span><br/>
+                        	Requirements <span style="padding-left: 5em">Maid</span><br/>
+                        	Timings <span style="padding-left: 8em">7am to 7pm</span><br/>
+                        	Working Time <span style="padding-left: 5em">12 hours</span><br/>
+                        	Salary Criteria <span style="padding-left: 5em">7k to 9k</span> <br/>
+                        	Remarks <span style="padding-left: 7em">Female, age between 35 to 45</span><br/>
+                        	Skills <span style="padding-left: 9em">Ironing, pet care, helping</span> 
+                        	<form method="post">
+                        		<input type="submit" class="btn btn-primary pull-right" value="Pick">
+                        	</form>  <br/></p>
+                        </div>
+                        <div class="note note-success">
+                        	<p style="font-size:20px;padding-left: 2em;">
+                        	Area  <span style="padding-left: 9em">Chakkarpur</span><br/>
+                        	Requirements <span style="padding-left: 5em">Maid</span><br/>
+                        	Timings <span style="padding-left: 8em">7am to 7pm</span><br/>
+                        	Working Time <span style="padding-left: 5em">12 hours</span><br/>
+                        	Salary Criteria <span style="padding-left: 5em">7k to 9k</span> <br/>
+                        	Remarks <span style="padding-left: 7em">Female, age between 35 to 45</span><br/>
+                        	Skills <span style="padding-left: 9em">Ironing, pet care, helping</span> 
+                        	<form method="post">
+                        		<input type="submit" class="btn btn-primary pull-right" value="Pick">
+                        	</form>  <br/></p>
+                        </div>
+                        <div class="note note-success">
+                        	<p style="font-size:20px;padding-left: 2em;">
+                        	Area  <span style="padding-left: 9em">Chakkarpur</span><br/>
+                        	Requirements <span style="padding-left: 5em">Maid</span><br/>
+                        	Timings <span style="padding-left: 8em">7am to 7pm</span><br/>
+                        	Working Time <span style="padding-left: 5em">12 hours</span><br/>
+                        	Salary Criteria <span style="padding-left: 5em">7k to 9k</span> <br/>
+                        	Remarks <span style="padding-left: 7em">Female, age between 35 to 45</span><br/>
+                        	Skills <span style="padding-left: 9em">Ironing, pet care, helping</span> 
+                        	<form method="post">
+                        		<input type="submit" class="btn btn-primary pull-right" value="Pick">
+                        	</form>  <br/></p>
+                        </div>
+                    </div>
 				</div>
 			</div>
 		 </div>
