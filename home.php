@@ -97,27 +97,41 @@ var_dump($_SESSION,$_POST,$_GET);
                     </ul>
                 </div>
                 <ul class="nav navbar navbar-top-links navbar-right mbn">
-                    <li class="dropdown"><a data-hover="dropdown" href="#" class="dropdown-toggle"><i class="fa fa-bell fa-fw"></i><span class="badge badge-green">3</span></a>
-                        
+                    <li class="dropdown">
+                      <a data-hover="dropdown" href="#" class="dropdown-toggle">
+                        <i class="fa fa-bell fa-fw"></i><span class="badge badge-green">3</span>
+                      </a>  
                     </li>
-                    <li class="dropdown"><a data-hover="dropdown" href="#" class="dropdown-toggle"><i class="fa fa-envelope fa-fw"></i><span class="badge badge-orange">7</span></a>
-                        
+                    <li class="dropdown">
+                      <a data-hover="dropdown" href="#" class="dropdown-toggle">
+                        <i class="fa fa-envelope fa-fw"></i><span class="badge badge-orange">7</span>
+                      </a>  
                     </li>
-                    <li class="dropdown"><a data-hover="dropdown" href="#" class="dropdown-toggle"><i class="fa fa-tasks fa-fw"></i><span class="badge badge-yellow">8</span></a>
-                        
+                    <li class="dropdown">
+                      <a data-hover="dropdown" href="#" class="dropdown-toggle">
+                        <i class="fa fa-tasks fa-fw"></i><span class="badge badge-yellow">8</span>
+                      </a>  
                     </li>
-                    <li class="dropdown topbar-user"><a data-hover="dropdown" href="#" class="dropdown-toggle"><img src="images/avatar/48.jpg" alt="" class="img-responsive img-circle"/>&nbsp;<span class="hidden-xs">Robert John</span>&nbsp;<span class="caret"></span></a>
-                        <ul class="dropdown-menu dropdown-user pull-right">
-                            <li><a href="#"><i class="fa fa-user"></i>My Profile</a></li>
-                            <li><a href="#"><i class="fa fa-calendar"></i>My Calendar</a></li>
-                            <li><a href="#"><i class="fa fa-envelope"></i>My Inbox<span class="badge badge-danger">3</span></a></li>
-                            <li><a href="#"><i class="fa fa-tasks"></i>My Tasks<span class="badge badge-success">7</span></a></li>
-                            <li class="divider"></li>
-                            <li><a href="#"><i class="fa fa-lock"></i>Lock Screen</a></li>
-                            <li><a href="Login.html"><i class="fa fa-key"></i>Log Out</a></li>
-                        </ul>
+                    <li class="dropdown topbar-user">
+                      <a data-hover="dropdown" href="#" class="dropdown-toggle">
+                        <img src="images/avatar/48.jpg" alt="" class="img-responsive img-circle"/>&nbsp;
+                        <span class="hidden-xs">Robert John</span>&nbsp;<span class="caret"></span>
+                      </a>
+                      <ul class="dropdown-menu dropdown-user pull-right">
+                        <li><a href="#"><i class="fa fa-user"></i>My Profile</a></li>
+                        <li><a href="#"><i class="fa fa-calendar"></i>My Calendar</a></li>
+                        <li><a href="#"><i class="fa fa-envelope"></i>My Inbox<span class="badge badge-danger">3</span></a></li>
+                        <li><a href="#"><i class="fa fa-tasks"></i>My Tasks<span class="badge badge-success">7</span></a></li>
+                        <li class="divider"></li>
+                        <li><a href="#"><i class="fa fa-lock"></i>Lock Screen</a></li>
+                        <li><a href="Login.html"><i class="fa fa-key"></i>Log Out</a></li>
+                      </ul>
                     </li>
-                    <li id="topbar-chat" class="hidden-xs"><a href="javascript:void(0)" data-step="4" data-intro="&lt;b&gt;Form chat&lt;/b&gt; keep you connecting with other coworker" data-position="left" class="btn-chat"><i class="fa fa-comments"></i><span class="badge badge-info">3</span></a></li>
+                    <li id="topbar-chat" class="hidden-xs">
+                      <a href="javascript:void(0)" data-step="4" data-intro="&lt;b&gt;Form chat&lt;/b&gt; keep you connecting with other coworker" data-position="left" class="btn-chat">
+                        <i class="fa fa-comments"></i><span class="badge badge-info">3</span>
+                      </a>
+                    </li>
                 </ul>
             </div>
         </nav>
@@ -292,32 +306,30 @@ var_dump($_SESSION,$_POST,$_GET);
 
       function postWorkerDetails(fields, languagesArray, skillsArray) {
         var dataString = "";
-        var working_slots = "";
-        var free_slots = "";
+        
         //timings, home_town, remarks, police
         dataString = "first_name=" + $('#'+fields[0]).val() + "&last_name=" + $('#'+fields[1]).val() +
             "&address_proof_name=" + $('#'+fields[2]).val() + "&address_proof_id=" + $('#'+fields[3]).val() + 
             "&id_proof_name=" + $('#'+fields[4]).val() + "&id_proof_id=" +  $('#'+fields[5]).val() + 
-            "&mobile=" +  $('#'+fields[6]).val() + "&education=" +  $('#'+fields[7]).val() + 
-            "&experience=" +  $('#'+fields[8]).val() + "&working_domain=" + $('#'+fields[9]).val() +
-            "&current_working_city=" + $('#'+fields[10]).val() + "&current_working_area=" +  $('#'+fields[11]).val() + 
-            "&preferred_working_city=" + $('#'+fields[12]).val() + "&preferred_working_area=" + $('#'+fields[13]).val()+ 
-            "&birth_date=" +  $('#'+fields[14]).val() + "&address=" + $('#'+fields[15]).val() +
-            "&gender=" + $("input[name='gender']:checked").val() +
-            "&working_slots=" + $('#'+fields[17]).val() +
-            "&free_slots=" + $('#'+fields[18]).val() +
+            "&mobile=" +  $('#'+fields[6]).val() + "&emergancy_mobile=" +  $('#'+fields[7]).val() + 
+            "&age=" +  $('#'+fields[8]).val() + "&expected_salary=" + $('#'+fields[9]).val() +
+            "&current_address=" + $('#'+fields[10]).val() + "&parmanent_address=" +  $('#'+fields[11]).val() + 
+            "&education=" + $('#'+fields[12]).val() + "&experience=" + $('#'+fields[13]).val()+ 
+            "&gender=" +  $('#'+fields[14]).val() + "&birth_date=" + $('#'+fields[15]).val() +
+            "&timings=" + $('#'+fields[16]).val() + "&work_time=" + $('#'+fields[17]).val() +
+            "&remarks=" + $('#'+fields[18]).val() + "&police=" + $('#'+fields[19]).val() +
             "&languages=" + languagesArray + 
-            "&skills=" + skillsArray +
+            "&skills=" + skillsArray ;/*+
             "&emergancy_mobile=" + $('#emergancy_mobile').val()+
             "&timings=" + $('#timings').val() +
             "&home_town=" + $('#home_town').val() +
             "&remarks=" + $('#remarks').val() +
-            "&police=" + $("input[name='police']:checked").val() ;
+            "&police=" + $("input[name='police']:checked").val()*/ 
         //alert(dataString);
         console.log(dataString);
           $.ajax({
           type: "POST",
-          url: "ajax/addNewWorker.php",
+          url: "ajax/addWorker.php",
           data: dataString,
           cache: false,
           success: function(result){
@@ -328,7 +340,7 @@ var_dump($_SESSION,$_POST,$_GET);
             });
             $('#languages').val("");
             $('#skills').val("");
-            $('#emergancy_mobile').val(""); 
+             
             alert("Added Successfully");
             location.reload();
           },
@@ -342,10 +354,10 @@ var_dump($_SESSION,$_POST,$_GET);
       function validateWorkerDetails(){
           
            fields = ["first_name","last_name","address_proof_name", "address_proof_id", 
-                "id_proof_name", "id_proof_id", "mobile", 
-                "education", "experience", "working_domain", 
-                "current_working_city", "current_working_area", "preferred_working_city", 
-                "preferred_working_area", "birth_date", "address" ];
+                "id_proof_name", "id_proof_id", "mobile", "emergancy_mobile", "age",  
+                "expected_salary", "current_address", "parmanent_address", "education", 
+                "experience", "gender","birth_date", "timings", "work_time", "remarks",
+                "police"];
                 /*, "working_slot1_from", "working_slot1_to", "free_slot1_from", 
                 "free_slot1_to"*/
            //emergancy_mobile not compulsary
