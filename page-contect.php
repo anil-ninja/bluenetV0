@@ -104,17 +104,24 @@
                               </div>
                            </div>
                            <div class="form-group">
-                              <label class="col-md-3 control-label">Address</label>
+                              <label class="col-md-3 control-label">Age</label>
                               <div class="col-md-3">
-                                 <textarea type="text" id="address" class="form-control" placeholder="Full Address" rows="4"></textarea>
+                                 <input type="text" id="age" class="form-control" placeholder="Age in years">
+                                 <small class="help"></small>
                               </div>
-                              <label class="col-lg-3 control-label">Gender</label>
-                              <div class="col-lg-3">
-                                 <select class="selectpicker" id="gender" name="gender" data-live-search="true" data-width="100%">    
-                                    <option value='Male'>Male </option>
-                                    <option value='Female'>Female</option>
-                                    <option value='Other'>Other</option>
-                                 </select>
+                              <label for="demo-msk-date" class="col-md-3 control-label">Expected Salary</label>
+                              <div class="col-md-3">
+                                 <input type="text" id="expected_salary" class="form-control" placeholder="Expected Salary">
+                              </div>
+                           </div>
+                           <div class="form-group">
+                              <label class="col-md-3 control-label">Current Address</label>
+                              <div class="col-md-3">
+                                 <textarea type="text" id="current_address" class="form-control" placeholder="Full Address" rows="4"></textarea>
+                              </div>
+                              <label class="col-md-3 control-label">Parmanent Address</label>
+                              <div class="col-md-3">
+                                 <textarea type="text" id="parmanent_address" class="form-control" placeholder="Full Address" rows="4"></textarea>
                               </div>
                            </div>
                            <div class="form-group">
@@ -139,32 +146,15 @@
                                  <input type="text" id="skills"  class="form-control" placeholder="Enter atleast one skill" data-role="tagsinput">
                                  <small class="help">Enter multimple seperated by , or Enter</small>
                               </div>
-                           </div>
-                           <div class="form-group">
-                              <label class="col-md-3 control-label">Current Working City</label>
-                              <div class="col-md-3">
-                                 <input type="text" id ="current_working_city" class="form-control" placeholder="Current Working City" />       
-                              </div> <!-- /.col -->
-                              <label class="col-md-3 control-label">Area</label>
-                              <div class="col-md-3">
-                                 <input type="text" id ="current_working_area" class="form-control" placeholder="Current Working Area" />
-                              </div> <!-- /.col -->
                            </div> <!-- /.form-group -->
                            <div class="form-group">
-                              <label class="col-md-3 control-label">Preferred Working City</label>
-                              <div class="col-md-3">
-                                 <input type="text" id ="preferred_working_city" class="form-control" placeholder="Preferred Working City" />       
-                              </div> <!-- /.col -->
-                              <label class="col-md-3 control-label">Area</label>
-                              <div class="col-md-3">
-                                 <input type="text" id ="preferred_working_area" class="form-control" placeholder="Preferred Working Area" />
-                              </div> <!-- /.col -->
-                           </div> <!-- /.form-group -->
-                           <div class="form-group">
-                              <label class="col-md-3 control-label">Working Domain</label>
-                              <div class="col-md-3">
-                                 <input type="text" id="working_domain" class="form-control" placeholder="Field of work">
-                                 <small class="help"></small>
+                              <label class="col-lg-3 control-label">Gender</label>
+                              <div class="col-lg-3">
+                                 <select class="selectpicker" id="gender" name="gender" data-live-search="true" data-width="100%">    
+                                    <option value='Male'>Male </option>
+                                    <option value='Female'>Female</option>
+                                    <option value='Other'>Other</option>
+                                 </select>
                               </div>
                               <label for="demo-msk-date" class="col-md-3 control-label">Date of Birth</label>
                               <div class="col-md-3">
@@ -177,9 +167,9 @@
                                  <input type="text" id="timings" class="form-control" placeholder="Timings">
                                  <small class="help"></small>
                               </div>
-                              <label for="demo-msk-date" class="col-md-3 control-label">Home Town/state</label>
+                              <label for="demo-msk-date" class="col-md-3 control-label">Working Hours</label>
                               <div class="col-md-3">
-                                 <input type="text" id="home_town" class="form-control" placeholder="hometown/state">
+                                 <input type="text" id="work_time" class="form-control" placeholder="Working time in hours">
                               </div>
                            </div>
                            <div class="form-group">
