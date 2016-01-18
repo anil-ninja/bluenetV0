@@ -1,7 +1,7 @@
 <?php
-session_start();
+    session_start();
 
-require_once "dbConnection.php";
+    require_once "dbConnection.php";
 
 	if (isset($_SESSION['user_id'])) {  
 		header('Location: home.php');
@@ -12,29 +12,34 @@ require_once "dbConnection.php";
 		$lastname = mysqli_real_escape_string($db_handle, $_POST['lastname']);
 		$email = mysqli_real_escape_string($db_handle, $_POST['email']);
 		$phone = mysqli_real_escape_string($db_handle, $_POST['phone']);
+        $employee_type = mysqli_real_escape_string($db_handle, $_POST['employee_type']);
 		$pas = mysqli_real_escape_string($db_handle, $_POST['password']) ;
 		$awe = mysqli_real_escape_string($db_handle, $_POST['password2']) ;
+	    if((strlen($firstname)< 2) OR (strlen($lastname)< 2) OR (strlen($email)< 8) OR (strlen($phone)< 10) OR (strlen($pas)< 4)) {
+            echo "Something went wrong, Try again";
+        }
+        else {
+    		if ( $pas == $awe ) {
+    			$pas = md5($pas);
+    			mysqli_query($db_handle,"INSERT INTO user(first_name, last_name, email, phone, password, employee_type) 
+    												VALUES ('$firstname', '$lastname', '$email', '$phone', '$pas', '$employee_type') ; ") ;		
+    			$user_create_id = mysqli_insert_id($db_handle);
+    			
+    			if(mysqli_error($db_handle)){ echo "Please Try Again"; } 
+    			else {
+    				$_SESSION['user_id'] = $user_create_id;
+    				$_SESSION['first_name'] = $firstname ;
+    				$_SESSION['email'] = $email;
+    				header("Location: home.php");
+    			}
+    		}
+    		else {  
+    			//header('Location: ./index.php?status=1');
+    			echo "Password do not match, Try again";
+    		}
+        }
 	
-		if ( $pas == $awe ) {
-			$pas = md5($pas);
-			mysqli_query($db_handle,"INSERT INTO user(first_name, last_name, email, phone, password) 
-												VALUES ('$firstname', '$lastname', '$email', '$phone', '$pas') ; ") ;		
-			$user_create_id = mysqli_insert_id($db_handle);
-			
-			if(mysqli_error($db_handle)){ echo "Please Try Again"; } 
-			else {
-				$_SESSION['user_id'] = $user_create_id;
-				$_SESSION['first_name'] = $firstname ;
-				$_SESSION['email'] = $email;
-				header("Location: home.php");
-			}
-		}
-		else {  
-			//header('Location: ./index.php?status=1');
-			echo "Password do not match, Try again";
-		}
-	
-}
+    }
 
 	if (isset($_POST['login'])) {
 		$email = mysqli_real_escape_string($db_handle, $_POST['username']); 
@@ -55,7 +60,7 @@ require_once "dbConnection.php";
 		else {
 			echo "<center ><b>Sorry! Invalid username or password!</b></center>";      
 		}
-}
+    }
 
 ?>
 <!DOCTYPE html>
@@ -138,7 +143,17 @@ require_once "dbConnection.php";
                         </div>
                     </div><br/><br> 
                     <input type="text" class="form-control" style="width: 98%" name="email" placeholder="Email" /><br/>                   
-                    <input type="text" class="form-control" style="width: 98%" name="phone" placeholder="Mobile Number" /><br/>                   
+                    <input type="text" class="form-control" style="width: 98%" name="phone" placeholder="Mobile Number" /><br/>
+                    <label>&nbsp;&nbsp;&nbsp;Designation</label> 
+                    <select name="employee_type" data-live-search="true" data-width="100%">    
+                        <option value='operator' >Operator</option>
+                        <option value='me' >Marketing Executive</option>
+                        <option value='cem' >Customer Engagement Manager</option>
+                        <option value='admin' >Admin</option>
+                        <option value='accountant' >Accountant</option>
+                        <option value='ba' >Business Analyst</option>
+                        <option value='dev' >Developer</option>
+                    </select><br/> <br/>                 
                     <div>
                         <div class="col-md-6" style="padding-left: 0px;">
                             <input type="password" class="form-control" style="width: 100%" name="password" placeholder="password"/>

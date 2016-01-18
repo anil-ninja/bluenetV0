@@ -5,34 +5,14 @@ require_once "dbConnection.php";
 
 
 	$status = $_GET["status"];
-    
-    if($status == null) $status = "open";
+  if(!isset($status)) $status == "open" ;
 
-    $user_id = $_SESSION['user_id'];
+  $user_id = $_SESSION['user_id'];
 
-	/*if (!isset($_SESSION['user_id'])) {  
+	if (!isset($_SESSION['user_id'])) {  
 		header('Location: index.php');
-	}*/
-	if (isset($_POST['update_status'])) {
-		$newStatus = $_POST['new_status'];
-		$sr_id = $_POST['sr_id'];
-		$oldStatus = $_POST['old_status'];
-		$user_id = $_SESSION['user_id'];
-		$sql = mysqli_query ($db_handle, "UPDATE service_request SET status= '$newStatus' WHERE id = '$sr_id' ;");
-		$sql = mysqli_query ($db_handle, "INSERT INTO updates( user_id, request_id, old_status, new_status) 
-															VALUES ('$user_id', '$sr_id', '$oldStatus', '$newStatus') ;");
-		if(mysqli_connect_errno()){		
-		}
-		else { 
-			//header("Location: #"); 
-		}
 	}
-var_dump($_SESSION,$_POST,$_GET);
 
-   /* if($status == "cem_open" && $_SESSION["employee_type"] != "cem") {
-        echo "<h1> Brother you are at worrg place</h1>";
-        exit;
-    }*/
 ?>
 
 <!DOCTYPE html>
@@ -142,89 +122,146 @@ var_dump($_SESSION,$_POST,$_GET);
         <div class="sidebar-collapse menu-scroll">
             <ul id="side-menu" class="nav">      
               <div class="clearfix"></div>
-              
-              <?php if ($_SESSION["employee_type"] ==  "ba" ) { ?>
+              <?php if ($_SESSION["employee_type"] ==  "me" ) { ?>
 			  
-              <li class="active"><a href="request.php">
-				<div class="icon-bg bg-orange"></div><i class="glyphicon glyphicon-home"></i>
-				<span class="menu-title">View all request</span></a>
-			  </li>
+                <li class="active"><a href="home.php?status=open">
+          				<div class="icon-bg bg-orange"></div><i class="glyphicon glyphicon-search"></i>
+          				<span class="menu-title">Open requests</span></a>
+        			  </li>
+                <li><a href="home.php?status=picked">
+                  <div class="icon-bg bg-pink"></div><i class="glyphicon glyphicon-user"></i>
+                  <span class="menu-title">Picked requests</span></a>   
+                </li>
+                <li><a href="home.php?status=done">
+                  <div class="icon-bg bg-pink"></div><i class="glyphicon glyphicon-thumbs-up"></i>
+                  <span class="menu-title">Done requests</span></a>   
+                </li>
+                <li><a href="insert.php">
+                  <div class="icon-bg bg-red"></div><i class="glyphicon glyphicon-plus"></i>
+                  <span class="menu-title">Insert New Service Request</span></a>
+                </li>
+                <li><a href="insertworker.php">
+                  <div class="icon-bg bg-red"></div><i class="glyphicon glyphicon-plus"></i>
+                  <span class="menu-title">Insert New Worker</span></a>
+                </li>
+              <?php } 
+
+               else if ($_SESSION["employee_type"] ==  "cem" ) { ?>
+
+        			  <li><a href="home.php?status=open">
+          				<div class="icon-bg bg-pink"></div><i class="glyphicon glyphicon-search"></i>
+          				<span class="menu-title">Open requests</span></a>   
+        			  </li>
+                <li><a href="home.php?status=match">
+                  <div class="icon-bg bg-pink"></div><i class="glyphicon glyphicon-search"></i>
+                  <span class="menu-title">Match requests</span></a>   
+                </li>
+                <li><a href="home.php?status=picked">
+                  <div class="icon-bg bg-pink"></div><i class="glyphicon glyphicon-user"></i>
+                  <span class="menu-title">Picked requests</span></a>   
+                </li>
+                <li><a href="home.php?status=meeting">
+                  <div class="icon-bg bg-pink"></div><i class="glyphicon glyphicon-calendar"></i>
+                  <span class="menu-title">Meetings</span></a>   
+                </li>
+                <li><a href="home.php?status=demo">
+                  <div class="icon-bg bg-pink"></div><i class="glyphicon glyphicon-asterisk"></i>
+                  <span class="menu-title">IN Demo Period</span></a>   
+                </li>
+                <li><a href="home.php?status=done">
+                  <div class="icon-bg bg-pink"></div><i class="glyphicon glyphicon-ok"></i>
+                  <span class="menu-title">Done requests</span></a>   
+                </li>
+                <li><a href="insert.php">
+                  <div class="icon-bg bg-red"></div><i class="glyphicon glyphicon-plus"></i>
+                  <span class="menu-title">Insert New Service Request</span></a>
+                </li>
+            <?php } 
+
+              else if ($_SESSION["employee_type"] ==  "operator" ) { ?>
+
+                <li><a href="insert.php">
+                  <div class="icon-bg bg-red"></div><i class="glyphicon glyphicon-plus"></i>
+                  <span class="menu-title">Insert New Service Request</span></a>
+                </li>
+                <li><a href="insertworker.php">
+                  <div class="icon-bg bg-red"></div><i class="glyphicon glyphicon-plus"></i>
+                  <span class="menu-title">Insert New Worker</span></a>
+                </li>
+                <li><a href="home.php?status=followback">
+                  <div class="icon-bg bg-blue"></div><i class="glyphicon glyphicon-repeat"></i>
+                  <span class="menu-title">Follow back Requests</span></a>
+                </li>
+                <li><a href="home.php?status=feedback">
+                  <div class="icon-bg bg-blue"></div><i class="glyphicon glyphicon-repeat"></i>
+                  <span class="menu-title">Feedback Requests</span></a>
+                </li>
+            <?php }  
               
+            else { ?>
+
+                <li class="active"><a href="home.php">
+                  <div class="icon-bg bg-orange"></div><i class="glyphicon glyphicon-home"></i>
+                  <span class="menu-title">View All requests</span></a>
+                </li>
+                <li class="active"><a href="home.php?status=open">
+                  <div class="icon-bg bg-orange"></div><i class="glyphicon glyphicon-search"></i>
+                  <span class="menu-title">Open requests</span></a>
+                </li>
+                <li><a href="home.php?status=meeting">
+                  <div class="icon-bg bg-pink"></div><i class="glyphicon glyphicon-calendar"></i>
+                  <span class="menu-title">Meetings</span></a>   
+                </li>
+                <li><a href="home.php?status=demo">
+                  <div class="icon-bg bg-pink"></div><i class="glyphicon glyphicon-asterisk"></i>
+                  <span class="menu-title">IN Demo Period</span></a>   
+                </li>
+                <li><a href="home.php?status=done">
+                  <div class="icon-bg bg-pink"></div><i class="glyphicon glyphicon-ok"></i>
+                  <span class="menu-title">Done requests</span></a>   
+                </li>
+        			  <li><a href="request.php?status=me_open">
+          				<div class="icon-bg bg-pink"></div><i class="glyphicon glyphicon-search"></i>
+          				<span class="menu-title">ME Open</span></a>   
+        			  </li>
+        			  <li><a href="request.php?status=cem_open">
+                  <div class="icon-bg bg-pink"></div><i class="glyphicon glyphicon-search"></i>
+                  <span class="menu-title">CEM Open</span></a>   
+                </li>
+        			  <li><a href="request.php?status=salary_issue">
+          				<div class="icon-bg bg-blue"></div><i class="glyphicon glyphicon-usd"></i>
+          				<span class="menu-title">Salary Issues</span></a>
+        			  </li>
+        			  <li><a href="request.php?status=delete">
+          				<div class="icon-bg bg-blue"></div><i class="glyphicon glyphicon-remove"></i>
+          				<span class="menu-title">Deleted Requests</span></a>
+        			  </li>
+        			  <li><a href="request.php?status=not_interested">
+          				<div class="icon-bg bg-blue"></div><i class="glyphicon glyphicon-exclamation-sign"></i>
+          				<span class="menu-title">Not Interested</span></a>
+        			  </li>
+        			  <li><a href="request.php?status=decay">
+          				<div class="icon-bg bg-blue"></div><i class="glyphicon glyphicon-trash"></i>
+          				<span class="menu-title">Decay Requests</span></a>
+        			  </li>
+        			  <li><a href="24hour.php">
+          				<div class="icon-bg bg-blue"></div><i class=" glyphicon glyphicon-time"></i>
+          				<span class="menu-title">View 24hours Requests</span></a>
+        			  </li>
+        			  <li><a href="insert.php">
+          				<div class="icon-bg bg-red"></div><i class="glyphicon glyphicon-plus"></i>
+          				<span class="menu-title">Insert New Service Request</span></a>
+        			  </li>
+                <li><a href="insertworker.php">
+                  <div class="icon-bg bg-red"></div><i class="glyphicon glyphicon-plus"></i>
+                  <span class="menu-title">Insert New Worker</span></a>
+                </li>
+        			  <li><a href="area.php">
+          				<div class="icon-bg bg-blue"></div><i class="glyphicon glyphicon-print"></i>
+          				<span class="menu-title">Print Area</span></a>
+        			  </li>
               <?php } ?>
-
-              <?php if ($_SESSION["employee_type"] ==  "cem" ) { ?>
-			  <li><a href="request.php?status=cem_open">
-				<div class="icon-bg bg-pink"></div><i class="glyphicon glyphicon-user"></i>
-				<span class="menu-title">CEM Open</span></a>   
-			  </li>
-            
-            <?php } ?>
-
-            <?php if ($_SESSION["employee_type"] ==  "me" ) { ?>
-              <li><a href="home.php?status=open">
-                <div class="icon-bg bg-pink"></div><i class="glyphicon glyphicon-user"></i>
-                <span class="menu-title">Open</span></a>   
-              </li>
-            
-            <?php } ?>
-
-            <?php if ($_SESSION["employee_type"] ==  "me" ) { ?>
-              <li><a href="home.php?status=me_picked">
-                <div class="icon-bg bg-pink"></div><i class="glyphicon glyphicon-user"></i>
-                <span class="menu-title">Picked</span></a>   
-              </li>
-            
-            <?php } ?>
-
-            <?php if ($_SESSION["employee_type"] ==  "me" ) { ?>
-              <li><a href="home.php?status=cem_open">
-                <div class="icon-bg bg-pink"></div><i class="glyphicon glyphicon-user"></i>
-                <span class="menu-title">Done</span></a>   
-              </li>
-            
-            <?php } ?>
-
-			  <li><a href="request.php?status=open">
-				<div class="icon-bg bg-pink"></div><i class="glyphicon glyphicon-search"></i>
-				<span class="menu-title">ME Open</span></a>   
-			  </li>
-			  <li><a href="request.php?status=done">
-				<div class="icon-bg bg-violet"></div><i class="glyphicon glyphicon-ok"></i>
-				<span class="menu-title">Done Request</span></a>
-			  </li>
-			  <li><a href="request.php?status=salary_issue">
-				<div class="icon-bg bg-blue"></div><i class="glyphicon glyphicon-usd"></i>
-				<span class="menu-title">Salary Issues</span></a>
-			  </li>
-			  <li><a href="request.php?status=delete">
-				<div class="icon-bg bg-blue"></div><i class="glyphicon glyphicon-remove"></i>
-				<span class="menu-title">Deleted Requests</span></a>
-			  </li>
-			  <li><a href="request.php?status=not_interested">
-				<div class="icon-bg bg-blue"></div><i class="glyphicon glyphicon-exclamation-sign"></i>
-				<span class="menu-title">Not Interested</span></a>
-			  </li>
-			  <li><a href="request.php?status=decay">
-				<div class="icon-bg bg-blue"></div><i class="glyphicon glyphicon-trash"></i>
-				<span class="menu-title">Decay Requests</span></a>
-			  </li>
-			  <li><a href="request.php?status=followback">
-				<div class="icon-bg bg-blue"></div><i class="glyphicon glyphicon-repeat"></i>
-				<span class="menu-title">Follow back Requests</span></a>
-			  </li>
-			  <li><a href="24hour.php">
-				<div class="icon-bg bg-blue"></div><i class=" glyphicon glyphicon-time"></i>
-				<span class="menu-title">View 24hours Requests</span></a>
-			  </li>
-			  <li><a href="insert.php">
-				<div class="icon-bg bg-red"></div><i class="glyphicon glyphicon-plus"></i>
-				<span class="menu-title">Insert New Service Request</span></a>
-			  </li>
-			  <li><a href="area.php">
-				<div class="icon-bg bg-blue"></div><i class="glyphicon glyphicon-print"></i>
-				<span class="menu-title">Print Area</span></a>
-			  </li>
-			</ul>
+    			</ul>
         </div>
       </nav>
             <!--END SIDEBAR MENU-->
@@ -237,10 +274,10 @@ var_dump($_SESSION,$_POST,$_GET);
 				<a id="menu-toggle" href="#" class="hidden-xs"><i class="glyphicon glyphicon-th-list"></i></a>
 			</div>
 			<ol class="breadcrumb page-breadcrumb pull-right">
-                 <li><a href="logout.php">Logout</a></li>
-                 <li></li>
-                 <li><?= strtoupper($_SESSION['first_name']) ?></li>
-            </ol>
+         <li><a href="logout.php">Logout</a></li>
+         <li></li>
+         <li><?= strtoupper($_SESSION['first_name']) ?></li>
+      </ol>
 			<div class="clearfix "></div>
 		</div>
                 <!--END TITLE & BREADCRUMB PAGE-->
@@ -276,156 +313,11 @@ var_dump($_SESSION,$_POST,$_GET);
     <script src="script/pace.min.js"></script>
     <script src="script/holder.js"></script>
     <script src="script/responsive-tabs.js"></script>
+    <script src="script/bootbox.js"></script>
+    <script src="script/blueteam.js"></script>
    
     <!--CORE JAVASCRIPT-->
     <script src="script/main.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/s/dt/dt-1.10.10/datatables.min.js"></script>
-
-
-<script type="text/javascript">
-
-        function genericEmptyFieldValidator(fields){
-          returnBool = true;
-          $.each(fields, function( index, value ) {
-            console.log(value);
-            if($('#'+value).val() == "" || $('#'+value).val() == null){
-              $('#'+value).keypress(function() {
-                  genericEmptyFieldValidator([value]);
-              });
-
-              $('#'+value).css("border-color", "red");
-              
-              returnBool = false;
-            }else{
-              $('#'+value).css("border-color", "blue");
-            }
-          });
-
-          return returnBool;
-      }
-
-      function postWorkerDetails(fields, languagesArray, skillsArray) {
-        var dataString = "";
-        
-        //timings, home_town, remarks, police
-        dataString = "first_name=" + $('#'+fields[0]).val() + "&last_name=" + $('#'+fields[1]).val() +
-            "&address_proof_name=" + $('#'+fields[2]).val() + "&address_proof_id=" + $('#'+fields[3]).val() + 
-            "&id_proof_name=" + $('#'+fields[4]).val() + "&id_proof_id=" +  $('#'+fields[5]).val() + 
-            "&mobile=" +  $('#'+fields[6]).val() + "&emergancy_mobile=" +  $('#'+fields[7]).val() + 
-            "&age=" +  $('#'+fields[8]).val() + "&expected_salary=" + $('#'+fields[9]).val() +
-            "&current_address=" + $('#'+fields[10]).val() + "&parmanent_address=" +  $('#'+fields[11]).val() + 
-            "&education=" + $('#'+fields[12]).val() + "&experience=" + $('#'+fields[13]).val()+ 
-            "&gender=" +  $('#'+fields[14]).val() + "&birth_date=" + $('#'+fields[15]).val() +
-            "&timings=" + $('#'+fields[16]).val() + "&work_time=" + $('#'+fields[17]).val() +
-            "&remarks=" + $('#'+fields[18]).val() + "&police=" + $('#'+fields[19]).val() +
-            "&languages=" + languagesArray + 
-            "&skills=" + skillsArray ;/*+
-            "&emergancy_mobile=" + $('#emergancy_mobile').val()+
-            "&timings=" + $('#timings').val() +
-            "&home_town=" + $('#home_town').val() +
-            "&remarks=" + $('#remarks').val() +
-            "&police=" + $("input[name='police']:checked").val()*/ 
-        //alert(dataString);
-        console.log(dataString);
-          $.ajax({
-          type: "POST",
-          url: "ajax/addWorker.php",
-          data: dataString,
-          cache: false,
-          success: function(result){
-            //alert(result);
-            console.log(result);
-            $(fields).each(function(i, idVal){ 
-              $("#"+idVal).val(""); 
-            });
-            $('#languages').val("");
-            $('#skills').val("");
-             
-            alert("Added Successfully");
-            location.reload();
-          },
-          error: function(result){
-            alert(result);
-            return false;
-          }
-        });
-      }
-
-      function validateWorkerDetails(){
-          
-           fields = ["first_name","last_name","address_proof_name", "address_proof_id", 
-                "id_proof_name", "id_proof_id", "mobile", "emergancy_mobile", "age",  
-                "expected_salary", "current_address", "parmanent_address", "education", 
-                "experience", "gender","birth_date", "timings", "work_time", "remarks",
-                "police"];
-                /*, "working_slot1_from", "working_slot1_to", "free_slot1_from", 
-                "free_slot1_to"*/
-           //emergancy_mobile not compulsary
-          /*var languagesArray = []; 
-          $('#languages :selected').each(function(i, selected){ 
-            languagesArray[i] = $(selected).val(); 
-          });*/
-
-          var languagesArray = []; 
-          $('#languages').each(function(i, selected){ 
-            languagesArray[i] = $(selected).val(); 
-          });
-
-          var skillsArray = []; 
-          $('#skills').each(function(i, selected){ 
-            skillsArray[i] = $(selected).val(); 
-          });
-
-          
-          if(genericEmptyFieldValidator(fields)){
-            
-            //var phoneVal = $('#mobile').val();
-                    
-            /*var stripped = phoneVal.replace(/[\(\)\.\-\ ]/g, '');    
-            if (isNaN(parseInt(stripped))) {
-              //error("Contact No", "The mobile number contains illegal characters");
-              $('#mobile').css("border", "1px solid OrangeRed");
-              return false;
-            }
-            else if (phoneVal.length != 10) {
-              //error("Contact No", "Make sure you included valid contact number");
-              $('#mobile').css("border", "1px solid OrangeRed");
-              return false;
-            }*/
-            
-            postWorkerDetails(fields, languagesArray, skillsArray);
-
-          }
-          return false;
-      }
-
-
-
-
-      function ChangeServiceRequestStatus(id, oldStatus, newStatus) {
-        
-        
-        var dataString = "";
-        dataString = "sr_id=" + id + "&old_status=" + oldStatus + "&new_status=" + newStatus;
-
-        $.ajax({
-            type: "POST",
-            url: "ajax/ChangeServiceRequestStatus.php",
-            data: dataString,
-            cache: false,
-            success: function(result){
-
-            },
-            error: function(result){
-              console.log("inside error");
-              console.log(result);
-              
-            }
-        });
-        return false;
-    }
-</script>
-
-
 </body>
 </html>
