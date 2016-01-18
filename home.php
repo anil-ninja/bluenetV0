@@ -287,16 +287,16 @@ require_once "dbConnection.php";
     <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
     <script src="script/jquery-1.10.2.min.js"></script>
     <script type="text/javascript">
-		$(document).ready(function() {
-		    $('#example1').DataTable( 
-		    {"iDisplayLength": 50}
-		    );
-		} );
-        $(".addworker").hide();
-        function toggle() {
-            $(".addworker").toggle();
-        }
-	</script>
+  		$(document).ready(function() {
+  		  $('#example1').DataTable({
+          "iDisplayLength": 50
+        });
+  		});
+      $(".addworker").hide();
+      function toggle() {
+        $(".addworker").toggle();
+      }
+	  </script>
     <script src="script/jquery-migrate-1.2.1.min.js"></script>
     <script src="script/jquery-ui.js"></script>
     <script src="script/bootstrap.min.js"></script>

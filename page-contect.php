@@ -3,7 +3,7 @@
       <div class="row mbl">
          <div class="col-lg-8">
             <div class="panel-primary">
-            <?php echo $status.$user_id ;
+            <?php 
             if ($_SESSION["employee_type"] ==  "me"  ) {
                      $condition = "";
                      //if ($status == "open") $condition = " status='open' OR status='me_open' ";
@@ -26,18 +26,17 @@
                      <a href="#" class="list-group-item">
                         <?php if($status == "done") {  } 
                         elseif($status == "picked") { ?>
-                              <button class="btn btn-primary" style="margin-left: 60%" onclick="addworker(<?= $srsrow['id'] ?>, 1)">Add Worker1</button>
-                              <button class="btn btn-primary" onclick="addworker(<?= $srsrow['id'] ?>, 2)">Add Worker2</button>
+                              <button class="btn btn-primary" style="margin-left: 60%" onclick="addworker(<?= $srsrow['id'] ?>, 1);">Add Worker1</button>
+                              <button class="btn btn-primary" onclick="addworker(<?= $srsrow['id'] ?>, 2);">Add Worker2</button>
                         <?php } else { ?>
                               <button class="btn btn-primary" style="margin-left: 80%" onclick="mePick(<?= $srsrow['id'] ?>);" >Pick</button>
                         <?php }?>
                      </a>
-                     <a href="#" class="list-group-item" id="addworker">
-                       
+                     <a href="#" class="list-group-item" >
+                       <span id="workerform_<?= $srsrow['id'] ?>"></span>
                      </a>
                   </p>
                </div>
-
           <?php }} ?>
 
             </div>

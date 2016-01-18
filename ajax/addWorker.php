@@ -24,6 +24,8 @@ if(isset($_POST['first_name'])){
 	$police = $_POST['police'];
 	$languages = $_POST['languages'];
 	$skills = $_POST['skills'];
+	$request_id = $_POST['request_id'];
+	$id = $_POST['id'];
 	$me_id = $_SESSION['user_id'];
 	mysqli_query($db_handle,"INSERT INTO workers (first_name, last_name, phone, gender, birth_date, age, education, languages, expected_salary, 
 										current_address, permanent_address, timings, work_time, varification_status, emergency_phone, address_proof_name, 
@@ -32,7 +34,14 @@ if(isset($_POST['first_name'])){
 										'$expected_salary', '$current_address', '$parmanent_address', '$timings', '$work_time', '$police', 
 										'$emergancy_mobile', '$address_proof_name', '$address_proof_id', '$id_proof_name', '$id_proof_id', '$experience', 
 										'$remarks', '$skills', '$me_id');");
-
+	$worker_id = mysqli_insert_id($db_handle);
+	if($id == 1){
+		mysqli_query($db_handle,"UPDATE service_request SET match_id = '$worker_id' where id = '$request_id' ;");
+	}
+	else {
+		mysqli_query($db_handle,"UPDATE service_request SET match2_id = '$worker_id' where id = '$request_id' ;");
+	}
+	 
 	if(mysqli_error($db_handle)) return false ;
 	else return true ;
 }
