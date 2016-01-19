@@ -217,7 +217,7 @@ session_start();
                         		<a href="#" class="list-group-item">Remarks <span style="padding-left: 7em">Female, age between 35 to 45</span></a>
                         		<a href="#" class="list-group-item">Skills <span style="padding-left: 9em">Ironing, pet care, helping</span></a>
 		                        <a href="#" class="list-group-item">
-		                        		<input type="submit" class="btn btn-primary" style="margin-left: 80%" value="Pick">
+		                        	<input type="submit" class="btn btn-primary" style="margin-left: 80%" value="Pick">
 		                        </a>
 		                    </p>
                         </div>

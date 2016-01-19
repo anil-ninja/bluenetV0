@@ -136,14 +136,6 @@ require_once "dbConnection.php";
                   <div class="icon-bg bg-pink"></div><i class="glyphicon glyphicon-thumbs-up"></i>
                   <span class="menu-title">Done requests</span></a>   
                 </li>
-                <li><a href="insert.php">
-                  <div class="icon-bg bg-red"></div><i class="glyphicon glyphicon-plus"></i>
-                  <span class="menu-title">Insert New Service Request</span></a>
-                </li>
-                <li><a href="insertworker.php">
-                  <div class="icon-bg bg-red"></div><i class="glyphicon glyphicon-plus"></i>
-                  <span class="menu-title">Insert New Worker</span></a>
-                </li>
               <?php } 
 
                else if ($_SESSION["employee_type"] ==  "cem" ) { ?>
@@ -172,22 +164,10 @@ require_once "dbConnection.php";
                   <div class="icon-bg bg-pink"></div><i class="glyphicon glyphicon-ok"></i>
                   <span class="menu-title">Done requests</span></a>   
                 </li>
-                <li><a href="insert.php">
-                  <div class="icon-bg bg-red"></div><i class="glyphicon glyphicon-plus"></i>
-                  <span class="menu-title">Insert New Service Request</span></a>
-                </li>
             <?php } 
 
               else if ($_SESSION["employee_type"] ==  "operator" ) { ?>
 
-                <li><a href="insert.php">
-                  <div class="icon-bg bg-red"></div><i class="glyphicon glyphicon-plus"></i>
-                  <span class="menu-title">Insert New Service Request</span></a>
-                </li>
-                <li><a href="insertworker.php">
-                  <div class="icon-bg bg-red"></div><i class="glyphicon glyphicon-plus"></i>
-                  <span class="menu-title">Insert New Worker</span></a>
-                </li>
                 <li><a href="home.php?status=followback">
                   <div class="icon-bg bg-blue"></div><i class="glyphicon glyphicon-repeat"></i>
                   <span class="menu-title">Follow back Requests</span></a>
@@ -248,19 +228,19 @@ require_once "dbConnection.php";
           				<div class="icon-bg bg-blue"></div><i class=" glyphicon glyphicon-time"></i>
           				<span class="menu-title">View 24hours Requests</span></a>
         			  </li>
-        			  <li><a href="insert.php">
-          				<div class="icon-bg bg-red"></div><i class="glyphicon glyphicon-plus"></i>
-          				<span class="menu-title">Insert New Service Request</span></a>
-        			  </li>
-                <li><a href="insertworker.php">
-                  <div class="icon-bg bg-red"></div><i class="glyphicon glyphicon-plus"></i>
-                  <span class="menu-title">Insert New Worker</span></a>
-                </li>
         			  <li><a href="area.php">
           				<div class="icon-bg bg-blue"></div><i class="glyphicon glyphicon-print"></i>
           				<span class="menu-title">Print Area</span></a>
         			  </li>
               <?php } ?>
+                <li><a href="insert.php">
+                  <div class="icon-bg bg-red"></div><i class="glyphicon glyphicon-plus"></i>
+                  <span class="menu-title">Insert New Service Request</span></a>
+                </li>
+                <li><a href="insertworker.php">
+                  <div class="icon-bg bg-red"></div><i class="glyphicon glyphicon-plus"></i>
+                  <span class="menu-title">Insert New Worker</span></a>
+                </li>
     			</ul>
         </div>
       </nav>

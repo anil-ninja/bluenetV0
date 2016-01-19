@@ -43,11 +43,11 @@ function postWorkerDetails(fields, languagesArray, skillsArray, request_id, id) 
       });
       $('#languages').val("");
       $('#skills').val("");
-      alert("Added Successfully");
+      //alert("Added Successfully");
       location.reload();
     },
     error: function(result){
-      alert(result);
+      //alert(result);
       return false;
     }
   });
@@ -69,7 +69,7 @@ function validateWorkerDetails(request_id, id){
       skillsArray[i] = $(selected).val(); 
     });
   }
-  else {
+  else if(id == 2){
     fields = ["2first_name"+request_id,"2last_name"+request_id,"2address_proof_name"+request_id, "2address_proof_id"+request_id, 
             "2id_proof_name"+request_id, "2id_proof_id"+request_id, "2mobile"+request_id, "2emergancy_mobile"+request_id, "2age"+request_id,  
             "2expected_salary"+request_id, "2current_address"+request_id, "2parmanent_address"+request_id, "2education"+request_id, 
@@ -84,10 +84,75 @@ function validateWorkerDetails(request_id, id){
       skillsArray[i] = $(selected).val(); 
     });
   }
+  else {
+    fields = ["first_name","last_name","address_proof_name", "address_proof_id", 
+            "id_proof_name", "id_proof_id", "mobile", "emergancy_mobile", "age",  
+            "expected_salary", "current_address", "parmanent_address", "education", 
+            "experience", "gender","birth_date", "timings", "work_time", "remarks",
+            "police"];
+    var languagesArray = []; 
+    $('#2languages').each(function(i, selected){ 
+      languagesArray[i] = $(selected).val(); 
+    });
+    var skillsArray = []; 
+    $('#2skills').each(function(i, selected){ 
+      skillsArray[i] = $(selected).val(); 
+    });
+  }
   if(genericEmptyFieldValidator(fields)){
     postWorkerDetails(fields, languagesArray, skillsArray, request_id, id);
   }
  return false;
+}
+
+function postRequestDeatils(fields, skillsArray, areasArray) {
+
+  var dataString = "";
+  dataString = "name=" + $('#'+fields[0]).val() + "&mobile=" + $('#'+fields[1]).val() + "&address=" + $('#'+fields[2]).val() + 
+      "&timing=" + $('#'+fields[3]).val() + "&new_status=" + $('#'+fields[4]).val() + "&gender=" +  $('#'+fields[5]).val() + 
+      "&salary=" +  $('#'+fields[6]).val() + "&area=" +  $('#'+fields[7]).val() + "&work_time=" +  $('#'+fields[8]).val() + 
+      "&created_time=" + $('#'+fields[9]).val() + "&remarks=" + $('#'+fields[10]).val() + "&worker_area=" +  areasArray + 
+      "&skills=" + skillsArray ;/*+"&police=" + $("input[name='police']:checked").val()*/ 
+  console.log(dataString);
+  alert(dataString);
+  $.ajax({
+    type: "POST",
+    url: "ajax/addRequest.php",
+    data: dataString,
+    cache: false,
+    success: function(result){
+      console.log(result);
+      $(fields).each(function(i, idVal){ 
+        $("#"+idVal).val(""); 
+      });
+      $('#worker_area').val("");
+      $('#skills').val("");
+      //alert("Added Successfully");
+      location.reload();
+    },
+    error: function(result){
+      console.log(result);
+      //return false;
+    }
+  });
+}
+
+function validateRequestDetails(){
+
+  fields = ["name","mobile","address","timing","new_status","gender","salary","area","work_time","created_time","remarks"];
+  var areasArray = []; 
+  $('#worker_area').each(function(i, selected){ 
+    areasArray[i] = $(selected).val(); 
+  });
+  var skillsArray = []; 
+  $('input[name=skill]:checked').each(function(i, checked){ 
+    skillsArray[i] = $(selected).val(); 
+  });
+  var val = genericEmptyFieldValidator(fields);
+  if(val == true){
+    postRequestDeatils(fields, skillsArray, areasArray);
+  }
+  else return false;
 }
 
 function ChangeServiceRequestStatus(id, oldStatus, newStatus) {
@@ -109,9 +174,8 @@ function ChangeServiceRequestStatus(id, oldStatus, newStatus) {
 }
 
 function mePick(id) {
-  bootbox.confirm("Ready for search worker !!!", function(result) {
+  bootbox.confirm("Ready to search worker !!!", function(result) {
     if(result){
-      alert(id);
       $.ajax({
         type: "POST",
         url: "ajax/pick.php",

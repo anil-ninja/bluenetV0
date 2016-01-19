@@ -38,10 +38,10 @@ if(isset($_POST['first_name'])){
 	if($id == 1){
 		mysqli_query($db_handle,"UPDATE service_request SET match_id = '$worker_id' where id = '$request_id' ;");
 	}
-	else {
+	else if ($id == 2){
 		mysqli_query($db_handle,"UPDATE service_request SET match2_id = '$worker_id' where id = '$request_id' ;");
 	}
-	 
+	else {}
 	if(mysqli_error($db_handle)) return false ;
 	else return true ;
 }
