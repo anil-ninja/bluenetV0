@@ -155,8 +155,26 @@ function postUserDeatils(fields){
   var dataString = "";
   dataString = "first_name=" + $('#'+fields[0]).val() + "&last_name=" + $('#'+fields[1]).val() + "&email=" + $('#'+fields[2]).val() + 
       "&phone=" + $('#'+fields[3]).val() + "&employee_type=" + $('#'+fields[4]).val() + "&salary=" +  $('#'+fields[5]).val() + 
-      "&password=" +  $('#'+fields[6]).val() + "&password2=" +  $('#'+fields[7]).val() ;
-  if(fields[6]).val() == fields[7]).val()){ 
+      "&password=" +  $('#'+fields[6]).val() ;
+  if($('#'+fields[0]).val().length < 3){
+    alert("First Name is too short");
+  }
+  else if($('#'+fields[1]).val().length < 3){
+    alert("Last Name is too short");
+  }
+  else if($('#'+fields[2]).val().length < 8){
+    alert("Enter valid email");
+  }
+  else if($('#'+fields[3]).val().length < 10){
+    alert("Enter valid phone number");
+  }
+  else if($('#'+fields[5]).val().length < 3){
+    alert("Enter valid Base salary");
+  }
+  else if($('#'+fields[6]).val().length < 6){
+    alert("Password length should be more than 6 chars");
+  }
+  else if($('#'+fields[6]).val() == $('#'+fields[7]).val()){ 
     $.ajax({
       type: "POST",
       url: "ajax/addUser.php",
@@ -183,7 +201,6 @@ function postUserDeatils(fields){
 
 function validateUserDetails(){
   fields = ["first_name","last_name","email","phone","employee_type", "salary", "password","password2"];
-  
   if(genericEmptyFieldValidator(fields)){
     postUserDeatils(fields);
   }

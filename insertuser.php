@@ -165,12 +165,12 @@ if (!isset($_SESSION['user_id'])) {
             else { 
                   if($_SESSION["employee_type"] ==  "admin" ){
               ?>
-                <li><a href="insertuser.php">
+                <li class="active"><a href="insertuser.php">
                   <div class="icon-bg bg-red"></div><i class="glyphicon glyphicon-plus"></i>
                   <span class="menu-title">Add New User</span></a>
                 </li>
             <?php } ?>
-                <li class="active"><a href="home.php">
+                <li ><a href="home.php">
                   <div class="icon-bg bg-orange"></div><i class="glyphicon glyphicon-home"></i>
                   <span class="menu-title">View All requests</span></a>
                 </li>
@@ -268,13 +268,11 @@ if (!isset($_SESSION['user_id'])) {
                   </div> 
                   <div class='form-group'>
                     <label class='col-md-3 control-label'>Email</label>
-                    <div class='col-md-4'>
+                    <div class='col-md-3'>
                       <input type='text' id ='email' class='form-control' placeholder='Email' />
                     </div>
-                  </div> 
-                  <div class='form-group'>
                     <label class='col-md-3 control-label'>Phone No.</label>
-                    <div class='col-md-4'>
+                    <div class='col-md-3'>
                       <input type='text' id ='phone' class='form-control' placeholder='Mobile Number' />
                     </div>
                   </div>
@@ -299,11 +297,11 @@ if (!isset($_SESSION['user_id'])) {
                   <div class="form-group">
                     <label class="col-md-3 control-label">Password</label>
                     <div class="col-md-3">
-                      <input type="text" id ="password" class="form-control" placeholder="password" />
+                      <input type="password" id ="password" class="form-control" placeholder="password" />
                     </div>
                     <label class="col-md-3 control-label">Re-enter password</label>
                     <div class="col-md-3">
-                      <input type="text" id ="password2" class="form-control" placeholder="Re-enter password" />
+                      <input type="password" id ="password2" class="form-control" placeholder="Re-enter password" />
                     </div>               
                   </div>
       				    <div class="form-group">
