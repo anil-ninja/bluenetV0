@@ -167,14 +167,14 @@ if (!isset($_SESSION['user_id'])) {
               ?>
                 <li><a href="insertuser.php">
                   <div class="icon-bg bg-red"></div><i class="glyphicon glyphicon-plus"></i>
-                  <span class="menu-title">Insert New Worker</span></a>
+                  <span class="menu-title">Add New User</span></a>
                 </li>
             <?php } ?>
                 <li class="active"><a href="home.php">
                   <div class="icon-bg bg-orange"></div><i class="glyphicon glyphicon-home"></i>
                   <span class="menu-title">View All requests</span></a>
                 </li>
-                <li class="active"><a href="home.php?status=open">
+                <li ><a href="home.php?status=open">
                   <div class="icon-bg bg-orange"></div><i class="glyphicon glyphicon-search"></i>
                   <span class="menu-title">Open requests</span></a>
                 </li>
