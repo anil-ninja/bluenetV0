@@ -5,50 +5,7 @@ require_once "dbConnection.php";
 if (!isset($_SESSION['user_id'])) {  
 	header('Location: index.php');
 }
-if (isset($_POST['insert'])) {
-	$name = $_POST['name'];
-	$mobile = $_POST['mobile'];
-	$address = $_POST['address'];
-	$timing = $_POST['timing'];
-	$salary = $_POST['salary'];
-	$area = $_POST['area'];
-	$status = $_POST['new_status'];
-	$remarks = $_POST['remarks'];
-	$time = $_POST['work_time'];
-	$created_time = $_POST['created_time'];
-	$worker_area = $_POST['worker_area'];
-	$gender = $_POST['gender'];
-	$user_id = $_SESSION['user_id'];
-	$skill = count($_POST['skill']);
-	for($i=0; $i < $skill; $i++) {
-      $requirement .= ", ".$_POST['skill'][$i];
-    }
-    $str2 = substr($requirement, 1); 
-	$sql = mysqli_query ($db_handle, "INSERT INTO service_request (name, mobile, requirements, gender, timings, expected_salary, address, area, user_id,
-										remarks, status, worker_area, work_time, created_time)	VALUES ('$name','$mobile','$str2','$gender','$timing',
-										'$salary', '$address', '$area','$user_id','$remarks', '$status', '$worker_area', '$time', '$created_time');");
-	$sr_id = mysqli_insert_id($db_handle);
-	$eachworkarea = explode(",", $worker_area);
-	foreach ($eachworkarea as $workareas) {
-		$newarea = trim($workareas);
-		$workarea = mysqli_query ($db_handle, "SELECT * FROM area WHERE name='$newarea');");
-		if(mysqli_num_rows($workarea) != 0){
-			$areas = mysqli_fetch_array($workarea);
-			$area_id = $areas['id'];
-			$sql = mysqli_query ($db_handle, "INSERT INTO sr_area (id, sr_id) VALUES ('$area_id', '$sr_id');");
-		}
-		else {
-			$sql = mysqli_query ($db_handle, "INSERT INTO area (name) VALUES ('$newarea');");
-			$area_id = mysqli_insert_id($db_handle);
-			$sql = mysqli_query ($db_handle, "INSERT INTO sr_area (id, sr_id) VALUES ('$area_id', '$sr_id');");
-		}
-	}
-	if(mysqli_connect_errno()){		
-	}
-	else { 
-		//header("Location: index.php"); 
-		}
-}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -205,9 +162,14 @@ if (isset($_POST['insert'])) {
                   <span class="menu-title">Feedback Requests</span></a>
                 </li>
             <?php }  
-              
-            else { ?>
-
+            else { 
+                  if($_SESSION["employee_type"] ==  "admin" ){
+              ?>
+                <li><a href="insertuser.php">
+                  <div class="icon-bg bg-red"></div><i class="glyphicon glyphicon-plus"></i>
+                  <span class="menu-title">Insert New Worker</span></a>
+                </li>
+            <?php } ?>
                 <li class="active"><a href="home.php">
                   <div class="icon-bg bg-orange"></div><i class="glyphicon glyphicon-home"></i>
                   <span class="menu-title">View All requests</span></a>

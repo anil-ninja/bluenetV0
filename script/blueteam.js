@@ -218,6 +218,7 @@ function addnote(id, type){
       error: function(result){
         console.log("inside error");
         console.log(result);
+        return false;
       }
     });
     return false;
@@ -238,6 +239,7 @@ function ChangeServiceRequestStatus(id, oldStatus, newStatus) {
     error: function(result){
       console.log("inside error");
       console.log(result);
+      return false;
     }
   });
   return false;
@@ -282,7 +284,7 @@ function addmeeting(id){
 }
 
 function mePick(id) {
-  bootbox.confirm("Ready to search worker !!!", function(result) {
+  bootbox.confirm("Ready to work !!!", function(result) {
     if(result){
       $.ajax({
         type: "POST",
@@ -295,6 +297,7 @@ function mePick(id) {
         error: function(result){
           console.log("inside error");
           console.log(result);
+          return false;
         }
       });
     }

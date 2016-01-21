@@ -177,9 +177,14 @@ require_once "dbConnection.php";
                   <span class="menu-title">Feedback Requests</span></a>
                 </li>
             <?php }  
-              
-            else { ?>
-
+            else { 
+                  if($_SESSION["employee_type"] ==  "operator" ){
+              ?>
+                <li><a href="insertuser.php">
+                  <div class="icon-bg bg-red"></div><i class="glyphicon glyphicon-plus"></i>
+                  <span class="menu-title">Insert New Worker</span></a>
+                </li>
+            <?php } ?>
                 <li class="active"><a href="home.php">
                   <div class="icon-bg bg-orange"></div><i class="glyphicon glyphicon-home"></i>
                   <span class="menu-title">View All requests</span></a>

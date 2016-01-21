@@ -127,9 +127,15 @@
                      <a href="#" class="list-group-item "> Mobile  <span style="padding-left: 8em"><?= $srsrow['mobile'] ?></span></a>
                      <a href="#" class="list-group-item"> Requirements<span style="padding-left: 5em"><?= $srsrow['requirements'] ?></span></a>
                <?php 
-                  /*$srs = mysqli_query($db_handle, "SELECT * FROM service_request WHERE status = '$status'; ") ;
-                  while ($srsrow = mysqli_fetch_array($srs)){*/
+               if($status == 'feedback'){
+                  $sr_id = $srsrow['id'];
+                  $worker = mysqli_query($db_handle, "SELECT b.* FROM service_request as a join workers as b 
+                                                      WHERE a.id = $sr_id AND a.done_worker_id = b.id ;");
+                  $workerDetails = mysqli_fetch_array($worker);
                ?>
+                     <a href="#" class="list-group-item active"> Worker Name  <span style="padding-left: 5em"><?= $workerDetails['first_name'] ?></span></a>
+                     <a href="#" class="list-group-item "> Mobile  <span style="padding-left: 8em"><?= $srsrow['phone'] ?></span></a>
+               <?php } ?>
                   </p>
                </div>
                <?php }

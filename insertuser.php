@@ -255,110 +255,66 @@ if (!isset($_SESSION['user_id'])) {
 		      <div class="row mbl">
 		         <div class="col-lg-11">
 		            <div class="panel-primary">
-            		<form class="form-horizontal" id="request_details_form" onsubmit='return (validateRequestDetails());'>
-				    <div class="form-group">
-				      <label class="col-md-3 control-label">Name</label>
-				      <div class="col-md-3">
-				        <input type="text" id ="name" class="form-control" placeholder="Name" />
-				      </div> <!-- /.col -->
-				      <label class="col-md-1 control-label">Mobile No.</label>
-				      <div class="col-md-3">
-				        <input type="text" id ="mobile" class="form-control" placeholder="Enter 10 digit mobile number" />
-				      </div> <!-- /.col -->
-				    </div> <!-- /.form-group -->
-				    <div class="form-group">
-				      	<label class="col-md-3 control-label">address</label>
-						<div class="col-md-3">
-				        	<input type="text" id ="address" class="form-control" placeholder="address" />
-				      	</div> <!-- /.col -->
-				      	<label class="col-md-1 control-label">Worker timings</label>
-				      	<div class="col-md-3">
-				        	<input type="text" id ="timing" class="form-control" placeholder="Working Hours" />
-				      	</div> <!-- /.col -->
-				    </div> <!-- /.form-group -->
-				    <div class="form-group">
-				      	<label class="col-md-3 control-label">Status</label>
-						<div class="col-md-3">
-							<select id="new_status">
-								<option value="open" selected>Open</option>
-								<option value="me_open">ME Open</option>
-								<option value="demo" >Demo</option>
-								<option value="salary_issue" >Salary Issues</option>
-								<option value="not_interested" >Not Interested</option>
-								<option value="done" >Done</option>
-								<option value="decay" >Decay</option>
-								<option value="delete" >Delete</option>
-								<option value="just_to_know" >For information Purpose</option>
-								<option value="feedback" >Feedback</option>
-								<option value="followback" >Follow back</option>
-							</select>
-						</div>
-		      	<label class="col-md-1 control-label">Other Specifications</label>
-		      	<div class="col-md-3">
-		        	<select id = "gender" > 
-								<option value="M" selected >Male</option>
-								<option value="F">Female</option>
-								<option value="A">Any</option>
-							</select>
-				      	</div>
-				    </div>
-				    <div class="form-group">
-				      	<label class="col-md-3 control-label">Expected Salary</label>
-						<div class="col-md-3">
-				        	<input type="text" id ="salary" class="form-control" placeholder="Expected Salary" />
-				      	</div> <!-- /.col -->
-				      	<label class="col-md-1 control-label">Area</label>
-				      	<div class="col-md-3">
-				        	<input type="text" id ="area" class="form-control" placeholder="Area" />
-				      	</div> <!-- /.col -->
-				    </div>
-				    <div class="form-group">
-						<label class="col-md-3 control-label">Working Time in Hours</label>
-				      	<div class="col-md-3">
-				        	<input type="text" id ="work_time" class="form-control" placeholder="Working Time in Hours"/>
-				      	</div>
-				      	<label class="col-md-1 control-label">Created Date</label>
-				      	<div class="col-md-3">
-				        	<input type="text" id ="created_time" class="form-control" placeholder="YYYY-mm-dd" />
-				      	</div>
-				    </div>
-				    <div class="form-group">
-				      	<label class="col-md-3 control-label">Remarks</label>
-						<div class="col-md-3">
-				        	<input type="text" id ="remarks" class="form-control" placeholder="remarks" />
-				      	</div> <!-- /.col -->
-				      	<label class="col-md-1 control-label">Worker Area</label>
-				      	<div class="col-md-3">
-				        	<input type="text" id ="worker_area" class="form-control" placeholder="Worker Area" />
-				      	</div>
-				    </div>
-				    <div class="form-group">
-				    	<label class="col-md-3 control-label">Requierment</label>
-				      	<div class="col-md-6 ">
-				        	<input type="checkbox" name = "skill" value ='maid' /> Maid &nbsp;&nbsp;&nbsp;&nbsp;
-							<input type="checkbox" name = "skill" value ='cook' /> Cook &nbsp;&nbsp;&nbsp;&nbsp;
-							<input type="checkbox" name = "skill" value ='driver' /> driver &nbsp;&nbsp;&nbsp;&nbsp;         
-							<input type="checkbox" name = "skill" value ='electrician' /> electrician &nbsp;&nbsp;&nbsp;&nbsp;           
-							<input type="checkbox" name = "skill" value ='plumber' /> Plumber &nbsp;&nbsp;&nbsp;&nbsp;        
-							<input type="checkbox" name = "skill" value ='carpenter' /> Carpenter &nbsp;&nbsp;&nbsp;&nbsp;     
-							<input type="checkbox" name = "skill" value ='babysitter' /> Babysitter &nbsp;&nbsp;&nbsp;&nbsp;           
-							<input type="checkbox" name = "skill" value ='oldage' /> Old age care &nbsp;&nbsp;&nbsp;&nbsp;          
-							<input type="checkbox" name = "skill" value ='patient' />  Patient care &nbsp;&nbsp;&nbsp;
-				      	</div> 
-					</div>
-				    <div class="form-group">
-					    <label class="col-md-3 control-label"></label>
-					    <div class="col-md-7">
-					        <button type="submit" class="btn btn-success pull-right">Insert</button>
-					    </div>
-				    </div> <!-- /.form-group -->
-				</form>
+            		<form class="form-horizontal" id="user_details_form" onsubmit='return (validateUserDetails());'>
+                  <div class='form-group'>
+                    <label class='col-md-3 control-label'>First Name</label>
+                    <div class='col-md-3'>
+                      <input type='text' id ='first_name' class='form-control' placeholder='First Name' />
+                    </div>
+                    <label class='col-md-3 control-label'>Last Name</label>
+                    <div class='col-md-3'>
+                      <input type='text' id ='last_name' class='form-control' placeholder='Last Name' />
+                    </div>
+                  </div> 
+                  <div class='form-group'>
+                    <label class='col-md-3 control-label'>Email</label>
+                    <div class='col-md-4'>
+                      <input type='text' id ='email' class='form-control' placeholder='Email' />
+                    </div>
+                  </div> 
+                  <div class='form-group'>
+                    <label class='col-md-3 control-label'>Phone No.</label>
+                    <div class='col-md-4'>
+                      <input type='text' id ='phone' class='form-control' placeholder='Mobile Number' />
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-md-3 control-label">Designation</label>
+                    <div class="col-md-3">
+                      <select id="employee_type">
+                        <option value='operator' >Operator</option>
+                        <option value='me' >Marketing Executive</option>
+                        <option value='cem' >Customer Engagement Manager</option>
+                        <option value='admin' >Admin</option>
+                        <option value='accountant' >Accountant</option>
+                        <option value='ba' >Business Analyst</option>
+                        <option value='dev' >Developer</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-md-3 control-label">Password</label>
+                    <div class="col-md-3">
+                      <input type="text" id ="password" class="form-control" placeholder="password" />
+                    </div>
+                    <label class="col-md-3 control-label">Re-enter password</label>
+                    <div class="col-md-3">
+                      <input type="text" id ="password2" class="form-control" placeholder="Re-enter password" />
+                    </div>               
+                  </div>
+      				    <div class="form-group">
+      					    <label class="col-md-3 control-label"></label>
+      					    <div class="col-md-7">
+      					        <button type="submit" class="btn btn-success pull-right">Insert</button>
+      					    </div>
+      				    </div> <!-- /.form-group -->
+      				</form>
     				</div>
     			</div>
     		</div>
-        </div>
-        </div>
-        </div>
+      </div>
+    </div>
+    </div>
     </div>
    <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
     <script src="script/jquery-1.10.2.min.js"></script>
