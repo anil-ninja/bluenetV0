@@ -151,11 +151,50 @@ function validateRequestDetails(){
   return false;
 }
 
+function postUserDeatils(fields){
+  var dataString = "";
+  dataString = "first_name=" + $('#'+fields[0]).val() + "&last_name=" + $('#'+fields[1]).val() + "&email=" + $('#'+fields[2]).val() + 
+      "&phone=" + $('#'+fields[3]).val() + "&employee_type=" + $('#'+fields[4]).val() + "&salary=" +  $('#'+fields[5]).val() + 
+      "&password=" +  $('#'+fields[6]).val() + "&password2=" +  $('#'+fields[7]).val() ;
+  if(fields[6]).val() == fields[7]).val()){ 
+    $.ajax({
+      type: "POST",
+      url: "ajax/addUser.php",
+      data: dataString,
+      cache: false,
+      success: function(result){
+        
+        $(fields).each(function(i, idVal){ 
+          $("#"+idVal).val(""); 
+        });
+        alert("Added Successfully");
+        location.reload();
+      },
+      error: function(result){
+        alert(result);
+        return false;
+      }
+    });
+  }
+  else {
+    alert("Password do not match");
+  }
+}
+
+function validateUserDetails(){
+  fields = ["first_name","last_name","email","phone","employee_type", "salary", "password","password2"];
+  
+  if(genericEmptyFieldValidator(fields)){
+    postUserDeatils(fields);
+  }
+  return false;
+}
+
 function postMeetingDeatils(fields, id) {
 
   var dataString = "";
   dataString = "remark=" + $('#'+fields[2]).val() + "&date=" + $('#'+fields[0]).val()+" "+$('#'+fields[1]).val() + ":00" 
-                + "&name=" + $('#'+fields[3]).val() + "&phone=" + $('#'+fields[4]).val() + "&id=" + id ; 
+                + "&worker=" + $('#'+fields[3]).val() + "&id=" + id ; 
   $.ajax({
     type: "POST",
     url: "ajax/addMeeting.php",
@@ -178,7 +217,7 @@ function postMeetingDeatils(fields, id) {
 
 function validateMeetingDetails(id){
   
-  fields = ["date"+id,"time"+id,"remark"+id, "name"+id, "phone"+id];
+  fields = ["date"+id,"time"+id,"remark"+id, "worker"+id];
   
   if(genericEmptyFieldValidator(fields)){
     postMeetingDeatils(fields, id);
@@ -262,15 +301,12 @@ function addmeeting(id){
                     "<div class='col-md-3'>"+
                       "<input type='text' id ='remark"+id+"' class='form-control' placeholder='Enter remarks' />"+
                     "</div>"+
-                    "<label class='col-md-3 control-label'>Worker Name</label>"+
+                    "<label class='col-md-3 control-label'>Worker</label>"+
                     "<div class='col-md-3'>"+
-                      "<input type='text' id ='name"+id+"' class='form-control' placeholder='Enter Workers First Name' />"+
-                    "</div>"+
-                  "</div>"+
-                  "<div class='form-group'>"+
-                    "<label class='col-md-3 control-label'>Worker Mobile</label>"+
-                    "<div class='col-md-3'>"+
-                      "<input type='text' id ='phone"+id+"' class='form-control' placeholder='Enter Worker Mobile No' />"+
+                      "<select id='worker"+id+"'>"+
+                        "<option value='1' >Worker 1</option>"+
+                        "<option value='2' >Worker 2</option>"+
+                      "</select>"+
                     "</div>"+
                   "</div>"+
                   "<div class='form-group'>"+

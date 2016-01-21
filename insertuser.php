@@ -125,10 +125,10 @@ if (!isset($_SESSION['user_id'])) {
 
                else if ($_SESSION["employee_type"] ==  "cem" ) { ?>
 
-			  <li><a href="home.php?status=open">
-  				<div class="icon-bg bg-pink"></div><i class="glyphicon glyphicon-search"></i>
-  				<span class="menu-title">Open requests</span></a>   
-			  </li>
+        			  <li><a href="home.php?status=open">
+          				<div class="icon-bg bg-pink"></div><i class="glyphicon glyphicon-search"></i>
+          				<span class="menu-title">Open requests</span></a>   
+        			  </li>
                 <li><a href="home.php?status=match">
                   <div class="icon-bg bg-pink"></div><i class="glyphicon glyphicon-search"></i>
                   <span class="menu-title">Match requests</span></a>   
@@ -290,6 +290,10 @@ if (!isset($_SESSION['user_id'])) {
                         <option value='ba' >Business Analyst</option>
                         <option value='dev' >Developer</option>
                       </select>
+                    </div>
+                    <label class="col-md-3 control-label">Base salary</label>
+                    <div class="col-md-3">
+                      <input type="number" id ="salary" class="form-control" placeholder="Base salar" />
                     </div>
                   </div>
                   <div class="form-group">

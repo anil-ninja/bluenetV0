@@ -6,41 +6,7 @@
 	if (isset($_SESSION['user_id'])) {  
 		header('Location: home.php');
 	}
-	if (isset($_POST['request'])) {
 	
-		$firstname = mysqli_real_escape_string($db_handle, $_POST['firstname']);
-		$lastname = mysqli_real_escape_string($db_handle, $_POST['lastname']);
-		$email = mysqli_real_escape_string($db_handle, $_POST['email']);
-		$phone = mysqli_real_escape_string($db_handle, $_POST['phone']);
-        $employee_type = mysqli_real_escape_string($db_handle, $_POST['employee_type']);
-		$pas = mysqli_real_escape_string($db_handle, $_POST['password']) ;
-		$awe = mysqli_real_escape_string($db_handle, $_POST['password2']) ;
-	    if((strlen($firstname)< 2) OR (strlen($lastname)< 2) OR (strlen($email)< 8) OR (strlen($phone)< 10) OR (strlen($pas)< 4)) {
-            echo "Something went wrong, Try again";
-        }
-        else {
-    		if ( $pas == $awe ) {
-    			$pas = md5($pas);
-    			mysqli_query($db_handle,"INSERT INTO user(first_name, last_name, email, phone, password, employee_type) 
-    												VALUES ('$firstname', '$lastname', '$email', '$phone', '$pas', '$employee_type') ; ") ;		
-    			$user_create_id = mysqli_insert_id($db_handle);
-    			
-    			if(mysqli_error($db_handle)){ echo "Please Try Again"; } 
-    			else {
-    				$_SESSION['user_id'] = $user_create_id;
-    				$_SESSION['first_name'] = $firstname ;
-    				$_SESSION['email'] = $email;
-    				header("Location: home.php");
-    			}
-    		}
-    		else {  
-    			//header('Location: ./index.php?status=1');
-    			echo "Password do not match, Try again";
-    		}
-        }
-	
-    }
-
 	if (isset($_POST['login'])) {
 		$email = mysqli_real_escape_string($db_handle, $_POST['username']); 
 		$password = md5(mysqli_real_escape_string($db_handle, $_POST['passwordlogin']));

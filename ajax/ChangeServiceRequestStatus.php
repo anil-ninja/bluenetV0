@@ -19,5 +19,5 @@ if(isset($_POST['sr_id'])){
 	if(mysqli_error($db_handle)) return mysqli_error($db_handle) ;
 	else return true ;
 }
-
+mysqli_close($db_handle);
 ?>
