@@ -8,10 +8,13 @@ if(isset($_POST['id'])){
 	$type = $_POST['type'];
 	$data = "";
 	if($type == 1){
-		$srs = mysqli_query($db_handle, "SELECT a.*, b.* FROM service_request as a join workers as b WHERE a.id = $sr_id AND a.match_id = b.id ;");
+		$srs = mysqli_query($db_handle, "SELECT b.* FROM service_request as a join workers as b WHERE a.id = $sr_id AND a.match_id = b.id ;");
+	}
+	else if ($type == 1){
+		$srs = mysqli_query($db_handle, "SELECT b.* FROM service_request as a join workers as b WHERE a.id = $sr_id AND a.match2_id = b.id ;");
 	}
 	else {
-		$srs = mysqli_query($db_handle, "SELECT a.*, b.* FROM service_request as a join workers as b WHERE a.id = $sr_id AND a.match2_id = b.id ;");
+		$srs = mysqli_query($db_handle, "SELECT b.* FROM service_request as a join workers as b WHERE a.id = $sr_id AND a.done_worker_id = b.id ;");
 	}
 	$srsrow = mysqli_fetch_array($srs);
 	$data .= "<table class='display' cellspacing='0'>

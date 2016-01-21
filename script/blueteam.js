@@ -154,7 +154,8 @@ function validateRequestDetails(){
 function postMeetingDeatils(fields, id) {
 
   var dataString = "";
-  dataString = "remark=" + $('#'+fields[2]).val() + "&date=" + $('#'+fields[0]).val()+" "+$('#'+fields[1]).val() + ":00" + "&id=" + id ; 
+  dataString = "remark=" + $('#'+fields[2]).val() + "&date=" + $('#'+fields[0]).val()+" "+$('#'+fields[1]).val() + ":00" 
+                + "&name=" + $('#'+fields[3]).val() + "&phone=" + $('#'+fields[4]).val() + "&id=" + id ; 
   $.ajax({
     type: "POST",
     url: "ajax/addMeeting.php",
@@ -177,7 +178,7 @@ function postMeetingDeatils(fields, id) {
 
 function validateMeetingDetails(id){
   
-  fields = ["date"+id,"time"+id,"remark"+id];
+  fields = ["date"+id,"time"+id,"remark"+id, "name"+id, "phone"+id];
   
   if(genericEmptyFieldValidator(fields)){
     postMeetingDeatils(fields, id);
@@ -245,12 +246,12 @@ function ChangeServiceRequestStatus(id, oldStatus, newStatus) {
 function addmeeting(id){
   var meeting = "<form class='form-horizontal' id='meeting_details_form"+id+"' onsubmit='return (validateMeetingDetails("+id+"));'>" +
                   "<div class='form-group'>"+
-                    "<label class='col-md-3 control-label'>Date</label>"+
-                    "<div class='col-md-3'>"+
+                    "<label class='col-md-2 control-label'>Date</label>"+
+                    "<div class='col-md-4'>"+
                       "<input type='text' id ='date"+id+"' class='form-control' placeholder='Enter Date in yyyy-mm-dd' />"+
                     "</div>"+
-                    "<label class='col-md-3 control-label'>Time</label>"+
-                    "<div class='col-md-3'>"+
+                    "<label class='col-md-2 control-label'>Time</label>"+
+                    "<div class='col-md-4'>"+
                       "<input type='text' id ='time"+id+"' class='form-control' placeholder='Enter Time in hh:mm' />"+
                     "</div>"+
                   "</div>"+
@@ -258,6 +259,16 @@ function addmeeting(id){
                     "<label class='col-md-3 control-label'>Remarks</label>"+
                     "<div class='col-md-3'>"+
                       "<input type='text' id ='remark"+id+"' class='form-control' placeholder='Enter remarks' />"+
+                    "</div>"+
+                    "<label class='col-md-3 control-label'>Worker Name</label>"+
+                    "<div class='col-md-3'>"+
+                      "<input type='text' id ='name"+id+"' class='form-control' placeholder='Enter Workers First Name' />"+
+                    "</div>"+
+                  "</div>"+
+                  "<div class='form-group'>"+
+                    "<label class='col-md-3 control-label'>Worker Mobile</label>"+
+                    "<div class='col-md-3'>"+
+                      "<input type='text' id ='phone"+id+"' class='form-control' placeholder='Enter Worker Mobile No' />"+
                     "</div>"+
                   "</div>"+
                   "<div class='form-group'>"+

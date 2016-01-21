@@ -78,9 +78,8 @@
                      <a href="#" class="list-group-item">Meeting Time <span style="padding-left: 5em"><?= $meetingRow['meeting_time'] ?></span></a>
                      <a href="#" class="list-group-item "> Remarks  <span style="padding-left: 7em"><?= $meetingRow['remarks'] ?></span></a>
                      <a href="#" class="list-group-item">
-                        <button class="btn btn-primary" style="margin-left: 40%" onclick="workerDetails(<?= $srsrow['id'] ?>, 1);" >Worker 1 Details</button>
-                        <button class="btn btn-primary"  onclick="workerDetails(<?= $srsrow['id'] ?>, 2);" >Worker 2 Details</button><br/><br/>
-                        <button class="btn btn-primary"  style="margin-left: 40%" onclick="ChangeServiceRequestStatus(<?= $srsrow['id'] ?>, meeting, demo);" >Done</button>
+                        <button class="btn btn-primary" style="margin-left: 10%" onclick="workerDetails(<?= $srsrow['id'] ?>, 3);" >Worker Details</button>
+                        <button class="btn btn-primary" onclick="ChangeServiceRequestStatus(<?= $srsrow['id'] ?>, meeting, demo);" >Done</button>
                         <button class="btn btn-primary"  onclick="ChangeServiceRequestStatus(<?= $srsrow['id'] ?>, meeting, me_open);" >Search Worker</button>
                         <button class="btn btn-primary"  onclick="addmeeting(<?= $srsrow['id'] ?>);" >Reshadule Meeting</button>
                      </a>
@@ -126,14 +125,11 @@
                   <p style="font-size:20px;padding-left: 2em;">
                      <a href="#" class="list-group-item active"> Client Name  <span style="padding-left: 5em"><?= $srsrow['name'] ?></span></a>
                      <a href="#" class="list-group-item "> Mobile  <span style="padding-left: 8em"><?= $srsrow['mobile'] ?></span></a>
-                     <a href="#" class="list-group-item">Address <span style="padding-left: 7em"><?= $srsrow['address'] ?></span></a>
-                     <a href="#" class="list-group-item">Salary Criteria <span style="padding-left: 5em"><?= $srsrow['expected_salary'] ?></span></a>
-                     <a href="#" class="list-group-item">Timings <span style="padding-left: 8em"><?= $srsrow['timings'] ?></span></a>
-                     <a href="#" class="list-group-item">Working Time <span style="padding-left: 5em"><?= $srsrow['work_time'] ?></span></a>
                      <a href="#" class="list-group-item"> Requirements<span style="padding-left: 5em"><?= $srsrow['requirements'] ?></span></a>
-                     <a href="#" class="list-group-item">Remarks <span style="padding-left: 7em"><?= $srsrow['remarks'] ?></span></a>
-                     <a href="#" class="list-group-item">Worker Area <span style="padding-left: 5em"><?= $srsrow['worker_area'] ?></span></a>
-                     <a href="#" class="list-group-item "> Gender  <span style="padding-left: 7em"><?= $srsrow['gender'] ?></span></a>
+               <?php 
+                  /*$srs = mysqli_query($db_handle, "SELECT * FROM service_request WHERE status = '$status'; ") ;
+                  while ($srsrow = mysqli_fetch_array($srs)){*/
+               ?>
                   </p>
                </div>
                <?php }
