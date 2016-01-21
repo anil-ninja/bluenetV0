@@ -178,7 +178,7 @@ require_once "dbConnection.php";
                 </li>
             <?php }  
             else { 
-                  if($_SESSION["employee_type"] ==  "operator" ){
+                  if($_SESSION["employee_type"] ==  "admin" ){
               ?>
                 <li><a href="insertuser.php">
                   <div class="icon-bg bg-red"></div><i class="glyphicon glyphicon-plus"></i>
