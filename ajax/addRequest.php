@@ -20,9 +20,10 @@ if (isset($_POST['name'])) {
       $requirement .= ", ".$_POST['skill'][$i];
     }
     $str2 = substr($requirement, 1); */
-	mysqli_query ($db_handle, "INSERT INTO service_request (name, mobile, requirements, gender, timings, expected_salary, address, area, user_id,
+	mysqli_query ($db_handle, "INSERT INTO service_request (name, mobile, requirements, gender, timings, expected_salary, address, area,
 										remarks, status, worker_area, work_time, created_time)	VALUES ('$name','$mobile','$skill','$gender','$timing',
-										'$salary', '$address', '$area','$user_id','$remarks', '$status', '$worker_area', '$time', '$created_time');");
+										'$salary', '$address', '$area','$remarks', '$status', '$worker_area', '$time', '$created_time');");
+	
 	$sr_id = mysqli_insert_id($db_handle);
 	$eachworkarea = explode(",", $worker_area);
 	foreach ($eachworkarea as $workareas) {
@@ -42,5 +43,6 @@ if (isset($_POST['name'])) {
 	if(mysqli_error($db_handle)) return mysqli_error($db_handle) ;
 	else return true ;
 }
+
 mysqli_close($db_handle);
 ?>

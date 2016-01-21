@@ -117,7 +117,7 @@
                   </div>  
                   </div>  
 
-        </div>	
+        </div>	<?php /*
         <div class = "col-xs-1 col-ls-1"></div>
         <div class = "col-xs-2 col-ls-4" style="width:350px; margin-top:85px; background-color: #F8F8F8 ;">
 <!-- signin signup nav tabs starts ---->            
@@ -168,7 +168,7 @@
                 
                       
             </div>
-        </div>
+        </div>  */ ?>
     </div>
 	
 	<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>

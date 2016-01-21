@@ -105,40 +105,37 @@ function validateWorkerDetails(request_id, id){
  return false;
 }
 
-function postRequestDeatils(fields, skillsArray, areasArray) {
+function postRequestDeatils(fields, skills, areas) {
 
   var dataString = "";
   dataString = "name=" + $('#'+fields[0]).val() + "&mobile=" + $('#'+fields[1]).val() + "&address=" + $('#'+fields[2]).val() + 
       "&timing=" + $('#'+fields[3]).val() + "&new_status=" + $('#'+fields[4]).val() + "&gender=" +  $('#'+fields[5]).val() + 
       "&salary=" +  $('#'+fields[6]).val() + "&area=" +  $('#'+fields[7]).val() + "&work_time=" +  $('#'+fields[8]).val() + 
-      "&created_time=" + $('#'+fields[9]).val() + "&remarks=" + $('#'+fields[10]).val() + "&worker_area=" +  areasArray + 
-      "&skills=" + skillsArray ;/*+"&police=" + $("input[name='police']:checked").val()*/ 
-  console.log(dataString);
-  alert(dataString);
+      "&created_time=" + $('#'+fields[9]).val() + "&remarks=" + $('#'+fields[10]).val() + "&worker_area=" +  areas + "&skills=" + skills ; 
   $.ajax({
     type: "POST",
     url: "ajax/addRequest.php",
     data: dataString,
     cache: false,
     success: function(result){
-      console.log(result);
+      
       $(fields).each(function(i, idVal){ 
         $("#"+idVal).val(""); 
       });
       $('#worker_area').val("");
-      $('#skills').val("");
-      //alert("Added Successfully");
+      
+      alert("Added Successfully");
       location.reload();
     },
     error: function(result){
-      console.log(result);
-      //return false;
+      alert(result);
+      return false;
     }
   });
 }
 
 function validateRequestDetails(){
-
+  
   fields = ["name","mobile","address","timing","new_status","gender","salary","area","work_time","created_time","remarks"];
   var areasArray = []; 
   $('#worker_area').each(function(i, selected){ 
@@ -146,13 +143,85 @@ function validateRequestDetails(){
   });
   var skillsArray = []; 
   $('input[name=skill]:checked').each(function(i, checked){ 
-    skillsArray[i] = $(selected).val(); 
+    skillsArray[i] = $(checked).val(); 
   });
-  var val = genericEmptyFieldValidator(fields);
-  if(val == true){
+  if(genericEmptyFieldValidator(fields)){
     postRequestDeatils(fields, skillsArray, areasArray);
   }
-  else return false;
+  return false;
+}
+
+function postMeetingDeatils(fields, id) {
+
+  var dataString = "";
+  dataString = "remark=" + $('#'+fields[2]).val() + "&date=" + $('#'+fields[0]).val()+" "+$('#'+fields[1]).val() + ":00" + "&id=" + id ; 
+  $.ajax({
+    type: "POST",
+    url: "ajax/addMeeting.php",
+    data: dataString,
+    cache: false,
+    success: function(result){
+      
+      $(fields).each(function(i, idVal){ 
+        $("#"+idVal).val(""); 
+      });      
+      alert("Added Successfully");
+      location.reload();
+    },
+    error: function(result){
+      alert(result);
+      return false;
+    }
+  });
+}
+
+function validateMeetingDetails(id){
+  
+  fields = ["date"+id,"time"+id,"remark"+id];
+  
+  if(genericEmptyFieldValidator(fields)){
+    postMeetingDeatils(fields, id);
+  }
+  return false;
+}
+
+function workerDetails(id, type){
+  $.ajax({
+    type: "POST",
+    url: "ajax/workerDetails.php",
+    data: "id="+ id + "&type=" + type,
+    cache: false,
+    success: function(result){
+      //alert(result);
+      $("#workerform_"+id).show().html(result); 
+    },
+    error: function(result){
+      alert("Error Occured");
+      return false;
+    }
+  });
+}
+
+function addnote(id, type){
+  var dataString = "";
+  var note = $("#note").val() ;
+  if(genericEmptyFieldValidator(note)){
+    dataString = "id=" + id + "&type=" + type + "&note=" + note;
+    $.ajax({
+      type: "POST",
+      url: "ajax/addnote.php",
+      data: dataString,
+      cache: false,
+      success: function(result){
+      },
+      error: function(result){
+        console.log("inside error");
+        console.log(result);
+      }
+    });
+    return false;
+  }
+  return false;
 }
 
 function ChangeServiceRequestStatus(id, oldStatus, newStatus) {
@@ -171,6 +240,34 @@ function ChangeServiceRequestStatus(id, oldStatus, newStatus) {
     }
   });
   return false;
+}
+
+function addmeeting(id){
+  var meeting = "<form class='form-horizontal' id='meeting_details_form"+id+"' onsubmit='return (validateMeetingDetails("+id+"));'>" +
+                  "<div class='form-group'>"+
+                    "<label class='col-md-3 control-label'>Date</label>"+
+                    "<div class='col-md-3'>"+
+                      "<input type='text' id ='date"+id+"' class='form-control' placeholder='Enter Date in yyyy-mm-dd' />"+
+                    "</div>"+
+                    "<label class='col-md-3 control-label'>Time</label>"+
+                    "<div class='col-md-3'>"+
+                      "<input type='text' id ='time"+id+"' class='form-control' placeholder='Enter Time in hh:mm' />"+
+                    "</div>"+
+                  "</div>"+
+                  "<div class='form-group'>"+
+                    "<label class='col-md-3 control-label'>Remarks</label>"+
+                    "<div class='col-md-3'>"+
+                      "<input type='text' id ='remark"+id+"' class='form-control' placeholder='Enter remarks' />"+
+                    "</div>"+
+                  "</div>"+
+                  "<div class='form-group'>"+
+                    "<label class='col-md-3 control-label'></label>"+
+                    "<div class='col-md-7'>"+
+                      "<button type='submit' class='btn btn-success pull-right' >Submit Details</button>"+
+                    "</div>"+
+                  "</div>"+
+                "</form>";
+  $("#workerform_"+id).show().html(meeting);
 }
 
 function mePick(id) {

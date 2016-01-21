@@ -288,9 +288,9 @@ if (!isset($_SESSION['user_id'])) {
 								<option value="followback" >Follow back</option>
 							</select>
 						</div>
-				      	<label class="col-md-1 control-label">Other Specifications</label>
-				      	<div class="col-md-3">
-				        	<select id = "gender" > 
+		      	<label class="col-md-1 control-label">Other Specifications</label>
+		      	<div class="col-md-3">
+		        	<select id = "gender" > 
 								<option value="M" selected >Male</option>
 								<option value="F">Female</option>
 								<option value="A">Any</option>
