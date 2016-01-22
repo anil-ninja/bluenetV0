@@ -3,15 +3,14 @@ session_start();
 
 require_once "dbConnection.php";
 
+$status = $_GET["status"];
+if(!isset($status)) $status == "open" ;
 
-	$status = $_GET["status"];
-  if(!isset($status)) $status == "open" ;
+$user_id = $_SESSION['user_id'];
 
-  $user_id = $_SESSION['user_id'];
-
-	if (!isset($_SESSION['user_id'])) {  
-		header('Location: index.php');
-	}
+if (!isset($_SESSION['user_id'])) {  
+	header('Location: index.php');
+}
 
 ?>
 
@@ -66,8 +65,11 @@ require_once "dbConnection.php";
         <div class="news-update-box hidden-xs">
           <span class="text-uppercase mrm pull-left text-white">News:</span>
           <ul id="news-update" class="ticker list-unstyled">
-            <li>Welcome to KAdmin - Responsive Multi-Style Admin Template</li>
-            <li>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque.</li>
+            <li> Education is the key to unlock the golden door of freedom.</li>
+            <li>Education is the most powerful weapon which you can use to change the world.</li>
+            <li>The roots of education are bitter, but the fruit is sweet.</li>
+            <li>Education is not preparation for life; education is life itself.</li>
+            <li>The whole purpose of education is to turn mirrors into windows.</li>
           </ul>
         </div>
         <ul class="nav navbar navbar-top-links navbar-right mbn">
@@ -87,18 +89,11 @@ require_once "dbConnection.php";
             </a>  
           </li>
           <li class="dropdown topbar-user">
-            <a data-hover="dropdown" href="#" class="dropdown-toggle">
-              <img src="images/avatar/48.jpg" alt="" class="img-responsive img-circle"/>&nbsp;
-              <span class="hidden-xs">Robert John</span>&nbsp;<span class="caret"></span>
+            <a data-hover="dropdown" href="#" class="dropdown-toggle">&nbsp;
+              <span class="hidden-xs"><?= strtoupper($_SESSION['first_name']) ?></span>&nbsp;<span class="caret"></span>
             </a>
             <ul class="dropdown-menu dropdown-user pull-right">
-              <li><a href="#"><i class="fa fa-user"></i>My Profile</a></li>
-              <li><a href="#"><i class="fa fa-calendar"></i>My Calendar</a></li>
-              <li><a href="#"><i class="fa fa-envelope"></i>My Inbox<span class="badge badge-danger">3</span></a></li>
-              <li><a href="#"><i class="fa fa-tasks"></i>My Tasks<span class="badge badge-success">7</span></a></li>
-              <li class="divider"></li>
-              <li><a href="#"><i class="fa fa-lock"></i>Lock Screen</a></li>
-              <li><a href="Login.html"><i class="fa fa-key"></i>Log Out</a></li>
+              <li><a href="logout.php"><i class="fa fa-key"></i>Log Out</a></li>
             </ul>
           </li>
           <li id="topbar-chat" class="hidden-xs">
@@ -242,13 +237,13 @@ require_once "dbConnection.php";
     <!--BEGIN TITLE & BREADCRUMB PAGE-->
       <div id="title-breadcrumb-option-demo" class="page-title-breadcrumb">
         <div class="page-header pull-left">
-          <div class="page-title">BlueNet Hack</div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          <a id="menu-toggle" href="#" class="hidden-xs"><i class="glyphicon glyphicon-th-list"></i></a>
+          <div class="page-title">BlueNet Hack</div><!-- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <a id="menu-toggle" href="#" class="hidden-xs"><i class="glyphicon glyphicon-th-list"></i></a> -->
         </div>
         <ol class="breadcrumb page-breadcrumb pull-right">
-          <li><a href="logout.php">Logout</a></li>
           <li></li>
-          <li><?= strtoupper($_SESSION['first_name']) ?></li>
+          <li></li>
+          <li></li>
         </ol>
         <div class="clearfix"></div>
       </div>

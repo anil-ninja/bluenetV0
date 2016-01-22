@@ -1,32 +1,31 @@
 <?php
-    session_start();
+session_start();
 
-    require_once "dbConnection.php";
+require_once "dbConnection.php";
 
-	if (isset($_SESSION['user_id'])) {  
-		header('Location: home.php');
+if (isset($_SESSION['user_id'])) {  
+	header('Location: home.php');
+}
+
+if (isset($_POST['login'])) {
+	$email = mysqli_real_escape_string($db_handle, $_POST['username']); 
+	$password = md5(mysqli_real_escape_string($db_handle, $_POST['passwordlogin']));
+	$response = mysqli_query($db_handle,"select * from user where email = '$email' AND password = '$password';") ;
+	$num_rows = mysqli_num_rows($response);
+	if ( $num_rows > 0){
+		$responseRow = mysqli_fetch_array($response);
+		$_SESSION['first_name'] = $responseRow['first_name'] ;
+		$_SESSION['email'] = $responseRow['email'];
+        $_SESSION['user_id'] = $responseRow['id'];
+		$_SESSION['employee_type'] = $responseRow['employee_type'];
+
+        if($responseRow['employee_type'] == 'admin') header("Location: request.php");
+        else header("Location: home.php");
 	}
-	
-	if (isset($_POST['login'])) {
-		$email = mysqli_real_escape_string($db_handle, $_POST['username']); 
-		$password = md5(mysqli_real_escape_string($db_handle, $_POST['passwordlogin']));
-		$response = mysqli_query($db_handle,"select * from user where email = '$email' AND password = '$password';") ;
-		$num_rows = mysqli_num_rows($response);
-		if ( $num_rows > 0){
-			$responseRow = mysqli_fetch_array($response);
-			$_SESSION['first_name'] = $responseRow['first_name'] ;
-			$_SESSION['email'] = $responseRow['email'];
-            $_SESSION['user_id'] = $responseRow['id'];
-			$_SESSION['employee_type'] = $responseRow['employee_type'];
-
-			echo $responseRow['id'];
-
-			header("Location: home.php");
-		}
-		else {
-			echo "<center ><b>Sorry! Invalid username or password!</b></center>";      
-		}
-    }
+	else {
+		echo "<center ><b>Sorry! Invalid username or password!</b></center>";      
+	}
+}
 
 ?>
 <!DOCTYPE html>
@@ -54,21 +53,18 @@
 	
 </head>
 <body>
-<div class="row" style="background-image: url(img/collaboration.jpg); margin-top:0px; margin-left:0px; height: 600px; width: 100%;">
+    <div class="row" style="background-image: url(img/collaboration.jpg); margin-top:0px; margin-left:0px; height: 600px; width: 100%;">
         <div class = "col-xs-3 col-ls-3"></div>
         <div class = "col-xs-2 col-ls-4" style="width:350px; margin-top:85px; background-color: #F8F8F8 ;">
-        <ul class="nav nav-tabs" role="tablist" style="font-size:14px; margin-bottom: 0px; margin-top: 12px;">
+            <ul class="nav nav-tabs" role="tablist" style="font-size:14px; margin-bottom: 0px; margin-top: 12px;">
                 <li role="presentation" class="active" id="signup_modal">
-                    <a href="#tabSignup" role="tab" data-toggle="tab">
-                        SignIn
-                    </a>
-                </li>
-                
+                    <a href="#tabSignup" role="tab" data-toggle="tab"> SignIn </a>
+                </li>  
             </ul>
-   <div class="tab-content" style="margin-bottom: 12px">         
- <div role="tabpanel" class="row tab-pane active" id="tabSignup" style="line-height: 2;" >
+            <div class="tab-content" style="margin-bottom: 12px">         
+                <div role="tabpanel" class="row tab-pane active" id="tabSignup" style="line-height: 2;" >
                     <p align="center"><font size="5" >Sign In for Blueteam</font></p></br>
-                        <form method="post">
+                    <form method="post">
                         <div class="input-group">
                             <span class="input-group-addon">Email</span>
                             <input type="text" class="form-control" name="username" placeholder="Email ">
@@ -80,9 +76,8 @@
                         </div><br/>
                         <input type="submit" class="btn btn-success btn-lg" name = "login" value = "Log in" >
                     </form>
-                  </div>  
-                  </div>  
-
+                </div>  
+            </div>  
         </div>	<?php /*
         <div class = "col-xs-1 col-ls-1"></div>
         <div class = "col-xs-2 col-ls-4" style="width:350px; margin-top:85px; background-color: #F8F8F8 ;">
@@ -157,6 +152,5 @@
    
     <!--CORE JAVASCRIPT-->
     <script src="script/main.js"></script>
-    <script type="text/javascript" src="https://cdn.datatables.net/s/dt/dt-1.10.10/datatables.min.js"></script>
 </body>
 </html>
