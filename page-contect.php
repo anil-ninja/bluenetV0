@@ -92,7 +92,7 @@
                            if($srsrow['match_id'] != 0 AND $srsrow['match2_id'] != 0) {
                      ?>
                      <a href="#" class="list-group-item">
-                        <button class="btn btn-primary" style="margin-left: 30%" onclick="workerDetails(<?= $srsrow['id'] ?>, 1);" >Worker 1 Details</button>
+                        <button class="btn btn-primary" style="margin-left: 40%" onclick="workerDetails(<?= $srsrow['id'] ?>, 1);" >Worker 1 Details</button>
                         <button class="btn btn-primary"  onclick="workerDetails(<?= $srsrow['id'] ?>, 2);" >Worker 2 Details</button>
                         <button class="btn btn-primary"  onclick="addmeeting(<?= $srsrow['id'] ?>);" >Add Meeting</button>
                      </a>
@@ -100,7 +100,7 @@
                         else {
                      ?>
                      <a href="#" class="list-group-item">
-                        <button class="btn btn-primary" style="margin-left: 70%" onclick="ChangeServiceRequestStatus(<?= $srsrow['id'] ?>, open, me_open);" >Change Status</button>
+                        <button class="btn btn-primary" style="margin-left: 30%" onclick="ChangeServiceRequestStatus(<?= $srsrow['id'] ?>, open, me_open);" >Change Status</button>
                      </a>
                      <?php }
                         } 
@@ -110,6 +110,10 @@
                         <button class="btn btn-primary" style="margin-left: 80%" onclick="mePick(<?= $srsrow['id'] ?>);" >Pick</button>
                      </a>
                      <?php } ?>
+                     <a href="#" class="list-group-item" ><span style="padding-left: 15em">Update request</span></a>
+                     <a href="#" class="list-group-item" >
+                        <button class="btn btn-primary"  onclick="viewNotes(<?= $srsrow['id'] ?>, 1);" >View Notes</button>
+                     </a>
                      <a href="#" class="list-group-item" >
                        <span id="workerform_<?= $srsrow['id'] ?>"></span>
                      </a>

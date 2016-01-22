@@ -73,7 +73,7 @@ if (!isset($_SESSION['user_id'])) {
           </ul>
         </div>
         <ul class="nav navbar navbar-top-links navbar-right mbn">
-          <li class="dropdown">
+          <!-- <li class="dropdown">
             <a data-hover="dropdown" href="#" class="dropdown-toggle">
               <i class="fa fa-bell fa-fw"></i><span class="badge badge-green">3</span>
             </a>  
@@ -87,7 +87,7 @@ if (!isset($_SESSION['user_id'])) {
             <a data-hover="dropdown" href="#" class="dropdown-toggle">
               <i class="fa fa-tasks fa-fw"></i><span class="badge badge-yellow">8</span>
             </a>  
-          </li>
+          </li> -->
           <li class="dropdown topbar-user">
             <a data-hover="dropdown" href="#" class="dropdown-toggle">&nbsp;
               <span class="hidden-xs"><?= strtoupper($_SESSION['first_name']) ?></span>&nbsp;<span class="caret"></span>
@@ -96,11 +96,11 @@ if (!isset($_SESSION['user_id'])) {
               <li><a href="logout.php"><i class="fa fa-key"></i>Log Out</a></li>
             </ul>
           </li>
-          <li id="topbar-chat" class="hidden-xs">
+          <!-- <li id="topbar-chat" class="hidden-xs">
             <a href="javascript:void(0)" data-step="4" data-intro="&lt;b&gt;Form chat&lt;/b&gt; keep you connecting with other coworker" data-position="left" class="btn-chat">
               <i class="fa fa-comments"></i><span class="badge badge-info">3</span>
             </a>
-          </li>
+          </li> -->
         </ul>
       </div>
     </nav>
