@@ -29,7 +29,7 @@ function postWorkerDetails(fields, languagesArray, skillsArray, request_id, id) 
       "&timings=" + $('#'+fields[16]).val() + "&work_time=" + $('#'+fields[17]).val() +
       "&remarks=" + $('#'+fields[18]).val() + "&police=" + $('#'+fields[19]).val() +
       "&languages=" + languagesArray + "&skills=" + skillsArray + "&request_id=" + request_id + 
-      "&id=" + id ;/*+"&police=" + $("input[name='police']:checked").val()*/ 
+      "&type=" + id ;/*+"&police=" + $("input[name='police']:checked").val()*/ 
   console.log(dataString);
   $.ajax({
     type: "POST",
@@ -37,7 +37,7 @@ function postWorkerDetails(fields, languagesArray, skillsArray, request_id, id) 
     data: dataString,
     cache: false,
     success: function(result){
-      console.log(result);
+      alert("Added Successfully ")
       $(fields).each(function(i, idVal){ 
         $("#"+idVal).val(""); 
       });
