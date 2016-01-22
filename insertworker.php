@@ -256,7 +256,7 @@ if (!isset($_SESSION['user_id'])) {
                       <input type='text' id ='last_name' class='form-control' placeholder='Last Name' />
                     </div>
                   </div>
-                  <div class='form-group'>
+                  <!-- <div class='form-group'>
                     <label class='col-md-3 control-label'>Address Proof Name</label>
                     <div class='col-md-3'>
                       <select class='selectpicker' id='address_proof_name' data-live-search='true' data-width='100%'> 
@@ -289,7 +289,7 @@ if (!isset($_SESSION['user_id'])) {
                     <div class='col-md-3'>
                       <input type='text' id ='id_proof_id' class='form-control' placeholder='Id Proof Id' />
                     </div>
-                  </div>
+                  </div> -->
                   <div class='form-group'>
                     <label class='col-md-3 control-label'>Mobile No.</label>
                     <div class='col-md-3'>
