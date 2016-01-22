@@ -356,7 +356,6 @@ if (isset($_POST['update_status'])) {
   <script src="script/jquery.metisMenu.js"></script>
   <script src="script/jquery.slimscroll.js"></script>
   <script src="script/jquery.cookie.js"></script>
-  <script src="script/icheck.min.js"></script>
   <script src="script/custom.min.js"></script>
   <script src="script/jquery.news-ticker.js"></script>
   <script src="script/jquery.menu.js"></script>
