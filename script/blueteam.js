@@ -610,8 +610,8 @@ function addworker(request_id, id){
                         "<label class='col-md-3 control-label'>Id Proof No</label>"+
                         "<div class='col-md-3'>"+
                           "<input type='text' id ='id_proof_id"+request_id+"' class='form-control' placeholder='Id Proof Id' />"+
-                        "</div>"+*/
-                      "</div>"+
+                        "</div>"+
+                      "</div>"+*/
 
                       /*"<div class='form-group'>"+
                         "<label class='col-md-3 control-label'>Address Proof Name</label>"+
