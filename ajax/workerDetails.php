@@ -10,7 +10,7 @@ if(isset($_POST['id'])){
 	if($type == 1){
 		$srs = mysqli_query($db_handle, "SELECT b.* FROM service_request as a join workers as b WHERE a.id = $sr_id AND a.match_id = b.id ;");
 	}
-	else if ($type == 1){
+	else if ($type == 2){
 		$srs = mysqli_query($db_handle, "SELECT b.* FROM service_request as a join workers as b WHERE a.id = $sr_id AND a.match2_id = b.id ;");
 	}
 	else {
