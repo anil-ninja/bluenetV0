@@ -36,17 +36,16 @@ function postWorkerDetails(fields, languagesArray, skillsArray, request_id, id) 
     data: dataString,
     cache: false,
     success: function(result){
-      alert("Added Successfully ")
+      alert("Added Successfully ");
       $(fields).each(function(i, idVal){ 
         $("#"+idVal).val(""); 
       });
       $('#languages').val("");
       $('#skills').val("");
       //alert("Added Successfully");
-      location.reload();
     },
     error: function(result){
-      //alert(result);
+      alert(result);
       return false;
     }
   });
@@ -118,9 +117,11 @@ function postRequestDeatils(fields, skills, areas) {
         $("#"+idVal).val(""); 
       });
       $('#worker_area').val("");
-      
+      var checkboxes = document.getElementsByTagName('input');
+      for (var i = 0; i < checkboxes.length; i++) {
+        checkboxes[i].checked = false;
+      };
       alert("Added Successfully");
-      location.reload();
     },
     error: function(result){
       alert(result);
@@ -181,7 +182,6 @@ function postUserDeatils(fields){
           $("#"+idVal).val(""); 
         });
         alert("Added Successfully");
-        location.reload();
       },
       error: function(result){
         alert(result);
@@ -218,7 +218,6 @@ function postMeetingDeatils(fields, id) {
         $("#"+idVal).val(""); 
       });      
       alert("Added Successfully");
-      location.reload();
     },
     error: function(result){
       alert(result);
@@ -254,9 +253,9 @@ function workerDetails(id, type){
   });
 }
 
-function addnote(id, type){
+function postnote(id, type){
   var dataString = "";
-  var note = $("#note").val() ;
+  var note = $("#note"+id).val() ;
   if(genericEmptyFieldValidator(note)){
     dataString = "id=" + id + "&type=" + type + "&note=" + note;
     $.ajax({
@@ -265,6 +264,7 @@ function addnote(id, type){
       data: dataString,
       cache: false,
       success: function(result){
+        alert("Added Successfully");
       },
       error: function(result){
         console.log("inside error");
@@ -277,23 +277,112 @@ function addnote(id, type){
   return false;
 }
 
-function ChangeServiceRequestStatus(id, oldStatus, newStatus) {
+function addnote (id, type) {
+  var status = "<form class='form-horizontal'>" +   
+                  "<div class='form-group'>"+
+                    "<label class='col-md-3 control-label'>Note</label>"+
+                    "<div class='col-md-3'>"+
+                      "<textarea type='text' id='note"+id+"' class='form-control' placeholder='Full Address' rows='4'></textarea>"+
+                    "</div>"+
+                  "</div>"+
+                  "<div class='form-group'>"+
+                    "<label class='col-md-3 control-label'></label>"+
+                    "<div class='col-md-7'>"+
+                      "<button type='submit' onsubmit='postnote("+id+", "+type+")' class='btn btn-success pull-right' >Submit</button>"+
+                    "</div>"+
+                  "</div>"+
+                "</form>";
+  $("#workerform_"+id).show().html(status);
+}
+
+function postfeedback(id, type){
   var dataString = "";
-  dataString = "sr_id=" + id + "&old_status=" + oldStatus + "&new_status=" + newStatus;
-  $.ajax({
-    type: "POST",
-    url: "ajax/ChangeServiceRequestStatus.php",
-    data: dataString,
-    cache: false,
-    success: function(result){
-    },
-    error: function(result){
-      console.log("inside error");
-      console.log(result);
-      return false;
-    }
-  });
+  var feedback = $("#feedback"+id).val() ;
+  if(genericEmptyFieldValidator(note)){
+    dataString = "id=" + id + "&type=" + type + "&feedback=" + feedback;
+    $.ajax({
+      type: "POST",
+      url: "ajax/addfeedback.php",
+      data: dataString,
+      cache: false,
+      success: function(result){
+        alert("Added Successfully");
+      },
+      error: function(result){
+        alert(result);
+        return false;
+      }
+    });
+    return false;
+  }
   return false;
+}
+
+function feedback(id, type){
+  var feedback = "<form class='form-horizontal'>" +   
+                    "<div class='form-group'>"+
+                      "<label class='col-md-3 control-label'>Feedback</label>"+
+                      "<div class='col-md-3'>"+
+                        "<textarea type='text' id='feedback"+id+"' class='form-control' placeholder='Full Address' rows='4'></textarea>"+
+                      "</div>"+
+                    "</div>"+
+                    "<div class='form-group'>"+
+                      "<label class='col-md-3 control-label'></label>"+
+                      "<div class='col-md-7'>"+
+                        "<button type='submit' onsubmit='postfeedback("+id+", "+type+")' class='btn btn-success pull-right' >Submit</button>"+
+                      "</div>"+
+                    "</div>"+
+                  "</form>";
+  $("#workerform_"+id).show().html(feedback);
+}
+
+function ChangeServiceRequestStatus(id, oldStatus) {
+  var dataString = "";
+  var newStatus = $("#new_status"+id).val() ;
+  if(genericEmptyFieldValidator(newStatus)){
+    dataString = "sr_id=" + id + "&old_status=" + oldStatus + "&new_status=" + newStatus;
+    $.ajax({
+      type: "POST",
+      url: "ajax/ChangeServiceRequestStatus.php",
+      data: dataString,
+      cache: false,
+      success: function(result){
+        alert("Changed Successfully");
+      },
+      error: function(result){
+        console.log("inside error");
+        console.log(result);
+        return false;
+      }
+    });
+  }
+  return false;
+}
+
+function changeStatus(id, oldStatus, type){
+  if(type == 1){
+    var status = "<form class='form-horizontal'>" +   
+                    "<div class='form-group'>"+
+                      "<label class='col-md-3 control-label'>Status</label>"+
+                      "<div class='col-md-3'>"+
+                        "<select  id='new_status"+id+"'>" +   
+                          "<option value='open'>Open </option>"+
+                          "<option value='salary_issue'>Salary Issues</option>"+
+                          "<option value='not_interested'>Not Interested</option>"+
+                          "<option value='just_to_know'>For information Purpose</option>"+
+                          "<option value='decay'>Decay</option>"+
+                        "</select>"+
+                      "</div>"+
+                    "</div>"+
+                    "<div class='form-group'>"+
+                      "<label class='col-md-3 control-label'></label>"+
+                      "<div class='col-md-7'>"+
+                        "<button type='submit' onsubmit='ChangeServiceRequestStatus("+id+", "+oldStatus+")' class='btn btn-success pull-right' >Submit</button>"+
+                      "</div>"+
+                    "</div>"+
+                  "</form>";
+    $("#workerform_"+id).show().html(status);
+  }
 }
 
 function addmeeting(id){

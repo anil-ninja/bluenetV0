@@ -8,12 +8,10 @@ $status = $_GET["status"];
 $user_id = $_SESSION['user_id'];
 
 if (!isset($_SESSION['user_id'])) {  
-    header('Location: index.php');
+	header('Location: index.php');
 }
-
-if($_SESSION['employee_type'] == 'me') ;
+if($_SESSION['employee_type'] == 'operator') ;
 else header('Location: index.php');
-
 ?>
 
 <!DOCTYPE html>
@@ -46,17 +44,13 @@ else header('Location: index.php');
       <div class="sidebar-collapse menu-scroll">
         <ul id="side-menu" class="nav">      
           <div class="clearfix"></div>
-          <li class="active"><a href="home.php?status=open">
-            <div class="icon-bg bg-orange"></div><i class="glyphicon glyphicon-search"></i>
-            <span class="menu-title">Open requests</span></a>
+          <li class="active"><a href="home.php?status=followback">
+            <div class="icon-bg bg-blue"></div><i class="glyphicon glyphicon-repeat"></i>
+            <span class="menu-title">Follow back Requests</span></a>
           </li>
-          <li><a href="home.php?status=picked">
-            <div class="icon-bg bg-pink"></div><i class="glyphicon glyphicon-user"></i>
-            <span class="menu-title">Picked requests</span></a>   
-          </li>
-          <li><a href="home.php?status=done">
-            <div class="icon-bg bg-pink"></div><i class="glyphicon glyphicon-thumbs-up"></i>
-            <span class="menu-title">Done requests</span></a>   
+          <li><a href="home.php?status=feedback">
+            <div class="icon-bg bg-blue"></div><i class="glyphicon glyphicon-repeat"></i>
+            <span class="menu-title">Feedback Requests</span></a>
           </li>
           <li ><a href="insert.php">
             <div class="icon-bg bg-red"></div><i class="glyphicon glyphicon-plus"></i>
@@ -84,7 +78,7 @@ else header('Location: index.php');
         <div class="clearfix"></div>
       </div>
                 <!--END TITLE & BREADCRUMB PAGE-->
-       <?php require_once "me_inc.php"; ?>
+       <?php require_once "operator_inc.php"; ?>
     </div>
   </div>
   <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>

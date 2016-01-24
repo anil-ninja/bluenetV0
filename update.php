@@ -98,6 +98,7 @@ $db_handle = mysqli_connect("localhost","root","redhat111111","bluenethack");
 	<script type="text/javascript" src="https://cdn.datatables.net/s/dt/dt-1.10.10/datatables.min.js"></script>
 </head>
 <body>
+	<?php require_once "navbar.php"; ?>
     <div>
             <!--BEGIN MODAL CONFIG PORTLET-->
             <div id="addNote" class="modal fade modal-form" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" >

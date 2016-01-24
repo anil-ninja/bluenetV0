@@ -2,9 +2,9 @@
 session_start();
 
 require_once "dbConnection.php";
-
+include_once "functions.php";
 if (isset($_SESSION['user_id'])) {  
-	header('Location: home.php');
+	route($_SESSION['employee_type']);
 }
 
 if (isset($_POST['login'])) {
@@ -18,9 +18,7 @@ if (isset($_POST['login'])) {
 		$_SESSION['email'] = $responseRow['email'];
         $_SESSION['user_id'] = $responseRow['id'];
 		$_SESSION['employee_type'] = $responseRow['employee_type'];
-
-        if($responseRow['employee_type'] == 'admin') header("Location: request.php");
-        else header("Location: home.php");
+        route($responseRow['employee_type']);
 	}
 	else {
 		echo "<center ><b>Sorry! Invalid username or password!</b></center>";      
@@ -53,7 +51,7 @@ if (isset($_POST['login'])) {
 	
 </head>
 <body>
-    <div class="row" style="background-image: url(img/collaboration.jpg); margin-top:0px; margin-left:0px; height: 600px; width: 100%;">
+    <div class="row" >
         <div class = "col-xs-3 col-ls-3"></div>
         <div class = "col-xs-2 col-ls-4" style="width:350px; margin-top:85px; background-color: #F8F8F8 ;">
             <ul class="nav nav-tabs" role="tablist" style="font-size:14px; margin-bottom: 0px; margin-top: 12px;">

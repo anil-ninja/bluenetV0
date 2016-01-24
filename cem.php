@@ -11,9 +11,6 @@ if (!isset($_SESSION['user_id'])) {
     header('Location: index.php');
 }
 
-if($_SESSION['employee_type'] == 'me') ;
-else header('Location: index.php');
-
 ?>
 
 <!DOCTYPE html>
@@ -47,15 +44,27 @@ else header('Location: index.php');
         <ul id="side-menu" class="nav">      
           <div class="clearfix"></div>
           <li class="active"><a href="home.php?status=open">
-            <div class="icon-bg bg-orange"></div><i class="glyphicon glyphicon-search"></i>
-            <span class="menu-title">Open requests</span></a>
+            <div class="icon-bg bg-pink"></div><i class="glyphicon glyphicon-search"></i>
+            <span class="menu-title">Open requests</span></a>   
+          </li>
+          <li><a href="home.php?status=match">
+            <div class="icon-bg bg-pink"></div><i class="glyphicon glyphicon-search"></i>
+            <span class="menu-title">Match requests</span></a>   
           </li>
           <li><a href="home.php?status=picked">
             <div class="icon-bg bg-pink"></div><i class="glyphicon glyphicon-user"></i>
             <span class="menu-title">Picked requests</span></a>   
           </li>
+          <li><a href="home.php?status=meeting">
+            <div class="icon-bg bg-pink"></div><i class="glyphicon glyphicon-calendar"></i>
+            <span class="menu-title">Meetings</span></a>   
+          </li>
+          <li><a href="home.php?status=demo">
+            <div class="icon-bg bg-pink"></div><i class="glyphicon glyphicon-asterisk"></i>
+            <span class="menu-title">IN Demo Period</span></a>   
+          </li>
           <li><a href="home.php?status=done">
-            <div class="icon-bg bg-pink"></div><i class="glyphicon glyphicon-thumbs-up"></i>
+            <div class="icon-bg bg-pink"></div><i class="glyphicon glyphicon-ok"></i>
             <span class="menu-title">Done requests</span></a>   
           </li>
           <li ><a href="insert.php">
@@ -84,7 +93,7 @@ else header('Location: index.php');
         <div class="clearfix"></div>
       </div>
                 <!--END TITLE & BREADCRUMB PAGE-->
-       <?php require_once "me_inc.php"; ?>
+       <?php require_once "cem_inc.php"; ?>
     </div>
   </div>
   <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>

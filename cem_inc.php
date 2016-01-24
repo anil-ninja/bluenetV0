@@ -3,17 +3,17 @@
       <div class="row mbl">
          <div class="col-lg-8">
             <div class="panel-primary">
-            <?php 
-               $condition = "";
-               if ($status == "picked") $condition = " cem_id = " .$user_id. " AND status = 'open'";
-               elseif ($status == "match") $condition = " cem_id = 0 AND me_id != 0 " ;
-               elseif ($status == "meeting") $condition = " status = 'meeting' AND cem_id = " .$user_id ;
-               elseif ($status == "demo") $condition = " status='demo' AND cem_id = " .$user_id ;
-               elseif ($status == "done") $condition = " status='done' AND cem_id = " .$user_id ;
-               else $condition = " cem_id = 0 AND match_id = 0 AND match2_id = 0" ;
-               $srs = mysqli_query($db_handle, "SELECT * FROM service_request WHERE ".$condition."; ") ;
-               while ($srsrow = mysqli_fetch_array($srs)){ 
-            ?>
+               <?php 
+                  $condition = "";
+                     if ($status == "picked") $condition = " cem_id = " .$user_id. " AND status = 'open'";
+                     elseif ($status == "match") $condition = " cem_id = 0 AND me_id != 0 AND status = 'open' " ;
+                     elseif ($status == "meeting") $condition = " status = 'meeting' AND cem_id = " .$user_id ;
+                     elseif ($status == "demo") $condition = " status='demo' AND cem_id = " .$user_id ;
+                     elseif ($status == "done") $condition = " status='done' AND cem_id = " .$user_id ;
+                     else $condition = " cem_id = 0 AND match_id = 0 AND match2_id = 0" ;
+                     $srs = mysqli_query($db_handle, "SELECT * FROM service_request WHERE ".$condition."; ") ;
+                     while ($srsrow = mysqli_fetch_array($srs)){ 
+               ?>
                <div class="list-group">
                   <p style="font-size:20px;padding-left: 2em;">
                      <a href="#" class="list-group-item active"> Client Name  <span style="padding-left: 5em"><?= $srsrow['name'] ?></span></a>
@@ -75,9 +75,9 @@
                      </a>
                   </p>
                </div>
-               <?php } ?>
+               <?php }  ?>
             </div>
          </div>
       </div>
    </div>
-</div>
+</div> 

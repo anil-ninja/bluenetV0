@@ -39,200 +39,24 @@ if (!isset($_SESSION['user_id'])) {
   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.10/css/jquery.dataTables.min.css"/>
 </head>
 <body>
-  <div id="header-topbar-option-demo" class="page-header-topbar">
-    <nav id="topbar" role="navigation" style="margin-bottom: 0;" data-step="3" class="navbar navbar-default navbar-static-top">
-      <div class="navbar-header">
-        <button type="button" data-toggle="collapse" data-target=".sidebar-collapse" class="navbar-toggle">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <a id="logo" href="index.html" class="navbar-brand">
-          <span class="fa fa-rocket"></span>
-          <span class="logo-text">BlueNet</span>
-          <span style="display: none" class="logo-text-icon">µ</span>
-        </a>
-      </div>
-      <div class="topbar-main">
-        <a id="menu-toggle" href="#" class="hidden-xs"><i class="fa fa-bars"></i></a>
-        <form id="topbar-search" action="" method="" class="hidden-sm hidden-xs">
-          <div class="input-icon right text-white">
-            <a href="#"><i class="fa fa-search"></i></a>
-            <input type="text" placeholder="Search here..." class="form-control text-white"/>
-          </div>
-        </form>
-        <div class="news-update-box hidden-xs">
-          <span class="text-uppercase mrm pull-left text-white">News:</span>
-          <ul id="news-update" class="ticker list-unstyled">
-            <li> Education is the key to unlock the golden door of freedom.</li>
-            <li>Education is the most powerful weapon which you can use to change the world.</li>
-            <li>The roots of education are bitter, but the fruit is sweet.</li>
-            <li>Education is not preparation for life; education is life itself.</li>
-            <li>The whole purpose of education is to turn mirrors into windows.</li>
-          </ul>
-        </div>
-        <ul class="nav navbar navbar-top-links navbar-right mbn">
-          <!-- <li class="dropdown">
-            <a data-hover="dropdown" href="#" class="dropdown-toggle">
-              <i class="fa fa-bell fa-fw"></i><span class="badge badge-green">3</span>
-            </a>  
-          </li>
-          <li class="dropdown">
-            <a data-hover="dropdown" href="#" class="dropdown-toggle">
-              <i class="fa fa-envelope fa-fw"></i><span class="badge badge-orange">7</span>
-            </a>  
-          </li>
-          <li class="dropdown">
-            <a data-hover="dropdown" href="#" class="dropdown-toggle">
-              <i class="fa fa-tasks fa-fw"></i><span class="badge badge-yellow">8</span>
-            </a>  
-          </li> -->
-          <li class="dropdown topbar-user">
-            <a data-hover="dropdown" href="#" class="dropdown-toggle">&nbsp;
-              <span class="hidden-xs"><?= strtoupper($_SESSION['first_name']) ?></span>&nbsp;<span class="caret"></span>
-            </a>
-            <ul class="dropdown-menu dropdown-user pull-right">
-              <li><a href="logout.php"><i class="fa fa-key"></i>Log Out</a></li>
-            </ul>
-          </li>
-          <!-- <li id="topbar-chat" class="hidden-xs">
-            <a href="javascript:void(0)" data-step="4" data-intro="&lt;b&gt;Form chat&lt;/b&gt; keep you connecting with other coworker" data-position="left" class="btn-chat">
-              <i class="fa fa-comments"></i><span class="badge badge-info">3</span>
-            </a>
-          </li> -->
-        </ul>
-      </div>
-    </nav>
-  </div>
+  <?php require_once "navbar.php"; ?>
   <div id="wrapper">
    <!--BEGIN SIDEBAR MENU-->
     <nav id="sidebar" role="navigation" data-step="2" data-intro="Template has &lt;b&gt;many navigation styles&lt;/b&gt;" data-position="right" class="navbar-default navbar-static-side">
       <div class="sidebar-collapse menu-scroll">
         <ul id="side-menu" class="nav">      
           <div class="clearfix"></div>
-            <?php if ($_SESSION["employee_type"] ==  "me" ) { ?>
-            <li class="active"><a href="home.php?status=open">
-              <div class="icon-bg bg-orange"></div><i class="glyphicon glyphicon-search"></i>
-              <span class="menu-title">Open requests</span></a>
-            </li>
-            <li><a href="home.php?status=picked">
-              <div class="icon-bg bg-pink"></div><i class="glyphicon glyphicon-user"></i>
-              <span class="menu-title">Picked requests</span></a>   
-            </li>
-            <li><a href="home.php?status=done">
-              <div class="icon-bg bg-pink"></div><i class="glyphicon glyphicon-thumbs-up"></i>
-              <span class="menu-title">Done requests</span></a>   
-            </li>
-            <?php } 
-              else if ($_SESSION["employee_type"] ==  "cem" ) { ?>
-            <li class="active"><a href="home.php?status=open">
-              <div class="icon-bg bg-pink"></div><i class="glyphicon glyphicon-search"></i>
-              <span class="menu-title">Open requests</span></a>   
-            </li>
-            <li><a href="home.php?status=match">
-              <div class="icon-bg bg-pink"></div><i class="glyphicon glyphicon-search"></i>
-              <span class="menu-title">Match requests</span></a>   
-            </li>
-            <li><a href="home.php?status=picked">
-              <div class="icon-bg bg-pink"></div><i class="glyphicon glyphicon-user"></i>
-              <span class="menu-title">Picked requests</span></a>   
-            </li>
-            <li><a href="home.php?status=meeting">
-              <div class="icon-bg bg-pink"></div><i class="glyphicon glyphicon-calendar"></i>
-              <span class="menu-title">Meetings</span></a>   
-            </li>
-            <li><a href="home.php?status=demo">
-              <div class="icon-bg bg-pink"></div><i class="glyphicon glyphicon-asterisk"></i>
-              <span class="menu-title">IN Demo Period</span></a>   
-            </li>
-            <li><a href="home.php?status=done">
-              <div class="icon-bg bg-pink"></div><i class="glyphicon glyphicon-ok"></i>
-              <span class="menu-title">Done requests</span></a>   
-            </li>
-            <?php } 
-              else if ($_SESSION["employee_type"] ==  "operator" ) { ?>
-
-            <li class="active"><a href="home.php?status=followback">
-              <div class="icon-bg bg-blue"></div><i class="glyphicon glyphicon-repeat"></i>
-              <span class="menu-title">Follow back Requests</span></a>
-            </li>
-            <li><a href="home.php?status=feedback">
-              <div class="icon-bg bg-blue"></div><i class="glyphicon glyphicon-repeat"></i>
-              <span class="menu-title">Feedback Requests</span></a>
-            </li>
-            <?php }  
-              else { 
-                if($_SESSION["employee_type"] ==  "admin" ){   ?>
-            <li><a href="insertuser.php">
-              <div class="icon-bg bg-red"></div><i class="glyphicon glyphicon-plus"></i>
-              <span class="menu-title">Add New User</span></a>
-            </li>
-            <?php } ?>
-            <li class="active"><a href="request.php">
-              <div class="icon-bg bg-orange"></div><i class="glyphicon glyphicon-home"></i>
-              <span class="menu-title">View All requests</span></a>
-            </li>
-            <li ><a href="request.php?status=open">
-              <div class="icon-bg bg-orange"></div><i class="glyphicon glyphicon-search"></i>
-              <span class="menu-title">Open requests</span></a>
-            </li>
-            <li><a href="request.php?status=meeting">
-              <div class="icon-bg bg-pink"></div><i class="glyphicon glyphicon-calendar"></i>
-              <span class="menu-title">Meetings</span></a>   
-            </li>
-            <li><a href="request.php?status=demo">
-              <div class="icon-bg bg-pink"></div><i class="glyphicon glyphicon-asterisk"></i>
-              <span class="menu-title">IN Demo Period</span></a>   
-            </li>
-            <li><a href="request.php?status=done">
-              <div class="icon-bg bg-pink"></div><i class="glyphicon glyphicon-ok"></i>
-              <span class="menu-title">Done requests</span></a>   
-            </li>
-            <li><a href="request.php?status=me_open">
-              <div class="icon-bg bg-pink"></div><i class="glyphicon glyphicon-search"></i>
-              <span class="menu-title">ME Open</span></a>   
-            </li>
-            <li><a href="request.php?status=cem_open">
-              <div class="icon-bg bg-pink"></div><i class="glyphicon glyphicon-search"></i>
-              <span class="menu-title">CEM Open</span></a>   
-            </li>
-            <li><a href="request.php?status=salary_issue">
-              <div class="icon-bg bg-blue"></div><i class="glyphicon glyphicon-usd"></i>
-              <span class="menu-title">Salary Issues</span></a>
-            </li>
-            <li><a href="request.php?status=delete">
-              <div class="icon-bg bg-blue"></div><i class="glyphicon glyphicon-remove"></i>
-              <span class="menu-title">Deleted Requests</span></a>
-            </li>
-            <li><a href="request.php?status=not_interested">
-              <div class="icon-bg bg-blue"></div><i class="glyphicon glyphicon-exclamation-sign"></i>
-              <span class="menu-title">Not Interested</span></a>
-            </li>
-            <li><a href="request.php?status=decay">
-              <div class="icon-bg bg-blue"></div><i class="glyphicon glyphicon-trash"></i>
-              <span class="menu-title">Decay Requests</span></a>
-            </li>
-            <li ><a href="24hour.php">
-              <div class="icon-bg bg-blue"></div><i class=" glyphicon glyphicon-time"></i>
-              <span class="menu-title">View 24hours Requests</span></a>
-            </li>
-            <li><a href="area.php">
-              <div class="icon-bg bg-blue"></div><i class="glyphicon glyphicon-print"></i>
-              <span class="menu-title">Print Area</span></a>
-            </li>
-            <?php } ?>
-            <li ><a href="insert.php">
-              <div class="icon-bg bg-red"></div><i class="glyphicon glyphicon-plus"></i>
-              <span class="menu-title">Insert New Service Request</span></a>
-            </li>
-            <li ><a href="insertworker.php">
-              <div class="icon-bg bg-red"></div><i class="glyphicon glyphicon-plus"></i>
-              <span class="menu-title">Insert New Worker</span></a>
-            </li>
-          </ul>
-        </div>
-      </nav>
+          <li ><a href="insert.php">
+            <div class="icon-bg bg-red"></div><i class="glyphicon glyphicon-plus"></i>
+            <span class="menu-title">Insert New Service Request</span></a>
+          </li>
+          <li ><a href="insertworker.php">
+            <div class="icon-bg bg-red"></div><i class="glyphicon glyphicon-plus"></i>
+            <span class="menu-title">Insert New Worker</span></a>
+          </li>
+        </ul>
+      </div>
+    </nav>
     <div id="page-wrapper">
     <!--BEGIN TITLE & BREADCRUMB PAGE-->
       <div id="title-breadcrumb-option-demo" class="page-title-breadcrumb">

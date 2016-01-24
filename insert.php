@@ -29,7 +29,6 @@ if (!isset($_SESSION['user_id'])) {
   <link type="text/css" rel="stylesheet" href="styles/zabuto_calendar.min.css">
   <link type="text/css" rel="stylesheet" href="styles/pace.css">
   <link type="text/css" rel="stylesheet" href="styles/jquery.news-ticker.css">
-  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.10/css/jquery.dataTables.min.css"/>
 </head>
 <body>
   <div id="header-topbar-option-demo" class="page-header-topbar">
@@ -41,20 +40,20 @@ if (!isset($_SESSION['user_id'])) {
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a id="logo" href="index.html" class="navbar-brand">
+        <a id="logo" href="index.php" class="navbar-brand">
           <span class="fa fa-rocket"></span>
           <span class="logo-text">BlueNet</span>
-          <span style="display: none" class="logo-text-icon">µ</span>
+          <span class="logo-text-icon">µ</span>
         </a>
       </div>
       <div class="topbar-main">
         <a id="menu-toggle" href="#" class="hidden-xs"><i class="fa fa-bars"></i></a>
-        <form id="topbar-search" action="" method="" class="hidden-sm hidden-xs">
+        <!-- <form id="topbar-search" action="" method="" class="hidden-sm hidden-xs">
           <div class="input-icon right text-white">
             <a href="#"><i class="fa fa-search"></i></a>
             <input type="text" placeholder="Search here..." class="form-control text-white"/>
           </div>
-        </form>
+        </form> -->
         <div class="news-update-box hidden-xs">
           <span class="text-uppercase mrm pull-left text-white">News:</span>
           <ul id="news-update" class="ticker list-unstyled">
@@ -104,134 +103,134 @@ if (!isset($_SESSION['user_id'])) {
       <div class="sidebar-collapse menu-scroll">
         <ul id="side-menu" class="nav">      
           <div class="clearfix"></div>
-            <?php if ($_SESSION["employee_type"] ==  "me" ) { ?>
-            <li ><a href="home.php?status=open">
-              <div class="icon-bg bg-orange"></div><i class="glyphicon glyphicon-search"></i>
-              <span class="menu-title">Open requests</span></a>
-            </li>
-            <li><a href="home.php?status=picked">
-              <div class="icon-bg bg-pink"></div><i class="glyphicon glyphicon-user"></i>
-              <span class="menu-title">Picked requests</span></a>   
-            </li>
-            <li><a href="home.php?status=done">
-              <div class="icon-bg bg-pink"></div><i class="glyphicon glyphicon-thumbs-up"></i>
-              <span class="menu-title">Done requests</span></a>   
-            </li>
-            <?php } 
-              else if ($_SESSION["employee_type"] ==  "cem" ) { ?>
-            <li><a href="home.php?status=open">
-              <div class="icon-bg bg-pink"></div><i class="glyphicon glyphicon-search"></i>
-              <span class="menu-title">Open requests</span></a>   
-            </li>
-            <li><a href="home.php?status=match">
-              <div class="icon-bg bg-pink"></div><i class="glyphicon glyphicon-search"></i>
-              <span class="menu-title">Match requests</span></a>   
-            </li>
-            <li><a href="home.php?status=picked">
-              <div class="icon-bg bg-pink"></div><i class="glyphicon glyphicon-user"></i>
-              <span class="menu-title">Picked requests</span></a>   
-            </li>
-            <li><a href="home.php?status=meeting">
-              <div class="icon-bg bg-pink"></div><i class="glyphicon glyphicon-calendar"></i>
-              <span class="menu-title">Meetings</span></a>   
-            </li>
-            <li><a href="home.php?status=demo">
-              <div class="icon-bg bg-pink"></div><i class="glyphicon glyphicon-asterisk"></i>
-              <span class="menu-title">IN Demo Period</span></a>   
-            </li>
-            <li><a href="home.php?status=done">
-              <div class="icon-bg bg-pink"></div><i class="glyphicon glyphicon-ok"></i>
-              <span class="menu-title">Done requests</span></a>   
-            </li>
-            <?php } 
-              else if ($_SESSION["employee_type"] ==  "operator" ) { ?>
+          <?php if ($_SESSION["employee_type"] ==  "me" ) { ?>
+          <li ><a href="me.php?status=open">
+            <div class="icon-bg bg-orange"></div><i class="glyphicon glyphicon-search"></i>
+            <span class="menu-title">Open requests</span></a>
+          </li>
+          <li><a href="me.php?status=picked">
+            <div class="icon-bg bg-pink"></div><i class="glyphicon glyphicon-user"></i>
+            <span class="menu-title">Picked requests</span></a>   
+          </li>
+          <li><a href="me.php?status=done">
+            <div class="icon-bg bg-pink"></div><i class="glyphicon glyphicon-thumbs-up"></i>
+            <span class="menu-title">Done requests</span></a>   
+          </li>
+          <?php } 
+            else if ($_SESSION["employee_type"] ==  "cem" ) { ?>
+          <li><a href="cem.php?status=open">
+            <div class="icon-bg bg-pink"></div><i class="glyphicon glyphicon-search"></i>
+            <span class="menu-title">Open requests</span></a>   
+          </li>
+          <li><a href="cem.php?status=match">
+            <div class="icon-bg bg-pink"></div><i class="glyphicon glyphicon-search"></i>
+            <span class="menu-title">Match requests</span></a>   
+          </li>
+          <li><a href="cem.php?status=picked">
+            <div class="icon-bg bg-pink"></div><i class="glyphicon glyphicon-user"></i>
+            <span class="menu-title">Picked requests</span></a>   
+          </li>
+          <li><a href="cem.php?status=meeting">
+            <div class="icon-bg bg-pink"></div><i class="glyphicon glyphicon-calendar"></i>
+            <span class="menu-title">Meetings</span></a>   
+          </li>
+          <li><a href="cem.php?status=demo">
+            <div class="icon-bg bg-pink"></div><i class="glyphicon glyphicon-asterisk"></i>
+            <span class="menu-title">IN Demo Period</span></a>   
+          </li>
+          <li><a href="cem.php?status=done">
+            <div class="icon-bg bg-pink"></div><i class="glyphicon glyphicon-ok"></i>
+            <span class="menu-title">Done requests</span></a>   
+          </li>
+          <?php } 
+            else if ($_SESSION["employee_type"] ==  "operator" ) { ?>
 
-            <li><a href="home.php?status=followback">
-              <div class="icon-bg bg-blue"></div><i class="glyphicon glyphicon-repeat"></i>
-              <span class="menu-title">Follow back Requests</span></a>
-            </li>
-            <li><a href="home.php?status=feedback">
-              <div class="icon-bg bg-blue"></div><i class="glyphicon glyphicon-repeat"></i>
-              <span class="menu-title">Feedback Requests</span></a>
-            </li>
-            <?php }  
-              else { 
-                  if($_SESSION["employee_type"] ==  "admin" ){   ?>
-            <li><a href="insertuser.php">
-              <div class="icon-bg bg-red"></div><i class="glyphicon glyphicon-plus"></i>
-              <span class="menu-title">Add New User</span></a>
-            </li>
-            <?php } ?>
-            <li ><a href="request.php">
-              <div class="icon-bg bg-orange"></div><i class="glyphicon glyphicon-home"></i>
-              <span class="menu-title">View All requests</span></a>
-            </li>
-            <li ><a href="request.php?status=open">
-              <div class="icon-bg bg-orange"></div><i class="glyphicon glyphicon-search"></i>
-              <span class="menu-title">Open requests</span></a>
-            </li>
-            <li><a href="request.php?status=meeting">
-              <div class="icon-bg bg-pink"></div><i class="glyphicon glyphicon-calendar"></i>
-              <span class="menu-title">Meetings</span></a>   
-            </li>
-            <li><a href="request.php?status=demo">
-              <div class="icon-bg bg-pink"></div><i class="glyphicon glyphicon-asterisk"></i>
-              <span class="menu-title">IN Demo Period</span></a>   
-            </li>
-            <li><a href="request.php?status=done">
-              <div class="icon-bg bg-pink"></div><i class="glyphicon glyphicon-ok"></i>
-              <span class="menu-title">Done requests</span></a>   
-            </li>
-            <li><a href="request.php?status=me_open">
-              <div class="icon-bg bg-pink"></div><i class="glyphicon glyphicon-search"></i>
-              <span class="menu-title">ME Open</span></a>   
-            </li>
-            <li><a href="request.php?status=cem_open">
-              <div class="icon-bg bg-pink"></div><i class="glyphicon glyphicon-search"></i>
-              <span class="menu-title">CEM Open</span></a>   
-            </li>
-            <li><a href="request.php?status=salary_issue">
-              <div class="icon-bg bg-blue"></div><i class="glyphicon glyphicon-usd"></i>
-              <span class="menu-title">Salary Issues</span></a>
-            </li>
-            <li><a href="request.php?status=delete">
-              <div class="icon-bg bg-blue"></div><i class="glyphicon glyphicon-remove"></i>
-              <span class="menu-title">Deleted Requests</span></a>
-            </li>
-            <li><a href="request.php?status=not_interested">
-              <div class="icon-bg bg-blue"></div><i class="glyphicon glyphicon-exclamation-sign"></i>
-              <span class="menu-title">Not Interested</span></a>
-            </li>
-            <li><a href="request.php?status=decay">
-              <div class="icon-bg bg-blue"></div><i class="glyphicon glyphicon-trash"></i>
-              <span class="menu-title">Decay Requests</span></a>
-            </li>
-            <li ><a href="24hour.php">
-              <div class="icon-bg bg-blue"></div><i class=" glyphicon glyphicon-time"></i>
-              <span class="menu-title">View 24hours Requests</span></a>
-            </li>
-            <li><a href="area.php">
-              <div class="icon-bg bg-blue"></div><i class="glyphicon glyphicon-print"></i>
-              <span class="menu-title">Print Area</span></a>
-            </li>
-            <?php } ?>
-            <li class="active"><a href="insert.php">
-              <div class="icon-bg bg-red"></div><i class="glyphicon glyphicon-plus"></i>
-              <span class="menu-title">Insert New Service Request</span></a>
-            </li>
-            <li ><a href="insertworker.php">
-              <div class="icon-bg bg-red"></div><i class="glyphicon glyphicon-plus"></i>
-              <span class="menu-title">Insert New Worker</span></a>
-            </li>
-          </ul>
-        </div>
-      </nav>
+          <li><a href="operator.php?status=followback">
+            <div class="icon-bg bg-blue"></div><i class="glyphicon glyphicon-repeat"></i>
+            <span class="menu-title">Follow back Requests</span></a>
+          </li>
+          <li><a href="operator.php?status=feedback">
+            <div class="icon-bg bg-blue"></div><i class="glyphicon glyphicon-repeat"></i>
+            <span class="menu-title">Feedback Requests</span></a>
+          </li>
+          <?php }  
+            else { 
+                if($_SESSION["employee_type"] ==  "admin" ){   ?>
+          <li><a href="insertuser.php">
+            <div class="icon-bg bg-red"></div><i class="glyphicon glyphicon-plus"></i>
+            <span class="menu-title">Add New User</span></a>
+          </li>
+          <?php } ?>
+          <li ><a href="request.php">
+            <div class="icon-bg bg-orange"></div><i class="glyphicon glyphicon-home"></i>
+            <span class="menu-title">View All requests</span></a>
+          </li>
+          <li ><a href="request.php?status=open">
+            <div class="icon-bg bg-orange"></div><i class="glyphicon glyphicon-search"></i>
+            <span class="menu-title">Open requests</span></a>
+          </li>
+          <li><a href="request.php?status=meeting">
+            <div class="icon-bg bg-pink"></div><i class="glyphicon glyphicon-calendar"></i>
+            <span class="menu-title">Meetings</span></a>   
+          </li>
+          <li><a href="request.php?status=demo">
+            <div class="icon-bg bg-pink"></div><i class="glyphicon glyphicon-asterisk"></i>
+            <span class="menu-title">IN Demo Period</span></a>   
+          </li>
+          <li><a href="request.php?status=done">
+            <div class="icon-bg bg-pink"></div><i class="glyphicon glyphicon-ok"></i>
+            <span class="menu-title">Done requests</span></a>   
+          </li>
+          <li><a href="request.php?status=me_open">
+            <div class="icon-bg bg-pink"></div><i class="glyphicon glyphicon-search"></i>
+            <span class="menu-title">ME Open</span></a>   
+          </li>
+          <li><a href="request.php?status=cem_open">
+            <div class="icon-bg bg-pink"></div><i class="glyphicon glyphicon-search"></i>
+            <span class="menu-title">CEM Open</span></a>   
+          </li>
+          <li><a href="request.php?status=salary_issue">
+            <div class="icon-bg bg-blue"></div><i class="glyphicon glyphicon-usd"></i>
+            <span class="menu-title">Salary Issues</span></a>
+          </li>
+          <li><a href="request.php?status=delete">
+            <div class="icon-bg bg-blue"></div><i class="glyphicon glyphicon-remove"></i>
+            <span class="menu-title">Deleted Requests</span></a>
+          </li>
+          <li><a href="request.php?status=not_interested">
+            <div class="icon-bg bg-blue"></div><i class="glyphicon glyphicon-exclamation-sign"></i>
+            <span class="menu-title">Not Interested</span></a>
+          </li>
+          <li><a href="request.php?status=decay">
+            <div class="icon-bg bg-blue"></div><i class="glyphicon glyphicon-trash"></i>
+            <span class="menu-title">Decay Requests</span></a>
+          </li>
+          <li ><a href="24hour.php">
+            <div class="icon-bg bg-blue"></div><i class=" glyphicon glyphicon-time"></i>
+            <span class="menu-title">View 24hours Requests</span></a>
+          </li>
+          <li><a href="area.php">
+            <div class="icon-bg bg-blue"></div><i class="glyphicon glyphicon-print"></i>
+            <span class="menu-title">Print Area</span></a>
+          </li>
+          <?php } ?>
+          <li class="active"><a href="insert.php">
+            <div class="icon-bg bg-red"></div><i class="glyphicon glyphicon-plus"></i>
+            <span class="menu-title">Insert New Service Request</span></a>
+          </li>
+          <li ><a href="insertworker.php">
+            <div class="icon-bg bg-red"></div><i class="glyphicon glyphicon-plus"></i>
+            <span class="menu-title">Insert New Worker</span></a>
+          </li>
+        </ul>
+      </div>
+    </nav>
     <div id="page-wrapper">
     <!--BEGIN TITLE & BREADCRUMB PAGE-->
       <div id="title-breadcrumb-option-demo" class="page-title-breadcrumb">
         <div class="page-header pull-left">
-          <div class="page-title">BlueNet Hack</div><!-- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          <a id="menu-toggle" href="#" class="hidden-xs"><i class="glyphicon glyphicon-th-list"></i></a> -->
+          <div class="page-title">BlueNet<!-- </div>&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;
+          <a href="#" ></a> -->
         </div>
         <ol class="breadcrumb page-breadcrumb pull-right">
           <li></li>
@@ -253,7 +252,7 @@ if (!isset($_SESSION['user_id'])) {
       				      </div> <!-- /.col -->
       				      <label class="col-md-1 control-label">Mobile No.</label>
       				      <div class="col-md-3">
-      				        <input type="text" id ="mobile" class="form-control" placeholder="Enter 10 digit mobile number" />
+      				        <input type="number" id ="mobile" class="form-control" placeholder="Enter 10 digit mobile number" />
       				      </div> <!-- /.col -->
       				    </div> <!-- /.form-group -->
 				          <div class="form-group">
@@ -286,9 +285,9 @@ if (!isset($_SESSION['user_id'])) {
             		   	<label class="col-md-1 control-label">Other Specifications</label>
             		   	<div class="col-md-3">
             		     	<select id = "gender" > 
-            						<option value="M" selected >Male</option>
-            						<option value="F">Female</option>
-            						<option value="A">Any</option>
+            						<option value="male" selected >Male</option>
+            						<option value="female">Female</option>
+            						<option value="any">Any</option>
             					</select>
             			 	</div>
             			</div>
@@ -305,11 +304,11 @@ if (!isset($_SESSION['user_id'])) {
             			<div class="form-group">
             				<label class="col-md-3 control-label">Working Time in Hours</label>
             			 	<div class="col-md-3">
-            			   	<input type="text" id ="work_time" class="form-control" placeholder="Working Time in Hours"/>
+            			   	<input type="number" id ="work_time" class="form-control" placeholder="Working Time in Hours"/>
             			 	</div>
             			 	<label class="col-md-1 control-label">Created Date</label>
             			 	<div class="col-md-3">
-            			   	<input type="text" id ="created_time" class="form-control" placeholder="YYYY-mm-dd" />
+            			   	<input type="date" id ="created_time" class="form-control" placeholder="YYYY-mm-dd" />
             			 	</div>
             			</div>
             			<div class="form-group">
@@ -326,7 +325,10 @@ if (!isset($_SESSION['user_id'])) {
             			 	<label class="col-md-3 control-label">Requierment</label>
             			 	<div class="col-md-6 ">
             			   	<input type="checkbox" name = "skill" value ='maid' /> Maid &nbsp;&nbsp;&nbsp;&nbsp;
-            					<input type="checkbox" name = "skill" value ='cook' /> Cook &nbsp;&nbsp;&nbsp;&nbsp;
+                      <input type="checkbox" name = "skill" value ='cook' /> Cook &nbsp;&nbsp;&nbsp;&nbsp;
+                      <input type="checkbox" name = "skill" value ='cook,maid' /> Maid + Cook &nbsp;&nbsp;&nbsp;&nbsp;
+                      <input type="checkbox" name = "skill" value ='cook,babysitter' /> Cook + Babysitter &nbsp;&nbsp;&nbsp;&nbsp;
+            					<input type="checkbox" name = "skill" value ='maid,babysitter' /> Maid  + Babysitter &nbsp;&nbsp;&nbsp;&nbsp;
             					<input type="checkbox" name = "skill" value ='driver' /> driver &nbsp;&nbsp;&nbsp;&nbsp;         
             					<input type="checkbox" name = "skill" value ='electrician' /> electrician &nbsp;&nbsp;&nbsp;&nbsp;           
             					<input type="checkbox" name = "skill" value ='plumber' /> Plumber &nbsp;&nbsp;&nbsp;&nbsp;        
@@ -352,17 +354,6 @@ if (!isset($_SESSION['user_id'])) {
   </div>
   <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
   <script src="script/jquery-1.10.2.min.js"></script>
-  <script type="text/javascript">
-    $(document).ready(function() {
-      $('#example1').DataTable({
-        "iDisplayLength": 50
-      });
-    });
-    $(".addworker").hide();
-    function toggle() {
-      $(".addworker").toggle();
-    }
-  </script>
   <script src="script/jquery-migrate-1.2.1.min.js"></script>
   <script src="script/jquery-ui.js"></script>
   <script src="script/bootstrap.min.js"></script>
@@ -383,6 +374,5 @@ if (!isset($_SESSION['user_id'])) {
  
   <!--CORE JAVASCRIPT-->
   <script src="script/main.js"></script>
-  <script type="text/javascript" src="https://cdn.datatables.net/s/dt/dt-1.10.10/datatables.min.js"></script>
 </body>
 </html>
