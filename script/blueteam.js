@@ -383,6 +383,68 @@ function changeStatus(id, oldStatus, type){
                   "</form>";
     $("#workerform_"+id).show().html(status);
   }
+  if(type == 2) {
+    var status = "<form class='form-horizontal'>" +   
+                    "<div class='form-group'>"+
+                      "<label class='col-md-3 control-label'>Status</label>"+
+                      "<div class='col-md-3'>"+
+                        "<select  id='new_status"+id+"'>" +   
+                          "<option value='open'>Open </option>"+
+                          "<option value='salary_issue'>Salary Issues</option>"+
+                          "<option value='not_interested'>Not Interested</option>"+
+                          "<option value='just_to_know'>For information Purpose</option>"+
+                          "<option value='me_open'>Search Worker</option>"+
+                          "<option value='decay'>Decay</option>"+
+                        "</select>"+
+                      "</div>"+
+                    "</div>"+
+                    "<div class='form-group'>"+
+                      "<label class='col-md-3 control-label'></label>"+
+                      "<div class='col-md-7'>"+
+                        "<button type='submit' onsubmit='ChangeServiceRequestStatus("+id+", "+oldStatus+")' class='btn btn-success pull-right' >Submit</button>"+
+                      "</div>"+
+                    "</div>"+
+                  "</form>";
+    $("#workerform_"+id).show().html(status);
+  }
+}
+
+function postDeatils(fields, skillsArray, areasArray, id){
+  var dataString = "";
+  dataString = "name=" + $('#'+fields[0]).val() + "&mobile=" + $('#'+fields[1]).val() + "&address=" + $('#'+fields[2]).val() + 
+      "&timing=" + $('#'+fields[3]).val() + "&remarks=" + $('#'+fields[4]).val() + "&gender=" +  $('#'+fields[5]).val() + 
+      "&salary=" +  $('#'+fields[6]).val() + "&area=" +  $('#'+fields[7]).val() + "&work_time=" +  $('#'+fields[8]).val() + 
+      "&created_time=" + $('#'+fields[9]).val() + "&worker_area=" +  areas + "&skills=" + skills + "&sr_id=" + id ; 
+  $.ajax({
+    type: "POST",
+    url: "ajax/update.php",
+    data: dataString,
+    cache: false,
+    success: function(result){
+      alert("Updated Successfully");
+      location.reload();
+    },
+    error: function(result){
+      alert(result);
+      return false;
+    }
+  });
+}
+
+function validateUpdateDetails(id){
+  fields = ["name","mobile","address","timing","remarks","gender","salary","area","work_time","created_time",];
+  var areasArray = []; 
+  $('#worker_area').each(function(i, selected){ 
+    areasArray[i] = $(selected).val(); 
+  });
+  var skillsArray = []; 
+  $('input[name=skill]:checked').each(function(i, checked){ 
+    skillsArray[i] = $(checked).val(); 
+  });
+  if(genericEmptyFieldValidator(fields)){
+    postDeatils(fields, skillsArray, areasArray, id);
+  }
+  return false;
 }
 
 function addmeeting(id){
@@ -439,6 +501,10 @@ function mePick(id) {
       });
     }
   });
+}
+
+function Update (id) {
+  location="update.php?sr_id="+id;
 }
 
 function addworker(request_id, id){
