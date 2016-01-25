@@ -36,6 +36,7 @@ else header('Location: index.php');
   <link type="text/css" rel="stylesheet" href="styles/zabuto_calendar.min.css">
   <link type="text/css" rel="stylesheet" href="styles/pace.css">
   <link type="text/css" rel="stylesheet" href="styles/jquery.news-ticker.css">
+  <link type="text/css" rel="stylesheet" href="styles/datepicker.css">
 <body>
   <?php require_once "navbar.php"; ?>
   <div id="wrapper">
@@ -118,6 +119,8 @@ else header('Location: index.php');
   <script src="script/responsive-tabs.js"></script>
   <script src="script/bootbox.js"></script>
   <script src="script/blueteam.js"></script>
+  
+  <script src="script/jquery-ui-timepicker-addon.js"></script>
  
   <!--CORE JAVASCRIPT-->
   <script src="script/main.js"></script>

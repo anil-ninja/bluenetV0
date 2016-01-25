@@ -530,6 +530,8 @@ function addmeeting(id){
                   "</div>"+
                 "</form>";
   $("#workerform_"+id).show().html(meeting);
+  $('#date'+id).datepicker();
+  $('#time'+id).datetimepicker();
 }
 
 function mePick(id) {
