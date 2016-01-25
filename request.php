@@ -3,8 +3,8 @@ session_start();
 
 require_once "dbConnection.php";
 
-$status = $_GET["status"];
-if(!isset($status)) $status == "open" ;
+if($_SESSION['employee_type'] == 'admin') ;
+else header('Location: index.php');
 
 $user_id = $_SESSION['user_id'];
 
@@ -50,47 +50,47 @@ if (!isset($_SESSION['user_id'])) {
             <div class="icon-bg bg-red"></div><i class="glyphicon glyphicon-plus"></i>
             <span class="menu-title">Add New User</span></a>
           </li>
-          <li class="active"><a href="request.php">
+          <li <?php if (!isset($_GET['status']) echo "class='active'";?>><a href="request.php">
             <div class="icon-bg bg-orange"></div><i class="glyphicon glyphicon-home"></i>
             <span class="menu-title">View All requests</span></a>
           </li>
-          <li ><a href="request.php?status=open">
+          <li <?php if($_GET['status']=='open') echo "class='active'";?> ><a href="request.php?status=open">
             <div class="icon-bg bg-orange"></div><i class="glyphicon glyphicon-search"></i>
             <span class="menu-title">Open requests</span></a>
           </li>
-          <li><a href="request.php?status=meeting">
+          <li <?php if($_GET['status']=='meeting') echo "class='active'";?>><a href="request.php?status=meeting">
             <div class="icon-bg bg-pink"></div><i class="glyphicon glyphicon-calendar"></i>
             <span class="menu-title">Meetings</span></a>   
           </li>
-          <li><a href="request.php?status=demo">
+          <li <?php if($_GET['status']=='demo') echo "class='active'";?>><a href="request.php?status=demo">
             <div class="icon-bg bg-pink"></div><i class="glyphicon glyphicon-asterisk"></i>
             <span class="menu-title">IN Demo Period</span></a>   
           </li>
-          <li><a href="request.php?status=done">
+          <li <?php if($_GET['status']=='done') echo "class='active'";?>><a href="request.php?status=done">
             <div class="icon-bg bg-pink"></div><i class="glyphicon glyphicon-ok"></i>
             <span class="menu-title">Done requests</span></a>   
           </li>
-          <li><a href="request.php?status=me_open">
+          <li <?php if($_GET['status']=='me_open') echo "class='active'";?>><a href="request.php?status=me_open">
             <div class="icon-bg bg-pink"></div><i class="glyphicon glyphicon-search"></i>
             <span class="menu-title">ME Open</span></a>   
           </li>
-          <li><a href="request.php?status=cem_open">
+          <li <?php if($_GET['status']=='cem_open') echo "class='active'";?>><a href="request.php?status=cem_open">
             <div class="icon-bg bg-pink"></div><i class="glyphicon glyphicon-search"></i>
             <span class="menu-title">CEM Open</span></a>   
           </li>
-          <li><a href="request.php?status=salary_issue">
+          <li <?php if($_GET['status']=='salary_issue') echo "class='active'";?>><a href="request.php?status=salary_issue">
             <div class="icon-bg bg-blue"></div><i class="glyphicon glyphicon-usd"></i>
             <span class="menu-title">Salary Issues</span></a>
           </li>
-          <li><a href="request.php?status=delete">
+          <li <?php if($_GET['status']=='delete') echo "class='active'";?>><a href="request.php?status=delete">
             <div class="icon-bg bg-blue"></div><i class="glyphicon glyphicon-remove"></i>
             <span class="menu-title">Deleted Requests</span></a>
           </li>
-          <li><a href="request.php?status=not_interested">
+          <li <?php if($_GET['status']=='not_interested') echo "class='active'";?>><a href="request.php?status=not_interested">
             <div class="icon-bg bg-blue"></div><i class="glyphicon glyphicon-exclamation-sign"></i>
             <span class="menu-title">Not Interested</span></a>
           </li>
-          <li><a href="request.php?status=decay">
+          <li <?php if($_GET['status']=='decay') echo "class='active'";?>><a href="request.php?status=decay">
             <div class="icon-bg bg-blue"></div><i class="glyphicon glyphicon-trash"></i>
             <span class="menu-title">Decay Requests</span></a>
           </li>
@@ -117,8 +117,10 @@ if (!isset($_SESSION['user_id'])) {
     <!--BEGIN TITLE & BREADCRUMB PAGE-->
       <div id="title-breadcrumb-option-demo" class="page-title-breadcrumb">
         <div class="page-header pull-left">
-          <div class="page-title">BlueNet</div><!-- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          <a id="menu-toggle" href="#" class="hidden-xs"><i class="glyphicon glyphicon-th-list"></i></a> -->
+          <div class="page-title">BlueNet&nbsp;/
+            <a  href="request.php" ><?= $_SESSION['employee_type'] ?></a>&nbsp;/
+            <a  href="#" ><?= $_GET['status'] ?></a>
+          </div>
         </div>
         <ol class="breadcrumb page-breadcrumb pull-right">
           <li></li>

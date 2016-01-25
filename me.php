@@ -46,15 +46,15 @@ else header('Location: index.php');
       <div class="sidebar-collapse menu-scroll">
         <ul id="side-menu" class="nav">      
           <div class="clearfix"></div>
-          <li class="active"><a href="home.php?status=open">
+          <li <?php if (($_GET['status']=='open') OR !isset($_GET['status'])) echo "class='active'";?>><a href="me.php?status=open">
             <div class="icon-bg bg-orange"></div><i class="glyphicon glyphicon-search"></i>
             <span class="menu-title">Open requests</span></a>
           </li>
-          <li><a href="home.php?status=picked">
+          <li <?php if ($_GET['status']=='picked') echo "class='active'";?>><a href="me.php?status=picked">
             <div class="icon-bg bg-pink"></div><i class="glyphicon glyphicon-user"></i>
             <span class="menu-title">Picked requests</span></a>   
           </li>
-          <li><a href="home.php?status=done">
+          <li <?php if ($_GET['status']=='done') echo "class='active'";?>><a href="me.php?status=done">
             <div class="icon-bg bg-pink"></div><i class="glyphicon glyphicon-thumbs-up"></i>
             <span class="menu-title">Done requests</span></a>   
           </li>
@@ -73,8 +73,10 @@ else header('Location: index.php');
     <!--BEGIN TITLE & BREADCRUMB PAGE-->
       <div id="title-breadcrumb-option-demo" class="page-title-breadcrumb">
         <div class="page-header pull-left">
-          <div class="page-title">BlueNet</div><!-- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          <a id="menu-toggle" href="#" class="hidden-xs"><i class="glyphicon glyphicon-th-list"></i></a> -->
+          <div class="page-title">BlueNet&nbsp;/
+            <a  href="me.php?status=open" ><?= $_SESSION['employee_type'] ?></a>&nbsp;/
+            <a  href="#" ><?= $_GET['status'] ?></a>
+          </div>
         </div>
         <ol class="breadcrumb page-breadcrumb pull-right">
           <li></li>

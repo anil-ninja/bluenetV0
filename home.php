@@ -83,10 +83,7 @@ if (!isset($_SESSION['user_id'])) {
         "iDisplayLength": 50
       });
   	});
-    $(".addworker").hide();
-    function toggle() {
-      $(".addworker").toggle();
-    }
+   
 	</script>
   <script src="script/jquery-migrate-1.2.1.min.js"></script>
   <script src="script/jquery-ui.js"></script>

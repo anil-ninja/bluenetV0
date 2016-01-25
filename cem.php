@@ -10,7 +10,8 @@ $user_id = $_SESSION['user_id'];
 if (!isset($_SESSION['user_id'])) {  
     header('Location: index.php');
 }
-
+if($_SESSION['employee_type'] == 'cem') ;
+else header('Location: index.php');
 ?>
 
 <!DOCTYPE html>
@@ -43,27 +44,27 @@ if (!isset($_SESSION['user_id'])) {
       <div class="sidebar-collapse menu-scroll">
         <ul id="side-menu" class="nav">      
           <div class="clearfix"></div>
-          <li class="active"><a href="home.php?status=open">
+          <li <?php if (($_GET['status']=='open') OR !isset($_GET['status'])) echo "class='active'";?>><a href="cem.php?status=open">
             <div class="icon-bg bg-pink"></div><i class="glyphicon glyphicon-search"></i>
             <span class="menu-title">Open requests</span></a>   
           </li>
-          <li><a href="home.php?status=match">
+          <li <?php if ($_GET['status']=='match') echo "class='active'";?>><a href="cem.php?status=match">
             <div class="icon-bg bg-pink"></div><i class="glyphicon glyphicon-search"></i>
             <span class="menu-title">Match requests</span></a>   
           </li>
-          <li><a href="home.php?status=picked">
+          <li <?php if ($_GET['status']=='picked') echo "class='active'";?>><a href="cem.php?status=picked">
             <div class="icon-bg bg-pink"></div><i class="glyphicon glyphicon-user"></i>
             <span class="menu-title">Picked requests</span></a>   
           </li>
-          <li><a href="home.php?status=meeting">
+          <li <?php if ($_GET['status']=='meeting') echo "class='active'";?>><a href="cem.php?status=meeting">
             <div class="icon-bg bg-pink"></div><i class="glyphicon glyphicon-calendar"></i>
             <span class="menu-title">Meetings</span></a>   
           </li>
-          <li><a href="home.php?status=demo">
+          <li <?php if ($_GET['status']=='demo') echo "class='active'";?>><a href="cem.php?status=demo">
             <div class="icon-bg bg-pink"></div><i class="glyphicon glyphicon-asterisk"></i>
             <span class="menu-title">IN Demo Period</span></a>   
           </li>
-          <li><a href="home.php?status=done">
+          <li <?php if ($_GET['status']=='done') echo "class='active'";?>><a href="cem.php?status=done">
             <div class="icon-bg bg-pink"></div><i class="glyphicon glyphicon-ok"></i>
             <span class="menu-title">Done requests</span></a>   
           </li>
@@ -82,8 +83,10 @@ if (!isset($_SESSION['user_id'])) {
     <!--BEGIN TITLE & BREADCRUMB PAGE-->
       <div id="title-breadcrumb-option-demo" class="page-title-breadcrumb">
         <div class="page-header pull-left">
-          <div class="page-title">BlueNet</div><!-- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          <a id="menu-toggle" href="#" class="hidden-xs"><i class="glyphicon glyphicon-th-list"></i></a> -->
+          <div class="page-title">BlueNet&nbsp;/
+            <a  href="cem.php?status=open" ><?= $_SESSION['employee_type'] ?></a>&nbsp;/
+            <a  href="#" ><?= $_GET['status'] ?></a>
+          </div>
         </div>
         <ol class="breadcrumb page-breadcrumb pull-right">
           <li></li>

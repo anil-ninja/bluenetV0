@@ -179,8 +179,9 @@ if (isset($_POST['update_status'])) {
     <!--BEGIN TITLE & BREADCRUMB PAGE-->
       <div id="title-breadcrumb-option-demo" class="page-title-breadcrumb">
         <div class="page-header pull-left">
-          <div class="page-title">BlueNet Hack</div><!-- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          <a id="menu-toggle" href="#" class="hidden-xs"><i class="glyphicon glyphicon-th-list"></i></a> -->
+          <div class="page-title">BlueNet Hack&nbsp;/
+            <a  href="cem.php?status=open" ><?= $_SESSION['employee_type'] ?></a>&nbsp;/
+            <a  href="#" >24 hours Requests</a>
         </div>
         <ol class="breadcrumb page-breadcrumb pull-right">
           <li></li>

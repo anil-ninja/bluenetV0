@@ -16,18 +16,17 @@ function genericEmptyFieldValidator(fields){
   return returnBool;
 }
 
-function postWorkerDetails(fields, languagesArray, skillsArray, request_id, id) {
+function postWorkerDetails(fields, languagesArray, skillsArray, request_id, id, police, gender) {
   var dataString = "";
   dataString = "first_name=" + $('#'+fields[0]).val() + "&last_name=" + $('#'+fields[1]).val() +
-      "&mobile=" +  $('#'+fields[6]).val() + "&emergancy_mobile=" +  $('#'+fields[7]).val() + 
-      "&age=" +  $('#'+fields[8]).val() + "&expected_salary=" + $('#'+fields[9]).val() +
-      "&current_address=" + $('#'+fields[10]).val() + "&parmanent_address=" +  $('#'+fields[11]).val() + 
-      "&education=" + $('#'+fields[12]).val() + "&experience=" + $('#'+fields[13]).val()+ 
-      "&gender=" +  $('#'+fields[14]).val() + "&birth_date=" + $('#'+fields[15]).val() +
-      "&timings=" + $('#'+fields[16]).val() + "&work_time=" + $('#'+fields[17]).val() +
-      "&remarks=" + $('#'+fields[18]).val() + "&police=" + $('#'+fields[19]).val() +
-      "&languages=" + languagesArray + "&skills=" + skillsArray + "&request_id=" + request_id + 
-      "&type=" + id ;/*"&address_proof_name=" + $('#'+fields[2]).val() + "&address_proof_id=" + $('#'+fields[3]).val() + 
+      "&mobile=" +  $('#'+fields[2]).val() + "&emergancy_mobile=" +  $('#'+fields[3]).val() + 
+      "&age=" +  $('#'+fields[4]).val() + "&expected_salary=" + $('#'+fields[5]).val() +
+      "&current_address=" + $('#'+fields[6]).val() + "&parmanent_address=" +  $('#'+fields[6]).val() + 
+      "&education=" + $('#'+fields[8]).val() + "&experience=" + $('#'+fields[9]).val()+ 
+      "&birth_date=" + $('#'+fields[10]).val() + "&timings=" + $('#'+fields[11]).val() + "&work_time=" + $('#'+fields[12]).val() +
+      "&remarks=" + $('#'+fields[13]).val() + "&police=" + police + "&languages=" + languagesArray + "&skills=" + skillsArray + 
+      "&request_id=" + request_id + "&type=" + id +"&gender=" + gender;
+      /*"&address_proof_name=" + $('#'+fields[2]).val() + "&address_proof_id=" + $('#'+fields[3]).val() + 
       "&id_proof_name=" + $('#'+fields[4]).val() + "&id_proof_id=" +  $('#'+fields[5]).val() + */
   console.log(dataString);
   $.ajax({
@@ -55,8 +54,8 @@ function validateWorkerDetails(request_id, id){
   if(id == 1) {
     fields = ["first_name"+request_id,"last_name"+request_id, "mobile"+request_id, "emergancy_mobile"+request_id, "age"+request_id,  
             "expected_salary"+request_id, "current_address"+request_id, "parmanent_address"+request_id, "education"+request_id, 
-            "experience"+request_id, "gender"+request_id,"birth_date"+request_id, "timings"+request_id, "work_time"+request_id, "remarks"+request_id,
-            "police"+request_id];//"address_proof_name"+request_id, "address_proof_id"+request_id, "id_proof_name"+request_id, "id_proof_id"+request_id,
+            "experience"+request_id, "birth_date"+request_id, "timings"+request_id, "work_time"+request_id, "remarks"+request_id];
+            //"address_proof_name"+request_id, "address_proof_id"+request_id, "id_proof_name"+request_id, "id_proof_id"+request_id,
     var languagesArray = []; 
     $('#languages'+request_id).each(function(i, selected){ 
       languagesArray[i] = $(selected).val(); 
@@ -65,12 +64,14 @@ function validateWorkerDetails(request_id, id){
     $('#skills'+request_id).each(function(i, selected){ 
       skillsArray[i] = $(selected).val(); 
     });
+    var gender = $('#gender'+request_id).val();
+    var police = $('#police'+request_id).val();
   }
   else if(id == 2){
     fields = ["2first_name"+request_id,"2last_name"+request_id, "2mobile"+request_id, "2emergancy_mobile"+request_id, "2age"+request_id,  
             "2expected_salary"+request_id, "2current_address"+request_id, "2parmanent_address"+request_id, "2education"+request_id, 
-            "2experience"+request_id, "2gender"+request_id,"2birth_date"+request_id, "2timings"+request_id, "2work_time"+request_id, "2remarks"+request_id,
-            "2police"+request_id];//"2address_proof_name"+request_id, "2address_proof_id"+request_id,"2id_proof_name"+request_id, "2id_proof_id"+request_id,
+            "2experience"+request_id, "2birth_date"+request_id, "2timings"+request_id, "2work_time"+request_id, "2remarks"+request_id];
+            //"2address_proof_name"+request_id, "2address_proof_id"+request_id,"2id_proof_name"+request_id, "2id_proof_id"+request_id,
     var languagesArray = []; 
     $('#2languages'+request_id).each(function(i, selected){ 
       languagesArray[i] = $(selected).val(); 
@@ -79,33 +80,38 @@ function validateWorkerDetails(request_id, id){
     $('#2skills'+request_id).each(function(i, selected){ 
       skillsArray[i] = $(selected).val(); 
     });
+    var gender = $('#2gender'+request_id).val();
+    var police = $('#2police'+request_id).val();
   }
   else {
     fields = ["first_name","last_name", "mobile", "emergancy_mobile", "age", "expected_salary", "current_address", "parmanent_address", "education", 
-            "experience", "gender","birth_date", "timings", "work_time", "remarks", "police"];
+            "experience", "birth_date", "timings", "work_time", "remarks"];
             //"address_proof_name", "address_proof_id", "id_proof_name", "id_proof_id",
     var languagesArray = []; 
-    $('#2languages').each(function(i, selected){ 
+    $('#languages').each(function(i, selected){ 
       languagesArray[i] = $(selected).val(); 
     });
     var skillsArray = []; 
-    $('#2skills').each(function(i, selected){ 
+    $('#skills').each(function(i, selected){ 
       skillsArray[i] = $(selected).val(); 
     });
+    var police = $('#police').val();
+    var gender = $('#gender').val();
   }
   if(genericEmptyFieldValidator(fields)){
-    postWorkerDetails(fields, languagesArray, skillsArray, request_id, id);
+    alert('we');
+    postWorkerDetails(fields, languagesArray, skillsArray, request_id, id, police, gender);
   }
  return false;
 }
 
-function postRequestDeatils(fields, skills, areas) {
+function postRequestDeatils(fields, skills, areas, status) {
 
   var dataString = "";
   dataString = "name=" + $('#'+fields[0]).val() + "&mobile=" + $('#'+fields[1]).val() + "&address=" + $('#'+fields[2]).val() + 
-      "&timing=" + $('#'+fields[3]).val() + "&new_status=" + $('#'+fields[4]).val() + "&gender=" +  $('#'+fields[5]).val() + 
-      "&salary=" +  $('#'+fields[6]).val() + "&area=" +  $('#'+fields[7]).val() + "&work_time=" +  $('#'+fields[8]).val() + 
-      "&created_time=" + $('#'+fields[9]).val() + "&remarks=" + $('#'+fields[10]).val() + "&worker_area=" +  areas + "&skills=" + skills ; 
+      "&timing=" + $('#'+fields[3]).val() + "&new_status=" + status + "&gender=" +  $('#'+fields[4]).val() + 
+      "&salary=" +  $('#'+fields[5]).val() + "&area=" +  $('#'+fields[6]).val() + "&work_time=" +  $('#'+fields[7]).val() + 
+      "&created_time=" + $('#'+fields[8]).val() + "&remarks=" + $('#'+fields[9]).val() + "&worker_area=" +  areas + "&skills=" + skills ; 
   $.ajax({
     type: "POST",
     url: "ajax/addRequest.php",
@@ -132,7 +138,7 @@ function postRequestDeatils(fields, skills, areas) {
 
 function validateRequestDetails(){
   
-  fields = ["name","mobile","address","timing","new_status","gender","salary","area","work_time","created_time","remarks"];
+  fields = ["name","mobile","address","timing","gender","salary","area","work_time","created_time","remarks"];
   var areasArray = []; 
   $('#worker_area').each(function(i, selected){ 
     areasArray[i] = $(selected).val(); 
@@ -141,17 +147,18 @@ function validateRequestDetails(){
   $('input[name=skill]:checked').each(function(i, checked){ 
     skillsArray[i] = $(checked).val(); 
   });
+  var status = $("#new_status").val();
   if(genericEmptyFieldValidator(fields)){
-    postRequestDeatils(fields, skillsArray, areasArray);
+    postRequestDeatils(fields, skillsArray, areasArray, status);
   }
   return false;
 }
 
-function postUserDeatils(fields){
+function postUserDeatils(fields, type){
   var dataString = "";
   dataString = "first_name=" + $('#'+fields[0]).val() + "&last_name=" + $('#'+fields[1]).val() + "&email=" + $('#'+fields[2]).val() + 
-      "&phone=" + $('#'+fields[3]).val() + "&employee_type=" + $('#'+fields[4]).val() + "&salary=" +  $('#'+fields[5]).val() + 
-      "&password=" +  $('#'+fields[6]).val() ;
+      "&phone=" + $('#'+fields[3]).val() + "&employee_type=" + type + "&salary=" +  $('#'+fields[4]).val() + 
+      "&password=" +  $('#'+fields[5]).val() ;
   if($('#'+fields[0]).val().length < 3){
     alert("First Name is too short");
   }
@@ -195,9 +202,10 @@ function postUserDeatils(fields){
 }
 
 function validateUserDetails(){
-  fields = ["first_name","last_name","email","phone","employee_type", "salary", "password","password2"];
+  fields = ["first_name","last_name","email","phone", "salary", "password","password2"];
+  var type = $('#employee_type').val();
   if(genericEmptyFieldValidator(fields)){
-    postUserDeatils(fields);
+    postUserDeatils(fields, type);
   }
   return false;
 }
@@ -253,7 +261,7 @@ function workerDetails(id, type){
   });
 }
 
-function postnote(id, type){
+function validateNote(id, type){
   var dataString = "";
   var note = $("#note"+id).val() ;
   if(genericEmptyFieldValidator(note)){
@@ -278,27 +286,27 @@ function postnote(id, type){
 }
 
 function addnote (id, type) {
-  var status = "<form class='form-horizontal'>" +   
+  var status = "<form class='form-horizontal' id='note_form"+id+"' onsubmit='return(validateNote("+id+", \""+type+"\"));'>" +   
                   "<div class='form-group'>"+
-                    "<label class='col-md-3 control-label'>Note</label>"+
-                    "<div class='col-md-3'>"+
-                      "<textarea type='text' id='note"+id+"' class='form-control' placeholder='Full Address' rows='4'></textarea>"+
+                    "<label class='col-md-2 control-label'>Note</label>"+
+                    "<div class='col-md-8'>"+
+                      "<textarea type='text' id='note"+id+"' class='form-control' placeholder='Note' rows='3'></textarea>"+
                     "</div>"+
                   "</div>"+
                   "<div class='form-group'>"+
                     "<label class='col-md-3 control-label'></label>"+
                     "<div class='col-md-7'>"+
-                      "<button type='submit' onsubmit='postnote("+id+", "+type+")' class='btn btn-success pull-right' >Submit</button>"+
+                      "<button type='submit' class='btn btn-success pull-right' >Submit</button>"+
                     "</div>"+
                   "</div>"+
                 "</form>";
   $("#workerform_"+id).show().html(status);
 }
 
-function postfeedback(id, type){
+function validateFeedback(id, type){
   var dataString = "";
   var feedback = $("#feedback"+id).val() ;
-  if(genericEmptyFieldValidator(note)){
+  if(genericEmptyFieldValidator(feedback)){
     dataString = "id=" + id + "&type=" + type + "&feedback=" + feedback;
     $.ajax({
       type: "POST",
@@ -319,53 +327,53 @@ function postfeedback(id, type){
 }
 
 function feedback(id, type){
-  var feedback = "<form class='form-horizontal'>" +   
+  var feedback = "<form class='form-horizontal' id='feedback_form"+id+"' onsubmit='return(validateFeedback("+id+", \""+type+"\"));'>" +   
                     "<div class='form-group'>"+
-                      "<label class='col-md-3 control-label'>Feedback</label>"+
-                      "<div class='col-md-3'>"+
-                        "<textarea type='text' id='feedback"+id+"' class='form-control' placeholder='Full Address' rows='4'></textarea>"+
+                      "<label class='col-md-2 control-label'>Feedback</label>"+
+                      "<div class='col-md-8'>"+
+                        "<textarea type='text' id='feedback"+id+"' class='form-control' placeholder='Feedback' rows='4'></textarea>"+
                       "</div>"+
                     "</div>"+
                     "<div class='form-group'>"+
                       "<label class='col-md-3 control-label'></label>"+
                       "<div class='col-md-7'>"+
-                        "<button type='submit' onsubmit='postfeedback("+id+", "+type+")' class='btn btn-success pull-right' >Submit</button>"+
+                        "<button type='submit' class='btn btn-success pull-right' >Submit</button>"+
                       "</div>"+
                     "</div>"+
                   "</form>";
   $("#workerform_"+id).show().html(feedback);
 }
 
-function ChangeServiceRequestStatus(id, oldStatus) {
+function validateStatus(id, oldStatus) {
   var dataString = "";
   var newStatus = $("#new_status"+id).val() ;
-  if(genericEmptyFieldValidator(newStatus)){
-    dataString = "sr_id=" + id + "&old_status=" + oldStatus + "&new_status=" + newStatus;
-    $.ajax({
-      type: "POST",
-      url: "ajax/ChangeServiceRequestStatus.php",
-      data: dataString,
-      cache: false,
-      success: function(result){
-        alert("Changed Successfully");
-      },
-      error: function(result){
-        console.log("inside error");
-        console.log(result);
-        return false;
-      }
-    });
-  }
-  return false;
+  //if(genericEmptyFieldValidator(newStatus)){
+  dataString = "sr_id=" + id + "&old_status=" + oldStatus + "&new_status=" + newStatus;
+  $.ajax({
+    type: "POST",
+    url: "ajax/ChangeStatus.php",
+    data: dataString,
+    cache: false,
+    success: function(result){
+      alert("Changed Successfully");
+      location.reload();
+    },
+    error: function(result){
+      alert(result);
+      return false;
+    }
+  });
+  //}
+  //return false;
 }
 
 function changeStatus(id, oldStatus, type){
   if(type == 1){
-    var status = "<form class='form-horizontal'>" +   
+    var status = "<form class='form-horizontal' id='status_form"+id+"' onsubmit='return(validateStatus("+id+", \""+oldStatus+"\"));'>" +   
                     "<div class='form-group'>"+
                       "<label class='col-md-3 control-label'>Status</label>"+
                       "<div class='col-md-3'>"+
-                        "<select  id='new_status"+id+"'>" +   
+                        "<select class='selectpicker' id='new_status"+id+"' data-live-search='true' data-width='100%'>" +   
                           "<option value='open'>Open </option>"+
                           "<option value='salary_issue'>Salary Issues</option>"+
                           "<option value='not_interested'>Not Interested</option>"+
@@ -377,18 +385,18 @@ function changeStatus(id, oldStatus, type){
                     "<div class='form-group'>"+
                       "<label class='col-md-3 control-label'></label>"+
                       "<div class='col-md-7'>"+
-                        "<button type='submit' onsubmit='ChangeServiceRequestStatus("+id+", "+oldStatus+")' class='btn btn-success pull-right' >Submit</button>"+
+                        "<button type='submit' class='btn btn-success pull-right' >Submit</button>"+
                       "</div>"+
                     "</div>"+
                   "</form>";
     $("#workerform_"+id).show().html(status);
   }
   if(type == 2) {
-    var status = "<form class='form-horizontal'>" +   
+    var status = "<form class='form-horizontal' id='status_form"+id+"' onsubmit='return(validateStatus("+id+", \""+oldStatus+"\"));'>" +   
                     "<div class='form-group'>"+
                       "<label class='col-md-3 control-label'>Status</label>"+
                       "<div class='col-md-3'>"+
-                        "<select  id='new_status"+id+"'>" +   
+                        "<select class='selectpicker' id='new_status"+id+"' data-live-search='true' data-width='100%'>" +   
                           "<option value='open'>Open </option>"+
                           "<option value='salary_issue'>Salary Issues</option>"+
                           "<option value='not_interested'>Not Interested</option>"+
@@ -401,7 +409,7 @@ function changeStatus(id, oldStatus, type){
                     "<div class='form-group'>"+
                       "<label class='col-md-3 control-label'></label>"+
                       "<div class='col-md-7'>"+
-                        "<button type='submit' onsubmit='ChangeServiceRequestStatus("+id+", "+oldStatus+")' class='btn btn-success pull-right' >Submit</button>"+
+                        "<button type='submit' class='btn btn-success pull-right' >Submit</button>"+
                       "</div>"+
                     "</div>"+
                   "</form>";
@@ -414,7 +422,7 @@ function postDeatils(fields, skillsArray, areasArray, id){
   dataString = "name=" + $('#'+fields[0]).val() + "&mobile=" + $('#'+fields[1]).val() + "&address=" + $('#'+fields[2]).val() + 
       "&timing=" + $('#'+fields[3]).val() + "&remarks=" + $('#'+fields[4]).val() + "&gender=" +  $('#'+fields[5]).val() + 
       "&salary=" +  $('#'+fields[6]).val() + "&area=" +  $('#'+fields[7]).val() + "&work_time=" +  $('#'+fields[8]).val() + 
-      "&created_time=" + $('#'+fields[9]).val() + "&worker_area=" +  areas + "&skills=" + skills + "&sr_id=" + id ; 
+      "&created_time=" + $('#'+fields[9]).val() + "&worker_area=" +  areasArray + "&skills=" + skillsArray + "&sr_id=" + id ; 
   $.ajax({
     type: "POST",
     url: "ajax/update.php",
@@ -422,7 +430,7 @@ function postDeatils(fields, skillsArray, areasArray, id){
     cache: false,
     success: function(result){
       alert("Updated Successfully");
-      location.reload();
+      //location.reload();
     },
     error: function(result){
       alert(result);
@@ -442,6 +450,7 @@ function validateUpdateDetails(id){
     skillsArray[i] = $(checked).val(); 
   });
   if(genericEmptyFieldValidator(fields)){
+    alert(id);
     postDeatils(fields, skillsArray, areasArray, id);
   }
   return false;

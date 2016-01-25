@@ -44,11 +44,11 @@ else header('Location: index.php');
       <div class="sidebar-collapse menu-scroll">
         <ul id="side-menu" class="nav">      
           <div class="clearfix"></div>
-          <li class="active"><a href="home.php?status=followback">
+          <li <?php if (($_GET['status']=='followback') OR !isset($_GET['status'])) echo "class='active'";?>><a href="operator.php?status=followback">
             <div class="icon-bg bg-blue"></div><i class="glyphicon glyphicon-repeat"></i>
             <span class="menu-title">Follow back Requests</span></a>
           </li>
-          <li><a href="home.php?status=feedback">
+          <li <?php if ($_GET['status']=='feedback') echo "class='active'";?>><a href="operator.php?status=feedback">
             <div class="icon-bg bg-blue"></div><i class="glyphicon glyphicon-repeat"></i>
             <span class="menu-title">Feedback Requests</span></a>
           </li>
@@ -67,8 +67,10 @@ else header('Location: index.php');
     <!--BEGIN TITLE & BREADCRUMB PAGE-->
       <div id="title-breadcrumb-option-demo" class="page-title-breadcrumb">
         <div class="page-header pull-left">
-          <div class="page-title">BlueNet</div><!-- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          <a id="menu-toggle" href="#" class="hidden-xs"><i class="glyphicon glyphicon-th-list"></i></a> -->
+          <div class="page-title">BlueNet&nbsp;/
+            <a  href="operator.php?status=followback" ><?= $_SESSION['employee_type'] ?></a>&nbsp;/
+            <a  href="#" ><?= $_GET['status'] ?></a>
+          </div>
         </div>
         <ol class="breadcrumb page-breadcrumb pull-right">
           <li></li>

@@ -164,9 +164,10 @@ if (!isset($_SESSION['user_id'])) {
     <!--BEGIN TITLE & BREADCRUMB PAGE-->
       <div id="title-breadcrumb-option-demo" class="page-title-breadcrumb">
         <div class="page-header pull-left">
-          <div class="page-title">BlueNet<!-- </div>&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;
-          <a href="#" ></a> -->
-        </div>
+          <div class="page-title">BlueNet&nbsp;/
+            <a  href="index.php" ><?= $_SESSION['employee_type'] ?></a>&nbsp;/
+            <a  href="#" >Insert New Service Request</a>
+          </div>
         <ol class="breadcrumb page-breadcrumb pull-right">
           <li></li>
           <li></li>

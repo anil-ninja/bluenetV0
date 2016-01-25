@@ -204,8 +204,10 @@ if (isset($_POST['add_note'])) {
     <!--BEGIN TITLE & BREADCRUMB PAGE-->
       <div id="title-breadcrumb-option-demo" class="page-title-breadcrumb">
         <div class="page-header pull-left">
-          <div class="page-title">BlueNet<!-- </div>&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;
-          <a href="#" ></a> -->
+          <div class="page-title">BlueNet&nbsp;/
+            <a  href="index.php" ><?= $_SESSION['employee_type'] ?></a>&nbsp;/
+            <a  href="#" >Update service request</a>
+          </div>
         </div>
         <ol class="breadcrumb page-breadcrumb pull-right">
           <li></li>
@@ -219,15 +221,15 @@ if (isset($_POST['add_note'])) {
 		  <div class="row mbl">
 		    <div class="col-lg-11">
 		      <div class="panel-primary">
-		        <?php
-					$sr_id = $_GET['sr_id'];
-					$srs = mysqli_query($db_handle, "SELECT * FROM service_request WHERE id = '$sr_id'; ") ;
-					$srsrow = mysqli_fetch_array($srs);
-					$reqirements = $srsrow['requirements'];
-					$reqire = explode(",", $reqirements);
-		        ?>
+		      <?php
+  					$sr_id = $_GET['sr_id'];
+  					$srs = mysqli_query($db_handle, "SELECT * FROM service_request WHERE id = '$sr_id'; ") ;
+  					$srsrow = mysqli_fetch_array($srs);
+  					$reqirements = $srsrow['requirements'];
+  					$reqire = explode("/,", $reqirements);
+		      ?>
             
-            	<form class="form-horizontal" id="update_details_form" onsubmit='return (validateUpdateDetails(<?php $sr_id ?>));'>
+          <form class="form-horizontal" id="update_details_form" onsubmit="return (validateUpdateDetails(<?= $sr_id  ?>));">
 				  <div class="form-group">
 				    <label class="col-md-3 control-label">Name</label>
 				    <div class="col-md-3">
@@ -306,12 +308,12 @@ if (isset($_POST['add_note'])) {
 							$abd = array();
 							foreach ($reqire as $donereqire){
 								array_push($abd , "$donereqire");
-								echo '<input type="checkbox" name = "skill[]" value ='.$donereqire.' checked/>&nbsp;&nbsp;&nbsp;'.$donereqire.'<br/>';
+								echo '<input type="checkbox" name = "skill" value ='.$donereqire.' checked/>&nbsp;&nbsp;&nbsp;'.$donereqire.'<br/>';
 							}
 							$allreqirements = array("maid","cook","driver","electrician","plumber","carpenter","babysitter","oldage","patient");
 							$nawreqire = array_diff($allreqirements, $abd);
 							foreach ($nawreqire as $val)
-							   echo '<input type="checkbox" name = "skill[]" value ='.$val.'/>&nbsp;&nbsp;&nbsp;'.$val.'<br/>';
+							   echo '<input type="checkbox" name = "skill" value ='.$val.'/>&nbsp;&nbsp;&nbsp;'.$val.'<br/>';
 						?>          
 					   	</div>
 					   	<label class="col-md-1 control-label">Worker Area</label>

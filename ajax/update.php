@@ -14,7 +14,7 @@ if (isset($_POST['name'])) {
 	$worker_area = $_POST['worker_area'];
 	$gender = $_POST['gender'];
 	$user_id = $_SESSION['user_id'];
-	$skill = $_POST['skill'];
+	$skill = $_POST['skills'];
 	$sr_id = $_POST['sr_id'];
 	$time = date("Y-m-d H:i:s");
 	$sql = mysqli_query ($db_handle, "UPDATE service_request SET name='$name',mobile='$mobile',requirements='$skill',gender='$gender',timings='$timing',
