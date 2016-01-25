@@ -16,6 +16,47 @@ function genericEmptyFieldValidator(fields){
   return returnBool;
 }
 
+function validateEmail(fld) {
+  var error="";
+  var tfld = trim(fld);                        // value of field with whitespace trimmed off
+  var emailFilter = /^[^@]+@[^@.]+\.[^@]*\w\w$/ ;
+  if (!emailFilter.test(tfld)) {              //test email for illegal characters
+    return false;
+  } 
+  else {
+    return true;
+  }
+}
+
+function validatePhone(fld) {
+  var error = "";
+  var stripped = fld.value.replace(/[\(\)\.\-\ ]/g, '');    
+  var res = fld.split(",");
+  for(var i = 0; i < res.length; i++) {
+    if (res.value == "") {
+    return false;
+    } 
+    else if (isNaN(parseInt(stripped))) {
+      return false ;
+    } 
+    else if (!(stripped.length == 10)) {
+      return false;
+    }
+    else return true ;
+  }
+}
+
+function nospaces(t){
+  if(t.value.match(/\s/g)){
+    alert('Sorry, you are not allowed to enter any spaces');
+    t.value=t.value.replace(/\s/g,'');
+  }
+}
+
+function trim(s){
+  return s.replace(/^\s+|\s+$/, '');
+}
+
 function postWorkerDetails(fields, languagesArray, skillsArray, request_id, id, police, gender) {
   var dataString = "";
   dataString = "first_name=" + $('#'+fields[0]).val() + "&last_name=" + $('#'+fields[1]).val() +
@@ -512,6 +553,23 @@ function mePick(id) {
   });
 }
 
+function viewNotes (Id, type) {
+  $.ajax({
+    type: "POST",
+    url: "ajax/notesDetails.php",
+    data: "sr_id="+ Id + "&type=" + type,
+    cache: false,
+    success: function(result){
+      //alert(result);
+      $("#workerform_"+Id).show().html(result); 
+    },
+    error: function(result){
+      alert("Error Occured");
+      return false;
+    }
+  });
+}
+
 function Update (id) {
   location="update.php?sr_id="+id;
 }
@@ -522,21 +580,21 @@ function addworker(request_id, id){
                       "<div class='form-group'>"+
                         "<label class='col-md-3 control-label'>First Name</label>"+
                         "<div class='col-md-3'>"+
-                          "<input type='text' id ='first_name"+request_id+"' class='form-control' placeholder='First Name' />"+
+                          "<input type='text' id ='first_name"+request_id+"' onkeyup='nospaces(this);' class='form-control' placeholder='First Name' />"+
                         "</div>"+
                         "<label class='col-md-3 control-label'>Last Name</label>"+
                         "<div class='col-md-3'>"+
-                          "<input type='text' id ='last_name"+request_id+"' class='form-control' placeholder='Last Name' />"+
+                          "<input type='text' id ='last_name"+request_id+"' onkeyup='nospaces(this);' class='form-control' placeholder='Last Name' />"+
                         "</div>"+
                       "</div>"+
                       "<div class='form-group'>"+
                         "<label class='col-md-3 control-label'>Mobile No.</label>"+
                         "<div class='col-md-3'>"+
-                          "<input type='number' id='mobile"+request_id+"' class='form-control' placeholder='Enter 10 digit mobile number'>"+
+                          "<input type='number' id='mobile"+request_id+"' class='form-control' onkeyup='nospaces(this);' placeholder='Enter 10 digit mobile number'>"+
                         "</div>"+
                         "<label class='col-md-3 control-label'>Emergancy Mobile No.</label>"+
                         "<div class='col-md-3'>"+
-                          "<input type='number' id='emergancy_mobile"+request_id+"' class='form-control' placeholder='Enter 10 digit mobile number'>"+
+                          "<input type='number' id='emergancy_mobile"+request_id+"' onkeyup='nospaces(this);' class='form-control' placeholder='Enter 10 digit mobile number'>"+
                         "</div>"+
                       "</div>"+
                       "<div class='form-group'>"+
@@ -562,7 +620,7 @@ function addworker(request_id, id){
                       "<div class='form-group'>"+
                         "<label class='col-md-3 control-label'>Highest Education</label>"+
                         "<div class='col-md-3'>"+
-                          "<input type='text' id='education"+request_id+"' class='form-control' placeholder='Highest Education'>"+
+                          "<input type='text' id='education"+request_id+"' class='form-control' onkeyup='nospaces(this);' placeholder='Highest Education'>"+
                         "</div>"+
                         "<label for='demo-msk-date' class='col-md-3 control-label'>Experience</label>"+
                         "<div class='col-md-3'>"+
@@ -609,12 +667,12 @@ function addworker(request_id, id){
                       "<div class='form-group'>"+
                         "<label class='col-md-3 control-label'>Languages</label>"+
                         "<div class='col-md-3'>"+
-                          "<input type='text' id='languages"+request_id+"' class='form-control' placeholder='Enter atleast one language' data-role='tagsinput'>" +
+                          "<input type='text' id='languages"+request_id+"' class='form-control' onkeyup='nospaces(this);' placeholder='Enter atleast one language' data-role='tagsinput'>" +
                           "<small class='help'>Enter multimple seperated by , or Enter</small>"+
                         "</div>"+
                         "<label class='col-md-3 control-label'>Skills</label>"+
                         "<div class='col-md-3'>"+       
-                          "<input type='text' id='skills"+request_id+"'  class='form-control' placeholder='Enter atleast one skill' data-role='tagsinput'>"+
+                          "<input type='text' id='skills"+request_id+"'  class='form-control' onkeyup='nospaces(this);' placeholder='Enter atleast one skill' data-role='tagsinput'>"+
                           "<small class='help'>Enter multimple seperated by , or Enter</small>"+
                         "</div>"+
                       "</div>"+
@@ -635,21 +693,21 @@ function addworker(request_id, id){
                       "<div class='form-group'>"+
                         "<label class='col-md-3 control-label'>First Name</label>"+
                         "<div class='col-md-3'>"+
-                          "<input type='text' id ='2first_name"+request_id+"' class='form-control' placeholder='First Name' />"+
+                          "<input type='text' id ='2first_name"+request_id+"' onkeyup='nospaces(this);' class='form-control' placeholder='First Name' />"+
                         "</div>"+
                         "<label class='col-md-3 control-label'>Last Name</label>"+
                         "<div class='col-md-3'>"+
-                          "<input type='text' id ='2last_name"+request_id+"' class='form-control' placeholder='Last Name' />"+
+                          "<input type='text' id ='2last_name"+request_id+"' onkeyup='nospaces(this);' class='form-control' placeholder='Last Name' />"+
                         "</div>"+
                       "</div>"+
                       "<div class='form-group'>"+
                         "<label class='col-md-3 control-label'>Mobile No.</label>"+
                         "<div class='col-md-3'>"+
-                          "<input type='number' id='2mobile"+request_id+"' class='form-control' placeholder='Enter 10 digit mobile number'>"+
+                          "<input type='number' id='2mobile"+request_id+"' onkeyup='nospaces(this);' class='form-control' placeholder='Enter 10 digit mobile number'>"+
                         "</div>"+
                         "<label class='col-md-3 control-label'>Emergancy Mobile No.</label>"+
                         "<div class='col-md-3'>"+
-                          "<input type='number' id='2emergancy_mobile"+request_id+"' class='form-control' placeholder='Enter 10 digit mobile number'>"+
+                          "<input type='number' id='2emergancy_mobile"+request_id+"' onkeyup='nospaces(this);' class='form-control' placeholder='Enter 10 digit mobile number'>"+
                         "</div>"+
                       "</div>"+
                       "<div class='form-group'>"+
@@ -675,7 +733,7 @@ function addworker(request_id, id){
                       "<div class='form-group'>"+
                         "<label class='col-md-3 control-label'>Highest Education</label>"+
                         "<div class='col-md-3'>"+
-                          "<input type='text' id='2education"+request_id+"' class='form-control' placeholder='Highest Education'>"+
+                          "<input type='text' id='2education"+request_id+"' class='form-control' onkeyup='nospaces(this);' placeholder='Highest Education'>"+
                         "</div>"+
                         "<label for='demo-msk-date' class='col-md-3 control-label'>Experience</label>"+
                         "<div class='col-md-3'>"+
@@ -722,12 +780,12 @@ function addworker(request_id, id){
                       "<div class='form-group'>"+
                         "<label class='col-md-3 control-label'>Languages</label>"+
                         "<div class='col-md-3'>"+
-                          "<input type='text' id='2languages"+request_id+"' class='form-control' placeholder='Enter atleast one language' data-role='tagsinput'>" +
+                          "<input type='text' id='2languages"+request_id+"' class='form-control' onkeyup='nospaces(this);' placeholder='Enter atleast one language' data-role='tagsinput'>" +
                           "<small class='help'>Enter multimple seperated by , or Enter</small>"+
                         "</div>"+
                         "<label class='col-md-3 control-label'>Skills</label>"+
                         "<div class='col-md-3'>"+       
-                          "<input type='text' id='2skills"+request_id+"'  class='form-control' placeholder='Enter atleast one skill' data-role='tagsinput'>"+
+                          "<input type='text' id='2skills"+request_id+"'  class='form-control' onkeyup='nospaces(this);' placeholder='Enter atleast one skill' data-role='tagsinput'>"+
                           "<small class='help'>Enter multimple seperated by , or Enter</small>"+
                         "</div>"+
                       "</div>"+

@@ -233,11 +233,11 @@ if (isset($_POST['add_note'])) {
 				  <div class="form-group">
 				    <label class="col-md-3 control-label">Name</label>
 				    <div class="col-md-3">
-				      <input type="text" id ="name" class="form-control" placeholder="Name" value="<?= $srsrow['name'] ?>"/>
+				      <input type="text" id ="name" class="form-control" onkeyup='nospaces(this);' placeholder="Name" value="<?= $srsrow['name'] ?>"/>
 				    </div> <!-- /.col -->
 				    <label class="col-md-1 control-label">Mobile No.</label>
 				    <div class="col-md-3">
-				      <input type="number" id ="mobile" class="form-control" placeholder="Enter 10 digit mobile number" value="<?= $srsrow['mobile'] ?>"/>
+				      <input type="number" id ="mobile" class="form-control" onkeyup='nospaces(this);' placeholder="Enter 10 digit mobile number" value="<?= $srsrow['mobile'] ?>"/>
 				    </div> <!-- /.col -->
 				  </div> <!-- /.form-group -->
 				  <div class="form-group">
@@ -288,7 +288,7 @@ if (isset($_POST['add_note'])) {
 				    </div> <!-- /.col -->
 				    <label class="col-md-1 control-label">Area</label>
 				    <div class="col-md-3">
-				      <input type="text" id ="area" class="form-control" placeholder="Area" value="<?= $srsrow['area'] ?>"/>
+				      <input type="text" id ="area" class="form-control" onkeyup='nospaces(this);' placeholder="Area" value="<?= $srsrow['area'] ?>"/>
 				    </div> <!-- /.col -->
 				  </div>
 				    <div class="form-group">
@@ -318,7 +318,7 @@ if (isset($_POST['add_note'])) {
 					   	</div>
 					   	<label class="col-md-1 control-label">Worker Area</label>
 				      	<div class="col-md-3">
-				        	<input type="text" id ="worker_area" class="form-control" placeholder="Worker Area" value="<?= $srsrow['worker_area'] ?>"/>
+				        	<input type="text" id ="worker_area" class="form-control" onkeyup='nospaces(this);' placeholder="Worker Area" value="<?= $srsrow['worker_area'] ?>"/>
 				      	</div>
 					</div>
 				    <div class="form-group">

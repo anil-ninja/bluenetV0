@@ -184,11 +184,11 @@ if (!isset($_SESSION['user_id'])) {
       				    <div class="form-group">
       				      <label class="col-md-3 control-label">Name</label>
       				      <div class="col-md-3">
-      				        <input type="text" id ="name" class="form-control" placeholder="Name" />
+      				        <input type="text" id ="name" onkeyup='nospaces(this);' class="form-control" placeholder="Name" />
       				      </div> <!-- /.col -->
       				      <label class="col-md-1 control-label">Mobile No.</label>
       				      <div class="col-md-3">
-      				        <input type="number" id ="mobile" class="form-control" placeholder="Enter 10 digit mobile number" />
+      				        <input type="number" id ="mobile" onkeyup='nospaces(this);' class="form-control" placeholder="Enter 10 digit mobile number" />
       				      </div> <!-- /.col -->
       				    </div> <!-- /.form-group -->
 				          <div class="form-group">
@@ -234,7 +234,7 @@ if (!isset($_SESSION['user_id'])) {
             			 	</div> <!-- /.col -->
             			 	<label class="col-md-1 control-label">Area</label>
             			 	<div class="col-md-3">
-            			   	<input type="text" id ="area" class="form-control" placeholder="Area" />
+            			   	<input type="text" id ="area" onkeyup='nospaces(this);' class="form-control" placeholder="Area" />
             			 	</div> <!-- /.col -->
             			</div>
             			<div class="form-group">
@@ -254,7 +254,7 @@ if (!isset($_SESSION['user_id'])) {
             			 	</div> <!-- /.col -->
             			 	<label class="col-md-1 control-label">Worker Area</label>
             			 	<div class="col-md-3">
-            			   	<input type="text" id ="worker_area" class="form-control" placeholder="Worker Area" />
+            			   	<input type="text" id ="worker_area" onkeyup='nospaces(this);' class="form-control" placeholder="Worker Area" />
             			 	</div>
             			</div>
             			<div class="form-group">

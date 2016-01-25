@@ -184,11 +184,11 @@ if (!isset($_SESSION['user_id'])) {
                   <div class='form-group'>
                     <label class='col-md-3 control-label'>First Name</label>
                     <div class='col-md-3'>
-                      <input type='text' id ='first_name' class='form-control' placeholder='First Name' />
+                      <input type='text' id ='first_name' onkeyup='nospaces(this);' class='form-control' placeholder='First Name' />
                     </div>
                     <label class='col-md-3 control-label'>Last Name</label>
                     <div class='col-md-3'>
-                      <input type='text' id ='last_name' class='form-control' placeholder='Last Name' />
+                      <input type='text' id ='last_name' onkeyup='nospaces(this);' class='form-control' placeholder='Last Name' />
                     </div>
                   </div>
                   <!-- <div class='form-group'>
@@ -228,11 +228,11 @@ if (!isset($_SESSION['user_id'])) {
                   <div class='form-group'>
                     <label class='col-md-3 control-label'>Mobile No.</label>
                     <div class='col-md-3'>
-                      <input type='number' id='mobile' class='form-control' placeholder='Enter 10 digit mobile number'>
+                      <input type='number' id='mobile' onkeyup='nospaces(this);' class='form-control' placeholder='Enter 10 digit mobile number'>
                     </div>
                     <label class='col-md-3 control-label'>Emergancy Mobile No.</label>
                     <div class='col-md-3'>
-                      <input type='number' id='emergancy_mobile' class='form-control' placeholder='Enter 10 digit mobile number'>
+                      <input type='number' id='emergancy_mobile' onkeyup='nospaces(this);' class='form-control' placeholder='Enter 10 digit mobile number'>
                     </div>
                   </div>
                   <div class='form-group'>
@@ -258,7 +258,7 @@ if (!isset($_SESSION['user_id'])) {
                   <div class='form-group'>
                     <label class='col-md-3 control-label'>Highest Education</label>
                     <div class='col-md-3'>
-                      <input type='text' id='education' class='form-control' placeholder='Highest Education'>
+                      <input type='text' id='education' onkeyup='nospaces(this);' class='form-control' placeholder='Highest Education'>
                     </div>
                     <label for='demo-msk-date' class='col-md-3 control-label'>Experience</label>
                     <div class='col-md-3'>
@@ -305,12 +305,12 @@ if (!isset($_SESSION['user_id'])) {
                   <div class='form-group'>
                     <label class='col-md-3 control-label'>Languages</label>
                     <div class='col-md-3'>
-                      <input type='text' id='languages' class='form-control' placeholder='Enter atleast one language' data-role='tagsinput'>
+                      <input type='text' id='languages' onkeyup='nospaces(this);' class='form-control' placeholder='Enter atleast one language' data-role='tagsinput'>
                       <small class='help'>Enter multimple seperated by , or Enter</small>
                     </div>
                     <label class='col-md-3 control-label'>Skills</label>
                     <div class='col-md-3'>       
-                      <input type='text' id='skills'  class='form-control' placeholder='Enter atleast one skill' data-role='tagsinput'>
+                      <input type='text' id='skills' onkeyup='nospaces(this);' class='form-control' placeholder='Enter atleast one skill' data-role='tagsinput'>
                       <small class='help'>Enter multimple seperated by , or Enter</small>
                     </div>
                   </div>

@@ -132,21 +132,21 @@ else header('Location: index.php');
                   <div class='form-group'>
                     <label class='col-md-3 control-label'>First Name</label>
                     <div class='col-md-3'>
-                      <input type='text' id ='first_name' class='form-control' placeholder='First Name' />
+                      <input type='text' id ='first_name' onkeyup='nospaces(this);' class='form-control' placeholder='First Name' />
                     </div>
                     <label class='col-md-3 control-label'>Last Name</label>
                     <div class='col-md-3'>
-                      <input type='text' id ='last_name' class='form-control' placeholder='Last Name' />
+                      <input type='text' id ='last_name' onkeyup='nospaces(this);' class='form-control' placeholder='Last Name' />
                     </div>
                   </div> 
                   <div class='form-group'>
                     <label class='col-md-3 control-label'>Email</label>
                     <div class='col-md-3'>
-                      <input type='text' id ='email' class='form-control' placeholder='Email' />
+                      <input type='text' id ='email' onkeyup='nospaces(this);' class='form-control' placeholder='Email' />
                     </div>
                     <label class='col-md-3 control-label'>Phone No.</label>
                     <div class='col-md-3'>
-                      <input type='text' id ='phone' class='form-control' placeholder='Mobile Number' />
+                      <input type='text' id ='phone' onkeyup='nospaces(this);' class='form-control' placeholder='Mobile Number' />
                     </div>
                   </div>
                   <div class="form-group">
@@ -164,13 +164,13 @@ else header('Location: index.php');
                     </div>
                     <label class="col-md-3 control-label">Base salary</label>
                     <div class="col-md-3">
-                      <input type="number" id ="salary" class="form-control" placeholder="Base salar" />
+                      <input type="number" id ="salary" onkeyup='nospaces(this);' class="form-control" placeholder="Base salary" />
                     </div>
                   </div>
                   <div class="form-group">
                     <label class="col-md-3 control-label">Password</label>
                     <div class="col-md-3">
-                      <input type="password" id ="password" class="form-control" placeholder="password" />
+                      <input type="password" id ="password" onkeyup='nospaces(this);' class="form-control" placeholder="password" />
                     </div>
                     <label class="col-md-3 control-label">Re-enter password</label>
                     <div class="col-md-3">
