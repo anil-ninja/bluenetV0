@@ -38,7 +38,7 @@ if (!isset($_SESSION['user_id'])) {
             <div class="icon-bg bg-red"></div><i class="glyphicon glyphicon-plus"></i>
             <span class="menu-title">Add New User</span></a>
           </li>
-          <li <?php if (!isset($_GET['status']) echo "class='active'";?>><a href="request.php">
+          <li <?php if (!isset($_GET['status'])) echo "class='active'";?>><a href="request.php">
             <div class="icon-bg bg-orange"></div><i class="glyphicon glyphicon-home"></i>
             <span class="menu-title">View All requests</span></a>
           </li>
