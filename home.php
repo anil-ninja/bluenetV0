@@ -24,19 +24,7 @@ if (!isset($_SESSION['user_id'])) {
   <link rel="shortcut icon" href="images/icons/favicon.ico">
   <link rel="apple-touch-icon" href="images/icons/favicon.png">
  <!--Loading bootstrap css-->
-  <link type="text/css" rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,300,700">
-  <link type="text/css" rel="stylesheet" href="http://fonts.googleapis.com/css?family=Oswald:400,700,300">
-  <link type="text/css" rel="stylesheet" href="styles/jquery-ui-1.10.4.custom.min.css">
-  <link type="text/css" rel="stylesheet" href="styles/font-awesome.min.css">
-  <link type="text/css" rel="stylesheet" href="styles/bootstrap.min.css">
-  <link type="text/css" rel="stylesheet" href="styles/animate.css">
-  <link type="text/css" rel="stylesheet" href="styles/all.css">
-  <link type="text/css" rel="stylesheet" href="styles/main.css">
-  <link type="text/css" rel="stylesheet" href="styles/style-responsive.css">
-  <link type="text/css" rel="stylesheet" href="styles/zabuto_calendar.min.css">
-  <link type="text/css" rel="stylesheet" href="styles/pace.css">
-  <link type="text/css" rel="stylesheet" href="styles/jquery.news-ticker.css">
-  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.10/css/jquery.dataTables.min.css"/>
+  <?php include_once "headers.php"; ?>  
 </head>
 <body>
   <?php require_once "navbar.php"; ?>
@@ -75,8 +63,7 @@ if (!isset($_SESSION['user_id'])) {
        <?php require_once "page-contect.php"; ?>
     </div>
   </div>
-  <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-  <script src="script/jquery-1.10.2.min.js"></script>
+  <?php include_once "footers.php"; ?>
   <script type="text/javascript">
   	$(document).ready(function() {
   	  $('#example1').DataTable({
@@ -85,26 +72,5 @@ if (!isset($_SESSION['user_id'])) {
   	});
    
 	</script>
-  <script src="script/jquery-migrate-1.2.1.min.js"></script>
-  <script src="script/jquery-ui.js"></script>
-  <script src="script/bootstrap.min.js"></script>
-  <script src="script/bootstrap-hover-dropdown.js"></script>
-  <script src="script/html5shiv.js"></script>
-  <script src="script/respond.min.js"></script>
-  <script src="script/jquery.metisMenu.js"></script>
-  <script src="script/jquery.slimscroll.js"></script>
-  <script src="script/jquery.cookie.js"></script>
-  <script src="script/custom.min.js"></script>
-  <script src="script/jquery.news-ticker.js"></script>
-  <script src="script/jquery.menu.js"></script>
-  <script src="script/pace.min.js"></script>
-  <script src="script/holder.js"></script>
-  <script src="script/responsive-tabs.js"></script>
-  <script src="script/bootbox.js"></script>
-  <script src="script/blueteam.js"></script>
- 
-  <!--CORE JAVASCRIPT-->
-  <script src="script/main.js"></script>
-  <script type="text/javascript" src="https://cdn.datatables.net/s/dt/dt-1.10.10/datatables.min.js"></script>
 </body>
 </html>
