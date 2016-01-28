@@ -143,6 +143,14 @@ if (isset($_POST['update_status'])) {
               <div class="icon-bg bg-blue"></div><i class="glyphicon glyphicon-trash"></i>
               <span class="menu-title">Decay Requests</span></a>
             </li>
+            <li><a href="request.php?status=followback">
+              <div class="icon-bg bg-blue"></div><i class="glyphicon glyphicon-repeat"></i>
+              <span class="menu-title">Follow back Requests</span></a>
+            </li>
+            <li><a href="request.php?status=feedback">
+              <div class="icon-bg bg-blue"></div><i class="glyphicon glyphicon-repeat"></i>
+              <span class="menu-title">Feedback Requests</span></a>
+            </li>
             <li class="active"><a href="24hour.php">
               <div class="icon-bg bg-blue"></div><i class=" glyphicon glyphicon-time"></i>
               <span class="menu-title">View 24hours Requests</span></a>
@@ -170,6 +178,7 @@ if (isset($_POST['update_status'])) {
           <div class="page-title">BlueNet Hack&nbsp;/
             <a  href="cem.php?status=open" ><?= $_SESSION['employee_type'] ?></a>&nbsp;/
             <a  href="#" >24 hours Requests</a>
+          </div>
         </div>
         <ol class="breadcrumb page-breadcrumb pull-right">
           <li></li>
@@ -177,98 +186,57 @@ if (isset($_POST['update_status'])) {
           <li></li>
         </ol>
         <div class="clearfix"></div>
-      </div>        
+      </div>          
       <div class="page-content">
         <div id="tab-general">
           <div class="row mbl">
-			<div class="col-lg-12">
-			  <div class="panel" >
-				<div class="panel-body">
-			 	  <table id="example" class="display" cellspacing="0" >
-					<thead>
-					  <tr>
-						<th class="row_style">Name</th>
-						<th class="row_style">Mobile</th>
-						<th class="row_style">Requirement</th>
-						<th class="row_style">Gender</th>
-						<th class="row_style">Timing</th>
-						<th class="row_style">Salary</th>
-						<th class="row_style">Address</th>
-						<th class="row_style">Remarks</th>
-						<th class="row_style">Work Time</th>
-						<th class="row_style">Created Date</th>
-						<th class="row_style">Date</th>
-						<th class="row_style">Match 1</th>
-						<th class="row_style">Match 2</th>	
-						<th class="row_style">Status</th>
-						<th class="row_style">Edit</th>
-					  </tr>
-					</thead>
-					<tbody>				
-				<?php
-					$srs = mysqli_query($db_handle, "SELECT * FROM service_request WHERE work_time ='24'; ") ;
-					while ($srsrow = mysqli_fetch_array($srs)){
-				?>
-					  <tr>					
-						<td class="row_style"><?= $srsrow['name'] ?> </td>
-						<td class="row_style"><?= $srsrow['mobile'] ?> </td>
-						<td class="row_style"><?= $srsrow['requirements'] ?> </td>
-						<td class="row_style"><?= $srsrow['gender'] ?> </td>
-						<td class="row_style"><?= $srsrow['timings'] ?> </td>
-						<td class="row_style"><?= $srsrow['expected_salary'] ?> </td>
-						<td class="row_style"><?= $srsrow['address'] ?> </td>
-						<td class="row_style"><?= $srsrow['remarks'] ?> </td>
-						<td class="row_style"><?= $srsrow['work_time'] ?> </td>
-						<td class="row_style"><?= $srsrow['created_time'] ?> </td>
-						<td class="row_style"><?= $srsrow['date'] ?> </td>
-						<td class="row_style"><?= $srsrow['match_name'] ?> <?= $srsrow['match_mobile'] ?> </td>
-						<td class="row_style"><?= $srsrow['match2_name'] ?> <?= $srsrow['match2_mobile'] ?> </td>
-						<td class="row_style">
-						  <form method="POST" action="">
-							<select name="new_status">
-							  <option value="<?= $srsrow['status'] ?>" selected><?= $srsrow['status'] ?></option>
-							  <option value="open">Open</option>
-							  <option value="followback">Followback</option>
-							  <option value="cem_open" >CEM - Open</option>
-							  <option value="salary_issue" >Salary Issues</option>
-							  <option value="not_interested" >Not Interested</option>
-							  <option value="done" >Done</option>
-							  <option value="decay" >Decay</option>
-							  <option value="delete" >Delete</option>
-							</select>
-							<input type="hidden" name="sr_id" value="<?= $srsrow['id'] ?>">
-							<input type="hidden" name="old_status" value="<?= $srsrow['status'] ?>">
-							<button type="submit" name="update_status" class="btn btn-primary"> Update </button>
-						  </form>
-						</td>
-						<td class="row_style">
-						  <form method="post" action="update.php?sr_id=<?= $srsrow['id'] ?>">
-							<button type="submit" name="update_sr" class="btn btn-primary"> Edit </button>
-						  </form>
-						</td>
-					  </tr>
-					<?php   }   ?>
-					</tbody>
-				  </table>
-				</div>
-			  </div>
-			</div>
-		  </div>
-		</div>
+            <div class="col-lg-8">
+              <div class="panel-primary">
+              <?php 
+                $srs = mysqli_query($db_handle, "SELECT * FROM service_request WHERE work_time ='24' ;") ;
+                while ($srsrow = mysqli_fetch_array($srs)){ 
+                  $id = $srsrow['id'];
+                  $skill = mysqli_query($db_handle, "SELECT a.name, a.id FROM skill_name AS a JOIN skills AS b WHERE b.user_id = '$id'
+                                                      AND b.status = 'open' AND b.type = 'client' AND a.id = b.skill_id ;");
+              ?>
+                <div class="list-group">
+                  <p style="font-size:20px;padding-left: 2em;">
+                    <a  class="list-group-item active"> Client Name  <span style="padding-left: 5em"><?= $srsrow['name'] ?></span></a>
+                    <a  class="list-group-item "> Mobile  <span style="padding-left: 8em"><?= $srsrow['mobile'] ?></span></a>
+                    <a  class="list-group-item">Address <span style="padding-left: 7em"><?= $srsrow['address'] ?></span></a>
+                    <a  class="list-group-item">Salary Criteria <span style="padding-left: 5em"><?= $srsrow['expected_salary'] ?></span></a>
+                    <a  class="list-group-item">Timings <span style="padding-left: 8em"><?= $srsrow['timings'] ?></span></a>
+                    <a  class="list-group-item">Working Time <span style="padding-left: 5em"><?= $srsrow['work_time'] ?></span></a>
+                    <a  class="list-group-item"> Requirements<span style="padding-left: 5em"><?= $srsrow['requirements'] ?></span></a>
+                    <a  class="list-group-item">Remarks <span style="padding-left: 7em"><?= $srsrow['remarks'] ?></span></a>
+                    <a  class="list-group-item">Worker Area <span style="padding-left: 5em"><?= $srsrow['worker_area'] ?></span></a>
+                    <a  class="list-group-item "> Gender  <span style="padding-left: 7em"><?= $srsrow['gender'] ?></span></a>       
+                    <a  class="list-group-item "> Skills  <span style="padding-left: 7em">
+                      <?php 
+                        while($skillrow = mysqli_fetch_array($skill)){ 
+                          echo $skillrow['name'].", ";
+                        }
+                      ?>
+                      </span>
+                    </a>       
+                    <a  class="list-group-item" >
+                      <button class="btn btn-primary" style="margin-left: 40%" onclick="Update(<?= $srsrow['id'] ?>);">Update request</button>
+                      <button class="btn btn-primary"  onclick="viewNotes(<?= $srsrow['id'] ?>, 1);" >View Notes</button>
+                      <button class="btn btn-primary"  onclick="changeStatus(<?= $srsrow['id'] ?>, <?= $srsrow['status'] ?>, 3);" >Change Status</button>
+                    </a>
+                    <a  class="list-group-item" >
+                      <span id="workerform_<?= $srsrow['id'] ?>"></span>
+                    </a>
+                  </p>
+                </div>
+                <?php } ?>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
+    </div>  
   </div>
   <?php include_once "footers.php"; ?>
-  <script type="text/javascript">
-  	$(document).ready(function() {
-  	  $('#example1').DataTable({
-        "iDisplayLength": 50
-      });
-  	});
-    $(".addworker").hide();
-    function toggle() {
-      $(".addworker").toggle();
-    }
-	</script>
 </body>
 </html>

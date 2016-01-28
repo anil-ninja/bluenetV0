@@ -10,6 +10,9 @@
                   else $condition = " (status='open' OR status='me_open') and me_id = 0" ;
                   $srs = mysqli_query($db_handle, "SELECT * FROM service_request WHERE ".$condition."; ") ;
                   while ($srsrow = mysqli_fetch_array($srs)){
+                     $id = $srsrow['id'];
+                     $skill = mysqli_query($db_handle, "SELECT a.name, a.id FROM skill_name AS a JOIN skills AS b WHERE b.user_id = '$id'
+                                                            AND b.status = 'open' AND b.type = 'client' AND a.id = b.skill_id ;");
                ?>
                <div class="list-group">
                   <p style="font-size:20px;padding-left: 2em;">
@@ -20,6 +23,14 @@
                      <a  class="list-group-item">Working Time <span style="padding-left: 5em"><?= $srsrow['work_time'] ?></span></a>
                      <a  class="list-group-item">Salary Criteria <span style="padding-left: 5em"><?= $srsrow['expected_salary'] ?></span></a>
                      <a  class="list-group-item">Remarks <span style="margin-left: 7em;"><?= $srsrow['remarks'] ?></span></a>
+                     <a  class="list-group-item "> Skills  <span style="padding-left: 7em">
+                        <?php 
+                           while($skillrow = mysqli_fetch_array($skill)){ 
+                              echo $skillrow['name'].", ";
+                           }
+                        ?>
+                        </span>
+                     </a>
                      <a  class="list-group-item">
                      <?php 
                         if($status == "done") { 

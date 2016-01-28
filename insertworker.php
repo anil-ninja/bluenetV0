@@ -156,6 +156,7 @@ if (!isset($_SESSION['user_id'])) {
           <div class="page-title">BlueNet&nbsp;/
             <a  href="index.php" ><?= $_SESSION['employee_type'] ?></a>&nbsp;/
             <a  href="#" >Insert New Worker</a>
+          </div>
         </div>
         <ol class="breadcrumb page-breadcrumb pull-right">
           <li></li>
@@ -295,12 +296,30 @@ if (!isset($_SESSION['user_id'])) {
                     <label class='col-md-3 control-label'>Languages</label>
                     <div class='col-md-3'>
                       <input type='text' id='languages' onkeyup='nospaces(this);' class='form-control' placeholder='Enter atleast one language' data-role='tagsinput'>
-                      <small class='help'>Enter multimple seperated by , or Enter</small>
+                      <small class='help'>Enter multimple seperated by , </small>
                     </div>
-                    <label class='col-md-3 control-label'>Skills</label>
+                    <label class='col-md-3 control-label'>Services</label>
                     <div class='col-md-3'>       
-                      <input type='text' id='skills' onkeyup='nospaces(this);' class='form-control' placeholder='Enter atleast one skill' data-role='tagsinput'>
-                      <small class='help'>Enter multimple seperated by , or Enter</small>
+                      <input type='text' id='services' onkeyup='nospaces(this);' class='form-control' placeholder='Enter atleast one Service' data-role='tagsinput'>
+                      <small class='help'>Enter multimple seperated by , </small>
+                    </div>
+                  </div>
+                  <div class='form-group'>
+                    <label class='col-md-3 control-label'>Enter New Skill or select Skills</label>
+                    <div class='col-md-3'>
+                      <input type='text' id='newskill' onkeyup='nospaces(this);' class='form-control' placeholder='Enter Skill' data-role='tagsinput'>
+                    </div>
+                    <div class='col-md-4'>
+                      <select class='selectpicker' id='skills' onchange="getselectedskill(0, 3);" data-live-search='true' data-width='100%' > 
+                        <option value='0'>Select Skills </option>
+                        <?php 
+                          $skill = mysqli_query($db_handle, "SELECT * FROM skill_name ;");
+                           while($skillrow = mysqli_fetch_array($skill)){ 
+                            echo "<option value=".$skillrow['id'].">".$skillrow['name']."</option>";
+                          }
+                        ?>
+                      </select>
+                      <div id="selectedskills"></div>
                     </div>
                   </div>
                   <div class='form-group'>

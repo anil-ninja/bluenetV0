@@ -24,6 +24,8 @@ if(isset($_POST['first_name'])){
 	$police = $_POST['police'];
 	$languages = $_POST['languages'];
 	$skills = $_POST['skills'];
+	$services = $_POST['services'];
+	$newskill = $_POST['newskill'];
 	$request_id = $_POST['request_id'];
 	$type = $_POST['type'];
 	$me_id = $_SESSION['user_id'];
@@ -32,8 +34,9 @@ if(isset($_POST['first_name'])){
 										remarks, service, me_id) 
 									VALUES ('$first_name', '$last_name', '$mobile', '$gender', '$birth_date', '$age', '$education', '$languages', 
 										'$expected_salary', '$current_address', '$parmanent_address', '$timings', '$work_time', '$police', 
-										'$emergancy_mobile', '$experience',	'$remarks', '$skills', '$me_id');");
+										'$emergancy_mobile', '$experience',	'$remarks', '$services', '$me_id');");
 	$worker_id = mysqli_insert_id($db_handle);
+	$newskill = explode(",", $reqirements);
 	if($type == 1){
 		mysqli_query($db_handle,"UPDATE service_request SET match_id = '$worker_id' where id = '$request_id' ;");
 	}

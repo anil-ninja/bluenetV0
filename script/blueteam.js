@@ -1,3 +1,4 @@
+//require_once "../dbConnection.php"; 
 function genericEmptyFieldValidator(fields){
   returnBool = true;
   $.each(fields, function( index, value ) {
@@ -57,7 +58,7 @@ function trim(s){
   return s.replace(/^\s+|\s+$/, '');
 }
 
-function postWorkerDetails(fields, languagesArray, skillsArray, request_id, id, police, gender) {
+function postWorkerDetails(fields, languagesArray, skillsArray, request_id, id, police, gender, servicesArray, newskill) {
   var dataString = "";
   dataString = "first_name=" + $('#'+fields[0]).val() + "&last_name=" + $('#'+fields[1]).val() +
       "&mobile=" +  $('#'+fields[2]).val() + "&emergancy_mobile=" +  $('#'+fields[3]).val() + 
@@ -66,7 +67,7 @@ function postWorkerDetails(fields, languagesArray, skillsArray, request_id, id, 
       "&education=" + $('#'+fields[8]).val() + "&experience=" + $('#'+fields[9]).val()+ 
       "&birth_date=" + $('#'+fields[10]).val() + "&timings=" + $('#'+fields[11]).val() + "&work_time=" + $('#'+fields[12]).val() +
       "&remarks=" + $('#'+fields[13]).val() + "&police=" + police + "&languages=" + languagesArray + "&skills=" + skillsArray + 
-      "&request_id=" + request_id + "&type=" + id +"&gender=" + gender;
+      "&request_id=" + request_id + "&type=" + id +"&gender=" + gender + "&services=" + servicesArray + "&newskill=" + newskill;
       /*"&address_proof_name=" + $('#'+fields[2]).val() + "&address_proof_id=" + $('#'+fields[3]).val() + 
       "&id_proof_name=" + $('#'+fields[4]).val() + "&id_proof_id=" +  $('#'+fields[5]).val() + */
   console.log(dataString);
@@ -101,10 +102,15 @@ function validateWorkerDetails(request_id, id){
     $('#languages'+request_id).each(function(i, selected){ 
       languagesArray[i] = $(selected).val(); 
     });
-    var skillsArray = []; 
-    $('#skills'+request_id).each(function(i, selected){ 
-      skillsArray[i] = $(selected).val(); 
+    var servicesArray = []; 
+    $('#services'+request_id).each(function(i, selected){ 
+      servicesArray[i] = $(selected).val(); 
     });
+    var skillsArray = [];
+    $(".values").each(function(i){
+        skillsArray[i] = $(this).data('value');
+    });
+    var newskill = $('#newskill'+request_id).val();
     var gender = $('#gender'+request_id).val();
     var police = $('#police'+request_id).val();
   }
@@ -117,10 +123,16 @@ function validateWorkerDetails(request_id, id){
     $('#2languages'+request_id).each(function(i, selected){ 
       languagesArray[i] = $(selected).val(); 
     });
-    var skillsArray = []; 
-    $('#2skills'+request_id).each(function(i, selected){ 
-      skillsArray[i] = $(selected).val(); 
+    var servicesArray = []; 
+    $('#2services'+request_id).each(function(i, selected){ 
+      servicesArray[i] = $(selected).val(); 
     });
+    var skillsArray = [];
+    $(".values").each(function(i){
+        skillsArray[i] = $(this).data('value');
+    });
+    var newskill = $('#2newskill'+request_id).val();
+    
     var gender = $('#2gender'+request_id).val();
     var police = $('#2police'+request_id).val();
   }
@@ -132,18 +144,32 @@ function validateWorkerDetails(request_id, id){
     $('#languages').each(function(i, selected){ 
       languagesArray[i] = $(selected).val(); 
     });
-    var skillsArray = []; 
-    $('#skills').each(function(i, selected){ 
-      skillsArray[i] = $(selected).val(); 
+    var servicesArray = []; 
+    $('#services').each(function(i, selected){ 
+      servicesArray[i] = $(selected).val(); 
     });
+    var skillsArray = [];
+    $(".values").each(function(i){
+        skillsArray[i] = $(this).data('value');
+    });
+    var newskill = $('#newskill').val();
+    
     var police = $('#police').val();
     var gender = $('#gender').val();
   }
-  if(genericEmptyFieldValidator(fields)){
-    alert('we');
-    postWorkerDetails(fields, languagesArray, skillsArray, request_id, id, police, gender);
+  if(!genericEmptyFieldValidator(newskill)){
+    var x = document.getElementsByClass("values").length;
+    if(x ==0){
+      alert('Please enter or select a Skill');
+    }
   }
- return false;
+  else {
+    if(genericEmptyFieldValidator(fields)){
+      postWorkerDetails(fields, languagesArray, skillsArray, request_id, id, police, gender, servicesArray, newskill);
+      alert(skillsArray);
+    }
+  }
+  return false;
 }
 
 function postRequestDeatils(fields, skills, areas, status) {
@@ -408,6 +434,26 @@ function validateStatus(id, oldStatus) {
   //return false;
 }
 
+function getselectedskill(id, type) {
+  if(type == 1) var skills = $('#skills'+id).val();
+  else if(type == 2) var skills = $('#2skills'+id).val();
+  else var skills = $('#skills').val();
+  $.ajax({
+    type: "POST",
+    url: "ajax/skill.php",
+    data: "skills="+skills ,
+    cache: false,
+    success: function(result){
+      if(type == 1) $("#selectedskills"+id).append(result);
+      else if(type == 2) $("#2selectedskills"+id).append(result);
+      else $("#selectedskills").append(result);
+    },
+    error: function(result){
+      return false;
+    }
+  }); 
+}
+
 function changeStatus(id, oldStatus, type){
   if(type == 1){
     var status = "<form class='form-horizontal' id='status_form"+id+"' onsubmit='return(validateStatus("+id+", \""+oldStatus+"\"));'>" +   
@@ -432,7 +478,7 @@ function changeStatus(id, oldStatus, type){
                   "</form>";
     $("#workerform_"+id).show().html(status);
   }
-  if(type == 2) {
+  else if(type == 2) {
     var status = "<form class='form-horizontal' id='status_form"+id+"' onsubmit='return(validateStatus("+id+", \""+oldStatus+"\"));'>" +   
                     "<div class='form-group'>"+
                       "<label class='col-md-3 control-label'>Status</label>"+
@@ -456,6 +502,36 @@ function changeStatus(id, oldStatus, type){
                   "</form>";
     $("#workerform_"+id).show().html(status);
   }
+  else if(type == 3) {
+    var status = "<form class='form-horizontal' id='status_form"+id+"' onsubmit='return(validateStatus("+id+", \""+oldStatus+"\"));'>" +   
+                    "<div class='form-group'>"+
+                      "<label class='col-md-3 control-label'>Status</label>"+
+                      "<div class='col-md-3'>"+
+                        "<select class='selectpicker' id='new_status"+id+"' data-live-search='true' data-width='100%'>" +   
+                          "<option value='open'>Open </option>"+
+                          "<option value='salary_issue'>Salary Issues</option>"+
+                          "<option value='not_interested'>Not Interested</option>"+
+                          "<option value='just_to_know'>For information Purpose</option>"+
+                          "<option value='me_open'>Search Worker</option>"+
+                          "<option value='decay'>Decay</option>"+
+                          "<option value='demo'>Demo</option>"+
+                          "<option value='done'>Done</option>"+
+                          "<option value='delete'>Delete</option>"+
+                          "<option value='followback'>Followback</option>"+
+                          "<option value='feedback'>Feedback</option>"+
+                        "</select>"+
+                      "</div>"+
+                    "</div>"+
+                    "<div class='form-group'>"+
+                      "<label class='col-md-3 control-label'></label>"+
+                      "<div class='col-md-7'>"+
+                        "<button type='submit' class='btn btn-success pull-right' >Submit</button>"+
+                      "</div>"+
+                    "</div>"+
+                  "</form>";
+    $("#workerform_"+id).show().html(status);
+  }
+  else {}
 }
 
 function postDeatils(fields, skillsArray, areasArray, id){
@@ -553,6 +629,10 @@ function mePick(id) {
       });
     }
   });
+}
+
+function removeskill(id) {
+  $('#'+id).remove();
 }
 
 function viewNotes (Id, type) {
@@ -670,12 +750,23 @@ function addworker(request_id, id){
                         "<label class='col-md-3 control-label'>Languages</label>"+
                         "<div class='col-md-3'>"+
                           "<input type='text' id='languages"+request_id+"' class='form-control' onkeyup='nospaces(this);' placeholder='Enter atleast one language' data-role='tagsinput'>" +
-                          "<small class='help'>Enter multimple seperated by , or Enter</small>"+
+                          "<small class='help'>Enter multimple seperated by , </small>"+
                         "</div>"+
-                        "<label class='col-md-3 control-label'>Skills</label>"+
+                        "<label class='col-md-3 control-label'>Services</label>"+
                         "<div class='col-md-3'>"+       
-                          "<input type='text' id='skills"+request_id+"'  class='form-control' onkeyup='nospaces(this);' placeholder='Enter atleast one skill' data-role='tagsinput'>"+
-                          "<small class='help'>Enter multimple seperated by , or Enter</small>"+
+                          "<input type='text' id='services"+request_id+"'  class='form-control' onkeyup='nospaces(this);' placeholder='Enter atleast one Service' data-role='tagsinput'>"+
+                          "<small class='help'>Enter multimple seperated by , </small>"+
+                        "</div>"+
+                      "</div>"+ 
+                      "<div class='form-group'>"+
+                        "<label class='col-md-3 control-label'>Enter New Skill or select Skills</label>"+
+                        "<div class='col-md-3'>"+
+                          "<input type='text' id='newskill"+request_id+"' onkeyup='nospaces(this);' class='form-control' placeholder='Enter Skill' data-role='tagsinput'>"+
+                        "</div>"+
+                        "<div class='col-md-4'>"+
+                          "<select class='selectpicker"+request_id+"' id='skills"+request_id+"' onchange='getselectedskill("+request_id+", 1);' data-live-search='true' data-width='100%' >"+ 
+                          "</select>"+
+                          "<div id='selectedskills"+request_id+"'></div>"+
                         "</div>"+
                       "</div>"+
                       "<div class='form-group'>"+
@@ -686,7 +777,15 @@ function addworker(request_id, id){
                       "</div>"+
                       "</form>";
     $("#workerform_"+request_id).show().html(worker_modal);
-
+    $.ajax({
+      type: "POST",
+      url: "ajax/getskill.php",
+      data: "type="+id ,
+      cache: false,
+      success: function(result){
+        $('.selectpicker'+request_id).append(result);
+      }
+    }); 
     //document.getElementById("addworker").innerHTML = worker_modal;
     //$("#addworker").innerhtml(worker_modal);
   }
@@ -785,10 +884,21 @@ function addworker(request_id, id){
                           "<input type='text' id='2languages"+request_id+"' class='form-control' onkeyup='nospaces(this);' placeholder='Enter atleast one language' data-role='tagsinput'>" +
                           "<small class='help'>Enter multimple seperated by , or Enter</small>"+
                         "</div>"+
-                        "<label class='col-md-3 control-label'>Skills</label>"+
+                        "<label class='col-md-3 control-label'>Services</label>"+
                         "<div class='col-md-3'>"+       
-                          "<input type='text' id='2skills"+request_id+"'  class='form-control' onkeyup='nospaces(this);' placeholder='Enter atleast one skill' data-role='tagsinput'>"+
-                          "<small class='help'>Enter multimple seperated by , or Enter</small>"+
+                          "<input type='text' id='2services"+request_id+"'  class='form-control' onkeyup='nospaces(this);' placeholder='Enter atleast one Service' data-role='tagsinput'>"+
+                          "<small class='help'>Enter multimple seperated by , </small>"+
+                        "</div>"+
+                      "</div>"+ 
+                      "<div class='form-group'>"+
+                        "<label class='col-md-3 control-label'>Enter New Skill or select Skills</label>"+
+                        "<div class='col-md-3'>"+
+                          "<input type='text' id='2newskill"+request_id+"' onkeyup='nospaces(this);' class='form-control' placeholder='Enter Skill' data-role='tagsinput'>"+
+                        "</div>"+
+                        "<div class='col-md-4'>"+
+                          "<select class='2selectpicker"+request_id+"' id='2skills"+request_id+"' onchange='getselectedskill("+request_id+", 2);' data-live-search='true' data-width='100%' >"+ 
+                          "</select>"+
+                          "<div id='2selectedskills"+request_id+"'></div>"+
                         "</div>"+
                       "</div>"+
                       "<div class='form-group'>"+
@@ -799,7 +909,15 @@ function addworker(request_id, id){
                       "</div>"+
                     "</form>";
     $("#workerform_"+request_id).show().html(worker_modal);
-    //$("#workerform").innerhtml(worker_modal);
+    $.ajax({
+      type: "POST",
+      url: "ajax/getskill.php",
+      data: "type="+id ,
+      cache: false,
+      success: function(result){
+        $('.2selectpicker'+request_id).append(result);
+      }
+    }); 
   }                  
 }
                       /*"<div class='form-group'>"+

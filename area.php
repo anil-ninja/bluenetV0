@@ -156,6 +156,7 @@ if (!isset($_SESSION['user_id'])) {
           <div class="page-title">BlueNet Hack&nbsp;/
             <a  href="cem.php?status=open" ><?= $_SESSION['employee_type'] ?></a>&nbsp;/
             <a  href="#" >Areas</a>
+          </div>
         </div>
         <ol class="breadcrumb page-breadcrumb pull-right">
           <li></li>

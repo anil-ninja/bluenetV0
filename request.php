@@ -74,13 +74,25 @@ if (!isset($_SESSION['user_id'])) {
             <div class="icon-bg bg-blue"></div><i class="glyphicon glyphicon-remove"></i>
             <span class="menu-title">Deleted Requests</span></a>
           </li>
-          <li <?php if($_GET['status']=='not_interested') echo "class='active'";?>><a href="request.php?status=not_interested">
-            <div class="icon-bg bg-blue"></div><i class="glyphicon glyphicon-exclamation-sign"></i>
-            <span class="menu-title">Not Interested</span></a>
+          <li <?php if($_GET['status']=='just_to_know') echo "class='active'";?>><a href="request.php?status=just_to_know">
+            <div class="icon-bg bg-blue"></div><i class="glyphicon glyphicon-pencil"></i>
+            <span class="menu-title">Only Information Purpose</span></a>
           </li>
           <li <?php if($_GET['status']=='decay') echo "class='active'";?>><a href="request.php?status=decay">
             <div class="icon-bg bg-blue"></div><i class="glyphicon glyphicon-trash"></i>
             <span class="menu-title">Decay Requests</span></a>
+          </li>
+          <li <?php if($_GET['status']=='decay') echo "class='active'";?>><a href="request.php?status=not_interested">
+            <div class="icon-bg bg-blue"></div><i class="glyphicon glyphicon-exclamation-sign"></i>
+            <span class="menu-title">Not Interested</span></a>
+          </li>
+          <li <?php if($_GET['status']=='followback') echo "class='active'";?>><a href="request.php?status=followback">
+            <div class="icon-bg bg-blue"></div><i class="glyphicon glyphicon-repeat"></i>
+            <span class="menu-title">Follow back Requests</span></a>
+          </li>
+          <li <?php if($_GET['status']=='feedback') echo "class='active'";?>><a href="request.php?status=feedback">
+            <div class="icon-bg bg-blue"></div><i class="glyphicon glyphicon-repeat"></i>
+            <span class="menu-title">Feedback Requests</span></a>
           </li>
           <li ><a href="24hour.php">
             <div class="icon-bg bg-blue"></div><i class=" glyphicon glyphicon-time"></i>

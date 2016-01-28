@@ -60,16 +60,16 @@ if (!isset($_SESSION['user_id'])) {
         <div class="clearfix"></div>
       </div>
                 <!--END TITLE & BREADCRUMB PAGE-->
-       <?php require_once "page-contect.php"; ?>
+       <?php //require_once "page-contect.php"; ?>
     </div>
   </div>
   <?php include_once "footers.php"; ?>
   <script type="text/javascript">
-  	$(document).ready(function() {
+  	/*$(document).ready(function() {
   	  $('#example1').DataTable({
         "iDisplayLength": 50
       });
-  	});
+  	});*/
    
 	</script>
 </body>
