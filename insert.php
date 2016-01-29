@@ -157,6 +157,7 @@ if (!isset($_SESSION['user_id'])) {
             <a  href="index.php" ><?= $_SESSION['employee_type'] ?></a>&nbsp;/
             <a  href="#" >Insert New Service Request</a>
           </div>
+        </div>
         <ol class="breadcrumb page-breadcrumb pull-right">
           <li></li>
           <li></li>
@@ -175,20 +176,36 @@ if (!isset($_SESSION['user_id'])) {
       				      <div class="col-md-3">
       				        <input type="text" id ="name" onkeyup='nospaces(this);' class="form-control" placeholder="Name" />
       				      </div> <!-- /.col -->
-      				      <label class="col-md-1 control-label">Mobile No.</label>
+      				      <label class="col-md-2 control-label">Mobile No.</label>
       				      <div class="col-md-3">
-      				        <input type="number" id ="mobile" onkeyup='nospaces(this);' class="form-control" placeholder="Enter 10 digit mobile number" />
+      				        <input type="text" id ="mobile" onkeyup='nospaces(this);' class="form-control" placeholder="Enter 10 digit mobile number" />
       				      </div> <!-- /.col -->
       				    </div> <!-- /.form-group -->
 				          <div class="form-group">
 				      	    <label class="col-md-3 control-label">address</label>
 						        <div class="col-md-3">
 				        	    <input type="text" id ="address" class="form-control" placeholder="address" />
-				      	    </div> <!-- /.col -->
-				      	    <label class="col-md-1 control-label">Worker timings</label>
+				      	    </div>
+                    <label class="col-md-2 control-label" >Worker timings</label>
+                    <div class="col-md-4 input-group">
+                      <select id="timing">
+                        <option value="0" >Select Time</option>
+                        <?php for ($i=1; $i < 24; $i++) { 
+                          echo "<option value='".$i."'>".$i."</option>";
+                        }?>
+                      </select>
+                      To
+                      <select id="timing2">
+                        <option value="0" >Select Time</option>
+                        <?php for ($i=1; $i < 24; $i++) { 
+                          echo "<option value='".$i."'>".$i."</option>";
+                        }?>
+                      </select>
+                    </div>
+				      	    <!-- <label class="col-md-1 control-label">Worker timings</label>
 				      	    <div class="col-md-3">
 				        	    <input type="text" id ="timing" class="form-control" placeholder="Working Hours" />
-				      	    </div> <!-- /.col -->
+				      	    </div>  --><!-- /.col -->
 				          </div> <!-- /.form-group -->
             			<div class="form-group">
             			 	<label class="col-md-3 control-label">Status</label>
@@ -207,7 +224,7 @@ if (!isset($_SESSION['user_id'])) {
             						<option value="followback" >Follow back</option>
             					</select>
             				</div>
-            		   	<label class="col-md-1 control-label">Other Specifications</label>
+            		   	<label class="col-md-2 control-label">Other Specifications</label>
             		   	<div class="col-md-3">
             		     	<select id = "gender" > 
             						<option value="male" selected >Male</option>
@@ -218,9 +235,24 @@ if (!isset($_SESSION['user_id'])) {
             			</div>
             			<div class="form-group">
             			 	<label class="col-md-3 control-label">Expected Salary</label>
-            				<div class="col-md-3">
+                    <div class="col-md-4">
+                      <select id="salary">
+                        <option value="0" >Select Salary</option>
+                        <?php for ($i=2; $i < 15; $i++) { 
+                          echo "<option value='".$i."'>".$i."</option>";
+                        }?>
+                      </select>
+                      To
+                      <select id="salary2">
+                        <option value="0" >Select Salary</option>
+                        <?php for ($i=3; $i < 20; $i++) { 
+                          echo "<option value='".$i."'>".$i."</option>";
+                        }?>
+                      </select>
+                    </div>
+            				<!-- 
             			   	<input type="text" id ="salary" class="form-control" placeholder="Expected Salary" />
-            			 	</div> <!-- /.col -->
+            			 	  --><!-- /.col -->
             			 	<label class="col-md-1 control-label">Area</label>
             			 	<div class="col-md-3">
             			   	<input type="text" id ="area" onkeyup='nospaces(this);' class="form-control" placeholder="Area" />
@@ -229,11 +261,17 @@ if (!isset($_SESSION['user_id'])) {
             			<div class="form-group">
             				<label class="col-md-3 control-label">Working Time in Hours</label>
             			 	<div class="col-md-3">
-            			   	<input type="number" id ="work_time" class="form-control" placeholder="Working Time in Hours"/>
+                      <select id="work_time">
+                        <option value="0" >Select hours</option>
+                        <?php for ($i=2; $i < 25; $i++) { 
+                          echo "<option value='".$i."'>".$i."</option>";
+                        }?>
+                      </select>
+            			   	<!-- <input type="number" id ="work_time" class="form-control" placeholder="Working Time in Hours"/> -->
             			 	</div>
-            			 	<label class="col-md-1 control-label">Created Date</label>
+            			 	<label class="col-md-2 control-label">Created Date</label>
             			 	<div class="col-md-3">
-            			   	<input type="date" id ="created_time" class="form-control" placeholder="YYYY-mm-dd" />
+            			   	<input type="date" id ="created_time" class="form-control" placeholder="Enter Date" />
             			 	</div>
             			</div>
             			<div class="form-group">
@@ -241,17 +279,18 @@ if (!isset($_SESSION['user_id'])) {
             				<div class="col-md-3">
             			   	<input type="text" id ="remarks" class="form-control" placeholder="remarks" />
             			 	</div> <!-- /.col -->
-            			 	<label class="col-md-1 control-label">Worker Area</label>
+            			 	<label class="col-md-2 control-label">Worker Area</label>
             			 	<div class="col-md-3">
             			   	<input type="text" id ="worker_area" onkeyup='nospaces(this);' class="form-control" placeholder="Worker Area" />
             			 	</div>
             			</div>
                   <div class='form-group'>
-                    <label class='col-md-3 control-label'>Enter New Skill or select Skills</label>
+                    <label class='col-md-3 control-label'>Enter New Skill </label>
                     <div class='col-md-3'>
                       <input type='text' id='newskill' onkeyup='nospaces(this);' class='form-control' placeholder='Enter Skill' data-role='tagsinput'>
                     </div>
-                    <div class='col-md-4'>
+                    <label class="col-md-2 control-label">or select Skills</label>
+                    <div class='col-md-2'>
                       <select class='selectpicker' id='skills' onchange="getselectedskill(0, 3);" data-live-search='true' data-width='100%' > 
                         <option value='0'>Select Skills </option>
                         <?php 
@@ -296,5 +335,8 @@ if (!isset($_SESSION['user_id'])) {
     </div>
   </div>
   <?php include_once "footers.php"; ?>
+  <script type="text/javascript">
+    $('#created_time').datepicker();
+  </script>
 </body>
 </html>

@@ -28,22 +28,24 @@ function validateEmail(fld) {
   }
 }
 
-function validatePhone(fld) {
-  var error = "";
-  var stripped = fld.value.replace(/[\(\)\.\-\ ]/g, '');    
+function validatePhone(fld) {    
   var res = fld.split(",");
+  var filter = /^[0-9-+]+$/;
+  var result = "" ;
   for(var i = 0; i < res.length; i++) {
-    if (res.value == "") {
-    return false;
+    var stripped = res[i];
+    if (stripped.value == "") {
+      result = false;
     } 
-    else if (isNaN(parseInt(stripped))) {
-      return false ;
+    else if (!(filter.test(stripped))) {
+      result = false ;
     } 
     else if (!(stripped.length == 10)) {
-      return false;
+      result = false;
     }
-    else return true ;
+    else result = true ;
   }
+  return result;
 }
 
 function nospaces(t){
@@ -179,41 +181,47 @@ function validateWorkerDetails(request_id, id){
   }
 }
 
-function postRequestDeatils(fields, skills, areas, status, servicesArray, newskill) {
-
+function postRequestDeatils(fields, skills, areas, status, servicesArray, newskill, time,time2, salary,salary2, work_time, gender) {
   var dataString = "";
+  var d = $('#'+fields[4]).val().split('/');   
+  var date = d[2] +'-'+ d[1] +'-'+ d[0];
   dataString = "name=" + $('#'+fields[0]).val() + "&mobile=" + $('#'+fields[1]).val() + "&address=" + $('#'+fields[2]).val() + 
-      "&timing=" + $('#'+fields[3]).val() + "&new_status=" + status + "&gender=" +  $('#'+fields[4]).val() + 
-      "&salary=" +  $('#'+fields[5]).val() + "&area=" +  $('#'+fields[6]).val() + "&work_time=" +  $('#'+fields[7]).val() + 
-      "&created_time=" + $('#'+fields[8]).val() + "&remarks=" + $('#'+fields[9]).val() + "&worker_area=" +  areas + "&services=" + servicesArray +
-      "&skills=" + skills + "&newskill=" + newskill ; 
-  $.ajax({
-    type: "POST",
-    url: "ajax/addRequest.php",
-    data: dataString,
-    cache: false,
-    success: function(result){
-      
-      $(fields).each(function(i, idVal){ 
-        $("#"+idVal).val(""); 
-      });
-      $('#worker_area').val("");
-      var checkboxes = document.getElementsByTagName('input');
-      for (var i = 0; i < checkboxes.length; i++) {
-        checkboxes[i].checked = false;
-      };
-      alert("Added Successfully");
-    },
-    error: function(result){
-      alert(result);
-      return false;
-    }
-  });
+      "&area=" +  $('#'+fields[3]).val() + "&created_time=" + date + "&remarks=" + $('#'+fields[5]).val() +
+      "&timing=" + time + "&new_status=" + status + "&gender=" +  gender + "&salary=" +  salary + "&work_time=" +  work_time + 
+      "&salary2=" +  salary2 + "&worker_area=" +  areas + "&services=" + servicesArray + "&skills=" + skills + 
+      "&newskill=" + newskill + "&timing2=" + time2 ; 
+  if(validatePhone($('#'+fields[1]).val()) == false){
+    alert('Enter valid Phone Number');
+  }
+  else {
+    $.ajax({
+      type: "POST",
+      url: "ajax/addRequest.php",
+      data: dataString,
+      cache: false,
+      success: function(result){
+        
+        $(fields).each(function(i, idVal){ 
+          $("#"+idVal).val(""); 
+        });
+        $('#worker_area').val("");
+        var checkboxes = document.getElementsByTagName('input');
+        for (var i = 0; i < checkboxes.length; i++) {
+          checkboxes[i].checked = false;
+        };
+        alert("Added Successfully");
+      },
+      error: function(result){
+        alert(result);
+        return false;
+      }
+    });
+  }
 }
 
 function validateRequestDetails(){
   
-  fields = ["name","mobile","address","timing","gender","salary","area","work_time","created_time","remarks"];
+  fields = ["name","mobile","address","area","created_time","remarks","worker_area"];
   var areasArray = []; 
   $('#worker_area').each(function(i, selected){ 
     areasArray[i] = $(selected).val(); 
@@ -226,10 +234,27 @@ function validateRequestDetails(){
   $(".values").each(function(i){
       skillsArray[i] = $(this).data('value');
   });
-  var newskill = $('#newskill'+request_id).val();
+  var newskill = $('#newskill').val();
   var status = $("#new_status").val();
+  var time = $('#timing').val();
+  var time2 = $('#timing2').val();
+  var salary = $('#salary').val();
+  var salary2 = $('#salary2').val();
+  var work_time = $('#work_time').val();
+  var gender = $('#gender').val();
   if(genericEmptyFieldValidator(fields)){
-    postRequestDeatils(fields, skillsArray, areasArray, status, servicesArray, newskill);
+    if(time == 0 || time2 == 0 || parseInt(time2) < parseInt(time)){
+      alert('Enter valid work timing');
+    }
+    else if(salary == 0 || salary2 == 0 || parseInt(salary2) < parseInt(salary)){
+      alert('Enter valid salary');
+    }
+    else if(work_time == 0){
+      alert('Enter valid working time');
+    }
+    else {
+      postRequestDeatils(fields, skillsArray, areasArray, status, servicesArray, newskill, time,time2, salary,salary2, work_time, gender);
+    }
   }
   return false;
 }
