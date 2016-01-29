@@ -36,7 +36,18 @@ if(isset($_POST['first_name'])){
 										'$expected_salary', '$current_address', '$parmanent_address', '$timings', '$work_time', '$police', 
 										'$emergancy_mobile', '$experience',	'$remarks', '$services', '$me_id');");
 	$worker_id = mysqli_insert_id($db_handle);
-	$newskill = explode(",", $reqirements);
+	$newskils = explode(",", $newskill);
+	foreach ($newskils as $skil){
+		mysqli_query($db_handle,"INSERT INTO skill_name (name) VALUES ('$skil');");
+		$skil_id = mysqli_insert_id($db_handle);
+		mysqli_query($db_handle,"INSERT INTO skills ( user_id, skill_id, type, employee_id) 
+									VALUES ('$worker_id', '$skil_id', 'worker', '$me_id');");
+	}
+	$newskil = explode(",", $skills);
+	foreach ($newskil as $skil){
+		mysqli_query($db_handle,"INSERT INTO skills ( user_id, skill_id, type, employee_id) 
+									VALUES ('$worker_id', '$skil', 'worker', '$me_id');");
+	}
 	if($type == 1){
 		mysqli_query($db_handle,"UPDATE service_request SET match_id = '$worker_id' where id = '$request_id' ;");
 	}

@@ -59,6 +59,7 @@ function trim(s){
 }
 
 function postWorkerDetails(fields, languagesArray, skillsArray, request_id, id, police, gender, servicesArray, newskill) {
+  alert("hi");
   var dataString = "";
   dataString = "first_name=" + $('#'+fields[0]).val() + "&last_name=" + $('#'+fields[1]).val() +
       "&mobile=" +  $('#'+fields[2]).val() + "&emergancy_mobile=" +  $('#'+fields[3]).val() + 
@@ -157,19 +158,26 @@ function validateWorkerDetails(request_id, id){
     var police = $('#police').val();
     var gender = $('#gender').val();
   }
-  if(!genericEmptyFieldValidator(newskill)){
-    var x = document.getElementsByClass("values").length;
-    if(x ==0){
-      alert('Please enter or select a Skill');
+  if(genericEmptyFieldValidator(newskill)){
+    alert(x);
+    if(genericEmptyFieldValidator(fields)){
+      postWorkerDetails(fields, languagesArray, skillsArray, request_id, id, police, gender, servicesArray, newskill);   
     }
+    return false;
   }
   else {
-    if(genericEmptyFieldValidator(fields)){
-      postWorkerDetails(fields, languagesArray, skillsArray, request_id, id, police, gender, servicesArray, newskill);
-      alert(skillsArray);
+    var x = document.getElementsByClassName("values").length;
+    alert(x);
+    if(x == 0){
+      alert('Please enter or select a Skill');
+    }
+    else {
+      if(genericEmptyFieldValidator(fields)){
+        postWorkerDetails(fields, languagesArray, skillsArray, request_id, id, police, gender, servicesArray, newskill);   
+      }
+      return false;
     }
   }
-  return false;
 }
 
 function postRequestDeatils(fields, skills, areas, status) {
