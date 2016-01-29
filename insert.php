@@ -246,6 +246,24 @@ if (!isset($_SESSION['user_id'])) {
             			   	<input type="text" id ="worker_area" onkeyup='nospaces(this);' class="form-control" placeholder="Worker Area" />
             			 	</div>
             			</div>
+                  <div class='form-group'>
+                    <label class='col-md-3 control-label'>Enter New Skill or select Skills</label>
+                    <div class='col-md-3'>
+                      <input type='text' id='newskill' onkeyup='nospaces(this);' class='form-control' placeholder='Enter Skill' data-role='tagsinput'>
+                    </div>
+                    <div class='col-md-4'>
+                      <select class='selectpicker' id='skills' onchange="getselectedskill(0, 3);" data-live-search='true' data-width='100%' > 
+                        <option value='0'>Select Skills </option>
+                        <?php 
+                          $skill = mysqli_query($db_handle, "SELECT * FROM skill_name ;");
+                           while($skillrow = mysqli_fetch_array($skill)){ 
+                            echo "<option value=".$skillrow['id'].">".$skillrow['name']."</option>";
+                          }
+                        ?>
+                      </select>
+                      <div id="selectedskills"></div>
+                    </div>
+                  </div>
             			<div class="form-group">
             			 	<label class="col-md-3 control-label">Requierment</label>
             			 	<div class="col-md-6 ">

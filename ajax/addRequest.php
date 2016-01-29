@@ -15,14 +15,16 @@ if (isset($_POST['name'])) {
 	$worker_area = $_POST['worker_area'];
 	$gender = $_POST['gender'];
 	$user_id = $_SESSION['user_id'];
-	$skill = $_POST['skill'];
+	$skills = $_POST['skills'];
+	$services = $_POST['services'];
+	$newskill = $_POST['newskill'];
 	/*for($i=0; $i < $skill; $i++) {
       $requirement .= ", ".$_POST['skill'][$i];
     }
     $str2 = substr($requirement, 1); */
 	mysqli_query ($db_handle, "INSERT INTO service_request (name, mobile, requirements, gender, timings, expected_salary, address, area,
-										remarks, status, worker_area, work_time, created_time)	VALUES ('$name','$mobile','$skill','$gender','$timing',
-										'$salary', '$address', '$area','$remarks', '$status', '$worker_area', '$time', '$created_time');");
+										remarks, status, worker_area, work_time, created_time)	VALUES ('$name','$mobile','$services','$gender',
+										'$timing', '$salary', '$address', '$area','$remarks', '$status', '$worker_area', '$time', '$created_time');");
 	
 	$sr_id = mysqli_insert_id($db_handle);
 	$eachworkarea = explode(",", $worker_area);
@@ -39,6 +41,18 @@ if (isset($_POST['name'])) {
 			$area_id = mysqli_insert_id($db_handle);
 			mysqli_query ($db_handle, "INSERT INTO sr_area (id, sr_id) VALUES ('$area_id', '$sr_id');");
 		}
+	}
+	$newskils = explode(",", $newskill);
+	foreach ($newskils as $skil){
+		mysqli_query($db_handle,"INSERT INTO skill_name (name) VALUES ('$skil');");
+		$skil_id = mysqli_insert_id($db_handle);
+		mysqli_query($db_handle,"INSERT INTO skills ( user_id, skill_id, type, employee_id) 
+									VALUES ('$sr_id', '$skil_id', 'client', '$user_id');");
+	}
+	$newskil = explode(",", $skills);
+	foreach ($newskil as $skil){
+		mysqli_query($db_handle,"INSERT INTO skills ( user_id, skill_id, type, employee_id) 
+									VALUES ('$sr_id', '$skil', 'client', '$user_id');");
 	}
 	if(mysqli_error($db_handle)) return mysqli_error($db_handle) ;
 	else return true ;

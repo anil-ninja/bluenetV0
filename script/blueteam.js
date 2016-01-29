@@ -1,4 +1,3 @@
-//require_once "../dbConnection.php"; 
 function genericEmptyFieldValidator(fields){
   returnBool = true;
   $.each(fields, function( index, value ) {
@@ -180,13 +179,14 @@ function validateWorkerDetails(request_id, id){
   }
 }
 
-function postRequestDeatils(fields, skills, areas, status) {
+function postRequestDeatils(fields, skills, areas, status, servicesArray, newskill) {
 
   var dataString = "";
   dataString = "name=" + $('#'+fields[0]).val() + "&mobile=" + $('#'+fields[1]).val() + "&address=" + $('#'+fields[2]).val() + 
       "&timing=" + $('#'+fields[3]).val() + "&new_status=" + status + "&gender=" +  $('#'+fields[4]).val() + 
       "&salary=" +  $('#'+fields[5]).val() + "&area=" +  $('#'+fields[6]).val() + "&work_time=" +  $('#'+fields[7]).val() + 
-      "&created_time=" + $('#'+fields[8]).val() + "&remarks=" + $('#'+fields[9]).val() + "&worker_area=" +  areas + "&skills=" + skills ; 
+      "&created_time=" + $('#'+fields[8]).val() + "&remarks=" + $('#'+fields[9]).val() + "&worker_area=" +  areas + "&services=" + servicesArray +
+      "&skills=" + skills + "&newskill=" + newskill ; 
   $.ajax({
     type: "POST",
     url: "ajax/addRequest.php",
@@ -218,13 +218,18 @@ function validateRequestDetails(){
   $('#worker_area').each(function(i, selected){ 
     areasArray[i] = $(selected).val(); 
   });
-  var skillsArray = []; 
+  var servicesArray = []; 
   $('input[name=skill]:checked').each(function(i, checked){ 
-    skillsArray[i] = $(checked).val(); 
+    servicesArray[i] = $(checked).val(); 
   });
+  var skillsArray = [];
+  $(".values").each(function(i){
+      skillsArray[i] = $(this).data('value');
+  });
+  var newskill = $('#newskill'+request_id).val();
   var status = $("#new_status").val();
   if(genericEmptyFieldValidator(fields)){
-    postRequestDeatils(fields, skillsArray, areasArray, status);
+    postRequestDeatils(fields, skillsArray, areasArray, status, servicesArray, newskill);
   }
   return false;
 }
@@ -240,19 +245,19 @@ function postUserDeatils(fields, type){
   else if($('#'+fields[1]).val().length < 3){
     alert("Last Name is too short");
   }
-  else if($('#'+fields[2]).val().length < 8){
+  else if(validateEmail($('#'+fields[2]).val()) == false){
     alert("Enter valid email");
   }
-  else if($('#'+fields[3]).val().length < 10){
+  else if(validatePhone($('#'+fields[3]).val()) == false){
     alert("Enter valid phone number");
   }
-  else if($('#'+fields[5]).val().length < 3){
+  else if($('#'+fields[4]).val().length < 3){
     alert("Enter valid Base salary");
   }
-  else if($('#'+fields[6]).val().length < 6){
+  else if($('#'+fields[5]).val().length < 6){
     alert("Password length should be more than 6 chars");
   }
-  else if($('#'+fields[6]).val() == $('#'+fields[7]).val()){ 
+  else if($('#'+fields[5]).val() == $('#'+fields[6]).val()){ 
     $.ajax({
       type: "POST",
       url: "ajax/addUser.php",
@@ -548,20 +553,25 @@ function postDeatils(fields, skillsArray, areasArray, id){
       "&timing=" + $('#'+fields[3]).val() + "&remarks=" + $('#'+fields[4]).val() + "&gender=" +  $('#'+fields[5]).val() + 
       "&salary=" +  $('#'+fields[6]).val() + "&area=" +  $('#'+fields[7]).val() + "&work_time=" +  $('#'+fields[8]).val() + 
       "&created_time=" + $('#'+fields[9]).val() + "&worker_area=" +  areasArray + "&skills=" + skillsArray + "&sr_id=" + id ; 
-  $.ajax({
-    type: "POST",
-    url: "ajax/update.php",
-    data: dataString,
-    cache: false,
-    success: function(result){
-      alert("Updated Successfully");
-      //location.reload();
-    },
-    error: function(result){
-      alert(result);
-      return false;
-    }
-  });
+  if(validatePhone($('#'+fields[1]).val()) == false){
+    alert("Enter valid phone number");
+  }
+  else {
+    $.ajax({
+      type: "POST",
+      url: "ajax/update.php",
+      data: dataString,
+      cache: false,
+      success: function(result){
+        alert("Updated Successfully");
+        //location.reload();
+      },
+      error: function(result){
+        alert(result);
+        return false;
+      }
+    });
+  }
 }
 
 function validateUpdateDetails(id){
@@ -575,7 +585,6 @@ function validateUpdateDetails(id){
     skillsArray[i] = $(checked).val(); 
   });
   if(genericEmptyFieldValidator(fields)){
-    alert(id);
     postDeatils(fields, skillsArray, areasArray, id);
   }
   return false;
@@ -619,7 +628,7 @@ function addmeeting(id){
 }
 
 function mePick(id) {
-  bootbox.confirm("Ready to work !!!", function(result) {
+  bootbox.confirm("Ready for new challange !!!", function(result) {
     if(result){
       $.ajax({
         type: "POST",
