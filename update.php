@@ -37,31 +37,31 @@ if (isset($_POST['add_note'])) {
 <body>
 	<?php require_once "navbar.php"; ?>
     <!--BEGIN MODAL CONFIG PORTLET-->
-    <div id="addNote" class="modal fade modal-form" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" >
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" data-dismiss="modal" aria-hidden="true" class="close">&times;</button>
-            <h4 class="modal-title">Add Note</h4>
-          </div>
-          <div class="modal-body">
-            <form class="form-horizontal" action="" method="post">
-    					<div class="form-group">
-    					  <label class="control-label">Note</label>
-    						<textarea class="form-control" name='noteVal' placeholder="Add Note"></textarea>
-    					</div> <!-- /.form-group -->
-              <button type="submit" name="add_note" class="btn btn-primary pull-right">Add</button><br/>
-            </form>
-          </div>
-          <div class="modal-footer">
-            <button type="button" data-dismiss="modal" class="btn btn-default">Close</button>
-          </div>
+  <div id="addNote" class="modal fade modal-form" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" data-dismiss="modal" aria-hidden="true" class="close">&times;</button>
+          <h4 class="modal-title">Add Note</h4>
+        </div>
+        <div class="modal-body">
+          <form class="form-horizontal" action="" method="post">
+  					<div class="form-group">
+  					  <label class="control-label">Note</label>
+  						<textarea class="form-control" name='noteVal' placeholder="Add Note"></textarea>
+  					</div> <!-- /.form-group -->
+            <button type="submit" name="add_note" class="btn btn-primary pull-right">Add</button><br/>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" data-dismiss="modal" class="btn btn-default">Close</button>
         </div>
       </div>
     </div>
-            <!--END MODAL CONFIG PORTLET-->
-        
-    <div id="wrapper">
+  </div>
+          <!--END MODAL CONFIG PORTLET-->
+      
+  <div id="wrapper">
    <!--BEGIN SIDEBAR MENU-->
     <nav id="sidebar" role="navigation" data-step="2" data-intro="Template has &lt;b&gt;many navigation styles&lt;/b&gt;" data-position="right" class="navbar-default navbar-static-side">
       <div class="sidebar-collapse menu-scroll">
