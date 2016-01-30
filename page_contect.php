@@ -6,22 +6,26 @@
             <?php 
                $condition = "";
                $status = $_GET['status'];
-               if ($status == "open") $condition = " cem_id = 0 AND me_id = 0 ";
-               elseif ($status == "meeting") $condition = "status = 'meeting'" ;
-               elseif ($status == "me_open") $condition = " status = 'me_open'" ;
-               elseif ($status == "cem_open") $condition = " cem_id = 0 AND me_id != 0 AND (match_id != 0 OR match2_id != 0)" ;
-               elseif ($status == "salary_issue") $condition = "status = 'salary_issue'" ;
-               elseif ($status == "demo") $condition = "status = 'demo'";
-               elseif ($status == "done") $condition = "status = 'done'";
-               elseif ($status == "delete") $condition = "status = 'delete'";
-               elseif ($status == "not_interested") $condition = "status = 'not_interested'" ;
-               elseif ($status == "decay") $condition = "status = 'decay'";
-               elseif ($status == "just_to_know") $condition = "status = 'just_to_know'" ;
-               elseif ($status == "followback") $condition = "status = 'followback'" ;
-               elseif ($status == "feedback") $condition = "status = 'feedback'" ;
-               elseif (!isset($_GET['status']))$condition = " 1 = 1 " ;
-               else $condition = "status = ".$status ;
-               $srs = mysqli_query($db_handle, "SELECT * FROM service_request WHERE ".$condition."; ") ;
+               if (!isset($_GET['status'])) {
+                  $srs = mysqli_query($db_handle, "SELECT * FROM service_request WHERE 1=1 ;");
+               }
+               else {
+                  if ($status == "open") $condition = " cem_id = 0 AND me_id = 0 ";
+                  elseif ($status == "meeting") $condition = "status = 'meeting'" ;
+                  elseif ($status == "me_open") $condition = " status = 'me_open'" ;
+                  elseif ($status == "cem_open") $condition = " cem_id = 0 AND me_id != 0 AND (match_id != 0 OR match2_id != 0)" ;
+                  elseif ($status == "salary_issue") $condition = "status = 'salary_issue'" ;
+                  elseif ($status == "demo") $condition = "status = 'demo'";
+                  elseif ($status == "done") $condition = "status = 'done'";
+                  elseif ($status == "delete") $condition = "status = 'delete'";
+                  elseif ($status == "not_interested") $condition = "status = 'not_interested'" ;
+                  elseif ($status == "decay") $condition = "status = 'decay'";
+                  elseif ($status == "just_to_know") $condition = "status = 'just_to_know'" ;
+                  elseif ($status == "followback") $condition = "status = 'followback'" ;
+                  elseif ($status == "feedback") $condition = "status = 'feedback'" ;
+                  else $condition = "status = ".$status ;
+                  $srs = mysqli_query($db_handle, "SELECT * FROM service_request WHERE ".$condition."; ") ;
+               }
                while ($srsrow = mysqli_fetch_array($srs)){ 
                   $id = $srsrow['id'];
                   $skill = mysqli_query($db_handle, "SELECT a.name, a.id FROM skill_name AS a JOIN skills AS b WHERE b.user_id = '$id'
@@ -34,7 +38,7 @@
                      <a  class="list-group-item">Address <span style="padding-left: 7em"><?= $srsrow['address'] ?></span></a>
                      <a  class="list-group-item">Salary Criteria <span style="padding-left: 5em"><?= $srsrow['expected_salary'] ?></span></a>
                      <a  class="list-group-item">Timings <span style="padding-left: 8em"><?= $srsrow['timings'] ?></span></a>
-                     <a  class="list-group-item">Working Time <span style="padding-left: 5em"><?= $srsrow['work_time'] ?></span></a>
+                     <a  class="list-group-item">Working Time <span style="padding-left: 5em"><?= $srsrow['work_time'] ?> Hours</span></a>
                      <a  class="list-group-item"> Requirements<span style="padding-left: 5em"><?= $srsrow['requirements'] ?></span></a>
                      <a  class="list-group-item">Remarks <span style="padding-left: 7em"><?= $srsrow['remarks'] ?></span></a>
                      <a  class="list-group-item">Worker Area <span style="padding-left: 5em"><?= $srsrow['worker_area'] ?></span></a>

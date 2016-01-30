@@ -206,133 +206,222 @@ if (isset($_POST['add_note'])) {
         <div class="clearfix"></div>
       </div>		
       <div class="page-content">
-		<div id="tab-general">
-		  <div class="row mbl">
-		    <div class="col-lg-11">
-		      <div class="panel-primary">
-		      <?php
-  					$sr_id = $_GET['sr_id'];
-  					$srs = mysqli_query($db_handle, "SELECT * FROM service_request WHERE id = '$sr_id'; ") ;
-  					$srsrow = mysqli_fetch_array($srs);
-  					$reqirements = $srsrow['requirements'];
-  					$reqire = explode("/,", $reqirements);
-		      ?>
-            
-          <form class="form-horizontal" id="update_details_form" onsubmit="return (validateUpdateDetails(<?= $sr_id  ?>));">
-				  <div class="form-group">
-				    <label class="col-md-3 control-label">Name</label>
-				    <div class="col-md-3">
-				      <input type="text" id ="name" class="form-control" onkeyup='nospaces(this);' placeholder="Name" value="<?= $srsrow['name'] ?>"/>
-				    </div> <!-- /.col -->
-				    <label class="col-md-1 control-label">Mobile No.</label>
-				    <div class="col-md-3">
-				      <input type="number" id ="mobile" class="form-control" onkeyup='nospaces(this);' placeholder="Enter 10 digit mobile number" value="<?= $srsrow['mobile'] ?>"/>
-				    </div> <!-- /.col -->
-				  </div> <!-- /.form-group -->
-				  <div class="form-group">
-				   	<label class="col-md-3 control-label">address</label>
-					<div class="col-md-3">
-				   	  <input type="text" id ="address" class="form-control" placeholder="address" value="<?= $srsrow['address'] ?>"/>
-				    </div> <!-- /.col -->
-				    <label class="col-md-1 control-label">Worker timings</label>
-				    <div class="col-md-3">
-				      <input type="text" id ="timing" class="form-control" placeholder="Working Hours" value="<?= $srsrow['timings'] ?>"/>
-				   	</div> <!-- /.col -->
-				  </div> <!-- /.form-group -->
-				  <div class="form-group">
-				  	<label class="col-md-3 control-label">Remarks</label>
-					<div class="col-md-3">
-			        	<input type="text" id ="remarks" class="form-control" placeholder="remarks" value="<?= $srsrow['remarks'] ?>"/>
-			      	</div>
-				   	<label class="col-md-1 control-label">Other Specifications</label>
-				   	<div class="col-md-3">
-				   	  <select id = "gender" >
-					  <?php 
-						$gender = $srsrow['gender'];
-						if($gender == "male") {
-					  ?> 
-						<option value="male" selected >Male</option>
-						<option value="female">Female</option>
-						<option value="any">Any</option>
-					  <?php }
-						else if($gender == "female") {
-					  ?>
-						<option value="male"  >Male</option>
-						<option value="female" selected >Female</option>
-						<option value="any">Any</option>
-					  <?php } 
-					    else { 	
-					  ?>
-						<option value="male"  >Male</option>
-						<option value="female"  >Female</option>
-						<option value="any" selected >Any</option>
-					  <?php } ?>
-					  </select>
-				    </div>
-				  </div>
-				  <div class="form-group">
-				   	<label class="col-md-3 control-label">Expected Salary</label>
-				 	<div class="col-md-3">
-				      <input type="text" id ="salary" class="form-control" placeholder="Expected Salary" value="<?= $srsrow['expected_salary'] ?>"/>
-				    </div> <!-- /.col -->
-				    <label class="col-md-1 control-label">Area</label>
-				    <div class="col-md-3">
-				      <input type="text" id ="area" class="form-control" onkeyup='nospaces(this);' placeholder="Area" value="<?= $srsrow['area'] ?>"/>
-				    </div> <!-- /.col -->
-				  </div>
-				    <div class="form-group">
-						<label class="col-md-3 control-label">Working Time in Hours</label>
-				      	<div class="col-md-3">
-				        	<input type="number" id ="work_time" class="form-control" placeholder="Working Time in Hours" value="<?= $srsrow['work_time'] ?>"/>
-				      	</div>
-				      	<label class="col-md-1 control-label">Created Date</label>
-				      	<div class="col-md-3">
-				        	<input type="text" id ="created_time" class="form-control" placeholder="Created Date" value="<?= $srsrow['created_time'] ?>"/>
-				      	</div>
-				    </div>
-				    <div class="form-group">
-				    	<label class="col-md-3 control-label">Requierments</label>
-					   	<div class="col-md-3">
-						<?php 
-							$abd = array();
-							foreach ($reqire as $donereqire){
-								array_push($abd , "$donereqire");
-								echo '<input type="checkbox" name = "skill" value ='.$donereqire.' checked/>&nbsp;&nbsp;&nbsp;'.$donereqire.'<br/>';
-							}
-							$allreqirements = array("maid","cook","driver","electrician","plumber","carpenter","babysitter","oldage","patient");
-							$nawreqire = array_diff($allreqirements, $abd);
-							foreach ($nawreqire as $val)
-							   echo '<input type="checkbox" name = "skill" value ='.$val.'/>&nbsp;&nbsp;&nbsp;'.$val.'<br/>';
-						?>          
-					   	</div>
-					   	<label class="col-md-1 control-label">Worker Area</label>
-				      	<div class="col-md-3">
-				        	<input type="text" id ="worker_area" class="form-control" onkeyup='nospaces(this);' placeholder="Worker Area" value="<?= $srsrow['worker_area'] ?>"/>
-				      	</div>
-					</div>
-				    <div class="form-group">
-					    <label class="col-md-3 control-label"></label>
-					    <div class="col-md-7">
-					        <button type="submit" class="btn btn-success pull-right">Update</button>
-					    </div>
-				    </div> <!-- /.form-group -->
-				</form>
-				<ul>
-				<?php
-					$notes = mysqli_query($db_handle, "SELECT * FROM notes WHERE sr_id = '$sr_id'; ") ;	
-					while($notesrow = mysqli_fetch_array($notes)){
-						$note_val = $notesrow['note'] ;
-						echo "<li>".$note_val."</li>" ;
-					}
-				?>
-				</ul>
-				<a class='btn btn-success active' data-toggle='modal' data-target='#addNote'>Add Note</a>
-    		  </div>
-    		</div>
-    	  </div>
-        </div>
+    		<div id="tab-general">
+    		  <div class="row mbl">
+    		    <div class="col-lg-11">
+    		      <div class="panel-primary">
+      		      <?php
+        					$sr_id = $_GET['sr_id'];
+        					$srs = mysqli_query($db_handle, "SELECT * FROM service_request WHERE id = '$sr_id'; ") ;
+        					$srsrow = mysqli_fetch_array($srs);
+        					$reqirements = $srsrow['requirements'];
+        					$reqire = explode("/,", $reqirements);
+      		      ?>
+                  
+                <form class="form-horizontal" id="update_details_form" onsubmit="return (validateUpdateDetails(<?= $sr_id  ?>));">
+        				  <div class="form-group">
+        				    <label class="col-md-3 control-label">Name</label>
+        				    <div class="col-md-3">
+        				      <input type="text" id ="name" class="form-control" onkeyup='nospaces(this);' placeholder="Name" value="<?= $srsrow['name'] ?>"/>
+        				    </div> <!-- /.col -->
+        				    <label class="col-md-2 control-label">Mobile No.</label>
+        				    <div class="col-md-3">
+        				      <input type="number" id ="mobile" class="form-control" onkeyup='nospaces(this);' placeholder="Enter 10 digit mobile number" value="<?= $srsrow['mobile'] ?>"/>
+        				    </div> <!-- /.col -->
+        				  </div> <!-- /.form-group -->
+        				  <div class="form-group">
+        				   	<label class="col-md-3 control-label">address</label>
+        					  <div class="col-md-3">
+        				   	  <input type="text" id ="address" class="form-control" placeholder="address" value="<?= $srsrow['address'] ?>"/>
+        				    </div> <!-- /.col -->
+                    <label class="col-md-2 control-label" >Worker timings</label>
+        				    <div class="col-md-4 input-group">
+                      <select id="timing">
+                        <option value="0" >Select Time</option>
+                        <?php 
+                          $timing = $srsrow['timings'];
+                          $time1 = explode("-", $timing);
+                          $time2 = explode(" ",$time1[0]);
+                          $time3 = explode(" ",$time1[1]);
+                          if($time2[0] < 12 && $time2[1] == 'am') $time4 = $time2[0];
+                          else {
+                            if($time2[0] < 12 && $time2[1] == 'pm') $time4 = ($time2[0] + 12);
+                            else $time4 = $time2[0];
+                          }
+                          if($time3[0] < 12 && $time3[1] == 'am') $time5 = $time3[0];
+                          else {
+                            if($time3[0] < 12 && $time3[1] == 'pm') $time5 = ($time3[0] + 12);
+                            else $time5 = $time3[0];
+                          }
+                          for ($i=1; $i < 24; $i++) {
+                            if($i == $time4) echo "<option value='".$i."' selected>".$i."</option>";
+                            else echo "<option value='".$i."'>".$i."</option>";
+                          }
+                        ?>
+                      </select>
+                      To
+                      <select id="timing2">
+                        <option value="0" >Select Time</option>
+                        <?php 
+                          for ($i=1; $i < 24; $i++) { 
+                            if($i == $time5) echo "<option value='".$i."' selected>".$i."</option>";
+                            else echo "<option value='".$i."'>".$i."</option>";
+                          }
+                        ?>
+                      </select>
+                    </div>
+        				  </div> <!-- /.form-group -->
+        				  <div class="form-group">
+        				  	<label class="col-md-3 control-label">Remarks</label>
+      					    <div class="col-md-3">
+      			        	<input type="text" id ="remarks" class="form-control" placeholder="remarks" value="<?= $srsrow['remarks'] ?>"/>
+      			      	</div>
+        				   	<label class="col-md-2 control-label">Other Specifications</label>
+        				   	<div class="col-md-3">
+        				   	  <select id = "gender" >
+            					  <?php 
+            						$gender = $srsrow['gender'];
+            						if($gender == "male") {
+            					  ?> 
+            						<option value="male" selected >Male</option>
+            						<option value="female">Female</option>
+            						<option value="any">Any</option>
+            					  <?php }
+            						else if($gender == "female") {
+            					  ?>
+            						<option value="male"  >Male</option>
+            						<option value="female" selected >Female</option>
+            						<option value="any">Any</option>
+            					  <?php } 
+            					    else { 	
+            					  ?>
+            						<option value="male"  >Male</option>
+            						<option value="female"  >Female</option>
+            						<option value="any" selected >Any</option>
+            					  <?php } ?>
+        					    </select>
+        				    </div>
+        				  </div>
+        				  <div class="form-group">
+        				   	<label class="col-md-3 control-label">Expected Salary</label>
+                    <div class="col-md-4">
+                      <select id="salary">
+                        <option value="0" >Select Salary</option>
+                        <?php 
+                          $salary = $srsrow['expected_salary'];
+                          $salary1 = explode("-", $salary);
+                          $salary2 = explode(" ",$salary1[1]);
+                          for ($i=2; $i < 15; $i++) { 
+                            if($i == $salary1[0]) echo "<option value='".$i."' selected>".$i."</option>";
+                            else echo "<option value='".$i."'>".$i."</option>";
+                          }
+                        ?>
+                      </select>
+                      To
+                      <select id="salary2">
+                        <option value="0" >Select Salary</option>
+                        <?php 
+                          for ($i=3; $i < 20; $i++) { 
+                            if($i == $salary2[0]) echo "<option value='".$i."' selected>".$i."</option>";
+                            else echo "<option value='".$i."'>".$i."</option>";
+                          }
+                        ?>
+                      </select>
+                    </div>
+        				    <label class="col-md-1 control-label">Area</label>
+        				    <div class="col-md-3">
+        				      <input type="text" id ="area" class="form-control" onkeyup='nospaces(this);' placeholder="Area" value="<?= $srsrow['area'] ?>"/>
+        				    </div> <!-- /.col -->
+        				  </div>
+      				    <div class="form-group">
+                    <label class="col-md-3 control-label">Working Time in Hours</label>
+                    <div class="col-md-3">
+                      <select id="work_time">
+                        <option value="0" >Select hours</option>
+                        <?php 
+                          $work_time = $srsrow['work_time'];
+                          for ($i=2; $i < 25; $i++) { 
+                            if($i == $work_time) echo "<option value='".$i."' selected>".$i."</option>";
+                            else echo "<option value='".$i."'>".$i."</option>";
+                          }
+                          $created_time = $srsrow['created_time'];
+                          $Created = explode("-", $created_time);
+                          $newTime = $Created[2]."/".$Created[1]."/".$Created[0] ;
+                        ?>
+                      </select>
+                    </div>
+    				      	<label class="col-md-2 control-label">Created Date</label>
+    				      	<div class="col-md-3">
+    				        	<input type="text" id ="created_time" class="form-control" placeholder="Created Date" value="<?= $newTime ?>"/>
+    				      	</div>
+      				    </div>
+      				    <div class="form-group">
+                    <label class='col-md-3 control-label'>Enter New Skill </label>
+                    <div class='col-md-3'>
+                      <input type='text' id='newskill' onkeyup='nospaces(this);' class='form-control' placeholder='Enter Skill' data-role='tagsinput'>
+                    </div>
+                    <label class="col-md-2 control-label">or select Skills</label>
+                    <div class='col-md-2'>
+                      <select class='selectpicker' id='skills' onchange="getselectedskill(0, 3);" data-live-search='true' data-width='100%' > 
+                        <option value='0'>Select Skills </option>
+                        <?php 
+                          $skill = mysqli_query($db_handle, "SELECT * FROM skill_name ;");
+                           while($skillrow = mysqli_fetch_array($skill)){ 
+                            echo "<option value=".$skillrow['id'].">".$skillrow['name']."</option>";
+                          }
+                        ?>
+                      </select>
+                      <div id="selectedskills"></div>
+                    </div>
+      					  </div>
+                  <div class="form-group">
+                    <label class="col-md-3 control-label">Requierments</label>
+                    <div class="col-md-3">
+                    <?php 
+                      $abd = array();
+                      foreach ($reqire as $donereqire){
+                        array_push($abd , "$donereqire");
+                        echo '<input type="checkbox" name = "skill" value ='.$donereqire.' checked/>&nbsp;&nbsp;&nbsp;'.$donereqire.'<br/>';
+                      }
+                      $allreqirements = array("maid","cook","driver","electrician","plumber","carpenter","babysitter","oldage","patient");
+                      $nawreqire = array_diff($allreqirements, $abd);
+                      foreach ($nawreqire as $val)
+                         echo '<input type="checkbox" name = "skill" value ='.$val.'/>&nbsp;&nbsp;&nbsp;'.$val.'<br/>';
+                    ?>          
+                    </div>
+                    <label class="col-md-2 control-label">Worker Area</label>
+                    <div class="col-md-3">
+                      <input type="text" id ="worker_area" class="form-control" onkeyup='nospaces(this);' placeholder="Worker Area" value="<?= $srsrow['worker_area'] ?>"/>
+                    </div>
+                  </div>
+      				    <div class="form-group">
+      					    <label class="col-md-3 control-label"></label>
+      					    <div class="col-md-7">
+      					        <button type="submit" class="btn btn-success pull-right">Update</button>
+      					    </div>
+      				    </div> <!-- /.form-group -->
+  				      </form>
+      				  <ul>
+        				<?php
+        					$notes = mysqli_query($db_handle, "SELECT * FROM notes WHERE sr_id = '$sr_id'; ") ;	
+        					while($notesrow = mysqli_fetch_array($notes)){
+        						$note_val = $notesrow['note'] ;
+        						echo "<li>".$note_val."</li>" ;
+        					}
+        				?>
+      				  </ul>
+    				    <a class='btn btn-success active' data-toggle='modal' data-target='#addNote'>Add Note</a>
+              </div>
+      		  </div>
+      		</div>
+      	</div>
       </div>
     </div>
+  </div>
   <?php include_once "footers.php"; ?>
+  <script type="text/javascript">
+    $('#created_time').datepicker();
+    getSkills(<?= $_GET['sr_id'] ?>, "client");
+  </script>
 </body>
 </html>

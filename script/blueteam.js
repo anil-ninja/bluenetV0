@@ -28,6 +28,32 @@ function validateEmail(fld) {
   }
 }
 
+String.prototype.isValidDate = function() {
+  var IsoDateRe = new RegExp("^([0-9]{2})/([0-9]{2})/([0-9]{4})$");
+  var matches = IsoDateRe.exec(this);
+  if (!matches) return false;
+  else return true ;
+  /*var composedDate = new Date(matches[1], (matches[2] - 1), matches[3]);
+
+  return ((composedDate.getMonth() == (matches[2] - 1)) &&
+          (composedDate.getDate() == matches[3]) &&
+          (composedDate.getFullYear() == matches[1]));*/
+}
+
+function validate_time(time){
+  var a=true;
+  var time_arr=time.split(":");
+  if(time_arr.length!=2)  a=false;
+  else {
+    if(isNaN(time_arr[0]) || isNaN(time_arr[1])){                
+      a=false;
+    }
+    if(time_arr[0]<24 && time_arr[1]<60) {}
+    else a =false;         
+  }
+  return a;
+}
+
 function validatePhone(fld) {    
   var res = fld.split(",");
   var filter = /^[0-9-+]+$/;
@@ -193,6 +219,7 @@ function postRequestDeatils(fields, skills, areas, status, servicesArray, newski
   if(validatePhone($('#'+fields[1]).val()) == false){
     alert('Enter valid Phone Number');
   }
+  else if(!($('#'+fields[4]).val().isValidDate())) alert('Enter valid date');
   else {
     $.ajax({
       type: "POST",
@@ -492,6 +519,30 @@ function getselectedskill(id, type) {
   }); 
 }
 
+function deleteskill(skil, id, type) {
+  $.ajax({
+    type: "POST",
+    url: "ajax/deleteSkills.php",
+    data: "type="+type + "&id=" +id + "&skill="+skil,
+    cache: false,
+    success: function(result){
+      $('#'+skil).remove();
+    }
+  }); 
+}
+
+function getSkills(id, type) {
+  $.ajax({
+    type: "POST",
+    url: "ajax/getSkills.php",
+    data: "type="+type + "&id=" +id ,
+    cache: false,
+    success: function(result){
+      $("#selectedskills").append(result);
+    }
+  }); 
+}
+
 function changeStatus(id, oldStatus, type){
   if(type == 1){
     var status = "<form class='form-horizontal' id='status_form"+id+"' onsubmit='return(validateStatus("+id+", \""+oldStatus+"\"));'>" +   
@@ -572,15 +623,19 @@ function changeStatus(id, oldStatus, type){
   else {}
 }
 
-function postDeatils(fields, skillsArray, areasArray, id){
+function postDeatils(fields, skillsArray, areasArray, servicesArray, newskill, time,time2, salary,salary2, work_time, gender, id){
   var dataString = "";
+  var d = $('#'+fields[4]).val().split('/');   
+  var date = d[2] +'-'+ d[1] +'-'+ d[0];
   dataString = "name=" + $('#'+fields[0]).val() + "&mobile=" + $('#'+fields[1]).val() + "&address=" + $('#'+fields[2]).val() + 
-      "&timing=" + $('#'+fields[3]).val() + "&remarks=" + $('#'+fields[4]).val() + "&gender=" +  $('#'+fields[5]).val() + 
-      "&salary=" +  $('#'+fields[6]).val() + "&area=" +  $('#'+fields[7]).val() + "&work_time=" +  $('#'+fields[8]).val() + 
-      "&created_time=" + $('#'+fields[9]).val() + "&worker_area=" +  areasArray + "&skills=" + skillsArray + "&sr_id=" + id ; 
+      "&area=" +  $('#'+fields[3]).val() + "&created_time=" + date + "&remarks=" + $('#'+fields[5]).val() +
+      "&timing=" + time + "&gender=" +  gender + "&salary=" +  salary + "&work_time=" +  work_time + 
+      "&salary2=" +  salary2 + "&worker_area=" +  areasArray + "&services=" + servicesArray + "&skills=" + skillsArray + 
+      "&newskill=" + newskill + "&timing2=" + time2 + "&sr_id=" + id; 
   if(validatePhone($('#'+fields[1]).val()) == false){
-    alert("Enter valid phone number");
+    alert('Enter valid Phone Number');
   }
+  else if(!($('#'+fields[4]).val().isValidDate())) alert('Enter valid date');
   else {
     $.ajax({
       type: "POST",
@@ -600,17 +655,39 @@ function postDeatils(fields, skillsArray, areasArray, id){
 }
 
 function validateUpdateDetails(id){
-  fields = ["name","mobile","address","timing","remarks","gender","salary","area","work_time","created_time",];
+  fields = ["name","mobile","address","area","created_time","remarks","worker_area"];
   var areasArray = []; 
   $('#worker_area').each(function(i, selected){ 
     areasArray[i] = $(selected).val(); 
   });
-  var skillsArray = []; 
+  var servicesArray = []; 
   $('input[name=skill]:checked').each(function(i, checked){ 
-    skillsArray[i] = $(checked).val(); 
+    servicesArray[i] = $(checked).val(); 
   });
+  var skillsArray = [];
+  $(".values").each(function(i){
+      skillsArray[i] = $(this).data('value');
+  });
+  var newskill = $('#newskill').val();
+  var time = $('#timing').val();
+  var time2 = $('#timing2').val();
+  var salary = $('#salary').val();
+  var salary2 = $('#salary2').val();
+  var work_time = $('#work_time').val();
+  var gender = $('#gender').val();
   if(genericEmptyFieldValidator(fields)){
-    postDeatils(fields, skillsArray, areasArray, id);
+    if(time == 0 || time2 == 0 || parseInt(time2) < parseInt(time)){
+      alert('Enter valid work timing');
+    }
+    else if(salary == 0 || salary2 == 0 || parseInt(salary2) < parseInt(salary)){
+      alert('Enter valid salary');
+    }
+    else if(work_time == 0){
+      alert('Enter valid working time');
+    }
+    else {
+      postDeatils(fields, skillsArray, areasArray, servicesArray, newskill, time,time2, salary,salary2, work_time, gender, id);
+    }
   }
   return false;
 }

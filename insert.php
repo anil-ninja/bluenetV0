@@ -250,9 +250,6 @@ if (!isset($_SESSION['user_id'])) {
                         }?>
                       </select>
                     </div>
-            				<!-- 
-            			   	<input type="text" id ="salary" class="form-control" placeholder="Expected Salary" />
-            			 	  --><!-- /.col -->
             			 	<label class="col-md-1 control-label">Area</label>
             			 	<div class="col-md-3">
             			   	<input type="text" id ="area" onkeyup='nospaces(this);' class="form-control" placeholder="Area" />
@@ -267,11 +264,10 @@ if (!isset($_SESSION['user_id'])) {
                           echo "<option value='".$i."'>".$i."</option>";
                         }?>
                       </select>
-            			   	<!-- <input type="number" id ="work_time" class="form-control" placeholder="Working Time in Hours"/> -->
             			 	</div>
             			 	<label class="col-md-2 control-label">Created Date</label>
             			 	<div class="col-md-3">
-            			   	<input type="date" id ="created_time" class="form-control" placeholder="Enter Date" />
+            			   	<input type="date" id ="created_time" onkeyup='nospaces(this);' class="form-control" placeholder="Enter Date" />
             			 	</div>
             			</div>
             			<div class="form-group">
