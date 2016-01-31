@@ -8,7 +8,7 @@
                   if ($status == "picked") $condition = " me_id = " .$user_id." AND (match_id = 0 OR match2_id = 0) AND (status='open' OR status='me_open')" ;
                   else if ($status == "done") $condition = " me_id = " .$user_id." AND match_id != 0 AND match2_id != 0 " ;
                   else $condition = " (status='open' OR status='me_open') and me_id = 0" ;
-                  $srs = mysqli_query($db_handle, "SELECT * FROM service_request WHERE ".$condition."; ") ;
+                  $srs = mysqli_query($db_handle, "SELECT * FROM service_request WHERE ".$condition." ORDER BY 'date' DESC; ") ;
                   while ($srsrow = mysqli_fetch_array($srs)){
                      $id = $srsrow['id'];
                      $skill = mysqli_query($db_handle, "SELECT a.name, a.id FROM skill_name AS a JOIN skills AS b WHERE b.user_id = '$id'

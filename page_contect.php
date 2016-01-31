@@ -7,7 +7,7 @@
                $condition = "";
                $status = $_GET['status'];
                if (!isset($_GET['status'])) {
-                  $srs = mysqli_query($db_handle, "SELECT * FROM service_request WHERE 1=1 ;");
+                  $srs = mysqli_query($db_handle, "SELECT * FROM service_request WHERE 1=1  ORDER BY 'date' DESC;");
                }
                else {
                   if ($status == "open") $condition = " cem_id = 0 AND me_id = 0 ";
@@ -24,7 +24,7 @@
                   elseif ($status == "followback") $condition = "status = 'followback'" ;
                   elseif ($status == "feedback") $condition = "status = 'feedback'" ;
                   else $condition = "status = ".$status ;
-                  $srs = mysqli_query($db_handle, "SELECT * FROM service_request WHERE ".$condition."; ") ;
+                  $srs = mysqli_query($db_handle, "SELECT * FROM service_request WHERE ".$condition." ORDER BY 'date' DESC; ") ;
                }
                while ($srsrow = mysqli_fetch_array($srs)){ 
                   $id = $srsrow['id'];

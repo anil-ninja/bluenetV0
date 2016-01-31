@@ -5,17 +5,17 @@
             <div class="panel-primary">
                <?php 
                   $condition = "";
-                     if ($status == "picked") $condition = " cem_id = " .$user_id. " AND status = 'open'";
-                     elseif ($status == "match") $condition = " cem_id = 0 AND me_id != 0 AND status = 'open' " ;
-                     elseif ($status == "meeting") $condition = " status = 'meeting' AND cem_id = " .$user_id ;
-                     elseif ($status == "demo") $condition = " status='demo' AND cem_id = " .$user_id ;
-                     elseif ($status == "done") $condition = " status='done' AND cem_id = " .$user_id ;
-                     else $condition = " cem_id = 0 AND match_id = 0 AND match2_id = 0" ;
-                     $srs = mysqli_query($db_handle, "SELECT * FROM service_request WHERE ".$condition."; ") ;
-                     while ($srsrow = mysqli_fetch_array($srs)){ 
-                        $id = $srsrow['id'];
-                        $skill = mysqli_query($db_handle, "SELECT a.name, a.id FROM skill_name AS a JOIN skills AS b WHERE b.user_id = '$id'
-                                                            AND b.status = 'open' AND b.type = 'client' AND a.id = b.skill_id ;");
+                  if ($status == "picked") $condition = " cem_id = " .$user_id. " AND status = 'open'";
+                  elseif ($status == "match") $condition = " cem_id = 0 AND me_id != 0 AND status = 'open' " ;
+                  elseif ($status == "meeting") $condition = " status = 'meeting' AND cem_id = " .$user_id ;
+                  elseif ($status == "demo") $condition = " status='demo' AND cem_id = " .$user_id ;
+                  elseif ($status == "done") $condition = " status='done' AND cem_id = " .$user_id ;
+                  else $condition = " cem_id = 0 AND match_id = 0 AND match2_id = 0 AND status = 'open'" ;
+                  $srs = mysqli_query($db_handle, "SELECT * FROM service_request WHERE ".$condition." ORDER BY 'date' DESC; ") ;
+                  while ($srsrow = mysqli_fetch_array($srs)){ 
+                     $id = $srsrow['id'];
+                     $skill = mysqli_query($db_handle, "SELECT a.name, a.id FROM skill_name AS a JOIN skills AS b WHERE b.user_id = '$id'
+                                                         AND b.status = 'open' AND b.type = 'client' AND a.id = b.skill_id ;");
                ?>
                <div class="list-group">
                   <p style="font-size:20px;padding-left: 1em;">
@@ -71,7 +71,7 @@
                         else {
                      ?>
                      <a  class="list-group-item">
-                        <button class="btn btn-primary" style="margin-left: 30%" onclick="changeStatus(<?= $srsrow['id'] ?>, open, 2);" >Change Status</button>
+                        <button class="btn btn-primary" style="margin-left: 30%" onclick="changeStatus(<?= $srsrow['id'] ?>, 'open', 2);" >Change Status</button>
                      </a>
                      <?php }
                         } 

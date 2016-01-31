@@ -70,7 +70,7 @@ function validateTime(time){
 
 function validatePhone(fld) {    
   var res = fld.split(",");
-  var filter = /^[0-9-+]+$/;
+  var filter = /^([7-9][0-9]{9})+$/;
   var result = "" ;
   for(var i = 0; i < res.length; i++) {
     var stripped = res[i];
@@ -281,7 +281,7 @@ function postRequestDeatils(fields, skills, areas, status, servicesArray, time,t
 
 function validateRequestDetails(){
   
-  fields = ["name","mobile","address","area","created_time","remarks","worker_area","newskill"];
+  fields = ["name","mobile","address","area","created_time","remarks","worker_area"];
   var areasArray = []; 
   $('#worker_area').each(function(i, selected){ 
     areasArray[i] = $(selected).val(); 
@@ -521,8 +521,22 @@ function feedback(id, type){
 function validateStatus(id, oldStatus) {
   var dataString = "";
   var newStatus = $("#new_status"+id).val() ;
-  //if(genericEmptyFieldValidator(newStatus)){
-  dataString = "sr_id=" + id + "&old_status=" + oldStatus + "&new_status=" + newStatus;
+  if(oldStatus == 'meeting'){
+    var salary = $('#salary'+id).val();
+    if(isFinite(salary) && salary != ''){
+      dataString = "sr_id=" + id + "&old_status=" + oldStatus + "&new_status=" + newStatus + "&salary=" + salary;
+      postStatus(dataString);
+    }
+    else alert("Enter valid Salary");
+    return false;
+  }
+  else {
+    dataString = "sr_id=" + id + "&old_status=" + oldStatus + "&new_status=" + newStatus;
+    postStatus(dataString);
+  }
+}
+
+function postStatus(dataString) {
   $.ajax({
     type: "POST",
     url: "ajax/ChangeStatus.php",
@@ -537,8 +551,6 @@ function validateStatus(id, oldStatus) {
       return false;
     }
   });
-  //}
-  //return false;
 }
 
 function getselectedskill(id, type) {
@@ -612,8 +624,8 @@ function changeStatus(id, oldStatus, type){
   else if(type == 2) {
     var status = "<form class='form-horizontal' id='status_form"+id+"' onsubmit='return(validateStatus("+id+", \""+oldStatus+"\"));'>" +   
                     "<div class='form-group'>"+
-                      "<label class='col-md-3 control-label'>Status</label>"+
-                      "<div class='col-md-3'>"+
+                      "<label class='col-md-2 control-label'>Status</label>"+
+                      "<div class='col-md-4'>"+
                         "<select class='selectpicker' id='new_status"+id+"' data-live-search='true' data-width='100%'>" +   
                           "<option value='open'>Open </option>"+
                           "<option value='salary_issue'>Salary Issues</option>"+
@@ -622,6 +634,10 @@ function changeStatus(id, oldStatus, type){
                           "<option value='me_open'>Search Worker</option>"+
                           "<option value='decay'>Decay</option>"+
                         "</select>"+
+                      "</div>"+
+                      "<label class='col-md-3 control-label'>Salary</label>"+
+                      "<div class='col-md-3'>"+
+                        "<input type='text' id ='salary"+id+"' class='form-control' placeholder='Enter Fixed Salary' />"+
                       "</div>"+
                     "</div>"+
                     "<div class='form-group'>"+
@@ -697,7 +713,7 @@ function postDeatils(fields, skillsArray, areasArray, servicesArray, time,time2,
 }
 
 function validateUpdateDetails(id){
-  fields = ["name","mobile","address","area","created_time","remarks","worker_area","newskill"];
+  fields = ["name","mobile","address","area","created_time","remarks","worker_area"];
   var areasArray = []; 
   $('#worker_area').each(function(i, selected){ 
     areasArray[i] = $(selected).val(); 

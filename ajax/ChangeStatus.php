@@ -16,6 +16,10 @@ if(isset($_POST['sr_id'])){
 	if($newStatus == 'me_open'){
 		mysqli_query ($db_handle, "UPDATE service_request SET match_id = 0, match2_id = 0  WHERE id = '$sr_id' ;");
 	}
+	if($oldStatus == 'meeting'){
+		$salary = $_POST['salary'];
+		mysqli_query ($db_handle, "UPDATE service_request SET fixed_salary = '$salary' WHERE id = '$sr_id' ;");
+	}
 	if(mysqli_error($db_handle)) return mysqli_error($db_handle) ;
 	else return true ;
 }

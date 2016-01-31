@@ -212,8 +212,6 @@ if (!isset($_SESSION['user_id'])) {
             				<div class="col-md-3">
             					<select id="new_status">
             						<option value="open" selected>Open</option>
-            						<option value="me_open">ME Open</option>
-            						<option value="demo" >Demo</option>
             						<option value="salary_issue" >Salary Issues</option>
             						<option value="not_interested" >Not Interested</option>
             						<option value="done" >Done</option>
