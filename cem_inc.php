@@ -19,7 +19,19 @@
                ?>
                <div class="list-group">
                   <p style="font-size:20px;padding-left: 1em;">
-                     <a  class="list-group-item active"> Client Name  <span style="padding-left: 5em"><?= $srsrow['name'] ?></span></a>
+                  <?php
+                  if($status == 'picked'){ 
+                     if($srsrow['match_id'] == 0 && $srsrow['match2_id'] == 0){
+                        echo "<a  class='list-group-item active' style='background: #3e77ab;border-color: #3e77ab;'> Client Name <span style='padding-left: 5em'>".$srsrow['name']."</span></a>";
+                     }
+                     else {
+                        echo "<a  class='list-group-item active' > Client Name <span style='padding-left: 5em'>".$srsrow['name']."</span></a>";
+                     }
+                  }
+                  else {
+                     echo "<a  class='list-group-item active' > Client Name <span style='padding-left: 5em'>".$srsrow['name']."</span></a>";
+                  }
+                  ?>
                      <a  class="list-group-item "> Mobile  <span style="padding-left: 8em"><?= $srsrow['mobile'] ?></span></a>
                      <a  class="list-group-item">Address <span style="padding-left: 7em"><?= $srsrow['address'] ?></span></a>
                      <a  class="list-group-item">Salary Criteria <span style="padding-left: 5em"><?= $srsrow['expected_salary'] ?></span></a>
