@@ -68,6 +68,7 @@ else header('Location: index.php');
         </ol>
         <div class="clearfix"></div>
       </div>
+      <div class="searchresult"></div>
                 <!--END TITLE & BREADCRUMB PAGE-->
        <?php require_once "operator_inc.php"; ?>
     </div>

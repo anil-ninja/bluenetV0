@@ -59,6 +59,7 @@ if (!isset($_SESSION['user_id'])) {
         </ol>
         <div class="clearfix"></div>
       </div>
+      <div class="searchresult"></div>
                 <!--END TITLE & BREADCRUMB PAGE-->
        <?php //require_once "page-contect.php"; ?>
     </div>

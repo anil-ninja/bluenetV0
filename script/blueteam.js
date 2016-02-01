@@ -837,6 +837,31 @@ function Update (id) {
   location="update.php?sr_id="+id;
 }
 
+function validateSearch() {
+  var search = $('#searchworker').val();
+  if(validatePhone(search) == false){
+    alert('Enter valid number');
+    return false;
+  }
+  else {
+    $.ajax({
+      type: "POST",
+      url: "ajax/searchworker.php",
+      data: "phone="+search,
+      cache: false,
+      success: function(result){
+        //alert(result);
+        $(".searchresult").append(result); 
+      },
+      error: function(result){
+        alert("Error Occured");
+        return false;
+      }
+    });
+    return false;
+  }
+}
+
 function addworker(request_id, id){
   var hourdata = "";
   hourdata += "<option value='0' >Select hours</option>";

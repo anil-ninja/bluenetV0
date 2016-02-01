@@ -110,7 +110,8 @@ else header('Location: index.php');
           <li></li>
         </ol>
         <div class="clearfix"></div>
-      </div>		
+      </div>
+      <div class="searchresult"></div>		
       <div class="page-content">
 		    <div id="tab-general">
 		      <div class="row mbl">

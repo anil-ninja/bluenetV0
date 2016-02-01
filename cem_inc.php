@@ -52,8 +52,12 @@
                      <?php 
                         if($status == "done") {  } 
                         elseif($status == "demo") { 
-                           echo "<button class='btn btn-primary' style='margin-left: 40%;' onclick='changeStatus(".$srsrow['id'].", 'meeting', 2);'>Change Status</button>
-                                 <button class='btn btn-primary' onclick='addnote(".$srsrow['id'].", client_request);'>Add Note</button>";
+                     ?>
+                     <a  class='list-group-item'>
+                        <button class='btn btn-primary' style='margin-left: 40%;' onclick="changeStatus(<?= $srsrow['id'] ?>, 'meeting', 2);">Change Status</button>
+                        <button class='btn btn-primary' onclick="addnote(<?= $srsrow['id'] ?>, 'client_request');">Add Note</button>
+                     </a>
+                     <?php
                         } 
                         elseif($status == "meeting") { 
                            $id =  $srsrow['id'];

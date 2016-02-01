@@ -7,7 +7,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a id="logo" href="index.html" class="navbar-brand">
+      <a id="logo" href="index.php" class="navbar-brand">
         <span class="fa fa-rocket"></span>
         <span class="logo-text">BlueNet</span>
         <span style="display: none" class="logo-text-icon">µ</span>
@@ -15,10 +15,10 @@
     </div>
     <div class="topbar-main">
       <a id="menu-toggle" href="#" class="hidden-xs"><i class="fa fa-bars"></i></a>
-      <form id="topbar-search" action="" method="" class="hidden-sm hidden-xs">
+      <form id="topbar-search" onsubmit="return(validateSearch());" class="hidden-sm hidden-xs">
         <div class="input-icon right text-white">
-          <a href="#"><i class="fa fa-search"></i></a>
-          <input type="text" placeholder="Search here..." class="form-control text-white"/>
+          <a onclick="return(validateSearch());"><i class="fa fa-search"></i></a>
+          <input type="text" id="searchworker" placeholder="Search by number..." class="form-control text-white"/>
         </div>
       </form>
       <div class="news-update-box hidden-xs">
