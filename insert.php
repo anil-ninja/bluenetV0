@@ -223,7 +223,7 @@ if (!isset($_SESSION['user_id'])) {
             						<option value="followback" >Follow back</option>
             					</select>
             				</div>
-            		   	<label class="col-md-2 control-label">Other Specifications</label>
+            		   	<label class="col-md-2 control-label">Gender</label>
             		   	<div class="col-md-3">
             		     	<select id = "gender" > 
             						<option value="male" selected >Male</option>
