@@ -39,6 +39,10 @@ else header('Location: index.php');
             <div class="icon-bg bg-orange"></div><i class="glyphicon glyphicon-search"></i>
             <span class="menu-title">Open requests</span></a>
           </li>
+          <li <?php if ($_GET['status']=='24') echo "class='active'";?>><a href="me.php?status=24">
+            <div class="icon-bg bg-pink"></div><i class="glyphicon glyphicon-time"></i>
+            <span class="menu-title">24 Hour open requests</span></a>   
+          </li>
           <li <?php if ($_GET['status']=='picked') echo "class='active'";?>><a href="me.php?status=picked">
             <div class="icon-bg bg-pink"></div><i class="glyphicon glyphicon-user"></i>
             <span class="menu-title">Picked requests</span></a>   

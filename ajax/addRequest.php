@@ -26,7 +26,9 @@ if (isset($_POST['name'])) {
 	$time2 = $timing2." pm";
 	$newtime = $time1."-".$time2;
 	$newsalary = $salary."-".$salary2." K";
-	$areaworker = "";
+	$data = $area."+".$newarea."+".$worker_area."+".$newworkerarea;
+	echo $data;
+	/*$areaworker = "";
 	if($worker_area != 0 AND $worker_area != null AND $worker_area != "" ){
 		$eachworkarea = explode(",", $worker_area);
 		foreach ($eachworkarea as $workareas) {
@@ -49,8 +51,8 @@ if (isset($_POST['name'])) {
 		}
 		if($newarea != null AND $newarea != "" AND $newarea != " ") $clientarea = $clientarea.",".$worker_area;
 	}
-	else $clientarea .= $worker_area;
-	mysqli_query ($db_handle, "INSERT INTO service_request (name, mobile, requirements, gender, timings, expected_salary, address, area,
+	else $clientarea .= $worker_area;*/
+	/*mysqli_query ($db_handle, "INSERT INTO service_request (name, mobile, requirements, gender, timings, expected_salary, address, area,
 										remarks, status, worker_area, work_time, created_time)	
 									VALUES ('$name','$mobile','$services','$gender','$newtime', '$newsalary', '$address', '$clientarea','$remarks', 
 										'$status', '$areaworker', '$time', '$created_time');");
@@ -84,7 +86,7 @@ if (isset($_POST['name'])) {
 									VALUES ('$sr_id', '$skil', 'client', '$user_id');");
 	}
 	if(mysqli_error($db_handle)) return mysqli_error($db_handle) ;
-	else return true ;
+	else return true ;*/
 }
 
 mysqli_close($db_handle);

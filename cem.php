@@ -37,6 +37,10 @@ else header('Location: index.php');
             <div class="icon-bg bg-pink"></div><i class="glyphicon glyphicon-search"></i>
             <span class="menu-title">Open requests</span></a>   
           </li>
+          <li <?php if ($_GET['status']=='24') echo "class='active'";?>><a href="cem.php?status=24">
+            <div class="icon-bg bg-pink"></div><i class="glyphicon glyphicon-time"></i>
+            <span class="menu-title">24 Hour open requests</span></a>   
+          </li>
           <li <?php if ($_GET['status']=='match') echo "class='active'";?>><a href="cem.php?status=match">
             <div class="icon-bg bg-pink"></div><i class="glyphicon glyphicon-search"></i>
             <span class="menu-title">Match requests</span></a>   

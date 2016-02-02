@@ -10,7 +10,8 @@
                   elseif ($status == "meeting") $condition = " status = 'meeting' AND cem_id = " .$user_id ;
                   elseif ($status == "demo") $condition = " status='demo' AND cem_id = " .$user_id ;
                   elseif ($status == "done") $condition = " status='done' AND cem_id = " .$user_id ;
-                  else $condition = " cem_id = 0 AND match_id = 0 AND match2_id = 0 AND status = 'open'" ;
+                  elseif ($status == "24") $condition = " cem_id = 0 AND match_id = 0 AND match2_id = 0 AND status = 'open' AND work_time = 24 " ;
+                  else $condition = " cem_id = 0 AND match_id = 0 AND match2_id = 0 AND status = 'open' AND work_time != 24 " ;
                   $srs = mysqli_query($db_handle, "SELECT * FROM service_request WHERE ".$condition." ; ") ;
                   while ($srsrow = mysqli_fetch_array($srs)){ 
                      $id = $srsrow['id'];
