@@ -88,6 +88,13 @@ function validatePhone(fld) {
   return result;
 }
 
+function validateSalary(fld) {
+  var valid = (value.match(/^-?\d*(\.\d+)?$/));
+  if (!valid.test(fld)) return false;
+  else if (fld == "" || fld == " " || fld == null) return false;
+  else return true; 
+}
+
 function nospaces(t){
   if(t.value.match(/\s/g)){
     alert('Sorry, you are not allowed to enter any spaces');
@@ -273,6 +280,8 @@ function postRequestDeatils(fields,skillsArray,areasArray,workerareasArray,statu
   else if(!($('#'+fields[3]).val().isValidDate())) alert('Enter valid date');
   else if(validateTime(time)== false) alert('Enter valid Time');
   else if(validateTime(time2)== false) alert('Enter valid Time');
+  //else if(validateSalary(salary)== false) alert('Enter valid Salary');
+  //else if(validateSalary(salary2)== false) alert('Enter valid Salary');
   else {
     $.ajax({
       type: "POST",

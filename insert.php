@@ -190,7 +190,7 @@ if (!isset($_SESSION['user_id'])) {
                     <label class="col-md-2 control-label" >Worker timings</label>
                     <div class="col-md-4 input-group">
                       <input type="text" id ="timing" class="form-control" placeholder="Enter Time" />
-                      To
+                      <div class="input-group-addon">To</div>
                       <input type="text" id ="timing2" class="form-control" placeholder="Enter Time" />
                     </div>
 				      	    <!-- <label class="col-md-1 control-label">Worker timings</label>
@@ -223,26 +223,34 @@ if (!isset($_SESSION['user_id'])) {
             			 	</div>
             			</div>
             			<div class="form-group">
+                    <label class="col-md-3 control-label">Remarks</label>
+                    <div class="col-md-3 input-group">
+                      <input type="text" id ="remarks" class="form-control" placeholder="remarks" />
+                    </div>
+                  </div>
+                  <div class="form-group">
             			 	<label class="col-md-3 control-label">Expected Salary</label>
-                    <div class="col-md-4">
+                    <div class="col-md-4 input-group">
+                      <input type="number" id ="salary" class="form-control" placeholder="Enter Salary" />
+                      <div class="input-group-addon">To</div>
+                      <input type="number" id ="salary2" class="form-control" placeholder="Enter Salary" />
+                    </div>
+                    <!-- <div class="col-md-4">
                       <select id="salary">
                         <option value="0" >Select Salary</option>
-                        <?php for ($i=2; $i < 15; $i++) { 
+                        <?php /*for ($i=2; $i < 15; $i++) { 
                           echo "<option value='".$i."'>".$i."</option>";
-                        }?>
+                        }*/?>
                       </select>
                       To
                       <select id="salary2">
                         <option value="0" >Select Salary</option>
-                        <?php for ($i=3; $i < 20; $i++) { 
+                        <?php /*for ($i=3; $i < 20; $i++) { 
                           echo "<option value='".$i."'>".$i."</option>";
-                        }?>
+                        }*/?>
                       </select>
-                    </div>
-            			  <label class="col-md-1 control-label">Remarks</label>
-                    <div class="col-md-3">
-                      <input type="text" id ="remarks" class="form-control" placeholder="remarks" />
-                    </div><!-- /.col -->
+                    </div> -->
+            			  <!-- /.col -->
             			</div>
             			<div class="form-group">
             				<label class="col-md-3 control-label">Working Time in Hours</label>
