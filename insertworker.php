@@ -354,6 +354,25 @@ if (!isset($_SESSION['user_id'])) {
                     </div>
                   </div>
                   <div class='form-group'>
+                    <label class='col-md-3 control-label'>Enter New Worker Area </label>
+                    <div class='col-md-3'>
+                      <input type='text' id='worker_area' class='form-control' placeholder='Enter Worker area' data-role='tagsinput'>
+                    </div>
+                    <label class="col-md-2 control-label">or select Worker Area</label>
+                    <div class='col-md-2'>
+                      <select class='selectpicker' id='skills' onchange="getselectedarea(0, 4);" data-live-search='true' data-width='100%' > 
+                        <option value='0'>Select Worker Area </option>
+                        <?php 
+                          $area = mysqli_query($db_handle, "SELECT * FROM area ;");
+                           while($arearow = mysqli_fetch_array($area)){ 
+                            echo "<option value=".$arearow['id'].">".$arearow['name']."</option>";
+                          }
+                        ?>
+                      </select>
+                      <div id="selectedworkerareas"></div>
+                    </div>
+                  </div>
+                  <div class='form-group'>
                     <label class='col-md-3 control-label'></label>
                     <div class='col-md-7'>
                       <button type='submit' class='btn btn-success pull-right' >Submit Details</button>

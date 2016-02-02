@@ -249,10 +249,10 @@ if (!isset($_SESSION['user_id'])) {
                         }?>
                       </select>
                     </div>
-            			 	<label class="col-md-1 control-label">Area</label>
-            			 	<div class="col-md-3">
-            			   	<input type="text" id ="area" onkeyup='nospaces(this);' class="form-control" placeholder="Area" />
-            			 	</div> <!-- /.col -->
+            			  <label class="col-md-1 control-label">Remarks</label>
+                    <div class="col-md-3">
+                      <input type="text" id ="remarks" class="form-control" placeholder="remarks" />
+                    </div><!-- /.col -->
             			</div>
             			<div class="form-group">
             				<label class="col-md-3 control-label">Working Time in Hours</label>
@@ -266,17 +266,7 @@ if (!isset($_SESSION['user_id'])) {
             			 	</div>
             			 	<label class="col-md-2 control-label">Created Date</label>
             			 	<div class="col-md-3">
-            			   	<input type="date" id ="created_time" onkeyup='nospaces(this);' class="form-control" placeholder="Enter Date" />
-            			 	</div>
-            			</div>
-            			<div class="form-group">
-            			 	<label class="col-md-3 control-label">Remarks</label>
-            				<div class="col-md-3">
-            			   	<input type="text" id ="remarks" class="form-control" placeholder="remarks" />
-            			 	</div> <!-- /.col -->
-            			 	<label class="col-md-2 control-label">Worker Area</label>
-            			 	<div class="col-md-3">
-            			   	<input type="text" id ="worker_area" onkeyup='nospaces(this);' class="form-control" placeholder="Worker Area" />
+            			   	<input type="text" id ="created_time" onkeyup='nospaces(this);' class="form-control" placeholder="Enter Date" />
             			 	</div>
             			</div>
                   <div class='form-group'>
@@ -296,6 +286,44 @@ if (!isset($_SESSION['user_id'])) {
                         ?>
                       </select>
                       <div id="selectedskills"></div>
+                    </div>
+                  </div>
+                  <div class='form-group'>
+                    <label class='col-md-3 control-label'>Enter New Area </label>
+                    <div class='col-md-3'>
+                      <input type='text' id='newarea' class='form-control' placeholder='Enter Area' data-role='tagsinput'>
+                    </div>
+                    <label class="col-md-2 control-label">or select Areas</label>
+                    <div class='col-md-2'>
+                      <select class='selectpicker' id='areas' onchange="getselectedarea(0, 3);" data-live-search='true' data-width='100%' > 
+                        <option value='0'>Select Area </option>
+                        <?php 
+                          $area = mysqli_query($db_handle, "SELECT * FROM area ;");
+                           while($arearow = mysqli_fetch_array($area)){ 
+                            echo "<option value=".$arearow['id'].">".$arearow['name']."</option>";
+                          }
+                        ?>
+                      </select>
+                      <div id="selectedareas"></div>
+                    </div>
+                  </div>
+                  <div class='form-group'>
+                    <label class='col-md-3 control-label'>Enter New Worker Area </label>
+                    <div class='col-md-3'>
+                      <input type='text' id='worker_area' class='form-control' placeholder='Enter Worker area' data-role='tagsinput'>
+                    </div>
+                    <label class="col-md-2 control-label">or select Worker Area</label>
+                    <div class='col-md-2'>
+                      <select class='selectpicker' id='workerareas' onchange="getselectedarea(0, 4);" data-live-search='true' data-width='100%' > 
+                        <option value='0'>Select Worker Area </option>
+                        <?php 
+                          $area = mysqli_query($db_handle, "SELECT * FROM area ;");
+                           while($arearow = mysqli_fetch_array($area)){ 
+                            echo "<option value=".$arearow['id'].">".$arearow['name']."</option>";
+                          }
+                        ?>
+                      </select>
+                      <div id="selectedworkerareas"></div>
                     </div>
                   </div>
             			<div class="form-group">

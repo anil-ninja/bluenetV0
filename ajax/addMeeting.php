@@ -15,12 +15,14 @@ if(isset($_POST['remark'])){
 		$workers = mysqli_fetch_array($workerid);
 		$worker_id = $workers['match_id'];
 	}
-	else {
+	elseif ($worker == 2) {
 		$workerid = mysqli_query ($db_handle, "SELECT match2_id FROM service_request WHERE id = '$sr_id' ;");
 		$workers = mysqli_fetch_array($workerid);
 		$worker_id = $workers['match2_id'];
 	}
-
+	else {
+		$worker_id = 0;
+	}
 	mysqli_query ($db_handle, "INSERT INTO meetings ( match_id, meeting_time, remarks, cem_id, worker_id) 
 								VALUES ('$sr_id', '$date', '$remark', '$user_id', '$worker_id') ;");
 	mysqli_query ($db_handle, "UPDATE service_request SET status = 'meeting', done_worker_id = '$worker_id' WHERE id = '$sr_id' ;");

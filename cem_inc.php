@@ -69,7 +69,7 @@
                      <a  class="list-group-item">
                         <button class="btn btn-primary" style="margin-left: 30%" onclick="workerDetails(<?= $srsrow['id'] ?>, 3);" >Worker Details</button>
                         <button class="btn btn-primary" onclick="changeStatus(<?= $srsrow['id'] ?>, 'meeting', 2);" >Change Status</button>
-                        <button class="btn btn-primary"  onclick="addmeeting(<?= $srsrow['id'] ?>);" >Reshadule Meeting</button>
+                        <button class="btn btn-primary"  onclick="addmeeting(<?= $srsrow['id'] ?>, 3);" >Reshadule Meeting</button>
                      </a>
                      <?php
                         } 
@@ -78,7 +78,7 @@
                      ?>
                      <a  class="list-group-item">
                         <button class="btn btn-primary" style="margin-left: 40%" onclick="workerDetails(<?= $srsrow['id'] ?>, 1);" >Worker 1 Details</button>
-                        <button class="btn btn-primary"  onclick="addmeeting(<?= $srsrow['id'] ?>);" >Add Meeting</button>
+                        <button class="btn btn-primary"  onclick="addmeeting(<?= $srsrow['id'] ?>, 1);" >Add Meeting</button>
                      </a>
                      <?php }
                         elseif ($srsrow['match2_id'] != 0) {
@@ -88,6 +88,7 @@
                      ?>
                      <a  class="list-group-item">
                         <button class="btn btn-primary" style="margin-left: 30%" onclick="changeStatus(<?= $srsrow['id'] ?>, 'open', 2);" >Change Status</button>
+                        <button class="btn btn-primary"  onclick="addmeeting(<?= $srsrow['id'] ?>, 2);" >Add Meeting</button>
                      </a>
                      <?php }
                         } 

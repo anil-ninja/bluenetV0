@@ -2,7 +2,7 @@ function genericEmptyFieldValidator(fields){
   returnBool = true;
   $.each(fields, function( index, value ) {
     console.log(value);
-    if($('#'+value).val() == "" || $('#'+value).val() == null){
+    if($('#'+value).val() == "" || $('#'+value).val() == null || $('#'+value).val() == " "){
       $('#'+value).keypress(function() {
         genericEmptyFieldValidator([value]);
       });
@@ -99,7 +99,7 @@ function trim(s){
   return s.replace(/^\s+|\s+$/, '');
 }
 
-function postWorkerDetails(fields,languagesArray,skillsArray,request_id,id,servicesArray,time,time2,salary,salary2,police,work_time,gender) {
+function postWorkerDetails(fields,languagesArray,skillsArray,request_id,id,servicesArray,time,time2,salary,salary2,police,work_time,gender,workerareasArray,newworkerarea) {
   var dataString = "";
   var d = $('#'+fields[9]).val().split('/');   
   var date = d[2] +'-'+ d[1] +'-'+ d[0];
@@ -108,7 +108,8 @@ function postWorkerDetails(fields,languagesArray,skillsArray,request_id,id,servi
       "&parmanent_address=" +  $('#'+fields[6]).val() + "&education=" + $('#'+fields[7]).val() + "&experience=" + $('#'+fields[8]).val()+ 
       "&birth_date=" + date + "&remarks=" + $('#'+fields[10]).val() + "&newskill=" + $('#'+fields[11]).val() + "&services=" + servicesArray + 
       "&languages=" + languagesArray + "&skills=" + skillsArray + "&request_id=" + request_id + "&type=" + id + "&gender=" + gender + 
-      "&timing=" + time + "&timing2=" + time2 + "&salary=" +  salary + "&salary2=" + salary2 + "&work_time=" +  work_time + "&police=" + police ;
+      "&timing=" + time + "&timing2=" + time2 + "&salary=" +  salary + "&salary2=" + salary2 + "&work_time=" +  work_time + "&police=" + police +
+      "&worker_area=" + workerareasArray + "&newworkerarea=" + newworkerarea;
       /*"&address_proof_name=" + $('#'+fields[2]).val() + "&address_proof_id=" + $('#'+fields[3]).val() + 
       "&id_proof_name=" + $('#'+fields[4]).val() + "&id_proof_id=" +  $('#'+fields[5]).val() + */
   console.log(dataString);
@@ -130,7 +131,6 @@ function postWorkerDetails(fields,languagesArray,skillsArray,request_id,id,servi
         });
         $('#languages').val("");
         $('#skills').val("");
-        //alert("Added Successfully");
       },
       error: function(result){
         alert("result");
@@ -210,6 +210,11 @@ function validateWorkerDetails(request_id, id){
     $(".values").each(function(i){
         skillsArray[i] = $(this).data('value');
     });
+    var workerareasArray = [];
+    $(".workerareavalues").each(function(i){
+        workerareasArray[i] = $(this).data('value');
+    });
+    var newworkerarea = $('#worker_area').val();
     var newskill = $('#newskill').val();
     var time = $('#timing').val();
     var time2 = $('#timing2').val();
@@ -230,29 +235,31 @@ function validateWorkerDetails(request_id, id){
     else if(work_time == 0){
       alert('Enter valid working time');
     }
-    else if(x == 0 && (genericEmptyFieldValidator(newskill) == false)){
+    else if(x == 0 && (newskill == "" || newskill == " " || newskill == null)){
       alert('Please enter or select a Skill');
     }
+    else if(c == 0 && (newworkerarea == "" || newworkerarea == " " || newworkerarea == null)){
+      alert('Please enter or select a Worker Area');
+    }
     else {
-      postWorkerDetails(fields,languagesArray,skillsArray,request_id,id,servicesArray,time,time2,salary,salary2,police,work_time,gender);
+      postWorkerDetails(fields,languagesArray,skillsArray,request_id,id,servicesArray,time,time2,salary,salary2,police,work_time,gender,workerareasArray,newworkerarea);
     }
   }
   return false;
 }
 
-function postRequestDeatils(fields, skills, areas, status, servicesArray, time,time2, salary,salary2, work_time, gender) {
+function postRequestDeatils(fields,skillsArray,areasArray,workerareasArray,status,servicesArray,time,time2,salary,salary2,work_time,gender,newskill,newarea,newworkerarea) {
   var dataString = "";
-  var d = $('#'+fields[4]).val().split('/');   
+  var d = $('#'+fields[3]).val().split('/');   
   var date = d[2] +'-'+ d[1] +'-'+ d[0];
-  dataString = "name=" + $('#'+fields[0]).val() + "&mobile=" + $('#'+fields[1]).val() + "&address=" + $('#'+fields[2]).val() + 
-      "&area=" +  $('#'+fields[3]).val() + "&created_time=" + date + "&remarks=" + $('#'+fields[5]).val() +
-      "&timing=" + time + "&new_status=" + status + "&gender=" +  gender + "&salary=" +  salary + "&work_time=" +  work_time + 
-      "&salary2=" +  salary2 + "&worker_area=" +  areas + "&services=" + servicesArray + "&skills=" + skills + 
-      "&newskill=" + $('#'+fields[7]).val() + "&timing2=" + time2 ; 
+  dataString = "name=" + $('#'+fields[0]).val() + "&mobile=" + $('#'+fields[1]).val() + "&address=" + $('#'+fields[2]).val() + "&area=" +  areasArray 
+      + "&newarea=" + newarea + "&created_time=" + date + "&remarks=" + $('#'+fields[4]).val() +"&timing=" + time + "&new_status=" + status + 
+      "&gender=" +  gender + "&salary=" +  salary + "&work_time=" +  work_time + "&salary2=" +  salary2 + "&worker_area=" + workerareasArray + 
+      "&newworkerarea=" + newworkerarea + "&services=" + servicesArray + "&skills=" + skillsArray + "&newskill=" + newskill + "&timing2=" + time2 ; 
   if(validatePhone($('#'+fields[1]).val()) == false){
     alert('Enter valid Phone Number');
   }
-  else if(!($('#'+fields[4]).val().isValidDate())) alert('Enter valid date');
+  else if(!($('#'+fields[3]).val().isValidDate())) alert('Enter valid date');
   else {
     $.ajax({
       type: "POST",
@@ -281,11 +288,8 @@ function postRequestDeatils(fields, skills, areas, status, servicesArray, time,t
 
 function validateRequestDetails(){
   
-  fields = ["name","mobile","address","area","created_time","remarks","worker_area"];
-  var areasArray = []; 
-  $('#worker_area').each(function(i, selected){ 
-    areasArray[i] = $(selected).val(); 
-  });
+  fields = ["name","mobile","address","created_time","remarks"];
+  
   var servicesArray = []; 
   $('input[name=skill]:checked').each(function(i, checked){ 
     servicesArray[i] = $(checked).val(); 
@@ -294,7 +298,17 @@ function validateRequestDetails(){
   $(".values").each(function(i){
       skillsArray[i] = $(this).data('value');
   });
+  var areasArray = [];
+  $(".areavalues").each(function(i){
+      areasArray[i] = $(this).data('value');
+  });
+  var workerareasArray = [];
+  $(".workerareavalues").each(function(i){
+      workerareasArray[i] = $(this).data('value');
+  });
   var newskill = $('#newskill').val();
+  var newarea = $('#newarea').val();
+  var newworkerarea = $('#worker_area').val();
   var status = $("#new_status").val();
   var time = $('#timing').val();
   var time2 = $('#timing2').val();
@@ -303,7 +317,9 @@ function validateRequestDetails(){
   var work_time = $('#work_time').val();
   var gender = $('#gender').val();
   if(genericEmptyFieldValidator(fields)){
-    var x = document.getElementsByClassName("values").length;
+    var a = document.getElementsByClassName("values").length;
+    var b = document.getElementsByClassName("areavalues").length;
+    var c = document.getElementsByClassName("workerareavalues").length;
     if(time == 0 || time2 == 0 || parseInt(time2) < parseInt(time)){
       alert('Enter valid work timing');
     }
@@ -313,11 +329,20 @@ function validateRequestDetails(){
     else if(work_time == 0){
       alert('Enter valid working time');
     }
-    else if(x == 0 && (genericEmptyFieldValidator(newskill) == false)){
+    else if(a == 0 && (newskill == "" || newskill == " " || newskill == null)){
       alert('Please enter or select a Skill');
     }
+    else if(b == 0 && (newskill == "" || newskill == " " || newskill == null)){
+      alert('Please enter or select a Area');
+    }
+    else if(c == 0 && (newworkerarea == "" || newworkerarea == " " || newworkerarea == null)){
+      alert('Please enter or select a Worker Area');
+    }
+    else if(servicesArray == null || servicesArray == ""){
+      alert('Please select a Requirement');
+    }
     else {
-      postRequestDeatils(fields, skillsArray, areasArray, status, servicesArray, time,time2, salary,salary2, work_time, gender);
+      postRequestDeatils(fields,skillsArray,areasArray,workerareasArray,status,servicesArray,time,time2,salary,salary2,work_time,gender,newskill,newarea,newworkerarea);
     }
   }
   return false;
@@ -553,6 +578,28 @@ function postStatus(dataString) {
   });
 }
 
+function getselectedarea(id, type) {
+  if(type == 1) var area = $('#skills'+id).val();
+  else if(type == 2) var area = $('#2skills'+id).val();
+  else if(type == 3) var area = $('#areas').val();
+  else var area = $('#workerareas').val();
+  $.ajax({
+    type: "POST",
+    url: "ajax/areas.php",
+    data: "area="+area+"&type="+type,
+    cache: false,
+    success: function(result){
+      if(type == 1) $("#selectedskills"+id).append(result);
+      else if(type == 2) $("#2selectedskills"+id).append(result);
+      else if(type == 3) $("#selectedareas").append(result);
+      else $("#selectedworkerareas").append(result);
+    },
+    error: function(result){
+      return false;
+    }
+  }); 
+}
+
 function getselectedskill(id, type) {
   if(type == 1) var skills = $('#skills'+id).val();
   else if(type == 2) var skills = $('#2skills'+id).val();
@@ -754,7 +801,7 @@ function validateUpdateDetails(id){
   return false;
 }
 
-function addmeeting(id){
+function addmeeting(id,type){
   var meeting = "<form class='form-horizontal' id='meeting_details_form"+id+"' onsubmit='return (validateMeetingDetails("+id+"));'>" +
                   "<div class='form-group'>"+
                     "<label class='col-md-2 control-label'>Date</label>"+
@@ -773,9 +820,12 @@ function addmeeting(id){
                     "</div>"+
                     "<label class='col-md-3 control-label'>Worker</label>"+
                     "<div class='col-md-3'>"+
-                      "<select id='worker"+id+"'>"+
-                        "<option value='1' >Worker 1</option>"+
-                        "<option value='2' >Worker 2</option>"+
+                      "<select id='worker"+id+"'>";
+  if(type == 1 || type == 3){
+    var data = "<option value='1' >Worker 1</option><option value='2' >Worker 2</option>";
+  }
+  else var data = "<option value='0' >Pre Meeting</option>";
+  meeting += data +
                       "</select>"+
                     "</div>"+
                   "</div>"+
@@ -810,6 +860,10 @@ function mePick(id) {
       });
     }
   });
+}
+
+function removearea(id) {
+  $('#'+id).remove();
 }
 
 function removeskill(id) {

@@ -31,6 +31,20 @@ if(isset($_POST['first_name'])){
 	$timing2 = $_POST['timing2'];
 	$salary = $_POST['salary'];
 	$salary2 = $_POST['salary2'];
+	$worker_area = $_POST['worker_area'];
+	$newworkerarea = $_POST['newworkerarea'];
+	$areaworker = "";
+	if($worker_area != 0 AND $worker_area != null AND $worker_area != "" ){
+		$eachworkarea = explode(",", $worker_area);
+		foreach ($eachworkarea as $workareas) {
+			$newareaid = trim($workareas);
+			$workarea = mysqli_query ($db_handle, "SELECT * FROM area WHERE id='$newareaid');");
+			$areas = mysqli_fetch_array($workarea);
+			$areaworker .= $areas['name'];
+		}
+		if($newworkerarea != null AND $newworkerarea != "") $areaworker = $areaworker.",".$worker_area;
+	}
+	else $areaworker = $worker_area;
 	if($timing < 12) $time1 = $timing." am";
 	else {
 		if($timing == 12) $time1 = $timing." pm";
@@ -43,10 +57,10 @@ if(isset($_POST['first_name'])){
 	}
 	$newtime = $time1."-".$time2;
 	$newsalary = $salary."-".$salary2." K";
-	mysqli_query($db_handle,"INSERT INTO workers (first_name, last_name, phone, gender, birth_date, age, education, languages, expected_salary, 
+	mysqli_query($db_handle,"INSERT INTO workers (first_name, last_name, phone, gender, area, birth_date, age, education, languages, expected_salary, 
 										current_address, permanent_address, timings, work_time, varification_status, emergency_phone,  experience, 
 										remarks, service, me_id) 
-									VALUES ('$first_name', '$last_name', '$mobile', '$gender', '$birth_date', '$age', '$education', '$languages', 
+									VALUES ('$first_name', '$last_name', '$mobile', '$gender', '$areaworker', '$birth_date', '$age', '$education', '$languages', 
 										'$newsalary', '$current_address', '$parmanent_address', '$newtime', '$work_time', '$police', 
 										'$emergancy_mobile', '$experience',	'$remarks', '$services', '$me_id');");
 	$worker_id = mysqli_insert_id($db_handle);
@@ -61,6 +75,21 @@ if(isset($_POST['first_name'])){
 	foreach ($newskil as $skil){
 		mysqli_query($db_handle,"INSERT INTO skills ( user_id, skill_id, type, employee_id) 
 									VALUES ('$worker_id', '$skil', 'worker', '$me_id');");
+	}
+	$eachworkarea = explode(",", $areaworker);
+	foreach ($eachworkarea as $workareas) {
+		$newarea = trim($workareas);
+		$workarea = mysqli_query ($db_handle, "SELECT * FROM area WHERE name='$newarea');");
+		if(mysqli_num_rows($workarea) != 0){
+			$areas = mysqli_fetch_array($workarea);
+			$area_id = $areas['id'];
+			mysqli_query ($db_handle, "INSERT INTO sr_area (id, sr_id) VALUES ('$area_id', '$sr_id');");
+		}
+		else {
+			mysqli_query ($db_handle, "INSERT INTO area (name) VALUES ('$newarea');");
+			$area_id = mysqli_insert_id($db_handle);
+			mysqli_query ($db_handle, "INSERT INTO sr_area (id, sr_id) VALUES ('$area_id', '$sr_id');");
+		}
 	}
 	if($type == 1){
 		mysqli_query($db_handle,"UPDATE service_request SET match_id = '$worker_id' where id = '$request_id' ;");

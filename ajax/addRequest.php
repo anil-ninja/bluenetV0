@@ -10,11 +10,13 @@ if (isset($_POST['name'])) {
 	$salary = $_POST['salary'];
 	$salary2 = $_POST['salary2'];
 	$area = $_POST['area'];
+	$newarea = $_POST['newarea'];
 	$status = $_POST['new_status'];
 	$remarks = $_POST['remarks'];
 	$time = $_POST['work_time'];
 	$created_time = $_POST['created_time'];
 	$worker_area = $_POST['worker_area'];
+	$newworkerarea = $_POST['newworkerarea'];
 	$gender = $_POST['gender'];
 	$user_id = $_SESSION['user_id'];
 	$skills = $_POST['skills'];
@@ -32,13 +34,37 @@ if (isset($_POST['name'])) {
 	}
 	$newtime = $time1."-".$time2;
 	$newsalary = $salary."-".$salary2." K";
+	$areaworker = "";
+	if($worker_area != 0 AND $worker_area != null AND $worker_area != "" ){
+		$eachworkarea = explode(",", $worker_area);
+		foreach ($eachworkarea as $workareas) {
+			$newareaid = trim($workareas);
+			$workarea = mysqli_query ($db_handle, "SELECT * FROM area WHERE id='$newareaid');");
+			$areas = mysqli_fetch_array($workarea);
+			$areaworker .= $areas['name'];
+		}
+		if($newworkerarea != null AND $newworkerarea != "") $areaworker = $areaworker.",".$worker_area;
+	}
+	else $areaworker = $worker_area;
+	$clientarea = "";
+	if($area != 0 AND $area != null AND $area != "" ){
+		$eachworkarea = explode(",", $area);
+		foreach ($eachworkarea as $workareas) {
+			$newareaid = trim($workareas);
+			$workarea = mysqli_query ($db_handle, "SELECT * FROM area WHERE id='$newareaid');");
+			$areas = mysqli_fetch_array($workarea);
+			$clientarea .= $areas['name'];
+		}
+		if($newarea != null AND $newarea != "") $clientarea = $clientarea.",".$worker_area;
+	}
+	else $clientarea = $worker_area;
 	mysqli_query ($db_handle, "INSERT INTO service_request (name, mobile, requirements, gender, timings, expected_salary, address, area,
 										remarks, status, worker_area, work_time, created_time)	
-									VALUES ('$name','$mobile','$services','$gender','$newtime', '$newsalary', '$address', '$area','$remarks', 
-										'$status', '$worker_area', '$time', '$created_time');");
+									VALUES ('$name','$mobile','$services','$gender','$newtime', '$newsalary', '$address', '$clientarea','$remarks', 
+										'$status', '$areaworker', '$time', '$created_time');");
 	
 	$sr_id = mysqli_insert_id($db_handle);
-	$eachworkarea = explode(",", $worker_area);
+	$eachworkarea = explode(",", $areaworker);
 	foreach ($eachworkarea as $workareas) {
 		$newarea = trim($workareas);
 		$workarea = mysqli_query ($db_handle, "SELECT * FROM area WHERE name='$newarea');");
