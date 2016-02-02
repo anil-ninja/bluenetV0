@@ -601,8 +601,8 @@ function postStatus(dataString) {
 }
 
 function getselectedarea(id, type) {
-  if(type == 1) var area = $('#skills'+id).val();
-  else if(type == 2) var area = $('#2skills'+id).val();
+  if(type == 1) var area = $('#workerareas'+id).val();
+  else if(type == 2) var area = $('#2workerareas'+id).val();
   else if(type == 3) var area = $('#areas').val();
   else var area = $('#workerareas').val();
   $.ajax({
@@ -611,8 +611,8 @@ function getselectedarea(id, type) {
     data: "area="+area+"&type="+type,
     cache: false,
     success: function(result){
-      if(type == 1) $("#selectedskills"+id).append(result);
-      else if(type == 2) $("#2selectedskills"+id).append(result);
+      if(type == 1) $("#selectedworkerareas"+id).append(result);
+      else if(type == 2) $("#2selectedworkerareas"+id).append(result);
       else if(type == 3) $("#selectedareas").append(result);
       else $("#selectedworkerareas").append(result);
     },
@@ -1230,7 +1230,7 @@ function addworker(request_id, id){
                           "</div>"+
                           "<label class='col-md-2 control-label'>or select Worker Area</label>"+
                           "<div class='col-md-2'>"+
-                            "<select class='selectpick"+request_id+"' id='workerareas"+request_id+"' onchange='getselectedarea("+request_id+", 2);' data-live-search='true' data-width='100%' >"+ 
+                            "<select class='selectpick"+request_id+"' id='2workerareas"+request_id+"' onchange='getselectedarea("+request_id+", 2);' data-live-search='true' data-width='100%' >"+ 
                             "</select>"+
                             "<div id='2selectedworkerareas"+request_id+"'></div>"+
                           "</div>"+
