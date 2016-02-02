@@ -175,7 +175,7 @@ if (!isset($_SESSION['user_id'])) {
       				    <div class="form-group">
       				      <label class="col-md-3 control-label">Name</label>
       				      <div class="col-md-3">
-      				        <input type="text" id ="name" onkeyup='nospaces(this);' class="form-control" placeholder="Name" />
+      				        <input type="text" id ="name"  class="form-control" placeholder="Name" />
       				      </div> <!-- /.col -->
       				      <label class="col-md-2 control-label">Mobile No.</label>
       				      <div class="col-md-3">
