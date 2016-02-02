@@ -360,7 +360,7 @@ if (!isset($_SESSION['user_id'])) {
                     </div>
                     <label class="col-md-2 control-label">or select Worker Area</label>
                     <div class='col-md-2'>
-                      <select class='selectpicker' id='skills' onchange="getselectedarea(0, 4);" data-live-search='true' data-width='100%' > 
+                      <select class='selectpicker' id='workerareas' onchange="getselectedarea(0, 4);" data-live-search='true' data-width='100%' > 
                         <option value='0'>Select Worker Area </option>
                         <?php 
                           $area = mysqli_query($db_handle, "SELECT * FROM area ;");

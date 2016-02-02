@@ -11,7 +11,7 @@
                   elseif ($status == "demo") $condition = " status='demo' AND cem_id = " .$user_id ;
                   elseif ($status == "done") $condition = " status='done' AND cem_id = " .$user_id ;
                   else $condition = " cem_id = 0 AND match_id = 0 AND match2_id = 0 AND status = 'open'" ;
-                  $srs = mysqli_query($db_handle, "SELECT * FROM service_request WHERE ".$condition." ORDER BY 'date' DESC; ") ;
+                  $srs = mysqli_query($db_handle, "SELECT * FROM service_request WHERE ".$condition." ORDER BY 'id' DESC; ") ;
                   while ($srsrow = mysqli_fetch_array($srs)){ 
                      $id = $srsrow['id'];
                      $skill = mysqli_query($db_handle, "SELECT a.name, a.id FROM skill_name AS a JOIN skills AS b WHERE b.user_id = '$id'

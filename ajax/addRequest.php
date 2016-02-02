@@ -22,16 +22,8 @@ if (isset($_POST['name'])) {
 	$skills = $_POST['skills'];
 	$services = $_POST['services'];
 	$newskill = $_POST['newskill'];
-	if($timing < 12) $time1 = $timing." am";
-	else {
-		if($timing == 12) $time1 = $timing." pm";
-		else $time1 = ($timing-12)." pm";
-	}
-	if($timing2 < 12) $time2 = $timing2." am";
-	else {
-		if($timing2 == 12) $time2 = $timing2." pm";
-		else $time2 = ($timing2-12)." pm";
-	}
+	$time1 = $timing." am";
+	$time2 = $timing2." pm";
 	$newtime = $time1."-".$time2;
 	$newsalary = $salary."-".$salary2." K";
 	$areaworker = "";

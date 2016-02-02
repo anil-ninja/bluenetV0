@@ -189,19 +189,9 @@ if (!isset($_SESSION['user_id'])) {
 				      	    </div>
                     <label class="col-md-2 control-label" >Worker timings</label>
                     <div class="col-md-4 input-group">
-                      <select id="timing">
-                        <option value="0" >Select Time</option>
-                        <?php for ($i=1; $i < 24; $i++) { 
-                          echo "<option value='".$i."'>".$i."</option>";
-                        }?>
-                      </select>
+                      <input type="text" id ="timing" class="form-control" placeholder="Enter Time" />
                       To
-                      <select id="timing2">
-                        <option value="0" >Select Time</option>
-                        <?php for ($i=1; $i < 24; $i++) { 
-                          echo "<option value='".$i."'>".$i."</option>";
-                        }?>
-                      </select>
+                      <input type="text" id ="timing2" class="form-control" placeholder="Enter Time" />
                     </div>
 				      	    <!-- <label class="col-md-1 control-label">Worker timings</label>
 				      	    <div class="col-md-3">
@@ -360,6 +350,8 @@ if (!isset($_SESSION['user_id'])) {
   <?php include_once "footers.php"; ?>
   <script type="text/javascript">
     $('#created_time').datepicker();
+    $('#timing').timepicker();
+    $('#timing2').timepicker();
   </script>
 </body>
 </html>

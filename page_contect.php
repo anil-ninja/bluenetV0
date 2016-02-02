@@ -7,7 +7,7 @@
                $condition = "";
                $status = $_GET['status'];
                if (!isset($_GET['status'])) {
-                  $srs = mysqli_query($db_handle, "SELECT * FROM service_request WHERE 1=1  ORDER BY 'date' DESC;");
+                  $srs = mysqli_query($db_handle, "SELECT * FROM service_request WHERE 1=1  ORDER BY 'id' DESC;");
                }
                else {
                   if ($status == "open") $condition = " cem_id = 0 AND me_id = 0 ";

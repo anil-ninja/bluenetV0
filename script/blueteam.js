@@ -159,6 +159,11 @@ function validateWorkerDetails(request_id, id){
     $(".values").each(function(i){
         skillsArray[i] = $(this).data('value');
     });
+    var workerareasArray = [];
+    $(".workerareavalues").each(function(i){
+        workerareasArray[i] = $(this).data('value');
+    });
+    var newworkerarea = $('#worker_area'+request_id).val();
     var newskill = $('#newskill'+request_id).val();
     var time = $('#timing'+request_id).val();
     var time2 = $('#timing2'+request_id).val();
@@ -185,6 +190,11 @@ function validateWorkerDetails(request_id, id){
     $(".values").each(function(i){
         skillsArray[i] = $(this).data('value');
     });
+    var workerareasArray = [];
+    $(".workerareavalues").each(function(i){
+        workerareasArray[i] = $(this).data('value');
+    });
+    var newworkerarea = $('#2worker_area'+request_id).val();
     var newskill = $('#2newskill'+request_id).val();
     var time = $('#2timing'+request_id).val();
     var time2 = $('#2timing2'+request_id).val();
@@ -226,6 +236,7 @@ function validateWorkerDetails(request_id, id){
   }
   if(genericEmptyFieldValidator(fields)){
     var x = document.getElementsByClassName("values").length;
+    var c = document.getElementsByClassName("workerareavalues").length;
     if(time == 0 || time2 == 0 || parseInt(time2) < parseInt(time)){
       alert('Enter valid work timing');
     }
@@ -260,6 +271,8 @@ function postRequestDeatils(fields,skillsArray,areasArray,workerareasArray,statu
     alert('Enter valid Phone Number');
   }
   else if(!($('#'+fields[3]).val().isValidDate())) alert('Enter valid date');
+  else if(validateTime(time)== false) alert('Enter valid Time');
+  else if(validateTime(time2)== false) alert('Enter valid Time');
   else {
     $.ajax({
       type: "POST",
@@ -332,7 +345,7 @@ function validateRequestDetails(){
     else if(a == 0 && (newskill == "" || newskill == " " || newskill == null)){
       alert('Please enter or select a Skill');
     }
-    else if(b == 0 && (newskill == "" || newskill == " " || newskill == null)){
+    else if(b == 0 && (newarea == "" || newarea == " " || newarea == null)){
       alert('Please enter or select a Area');
     }
     else if(c == 0 && (newworkerarea == "" || newworkerarea == " " || newworkerarea == null)){
@@ -1053,6 +1066,18 @@ function addworker(request_id, id){
                           "</div>"+
                         "</div>"+
                         "<div class='form-group'>"+
+                          "<label class='col-md-3 control-label'>Enter New Worker Area </label>"+
+                          "<div class='col-md-3'>"+
+                            "<input type='text' id='worker_area"+request_id+"' class='form-control' placeholder='Enter Worker area' data-role='tagsinput'>"+
+                          "</div>"+
+                          "<label class='col-md-2 control-label'>or select Worker Area</label>"+
+                          "<div class='col-md-2'>"+
+                            "<select class='selectpick"+request_id+"' id='workerareas"+request_id+"' onchange='getselectedarea("+request_id+", 1);' data-live-search='true' data-width='100%' >"+ 
+                            "</select>"+
+                            "<div id='selectedworkerareas"+request_id+"'></div>"+
+                          "</div>"+
+                        "</div>"+
+                        "<div class='form-group'>"+
                           "<label class='col-md-3 control-label'></label>"+
                           "<div class='col-md-7'>"+
                             "<button type='submit' class='btn btn-success pull-right' >Submit Details</button>"+
@@ -1060,15 +1085,6 @@ function addworker(request_id, id){
                         "</div>"+
                       "</form>";
     $("#workerform_"+request_id).show().html(worker_modal);
-    $.ajax({
-      type: "POST",
-      url: "ajax/getskill.php",
-      data: "type="+id ,
-      cache: false,
-      success: function(result){
-        $('.selectpicker'+request_id).append(result);
-      }
-    });
     $('#salary'+request_id).append(salarydata); 
     $('#salary2'+request_id).append(salarydata); 
     $('#timing'+request_id).append(timingdata); 
@@ -1193,9 +1209,21 @@ function addworker(request_id, id){
                           "</div>"+
                           "<label class='col-md-2 control-label'>or select Skills</label>"+
                           "<div class='col-md-2'>"+
-                            "<select class='2selectpicker"+request_id+"' id='2skills"+request_id+"' onchange='getselectedskill("+request_id+", 2);' data-live-search='true' data-width='100%' >"+ 
+                            "<select class='selectpicker"+request_id+"' id='2skills"+request_id+"' onchange='getselectedskill("+request_id+", 2);' data-live-search='true' data-width='100%' >"+ 
                             "</select>"+
                             "<div id='2selectedskills"+request_id+"'></div>"+
+                          "</div>"+
+                        "</div>"+
+                        "<div class='form-group'>"+
+                          "<label class='col-md-3 control-label'>Enter New Worker Area </label>"+
+                          "<div class='col-md-3'>"+
+                            "<input type='text' id='2worker_area"+request_id+"' class='form-control' placeholder='Enter Worker area' data-role='tagsinput'>"+
+                          "</div>"+
+                          "<label class='col-md-2 control-label'>or select Worker Area</label>"+
+                          "<div class='col-md-2'>"+
+                            "<select class='selectpick"+request_id+"' id='workerareas"+request_id+"' onchange='getselectedarea("+request_id+", 2);' data-live-search='true' data-width='100%' >"+ 
+                            "</select>"+
+                            "<div id='2selectedworkerareas"+request_id+"'></div>"+
                           "</div>"+
                         "</div>"+
                         "<div class='form-group'>"+
@@ -1206,22 +1234,31 @@ function addworker(request_id, id){
                         "</div>"+
                       "</form>";
     $("#workerform_"+request_id).show().html(worker_modal);
-    $.ajax({
-      type: "POST",
-      url: "ajax/getskill.php",
-      data: "type="+id ,
-      cache: false,
-      success: function(result){
-        $('.2selectpicker'+request_id).append(result);
-      }
-    });
     $('#2salary'+request_id).append(salarydata); 
     $('#2salary2'+request_id).append(salarydata); 
     $('#2timing'+request_id).append(timingdata); 
     $('#2timing2'+request_id).append(timingdata); 
     $('#2work_time'+request_id).append(hourdata); 
     $('#birth_date'+request_id).datepicker(); 
-  }                  
+  }
+  $.ajax({
+    type: "POST",
+    url: "ajax/getskill.php",
+    data: "type="+id ,
+    cache: false,
+    success: function(result){
+      $('.selectpicker'+request_id).append(result);
+    }
+  });
+  $.ajax({
+    type: "POST",
+    url: "ajax/getareas.php",
+    data: "type="+id ,
+    cache: false,
+    success: function(result){
+      $('.selectpick'+request_id).append(result);
+    }
+  });                  
 }
                       /*"<div class='form-group'>"+
                         "<label class='col-md-3 control-label'>Address Proof Name</label>"+

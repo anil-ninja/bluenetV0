@@ -5,7 +5,7 @@
             <div class="panel-primary">
                <?php 
                   if(!isset($_GET['status'])) $status = "followback";
-                  $srs = mysqli_query($db_handle, "SELECT * FROM service_request WHERE status = '$status' ORDER BY 'date' DESC; ") ;
+                  $srs = mysqli_query($db_handle, "SELECT * FROM service_request WHERE status = '$status' ORDER BY 'id' DESC; ") ;
                   while ($srsrow = mysqli_fetch_array($srs)){ 
                ?>
                <div class="list-group">
