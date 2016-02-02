@@ -35,9 +35,9 @@ if (isset($_POST['name'])) {
 			$areas = mysqli_fetch_array($workarea);
 			$areaworker .= $areas['name'];
 		}
-		if($newworkerarea != null AND $newworkerarea != "") $areaworker = $areaworker.",".$worker_area;
+		if($newworkerarea != null AND $newworkerarea != "" AND $newworkerarea != " ") $areaworker = $areaworker.",".$worker_area;
 	}
-	else $areaworker = $worker_area;
+	else $areaworker .= $worker_area;
 	$clientarea = "";
 	if($area != 0 AND $area != null AND $area != "" ){
 		$eachworkarea = explode(",", $area);
@@ -47,9 +47,9 @@ if (isset($_POST['name'])) {
 			$areas = mysqli_fetch_array($workarea);
 			$clientarea .= $areas['name'];
 		}
-		if($newarea != null AND $newarea != "") $clientarea = $clientarea.",".$worker_area;
+		if($newarea != null AND $newarea != "" AND $newarea != " ") $clientarea = $clientarea.",".$worker_area;
 	}
-	else $clientarea = $worker_area;
+	else $clientarea .= $worker_area;
 	mysqli_query ($db_handle, "INSERT INTO service_request (name, mobile, requirements, gender, timings, expected_salary, address, area,
 										remarks, status, worker_area, work_time, created_time)	
 									VALUES ('$name','$mobile','$services','$gender','$newtime', '$newsalary', '$address', '$clientarea','$remarks', 
