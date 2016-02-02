@@ -216,8 +216,8 @@ if (!isset($_SESSION['user_id'])) {
             		   	<label class="col-md-2 control-label">Gender</label>
             		   	<div class="col-md-3">
             		     	<select id = "gender" > 
-            						<option value="male" selected >Male</option>
-            						<option value="female">Female</option>
+            						<option value="male" >Male</option>
+            						<option value="female" selected>Female</option>
             						<option value="any">Any</option>
             					</select>
             			 	</div>
