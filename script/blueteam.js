@@ -274,7 +274,7 @@ function postRequestDeatils(fields,skillsArray,areasArray,workerareasArray,statu
       + "&newarea=" + newarea + "&created_time=" + date + "&remarks=" + $('#'+fields[4]).val() +"&timing=" + time + "&new_status=" + status + 
       "&gender=" +  gender + "&salary=" +  salary + "&work_time=" +  work_time + "&salary2=" +  salary2 + "&worker_area=" + workerareasArray + 
       "&newworkerarea=" + newworkerarea + "&services=" + servicesArray + "&skills=" + skillsArray + "&newskill=" + newskill + "&timing2=" + time2 ; 
-  /*if(validatePhone($('#'+fields[1]).val()) == false){
+  if(validatePhone($('#'+fields[1]).val()) == false){
     alert('Enter valid Phone Number');
   }
   else if(!($('#'+fields[3]).val().isValidDate())) alert('Enter valid date');
@@ -282,7 +282,7 @@ function postRequestDeatils(fields,skillsArray,areasArray,workerareasArray,statu
   else if(validateTime(time2)== false) alert('Enter valid Time');
   //else if(validateSalary(salary)== false) alert('Enter valid Salary');
   //else if(validateSalary(salary2)== false) alert('Enter valid Salary');
-  else {*/
+  else {
     $.ajax({
 
       type: "POST",
@@ -290,15 +290,20 @@ function postRequestDeatils(fields,skillsArray,areasArray,workerareasArray,statu
       data: dataString,
       cache: false,
       success: function(result){
-        alert(""),
-        /*$(fields).each(function(i, idVal){ 
+        alert("Added Successfully"),
+        $(fields).each(function(i, idVal){ 
           $("#"+idVal).val(""); 
-        });*/
-        $('#worker_area').val(result);
-        /*var checkboxes = document.getElementsByTagName('input');
+        });
+        $('#worker_area').val("");
+        $('#newskill').val("");
+        $('#newarea').val("");
+        $('.values').remove();
+        $('.areavalues').remove();
+        $('.workerareavalues').remove();
+        var checkboxes = document.getElementsByTagName('input');
         for (var i = 0; i < checkboxes.length; i++) {
           checkboxes[i].checked = false;
-        };*/
+        };
         return false;
       },
       error: function(result){
@@ -308,12 +313,12 @@ function postRequestDeatils(fields,skillsArray,areasArray,workerareasArray,statu
 
     });
     return false;
-  //}
+  }
 }
 
 function validateRequestDetails(){
   
-  fields = ["name","mobile","address","created_time","remarks"];
+  fields = ["name","mobile","address","created_time","remarks","timing","timing2","salary","salary2"];
   
   var servicesArray = []; 
   $('input[name=skill]:checked').each(function(i, checked){ 
@@ -341,7 +346,7 @@ function validateRequestDetails(){
   var salary2 = $('#salary2').val();
   var work_time = $('#work_time').val();
   var gender = $('#gender').val();
-  /*if(genericEmptyFieldValidator(fields)){
+  if(genericEmptyFieldValidator(fields)){
     var a = document.getElementsByClassName("values").length;
     var b = document.getElementsByClassName("areavalues").length;
     var c = document.getElementsByClassName("workerareavalues").length;
@@ -366,11 +371,11 @@ function validateRequestDetails(){
     else if(servicesArray == null || servicesArray == ""){
       alert('Please select a Requirement');
     }
-    else {*/
+    else {
       postRequestDeatils(fields,skillsArray,areasArray,workerareasArray,status,servicesArray,time,time2,salary,salary2,work_time,gender,newskill,newarea,newworkerarea);
-    /*}
+    }
   }
-  return false;*/
+  return false;
 }
 
 function postUserDeatils(fields, type){

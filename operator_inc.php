@@ -8,7 +8,7 @@
                   $srs = mysqli_query($db_handle, "SELECT * FROM service_request WHERE status = '$status' ORDER BY 'id' DESC; ") ;
                   while ($srsrow = mysqli_fetch_array($srs)){ 
                ?>
-               <div class="list-group">
+               <div class="list-group countRequest">
                   <p style="font-size:20px;padding-left: 2em;">
                      <a  class="list-group-item active"> Client Name  <span style="padding-left: 5em"><?= $srsrow['name'] ?></span></a>
                      <a  class="list-group-item "> Mobile  <span style="padding-left: 8em"><?= $srsrow['mobile'] ?></span></a>

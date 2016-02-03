@@ -18,7 +18,7 @@
                      $skill = mysqli_query($db_handle, "SELECT a.name, a.id FROM skill_name AS a JOIN skills AS b WHERE b.user_id = '$id'
                                                          AND b.status = 'open' AND b.type = 'client' AND a.id = b.skill_id ;");
                ?>
-               <div class="list-group">
+               <div class="list-group countRequest">
                   <p style="font-size:20px;padding-left: 1em;">
                   <?php
                   if($status == 'picked'){ 

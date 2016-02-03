@@ -200,7 +200,7 @@ if (isset($_POST['update_status'])) {
                   $skill = mysqli_query($db_handle, "SELECT a.name, a.id FROM skill_name AS a JOIN skills AS b WHERE b.user_id = '$id'
                                                       AND b.status = 'open' AND b.type = 'client' AND a.id = b.skill_id ;");
               ?>
-                <div class="list-group">
+                <div class="list-group countRequest">
                   <p style="font-size:20px;padding-left: 2em;">
                     <a  class="list-group-item active"> Client Name  <span style="padding-left: 5em"><?= $srsrow['name'] ?></span></a>
                     <a  class="list-group-item "> Mobile  <span style="padding-left: 8em"><?= $srsrow['mobile'] ?></span></a>
