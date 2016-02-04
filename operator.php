@@ -4,13 +4,13 @@ session_start();
 require_once "dbConnection.php";
 
 $status = $_GET["status"];
-
 $user_id = $_SESSION['user_id'];
+$type = $_SESSION['employee_type'];
 
 if (!isset($_SESSION['user_id'])) {  
 	header('Location: index.php');
 }
-if($_SESSION['employee_type'] == 'operator') ;
+if($type == 'operator') ;
 else header('Location: index.php');
 ?>
 
@@ -35,11 +35,11 @@ else header('Location: index.php');
           <div class="clearfix"></div>
           <li <?php if (($_GET['status']=='followback') OR !isset($_GET['status'])) echo "class='active'";?>><a href="operator.php?status=followback">
             <div class="icon-bg bg-blue"></div><i class="glyphicon glyphicon-repeat"></i>
-            <span class="menu-title">Follow back Requests</span></a>
+            <span class="menu-title">Follow back Requests</span><?php countRequest('followback', $type, $user_id, $db_handle); ?></a>
           </li>
           <li <?php if ($_GET['status']=='feedback') echo "class='active'";?>><a href="operator.php?status=feedback">
             <div class="icon-bg bg-blue"></div><i class="glyphicon glyphicon-repeat"></i>
-            <span class="menu-title">Feedback Requests</span></a>
+            <span class="menu-title">Feedback Requests</span><?php countRequest('feedback', $type, $user_id, $db_handle); ?></a>
           </li>
           <li ><a href="insert.php">
             <div class="icon-bg bg-red"></div><i class="glyphicon glyphicon-plus"></i>

@@ -23,6 +23,7 @@
                   elseif ($status == "just_to_know") $condition = "status = 'just_to_know'" ;
                   elseif ($status == "followback") $condition = "status = 'followback'" ;
                   elseif ($status == "feedback") $condition = "status = 'feedback'" ;
+                  elseif ($status == "24") $condition = " work_time = 24 " ;
                   else $condition = "status = ".$status ;
                   $srs = mysqli_query($db_handle, "SELECT * FROM service_request WHERE ".$condition." ORDER BY 'date' DESC; ") ;
                }

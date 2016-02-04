@@ -2,8 +2,8 @@
 session_start();
 
 require_once "dbConnection.php";
-
-if($_SESSION['employee_type'] == 'admin') ;
+$type = $_SESSION['employee_type'];
+if($type == 'admin') ;
 else header('Location: index.php');
 
 $user_id = $_SESSION['user_id'];
@@ -40,63 +40,63 @@ if (!isset($_SESSION['user_id'])) {
           </li>
           <li <?php if (!isset($_GET['status'])) echo "class='active'";?>><a href="request.php">
             <div class="icon-bg bg-orange"></div><i class="glyphicon glyphicon-home"></i>
-            <span class="menu-title">View All requests</span></a>
+            <span class="menu-title">View All requests</span><?php countRequest('all', $type, $user_id, $db_handle); ?></a>
           </li>
           <li <?php if($_GET['status']=='open') echo "class='active'";?> ><a href="request.php?status=open">
             <div class="icon-bg bg-orange"></div><i class="glyphicon glyphicon-search"></i>
-            <span class="menu-title">Open requests</span></a>
+            <span class="menu-title">Open requests</span><?php countRequest('open', $type, $user_id, $db_handle); ?></a>
           </li>
           <li <?php if($_GET['status']=='meeting') echo "class='active'";?>><a href="request.php?status=meeting">
             <div class="icon-bg bg-pink"></div><i class="glyphicon glyphicon-calendar"></i>
-            <span class="menu-title">Meetings</span></a>   
+            <span class="menu-title">Meetings</span><?php countRequest('meeting', $type, $user_id, $db_handle); ?></a>   
           </li>
           <li <?php if($_GET['status']=='demo') echo "class='active'";?>><a href="request.php?status=demo">
             <div class="icon-bg bg-pink"></div><i class="glyphicon glyphicon-asterisk"></i>
-            <span class="menu-title">IN Demo Period</span></a>   
+            <span class="menu-title">IN Demo Period</span><?php countRequest('demo', $type, $user_id, $db_handle); ?></a>   
           </li>
           <li <?php if($_GET['status']=='done') echo "class='active'";?>><a href="request.php?status=done">
             <div class="icon-bg bg-pink"></div><i class="glyphicon glyphicon-ok"></i>
-            <span class="menu-title">Done requests</span></a>   
+            <span class="menu-title">Done requests</span><?php countRequest('done', $type, $user_id, $db_handle); ?></a>   
           </li>
           <li <?php if($_GET['status']=='me_open') echo "class='active'";?>><a href="request.php?status=me_open">
             <div class="icon-bg bg-pink"></div><i class="glyphicon glyphicon-search"></i>
-            <span class="menu-title">ME Open</span></a>   
+            <span class="menu-title">ME Open</span><?php countRequest('me_open', $type, $user_id, $db_handle); ?></a>   
           </li>
           <li <?php if($_GET['status']=='cem_open') echo "class='active'";?>><a href="request.php?status=cem_open">
             <div class="icon-bg bg-pink"></div><i class="glyphicon glyphicon-search"></i>
-            <span class="menu-title">CEM Open</span></a>   
+            <span class="menu-title">CEM Open</span><?php countRequest('cem_open', $type, $user_id, $db_handle); ?></a>   
           </li>
           <li <?php if($_GET['status']=='salary_issue') echo "class='active'";?>><a href="request.php?status=salary_issue">
             <div class="icon-bg bg-blue"></div><i class="glyphicon glyphicon-usd"></i>
-            <span class="menu-title">Salary Issues</span></a>
+            <span class="menu-title">Salary Issues</span><?php countRequest('salary_issue', $type, $user_id, $db_handle); ?></a>
           </li>
           <li <?php if($_GET['status']=='delete') echo "class='active'";?>><a href="request.php?status=delete">
             <div class="icon-bg bg-blue"></div><i class="glyphicon glyphicon-remove"></i>
-            <span class="menu-title">Deleted Requests</span></a>
+            <span class="menu-title">Deleted Requests</span><?php countRequest('delete', $type, $user_id, $db_handle); ?></a>
           </li>
           <li <?php if($_GET['status']=='just_to_know') echo "class='active'";?>><a href="request.php?status=just_to_know">
             <div class="icon-bg bg-blue"></div><i class="glyphicon glyphicon-pencil"></i>
-            <span class="menu-title">Only Information Purpose</span></a>
+            <span class="menu-title">Only Information Purpose</span><?php countRequest('just_to_know', $type, $user_id, $db_handle); ?></a>
           </li>
           <li <?php if($_GET['status']=='decay') echo "class='active'";?>><a href="request.php?status=decay">
             <div class="icon-bg bg-blue"></div><i class="glyphicon glyphicon-trash"></i>
-            <span class="menu-title">Decay Requests</span></a>
+            <span class="menu-title">Decay Requests</span><?php countRequest('decay', $type, $user_id, $db_handle); ?></a>
           </li>
-          <li <?php if($_GET['status']=='decay') echo "class='active'";?>><a href="request.php?status=not_interested">
+          <li <?php if($_GET['status']=='not_interested') echo "class='active'";?>><a href="request.php?status=not_interested">
             <div class="icon-bg bg-blue"></div><i class="glyphicon glyphicon-exclamation-sign"></i>
-            <span class="menu-title">Not Interested</span></a>
+            <span class="menu-title">Not Interested</span><?php countRequest('not_interested', $type, $user_id, $db_handle); ?></a>
           </li>
           <li <?php if($_GET['status']=='followback') echo "class='active'";?>><a href="request.php?status=followback">
             <div class="icon-bg bg-blue"></div><i class="glyphicon glyphicon-repeat"></i>
-            <span class="menu-title">Follow back Requests</span></a>
+            <span class="menu-title">Follow back Requests</span><?php countRequest('followback', $type, $user_id, $db_handle); ?></a>
           </li>
           <li <?php if($_GET['status']=='feedback') echo "class='active'";?>><a href="request.php?status=feedback">
             <div class="icon-bg bg-blue"></div><i class="glyphicon glyphicon-repeat"></i>
-            <span class="menu-title">Feedback Requests</span></a>
+            <span class="menu-title">Feedback Requests</span><?php countRequest('feedback', $type, $user_id, $db_handle); ?></a>
           </li>
-          <li ><a href="24hour.php">
+          <li <?php if($_GET['status']=='24') echo "class='active'";?>><a href="request.php?status=24">
             <div class="icon-bg bg-blue"></div><i class=" glyphicon glyphicon-time"></i>
-            <span class="menu-title">View 24hours Requests</span></a>
+            <span class="menu-title">View 24hours Requests</span><?php countRequest('24', $type, $user_id, $db_handle); ?></a>
           </li>
           <li><a href="area.php">
             <div class="icon-bg bg-blue"></div><i class="glyphicon glyphicon-print"></i>

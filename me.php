@@ -10,8 +10,8 @@ $user_id = $_SESSION['user_id'];
 if (!isset($_SESSION['user_id'])) {  
     header('Location: index.php');
 }
-
-if($_SESSION['employee_type'] == 'me') ;
+$type = $_SESSION['employee_type'];
+if($type == 'me') ;
 else header('Location: index.php');
 
 ?>
@@ -37,19 +37,19 @@ else header('Location: index.php');
           <div class="clearfix"></div>
           <li <?php if (($_GET['status']=='open') OR !isset($_GET['status'])) echo "class='active'";?>><a href="me.php?status=open">
             <div class="icon-bg bg-orange"></div><i class="glyphicon glyphicon-search"></i>
-            <span class="menu-title">Open requests</span></a>
+            <span class="menu-title">Open requests</span><?php countRequest('open', $type, $user_id, $db_handle); ?></a>
           </li>
           <li <?php if ($_GET['status']=='24') echo "class='active'";?>><a href="me.php?status=24">
             <div class="icon-bg bg-pink"></div><i class="glyphicon glyphicon-time"></i>
-            <span class="menu-title">24 Hour open requests</span></a>   
+            <span class="menu-title">24 Hour open requests</span><?php countRequest('24', $type, $user_id, $db_handle); ?></a>   
           </li>
           <li <?php if ($_GET['status']=='picked') echo "class='active'";?>><a href="me.php?status=picked">
             <div class="icon-bg bg-pink"></div><i class="glyphicon glyphicon-user"></i>
-            <span class="menu-title">Picked requests</span></a>   
+            <span class="menu-title">Picked requests</span><?php countRequest('picked', $type, $user_id, $db_handle); ?></a>   
           </li>
           <li <?php if ($_GET['status']=='done') echo "class='active'";?>><a href="me.php?status=done">
             <div class="icon-bg bg-pink"></div><i class="glyphicon glyphicon-thumbs-up"></i>
-            <span class="menu-title">Done requests</span></a>   
+            <span class="menu-title">Done requests</span><?php countRequest('done', $type, $user_id, $db_handle); ?></a>   
           </li>
           <li ><a href="insert.php">
             <div class="icon-bg bg-red"></div><i class="glyphicon glyphicon-plus"></i>

@@ -5,7 +5,7 @@ require_once "dbConnection.php";
 if (!isset($_SESSION['user_id'])) {  
 	header('Location: index.php');
 }
-
+$type = $_SESSION['employee_type'];
 if (isset($_POST['update_status'])) {
 	$newStatus = $_POST['new_status'];
 	$sr_id = $_POST['sr_id'];
