@@ -236,41 +236,26 @@ if (isset($_POST['add_note'])) {
         					  <div class="col-md-3">
         				   	  <input type="text" id ="address" class="form-control" placeholder="address" value="<?= $srsrow['address'] ?>"/>
         				    </div> <!-- /.col -->
+                    <?php 
+                      $timing = $srsrow['timings'];
+                      $time1 = preg_split( '/(\s|:|-)/',$timing);//explode("-", $timing);
+                      
+                      if($time1[0] < 12 && $time1[2] == 'am') $time4 = $time1[0].":".$time1[1];
+                      else {
+                        if($time1[0] < 12 && $time1[2] == 'pm') $time4 = ($time1[0] + 12).":".$time1[1];
+                        else $time4 = $time1[0].":".$time1[1];
+                      }
+                      if($time1[3] < 12 && $time1[5] == 'am') $time5 = $time1[3].":".$time1[4];
+                      else {
+                        if($time1[3] < 12 && $time1[5] == 'pm') $time5 = ($time1[3] + 12).":".$time1[4];
+                        else $time5 = $time1[3].":".$time1[4];
+                      }
+                    ?>
                     <label class="col-md-2 control-label" >Worker timings</label>
-        				    <div class="col-md-4 input-group">
-                      <select id="timing">
-                        <option value="0" >Select Time</option>
-                        <?php 
-                          $timing = $srsrow['timings'];
-                          $time1 = explode("-", $timing);
-                          $time2 = explode(" ",$time1[0]);
-                          $time3 = explode(" ",$time1[1]);
-                          if($time2[0] < 12 && $time2[1] == 'am') $time4 = $time2[0];
-                          else {
-                            if($time2[0] < 12 && $time2[1] == 'pm') $time4 = ($time2[0] + 12);
-                            else $time4 = $time2[0];
-                          }
-                          if($time3[0] < 12 && $time3[1] == 'am') $time5 = $time3[0];
-                          else {
-                            if($time3[0] < 12 && $time3[1] == 'pm') $time5 = ($time3[0] + 12);
-                            else $time5 = $time3[0];
-                          }
-                          for ($i=1; $i < 24; $i++) {
-                            if($i == $time4) echo "<option value='".$i."' selected>".$i."</option>";
-                            else echo "<option value='".$i."'>".$i."</option>";
-                          }
-                        ?>
-                      </select>
-                      To
-                      <select id="timing2">
-                        <option value="0" >Select Time</option>
-                        <?php 
-                          for ($i=1; $i < 24; $i++) { 
-                            if($i == $time5) echo "<option value='".$i."' selected>".$i."</option>";
-                            else echo "<option value='".$i."'>".$i."</option>";
-                          }
-                        ?>
-                      </select>
+                    <div class="col-md-4 input-group">
+                      <input type="text" id ="timing" class="form-control" value="<?= $time4 ?>" />
+                      <div class="input-group-addon">To</div>
+                      <input type="text" id ="timing2" class="form-control" value="<?= $time5 ?>"  />
                     </div>
         				  </div> <!-- /.form-group -->
         				  <div class="form-group">
@@ -278,7 +263,7 @@ if (isset($_POST['add_note'])) {
       					    <div class="col-md-3">
       			        	<input type="text" id ="remarks" class="form-control" placeholder="remarks" value="<?= $srsrow['remarks'] ?>"/>
       			      	</div>
-        				   	<label class="col-md-2 control-label">Other Specifications</label>
+        				   	<label class="col-md-2 control-label">Gender</label>
         				   	<div class="col-md-3">
         				   	  <select id = "gender" >
             					  <?php 
@@ -305,35 +290,17 @@ if (isset($_POST['add_note'])) {
         				    </div>
         				  </div>
         				  <div class="form-group">
-        				   	<label class="col-md-3 control-label">Expected Salary</label>
-                    <div class="col-md-4">
-                      <select id="salary">
-                        <option value="0" >Select Salary</option>
-                        <?php 
-                          $salary = $srsrow['expected_salary'];
-                          $salary1 = explode("-", $salary);
-                          $salary2 = explode(" ",$salary1[1]);
-                          for ($i=2; $i < 15; $i++) { 
-                            if($i == $salary1[0]) echo "<option value='".$i."' selected>".$i."</option>";
-                            else echo "<option value='".$i."'>".$i."</option>";
-                          }
-                        ?>
-                      </select>
-                      To
-                      <select id="salary2">
-                        <option value="0" >Select Salary</option>
-                        <?php 
-                          for ($i=3; $i < 20; $i++) { 
-                            if($i == $salary2[0]) echo "<option value='".$i."' selected>".$i."</option>";
-                            else echo "<option value='".$i."'>".$i."</option>";
-                          }
-                        ?>
-                      </select>
+                    <?php 
+                      $salary = $srsrow['expected_salary'];
+                      $salary1 = explode("-", $salary);
+                      $salary2 = explode(" ",$salary1[1]);
+                    ?>
+                    <label class="col-md-3 control-label">Expected Salary</label>
+                    <div class="col-md-4 input-group">
+                      <input type="number" id ="salary" class="form-control" value="<?= $salary1[0] ?>" />
+                      <div class="input-group-addon">To</div>
+                      <input type="number" id ="salary2" class="form-control" value="<?= $salary2[0] ?>" />
                     </div>
-        				    <label class="col-md-1 control-label">Area</label>
-        				    <div class="col-md-3">
-        				      <input type="text" id ="area" class="form-control" onkeyup='nospaces(this);' placeholder="Area" value="<?= $srsrow['area'] ?>"/>
-        				    </div> <!-- /.col -->
         				  </div>
       				    <div class="form-group">
                     <label class="col-md-3 control-label">Working Time in Hours</label>
@@ -376,6 +343,44 @@ if (isset($_POST['add_note'])) {
                       <div id="selectedskills"></div>
                     </div>
       					  </div>
+                  <div class='form-group'>
+                    <label class='col-md-3 control-label'>Enter New Area </label>
+                    <div class='col-md-3'>
+                      <input type='text' id='newarea' class='form-control' placeholder='Enter Area' data-role='tagsinput'>
+                    </div>
+                    <label class="col-md-2 control-label">or select Areas</label>
+                    <div class='col-md-2'>
+                      <select class='selectpicker' id='areas' onchange="getselectedarea(0, 3);" data-live-search='true' data-width='100%' > 
+                        <option value='0'>Select Area </option>
+                        <?php 
+                          $area = mysqli_query($db_handle, "SELECT * FROM area ;");
+                           while($arearow = mysqli_fetch_array($area)){ 
+                            echo "<option value=".$arearow['id'].">".$arearow['name']."</option>";
+                          }
+                        ?>
+                      </select>
+                      <div id="selectedareas"></div>
+                    </div>
+                  </div>
+                  <div class='form-group'>
+                    <label class='col-md-3 control-label'>Enter New Worker Area </label>
+                    <div class='col-md-3'>
+                      <input type='text' id='worker_area' class='form-control' placeholder='Enter Worker area' data-role='tagsinput'>
+                    </div>
+                    <label class="col-md-2 control-label">or select Worker Area</label>
+                    <div class='col-md-2'>
+                      <select class='selectpicker' id='workerareas' onchange="getselectedarea(0, 4);" data-live-search='true' data-width='100%' > 
+                        <option value='0'>Select Worker Area </option>
+                        <?php 
+                          $area = mysqli_query($db_handle, "SELECT * FROM area ;");
+                           while($arearow = mysqli_fetch_array($area)){ 
+                            echo "<option value=".$arearow['id'].">".$arearow['name']."</option>";
+                          }
+                        ?>
+                      </select>
+                      <div id="selectedworkerareas"></div>
+                    </div>
+                  </div>
                   <div class="form-group">
                     <label class="col-md-3 control-label">Requierments</label>
                     <div class="col-md-3">
@@ -390,10 +395,6 @@ if (isset($_POST['add_note'])) {
                       foreach ($nawreqire as $val)
                          echo '<input type="checkbox" name = "skill" value ='.$val.'/>&nbsp;&nbsp;&nbsp;'.$val.'<br/>';
                     ?>          
-                    </div>
-                    <label class="col-md-2 control-label">Worker Area</label>
-                    <div class="col-md-3">
-                      <input type="text" id ="worker_area" class="form-control" onkeyup='nospaces(this);' placeholder="Worker Area" value="<?= $srsrow['worker_area'] ?>"/>
                     </div>
                   </div>
       				    <div class="form-group">
@@ -423,7 +424,11 @@ if (isset($_POST['add_note'])) {
   <?php include_once "footers.php"; ?>
   <script type="text/javascript">
     $('#created_time').datepicker();
+    $('#timing').timepicker();
+    $('#timing2').timepicker();
     getSkills(<?= $_GET['sr_id'] ?>, "client");
+    getAreas(<?= $_GET['sr_id'] ?>);
+    getWorkerAreas(<?= $_GET['sr_id'] ?>);
   </script>
 </body>
 </html>

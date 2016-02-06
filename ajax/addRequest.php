@@ -60,11 +60,11 @@ if (isset($_POST['name'])) {
 		if($newarea != null AND $newarea != "" AND $newarea != " ") $clientarea = $clientarea.$newarea;
 	}
 	else $clientarea .= $newarea;
-	echo $workerareas;
+	$user_id = $_SESSION['user_id'];
 	mysqli_query ($db_handle, "INSERT INTO service_request (name, mobile, requirements, gender, timings, expected_salary, address, area,
-										remarks, status, worker_area, work_time, created_time)	
+										remarks, status, worker_area, work_time, created_time, user_id)	
 									VALUES ('$name','$mobile','$services','$gender','$newtime', '$newsalary', '$address', '$clientarea','$remarks', 
-										'$status', '$workerareas', '$time', '$created_time');");
+										'$status', '$workerareas', '$time', '$created_time', '$user_id');");
 	
 	$sr_id = mysqli_insert_id($db_handle);
 	$eachworkarea = explode(",", $workerareas);
