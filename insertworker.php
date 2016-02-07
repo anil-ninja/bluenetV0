@@ -86,6 +86,10 @@ if (!isset($_SESSION['user_id'])) {
             <span class="menu-title">Add New User</span></a>
           </li>
           <?php } ?>
+          <li ><a href="statics.php">
+            <div class="icon-bg bg-orange"></div><i class="glyphicon glyphicon-cog"></i>
+            <span class="menu-title">Reports</span></a>
+          </li>
           <li ><a href="request.php">
             <div class="icon-bg bg-orange"></div><i class="glyphicon glyphicon-home"></i>
             <span class="menu-title">View All requests</span><?php countRequest('all', $type, $user_id, $db_handle); ?></a>
@@ -220,11 +224,11 @@ if (!isset($_SESSION['user_id'])) {
                   <div class='form-group'>
                     <label class='col-md-3 control-label'>Mobile No.</label>
                     <div class='col-md-3'>
-                      <input type='number' id='mobile' onkeyup='nospaces(this);' class='form-control' placeholder='Enter 10 digit mobile number'>
+                      <input type='text' id='mobile' onkeyup='nospaces(this);' class='form-control' placeholder='Enter 10 digit mobile number'>
                     </div>
                     <label class='col-md-3 control-label'>Emergancy Mobile No.</label>
                     <div class='col-md-3'>
-                      <input type='number' id='emergancy_mobile' onkeyup='nospaces(this);' class='form-control' placeholder='Enter 10 digit mobile number'>
+                      <input type='text' id='emergancy_mobile' onkeyup='nospaces(this);' class='form-control' placeholder='Enter 10 digit mobile number'>
                     </div>
                   </div>
                   <div class='form-group'>

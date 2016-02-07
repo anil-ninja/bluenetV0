@@ -11,17 +11,17 @@ if(isset($_POST['sr_id'])){
 	$areas = explode(",", $areasRow['worker_area']);
 	$eacharea = trim($areas);
 	foreach ($areas as $value) {
-		if($value != null OR $value != "" OR $value != " "){
+		if($value != null AND $value != "" AND $value != " "){
 			$areaname = mysqli_query($db_handle, "SELECT id FROM area WHERE name = '$value' ;");
+			$areanameRow = mysqli_fetch_array($areaname);
+			$area_id = $areanameRow['id'];
+			$data .= "<div class='workerareavalues' id=".$area_id." data-value=".$area_id.">
+			    		<span class='btn btn-success' style='color: #fff;font-size:14px;font-style: italic;'>&nbsp;".$value. 
+			                "&nbsp;&nbsp;<span class='badge badge-red' onclick='removearea(".$area_id.");'>
+			                <i class='fa fa-minus'></i></span>
+			            </span>
+			        </div>" ;
 		}
-		$areanameRow = mysqli_fetch_array($areaname);
-		$area_id = $areanameRow['id'];
-		$data .= "<div class='workerareavalues' id=".$area_id." data-value=".$area_id.">
-		    		<span class='btn btn-success' style='color: #fff;font-size:14px;font-style: italic;'>&nbsp;".$value. 
-		                "&nbsp;&nbsp;<span class='badge badge-red' onclick='removearea(".$area_id.");'>
-		                <i class='fa fa-minus'></i></span>
-		            </span>
-		        </div>" ;
 	}
 	echo $data ;
 }

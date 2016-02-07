@@ -807,7 +807,7 @@ function postDeatils(fields,skillsArray,areasArray,workerareasArray,servicesArra
       data: dataString,
       cache: false,
       success: function(result){
-        alert("Added Successfully");
+        alert("Updated Successfully");
       },
       error: function(result){
         alert(result);
@@ -918,6 +918,19 @@ function addmeeting(id,type){
   $('#time'+id).timepicker();
 }
 
+function viewrequestDetails(status, type, userId) {
+  $.ajax({
+    type: "POST",
+    url: "ajax/employeeRequests.php",
+    data: "status="+status +"&type="+type+"&user_id="+userId,
+    cache: false,
+    success: function(result){
+      $("#userDetails_"+userId).show().html(result);
+    }
+  });
+  return false;
+}
+
 function mePick(id) {
   bootbox.confirm("Ready for new challange !!!", function(result) {
     if(result){
@@ -937,6 +950,20 @@ function mePick(id) {
       });
     }
   });
+}
+
+function viewDetails(id, type) {
+  $.ajax({
+    type: "POST",
+    url: "ajax/userDetails.php",
+    data: "user_id="+ id + "&type=" + type,
+    cache: false,
+    success: function(result){
+      //alert(result);
+      $("#userDetails_"+id).show().html(result); 
+    }
+  });
+  return false;
 }
 
 function removearea(id) {
@@ -1024,11 +1051,11 @@ function addworker(request_id, id){
                         "<div class='form-group'>"+
                           "<label class='col-md-3 control-label'>Mobile No.</label>"+
                           "<div class='col-md-3'>"+
-                            "<input type='number' id='mobile"+request_id+"' class='form-control' onkeyup='nospaces(this);' placeholder='Enter 10 digit mobile number'>"+
+                            "<input type='text' id='mobile"+request_id+"' class='form-control' onkeyup='nospaces(this);' placeholder='Enter 10 digit mobile number'>"+
                           "</div>"+
                           "<label class='col-md-3 control-label'>Emergancy Mobile No.</label>"+
                           "<div class='col-md-3'>"+
-                            "<input type='number' id='emergancy_mobile"+request_id+"' onkeyup='nospaces(this);' class='form-control' placeholder='Enter 10 digit mobile number'>"+
+                            "<input type='text' id='emergancy_mobile"+request_id+"' onkeyup='nospaces(this);' class='form-control' placeholder='Enter 10 digit mobile number'>"+
                           "</div>"+
                         "</div>"+
                         "<div class='form-group'>"+
@@ -1173,11 +1200,11 @@ function addworker(request_id, id){
                         "<div class='form-group'>"+
                           "<label class='col-md-3 control-label'>Mobile No.</label>"+
                           "<div class='col-md-3'>"+
-                            "<input type='number' id='2mobile"+request_id+"' onkeyup='nospaces(this);' class='form-control' placeholder='Enter 10 digit mobile number'>"+
+                            "<input type='text' id='2mobile"+request_id+"' onkeyup='nospaces(this);' class='form-control' placeholder='Enter 10 digit mobile number'>"+
                           "</div>"+
                           "<label class='col-md-3 control-label'>Emergancy Mobile No.</label>"+
                           "<div class='col-md-3'>"+
-                            "<input type='number' id='2emergancy_mobile"+request_id+"' onkeyup='nospaces(this);' class='form-control' placeholder='Enter 10 digit mobile number'>"+
+                            "<input type='text' id='2emergancy_mobile"+request_id+"' onkeyup='nospaces(this);' class='form-control' placeholder='Enter 10 digit mobile number'>"+
                           "</div>"+
                         "</div>"+
                         "<div class='form-group'>"+

@@ -34,6 +34,10 @@ else header('Location: index.php');
               <div class="icon-bg bg-red"></div><i class="glyphicon glyphicon-plus"></i>
               <span class="menu-title">Add New User</span></a>
             </li>
+            <li ><a href="statics.php">
+              <div class="icon-bg bg-orange"></div><i class="glyphicon glyphicon-cog"></i>
+              <span class="menu-title">Reports</span></a>
+            </li>
             <li ><a href="request.php">
               <div class="icon-bg bg-orange"></div><i class="glyphicon glyphicon-home"></i>
               <span class="menu-title">View All requests</span><?php countRequest('all', $type, $user_id, $db_handle); ?></a>
