@@ -31,7 +31,7 @@ if(isset($_POST['status'])){
                                                       AND b.status = 'open' AND b.type = 'client' AND a.id = b.skill_id ;");
         $data.= "<div class='list-group'>
 	                <p style='font-size:20px;padding-left: 2em;'>
-	                  <a  class='list-group-item active'> Client Name  <span style='padding-left: 5em>".$srsrow['name']."</span></a>
+	                  <a  class='list-group-item active'> Client Name  <span style='padding-left: 5em>".strtoupper($srsrow['name'])."</span></a>
 	                  <a  class='list-group-item'> Mobile  <span style='padding-left: 8em'>".$srsrow['mobile']."</span></a>
 	                  <a  class='list-group-item'> Address <span style='padding-left: 7em'>".$srsrow['address']."</span></a>
 	                  <a  class='list-group-item'> Salary Criteria <span style='padding-left: 5em'>".$srsrow['expected_salary']."</span></a>
@@ -73,7 +73,7 @@ if(isset($_POST['status'])){
         else {
         	if($srsrow['match_id'] != 0){
         		$worker1 = mysqli_query($db_handle, "SELECT b.* FROM service_request as a join workers as b 
-        															WHERE a.id = $sr_id AND a.match_id = b.id ;");
+        															WHERE a.id = '$id' AND a.match_id = b.id ;");
         		$worker1row = mysqli_fetch_array($worker1);
            		$data = $data."                
                       <a  class='list-group-item'> Match 1 worker <span style='padding-left: 4em'>".strtoupper($worker1row['first_name'])." ".
@@ -82,7 +82,7 @@ if(isset($_POST['status'])){
         	}
         	if($srsrow['match2_id'] != 0){
         		$worker2 = mysqli_query($db_handle, "SELECT b.* FROM service_request as a join workers as b 
-        															WHERE a.id = $sr_id AND a.match2_id = b.id ;");
+        															WHERE a.id = '$id' AND a.match2_id = b.id ;");
         		$worker2row = mysqli_fetch_array($worker2);
            $data = $data."                
                       <a  class='list-group-item'> Match 2 worker <span style='padding-left: 4em'>".strtoupper($worker2row['first_name'])." ".
