@@ -31,6 +31,8 @@ if(isset($_POST['first_name'])){
 	$salary2 = $_POST['salary2'];
 	$worker_area = $_POST['worker_area'];
 	$newworkerarea = $_POST['newworkerarea'];
+	$timing = $_POST['timing'];
+	$timing2 = $_POST['timing2'];
 	$areaworker = "";
 	if($worker_area != 0 AND $worker_area != null AND $worker_area != "" ){
 		$eachworkarea = explode(",", $worker_area);
