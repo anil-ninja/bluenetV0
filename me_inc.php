@@ -1,5 +1,5 @@
 <div class="page-content">
-   <div id="tab-general">
+   <div id="tab-general">  
       <div class="row mbl">
          <div class="col-lg-8">
             <div class="panel-primary">
@@ -26,13 +26,25 @@
                      <a  class="list-group-item">Salary Criteria <span style="padding-left: 5em"><?= $srsrow['expected_salary'] ?></span></a>
                      <a  class="list-group-item">Remarks <span style="margin-left: 7em;"><?= $srsrow['remarks'] ?></span></a>
                      <a  class="list-group-item">Creation Date <span style="margin-left: 5em;"><?= $srsrow['created_time'] ?></span></a>
-                     <?php 
+                     <?php
+                        if($srsrow['me_id'] != 0){
+                           $pickDate = mysqli_query($db_handle, "SELECT * FROM updates WHERE request_id = '$id' AND new_status = 'picked' 
+                                                                  AND user_id = '$user_id' ORDER BY update_time DESC LIMIT 0 , 1 ;");
+                           $pickDateRow = mysqli_fetch_array($pickDate) ;
+                           echo "<a  class='list-group-item'>Picked Date <span style='margin-left: 5em;''>".$pickDateRow['update_time']."</span></a>" ;
+                        } 
                         if($cem_id != 0){
                            $cem = mysqli_query($db_handle, "SELECT * FROM user WHERE id = '$cem_id' ; ") ;
                            $cemRow = mysqli_fetch_array($cem) ;
-                           echo "<a  class='list-group-item ''> Picked By  <span style='padding-left: 7em'>".strtoupper($cemRow['first_name'])." ".strtoupper($cemRow['last_name'])."</span></a>
+                           echo "<a  class='list-group-item ''> Picked By CEM <span style='padding-left: 5em'>".strtoupper($cemRow['first_name'])." ".strtoupper($cemRow['last_name'])."</span></a>
                                  <a  class='list-group-item '> Mobile  <span style='padding-left: 8em'>".$cemRow['phone']."</span></a>";
                         }
+                        if($status == "done") {
+                           $doneDate =  mysqli_query($db_handle, "SELECT b.creation_date FROM service_request as a join workers as b 
+                                                                     WHERE a.match2_id=b.id ;");
+                           $doneDateRow = mysqli_fetch_array($doneDate) ;
+                           echo "<a  class='list-group-item'>Done Date <span style='margin-left: 5em;''>".$doneDateRow['creation_date']."</span></a>" ;
+                        } 
                      ?>
                      <a  class="list-group-item "> Skills  <span style="padding-left: 7em">
                      <?php 
@@ -41,6 +53,10 @@
                         }
                      ?>
                         </span>
+                     </a>
+                     <a  class="list-group-item">
+                        <button class="btn btn-primary" style="margin-left: 60%" onclick="viewNotes(<?= $srsrow['id'] ?>, 1);" >View Notes</button>
+                        <button class="btn btn-primary"  onclick="addnote(<?= $srsrow['id'] ?>, 'client_request');">Add Note</button>
                      </a>
                      <a  class="list-group-item">
                      <?php 

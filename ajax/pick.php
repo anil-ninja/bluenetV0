@@ -16,6 +16,8 @@ if(isset($_POST['request_id'])){
 		if(mysqli_error($db_handle)) return false ;
 		else return true ;
 	}
+	mysqli_query ($db_handle, "INSERT INTO updates( user_id, request_id, old_status, new_status) 
+														VALUES ('$me_id', '$request_id', 'open', 'picked') ;");
 }
 mysqli_close($db_handle);
 ?>
