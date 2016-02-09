@@ -233,22 +233,14 @@ if (!isset($_SESSION['user_id'])) {
                   </div>
                   <div class='form-group'>
                     <label class="col-md-3 control-label">Expected Salary</label>
-                    <div class="col-md-4">
-                      <select id="salary">
-                        <option value="0" >Select Salary</option>
-                        <?php for ($i=2; $i < 15; $i++) { 
-                          echo "<option value='".$i."'>".$i."</option>";
-                        }?>
-                      </select>
-                      To
-                      <select id="salary2">
-                        <option value="0" >Select Salary</option>
-                        <?php for ($i=3; $i < 20; $i++) { 
-                          echo "<option value='".$i."'>".$i."</option>";
-                        }?>
-                      </select>
+                    <div class="col-md-4 input-group">
+                      <input type="number" id ="salary" class="form-control" placeholder="Enter Salary" />
+                      <div class="input-group-addon">To</div>
+                      <input type="number" id ="salary2" class="form-control" placeholder="Enter Salary" />
                     </div>
-                    <label class='col-md-2 control-label'>Age</label>
+                  </div>
+                  <div class='form-group'>
+                    <label class='col-md-3 control-label'>Age</label>
                     <div class='col-md-3'>
                       <input type='number' id='age' class='form-control' placeholder='Age in years'>
                     </div>
@@ -297,21 +289,11 @@ if (!isset($_SESSION['user_id'])) {
                         }?>
                       </select>
                     </div>
-                    <label class="col-md-3 control-label" >Timings</label>
-                    <div class="col-md-3 input-group">
-                      <select id="timing">
-                        <option value="0" >Select Time</option>
-                        <?php for ($i=1; $i < 24; $i++) { 
-                          echo "<option value='".$i."'>".$i."</option>";
-                        }?>
-                      </select>
-                      To
-                      <select id="timing2">
-                        <option value="0" >Select Time</option>
-                        <?php for ($i=1; $i < 24; $i++) { 
-                          echo "<option value='".$i."'>".$i."</option>";
-                        }?>
-                      </select>
+                    <label class="col-md-2 control-label" >Work timings</label>
+                    <div class="col-md-4 input-group">
+                      <input type="text" id ="timing" class="form-control" placeholder="Enter Time" />
+                      <div class="input-group-addon">To</div>
+                      <input type="text" id ="timing2" class="form-control" placeholder="Enter Time" />
                     </div>
                   </div>
                   <div class='form-group'>
@@ -394,6 +376,8 @@ if (!isset($_SESSION['user_id'])) {
   <?php include_once "footers.php"; ?>
   <script type="text/javascript">
     $('#birth_date').datepicker();
+    $('#timing').timepicker();
+    $('#timing2').timepicker();
   </script>
 </body>
 </html>

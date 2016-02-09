@@ -106,17 +106,17 @@ function trim(s){
   return s.replace(/^\s+|\s+$/, '');
 }
 
-function postWorkerDetails(fields,languagesArray,skillsArray,request_id,id,servicesArray,time,time2,salary,salary2,police,work_time,gender,workerareasArray,newworkerarea) {
+function postWorkerDetails(fields,languagesArray,skillsArray,request_id,id,servicesArray,police,work_time,gender,workerareasArray,newskill,newworkerarea) {
   var dataString = "";
   var d = $('#'+fields[9]).val().split('/');   
   var date = d[2] +'-'+ d[1] +'-'+ d[0];
   dataString = "first_name=" + $('#'+fields[0]).val() + "&last_name=" + $('#'+fields[1]).val() + "&mobile=" +  $('#'+fields[2]).val() + 
       "&emergancy_mobile=" +  $('#'+fields[3]).val() + "&age=" +  $('#'+fields[4]).val() + "&current_address=" + $('#'+fields[5]).val() + 
       "&parmanent_address=" +  $('#'+fields[6]).val() + "&education=" + $('#'+fields[7]).val() + "&experience=" + $('#'+fields[8]).val()+ 
-      "&birth_date=" + date + "&remarks=" + $('#'+fields[10]).val() + "&newskill=" + $('#'+fields[11]).val() + "&services=" + servicesArray + 
+      "&birth_date=" + date + "&remarks=" + $('#'+fields[10]).val() + "&newskill=" + newskill + "&services=" + servicesArray + 
       "&languages=" + languagesArray + "&skills=" + skillsArray + "&request_id=" + request_id + "&type=" + id + "&gender=" + gender + 
-      "&timing=" + time + "&timing2=" + time2 + "&salary=" +  salary + "&salary2=" + salary2 + "&work_time=" +  work_time + "&police=" + police +
-      "&worker_area=" + workerareasArray + "&newworkerarea=" + newworkerarea;
+      "&timing=" + $('#'+fields[12]).val() + "&timing2=" + $('#'+fields[13]).val() + "&salary=" +  $('#'+fields[14]).val() + "&salary2=" + 
+      $('#'+fields[15]).val() + "&work_time=" +  work_time + "&police=" + police + "&worker_area=" + workerareasArray + "&newworkerarea=" + newworkerarea;
       /*"&address_proof_name=" + $('#'+fields[2]).val() + "&address_proof_id=" + $('#'+fields[3]).val() + 
       "&id_proof_name=" + $('#'+fields[4]).val() + "&id_proof_id=" +  $('#'+fields[5]).val() + */
   console.log(dataString);
@@ -151,8 +151,8 @@ function postWorkerDetails(fields,languagesArray,skillsArray,request_id,id,servi
 function validateWorkerDetails(request_id, id){
   if(id == 1) {
     fields = ["first_name"+request_id,"last_name"+request_id, "mobile"+request_id, "emergancy_mobile"+request_id, "age"+request_id,  
-            "current_address"+request_id, "parmanent_address"+request_id, "education"+request_id, "experience"+request_id, 
-            "birth_date"+request_id, "remarks"+request_id, "services"+request_id];
+            "current_address"+request_id, "parmanent_address"+request_id, "education"+request_id, "experience"+request_id,"birth_date"+request_id, 
+            "remarks"+request_id, "services"+request_id,"timing"+request_id,"timing2"+request_id,"salary"+request_id,"salary2"+request_id];
             //"address_proof_name"+request_id, "address_proof_id"+request_id, "id_proof_name"+request_id, "id_proof_id"+request_id,
     var languagesArray = []; 
     $('#languages'+request_id).each(function(i, selected){ 
@@ -182,8 +182,8 @@ function validateWorkerDetails(request_id, id){
   }
   else if(id == 2){
     fields = ["2first_name"+request_id,"2last_name"+request_id, "2mobile"+request_id, "2emergancy_mobile"+request_id, "2age"+request_id,  
-            "2current_address"+request_id, "2parmanent_address"+request_id, "2education"+request_id, "2experience"+request_id, 
-            "2birth_date"+request_id, "2remarks"+request_id, "2services"+request_id];
+            "2current_address"+request_id, "2parmanent_address"+request_id, "2education"+request_id, "2experience"+request_id,"2birth_date"+request_id,
+            "2remarks"+request_id, "2services"+request_id,"timing"+request_id,"timing2"+request_id,"salary"+request_id,"salary2"+request_id];
             //"2address_proof_name"+request_id, "2address_proof_id"+request_id,"2id_proof_name"+request_id, "2id_proof_id"+request_id,
     var languagesArray = []; 
     $('#2languages'+request_id).each(function(i, selected){ 
@@ -213,7 +213,7 @@ function validateWorkerDetails(request_id, id){
   }
   else {
     fields = ["first_name","last_name", "mobile", "emergancy_mobile", "age", "current_address", "parmanent_address", "education", 
-            "experience", "birth_date", "remarks", "services"];
+            "experience", "birth_date", "remarks", "services","timing","timing2","salary","salary2"];
             //"address_proof_name", "address_proof_id", "id_proof_name", "id_proof_id",
     var languagesArray = []; 
     $('#languages').each(function(i, selected){ 
@@ -260,26 +260,27 @@ function validateWorkerDetails(request_id, id){
       alert('Please enter or select a Worker Area');
     }
     else {
-      postWorkerDetails(fields,languagesArray,skillsArray,request_id,id,servicesArray,time,time2,salary,salary2,police,work_time,gender,workerareasArray,newworkerarea);
+      postWorkerDetails(fields,languagesArray,skillsArray,request_id,id,servicesArray,police,work_time,gender,workerareasArray,newskill,newworkerarea);
     }
   }
   return false;
 }
 
-function postRequestDeatils(fields,skillsArray,areasArray,workerareasArray,status,servicesArray,time,time2,salary,salary2,work_time,gender,newskill,newarea,newworkerarea) {
+function postRequestDeatils(fields,skillsArray,areasArray,workerareasArray,status,servicesArray,work_time,gender,newskill,newarea,newworkerarea,priority) {
   var dataString = "";
   var d = $('#'+fields[3]).val().split('/');   
   var date = d[2] +'-'+ d[1] +'-'+ d[0];
   dataString = "name=" + $('#'+fields[0]).val() + "&mobile=" + $('#'+fields[1]).val() + "&address=" + $('#'+fields[2]).val() + "&area=" +  areasArray 
-      + "&newarea=" + newarea + "&created_time=" + date + "&remarks=" + $('#'+fields[4]).val() +"&timing=" + time + "&new_status=" + status + 
-      "&gender=" +  gender + "&salary=" +  salary + "&work_time=" +  work_time + "&salary2=" +  salary2 + "&worker_area=" + workerareasArray + 
-      "&newworkerarea=" + newworkerarea + "&services=" + servicesArray + "&skills=" + skillsArray + "&newskill=" + newskill + "&timing2=" + time2 ; 
+      + "&newarea=" + newarea + "&created_time=" + date + "&remarks=" + $('#'+fields[4]).val() +"&timing=" + $('#'+fields[5]).val() + "&new_status=" 
+      + status + "&gender=" +  gender + "&salary=" +  $('#'+fields[7]).val() + "&work_time=" +  work_time + "&salary2=" +  $('#'+fields[8]).val() + 
+      "&worker_area=" + workerareasArray + "&newworkerarea=" + newworkerarea + "&services=" + servicesArray + "&skills=" + skillsArray + "&newskill="
+      + newskill + "&timing2=" + $('#'+fields[6]).val() + "&priority=" + priority; 
   if(validatePhone($('#'+fields[1]).val()) == false){
     alert('Enter valid Phone Number');
   }
   else if(!($('#'+fields[3]).val().isValidDate())) alert('Enter valid date');
-  else if(validateTime(time)== false) alert('Enter valid Time');
-  else if(validateTime(time2)== false) alert('Enter valid Time');
+  else if(validateTime($('#'+fields[5]).val())== false) alert('Enter valid Time');
+  else if(validateTime($('#'+fields[6]).val())== false) alert('Enter valid Time');
   //else if(validateSalary(salary)== false) alert('Enter valid Salary');
   //else if(validateSalary(salary2)== false) alert('Enter valid Salary');
   else {
@@ -346,6 +347,7 @@ function validateRequestDetails(){
   var salary2 = $('#salary2').val();
   var work_time = $('#work_time').val();
   var gender = $('#gender').val();
+  var priority = $('#priority').val();
   if(genericEmptyFieldValidator(fields)){
     var a = document.getElementsByClassName("values").length;
     var b = document.getElementsByClassName("areavalues").length;
@@ -372,7 +374,7 @@ function validateRequestDetails(){
       alert('Please select a Requirement');
     }
     else {
-      postRequestDeatils(fields,skillsArray,areasArray,workerareasArray,status,servicesArray,time,time2,salary,salary2,work_time,gender,newskill,newarea,newworkerarea);
+      postRequestDeatils(fields,skillsArray,areasArray,workerareasArray,status,servicesArray,work_time,gender,newskill,newarea,newworkerarea,priority);
     }
   }
   return false;
@@ -782,21 +784,21 @@ function changeStatus(id, oldStatus, type){
   else {}
 }
 
-function postDeatils(fields,skillsArray,areasArray,workerareasArray,servicesArray,time,time2,salary,salary2,work_time,gender,newskill,newarea,newworkerarea,id){
+function postDeatils(fields,skillsArray,areasArray,workerareasArray,servicesArray,work_time,gender,newskill,newarea,newworkerarea,id,priority){
   var dataString = "";
   var d = $('#'+fields[3]).val().split('/');   
   var date = d[2] +'-'+ d[1] +'-'+ d[0];
   dataString = "name=" + $('#'+fields[0]).val() + "&mobile=" + $('#'+fields[1]).val() + "&address=" + $('#'+fields[2]).val() + "&area=" +  areasArray 
-      + "&newarea=" + newarea + "&created_time=" + date + "&remarks=" + $('#'+fields[4]).val() +"&timing=" + time + "&new_status=" + status + 
-      "&gender=" +  gender + "&salary=" +  salary + "&work_time=" +  work_time + "&salary2=" +  salary2 + "&worker_area=" + workerareasArray + 
-      "&newworkerarea=" + newworkerarea + "&services=" + servicesArray + "&skills=" + skillsArray + "&newskill=" + newskill + "&timing2=" + time2 +
-      "&sr_id=" + id ; 
+      + "&newarea=" + newarea + "&created_time=" + date + "&remarks=" + $('#'+fields[4]).val() +"&timing=" + $('#'+fields[5]).val() + 
+      "&new_status=" + status + "&gender=" +  gender + "&salary=" +  $('#'+fields[7]).val() + "&work_time=" +  work_time + "&salary2=" +  $('#'+fields[8]).val()
+      + "&worker_area=" + workerareasArray + "&newworkerarea=" + newworkerarea + "&services=" + servicesArray + "&skills=" + skillsArray + 
+      "&newskill=" + newskill + "&timing2=" + $('#'+fields[6]).val() + "&sr_id=" + id + "&priority=" + priority; 
   if(validatePhone($('#'+fields[1]).val()) == false){
     alert('Enter valid Phone Number');
   }
   else if(!($('#'+fields[3]).val().isValidDate())) alert('Enter valid date');
-  else if(validateTime(time)== false) alert('Enter valid Time');
-  else if(validateTime(time2)== false) alert('Enter valid Time');
+  else if(validateTime($('#'+fields[5]).val())== false) alert('Enter valid Time');
+  else if(validateTime($('#'+fields[6]).val())== false) alert('Enter valid Time');
   //else if(validateSalary(salary)== false) alert('Enter valid Salary');
   //else if(validateSalary(salary2)== false) alert('Enter valid Salary');
   else {
@@ -846,6 +848,7 @@ function validateUpdateDetails(id){
   var salary2 = $('#salary2').val();
   var work_time = $('#work_time').val();
   var gender = $('#gender').val();
+  var priority = $('#priority').val();
   if(genericEmptyFieldValidator(fields)){
     var a = document.getElementsByClassName("values").length;
     var b = document.getElementsByClassName("areavalues").length;
@@ -872,7 +875,7 @@ function validateUpdateDetails(id){
       alert('Please select a Requirement');
     }
     else {
-      postDeatils(fields,skillsArray,areasArray,workerareasArray,servicesArray,time,time2,salary,salary2,work_time,gender,newskill,newarea,newworkerarea,id);
+      postDeatils(fields,skillsArray,areasArray,workerareasArray,servicesArray,work_time,gender,newskill,newarea,newworkerarea,id,priority);
     }
   }
   return false;
@@ -1026,16 +1029,6 @@ function addworker(request_id, id){
   for (var i = 2; i < 25; i++) {
     hourdata += "<option value="+i+">"+i+"</option>";
   }
-  var salarydata = "";
-  salarydata += "<option value='0' >Select Salary</option>";
-  for (var i = 2; i < 20; i++) {
-    salarydata += "<option value="+i+">"+i+"</option>";
-  }
-  var timingdata = "";
-  timingdata += "<option value='0' >Select Time</option>";
-  for (var i = 1; i < 24; i++) {
-    timingdata += "<option value="+i+">"+i+"</option>";
-  }
   if (id == 1){
     var worker_modal = "<form class='form-horizontal' id='worker_details_form"+request_id+"' onsubmit='return (validateWorkerDetails("+request_id+","+ id+"));'>" +
                         "<div class='form-group'>"+
@@ -1060,13 +1053,14 @@ function addworker(request_id, id){
                         "</div>"+
                         "<div class='form-group'>"+
                           "<label class='col-md-2 control-label'>Expected Salary</label>"+
-                          "<div class='col-md-4'>"+
-                            "<select id='salary"+request_id+"'>"+
-                            "</select> To "+
-                            "<select id='salary2"+request_id+"'>"+
-                            "</select>"+
+                          "<div class='col-md-6 input-group'>"+
+                            "<input type='number' id ='salary"+request_id+"' class='form-control' placeholder='Enter Salary' />"+
+                            "<div class='input-group-addon'>To</div>"+
+                            "<input type='number' id ='salary2"+request_id+"' class='form-control' placeholder='Enter Salary' />"+
                           "</div>"+
-                          "<label class='col-md-1 control-label'>Age</label>"+
+                        "</div>"+
+                        "<div class='form-group'>"+
+                          "<label class='col-md-3 control-label'>Age</label>"+
                           "<div class='col-md-3'>"+
                             "<input type='number' id='age"+request_id+"' class='form-control' placeholder='Age in years'>"+
                           "</div>"+
@@ -1107,12 +1101,13 @@ function addworker(request_id, id){
                         "</div>"+
                         "<div class='form-group'>"+
                           "<label class='col-md-2 control-label'>Timings</label>"+
-                          "<div class='col-md-4'>"+
-                            "<select id='timing"+request_id+"'>"+
-                            "</select> To "+
-                            "<select id='timing2"+request_id+"'>"+
-                            "</select>"+
+                          "<div class='col-md-6 input-group'>"+
+                            "<input type='text' id ='timing"+request_id+"' class='form-control' placeholder='Enter Time' />"+
+                            "<div class='input-group-addon'>To</div>"+
+                            "<input type='text' id ='timing2"+request_id+"' class='form-control' placeholder='Enter Time' />"+
                           "</div>"+
+                        "</div>"+
+                        "<div class='form-group'>"+
                           "<label for='demo-msk-date' class='col-md-3 control-label'>Working Hours</label>"+
                           "<div class='col-md-3'>"+
                             "<select id='work_time"+request_id+"'>"+
@@ -1176,12 +1171,10 @@ function addworker(request_id, id){
                         "</div>"+
                       "</form>";
     $("#workerform_"+request_id).show().html(worker_modal);
-    $('#salary'+request_id).append(salarydata); 
-    $('#salary2'+request_id).append(salarydata); 
-    $('#timing'+request_id).append(timingdata); 
-    $('#timing2'+request_id).append(timingdata); 
     $('#work_time'+request_id).append(hourdata);
-    $('#birth_date'+request_id).datepicker(); 
+    $('#birth_date'+request_id).datepicker();
+    $('#timing'+request_id).timepicker();
+    $('#timing2'+request_id).timepicker(); 
     //document.getElementById("addworker").innerHTML = worker_modal;
     //$("ddworker").innerhtml(worker_modal) }
   }
@@ -1209,16 +1202,17 @@ function addworker(request_id, id){
                         "</div>"+
                         "<div class='form-group'>"+
                           "<label class='col-md-2 control-label'>Expected Salary</label>"+
-                            "<div class='col-md-4'>"+
-                              "<select id='2salary"+request_id+"'>"+
-                              "</select> To "+
-                              "<select id='2salary2"+request_id+"'>"+
-                              "</select>"+
-                            "</div>"+
-                            "<label class='col-md-1 control-label'>Age</label>"+
-                            "<div class='col-md-3'>"+
-                              "<input type='number' id='2age"+request_id+"' class='form-control' placeholder='Age in years'>"+
-                            "</div>"+
+                          "<div class='col-md-6 input-group'>"+
+                            "<input type='number' id ='2salary"+request_id+"' class='form-control' placeholder='Enter Salary' />"+
+                            "<div class='input-group-addon'>To</div>"+
+                            "<input type='number' id ='2salary2"+request_id+"' class='form-control' placeholder='Enter Salary' />"+
+                          "</div>"+
+                        "</div>"+
+                        "<div class='form-group'>"+
+                          "<label class='col-md-3 control-label'>Age</label>"+
+                          "<div class='col-md-3'>"+
+                            "<input type='number' id='2age"+request_id+"' class='form-control' placeholder='Age in years'>"+
+                          "</div>"+
                         "</div>"+
                         "<div class='form-group'>"+
                           "<label class='col-md-3 control-label'>Current address</label>"+
@@ -1256,17 +1250,18 @@ function addworker(request_id, id){
                         "</div>"+
                         "<div class='form-group'>"+
                           "<label class='col-md-2 control-label'>Timings</label>"+
-                            "<div class='col-md-4'>"+
-                              "<select id='2timing"+request_id+"'>"+
-                              "</select> To "+
-                              "<select id='2timing2"+request_id+"'>"+
-                              "</select>"+
-                            "</div>"+
-                            "<label for='demo-msk-date' class='col-md-3 control-label'>Working Hours</label>"+
-                            "<div class='col-md-3'>"+
-                              "<select id='2work_time"+request_id+"'>"+
-                              "</select>"+
-                            "</div>"+
+                            "<div class='col-md-6 input-group'>"+
+                            "<input type='text' id ='2timing"+request_id+"' class='form-control' placeholder='Enter Time' />"+
+                            "<div class='input-group-addon'>To</div>"+
+                            "<input type='text' id ='2timing2"+request_id+"' class='form-control' placeholder='Enter Time' />"+
+                          "</div>"+
+                        "</div>"+
+                        "<div class='form-group'>"+
+                          "<label for='demo-msk-date' class='col-md-3 control-label'>Working Hours</label>"+
+                          "<div class='col-md-3'>"+
+                            "<select id='2work_time"+request_id+"'>"+
+                            "</select>"+
+                          "</div>"+
                         "</div>"+
                         "<div class='form-group'>"+
                           "<label class='col-md-3 control-label'>Remarks</label>"+
@@ -1325,12 +1320,10 @@ function addworker(request_id, id){
                         "</div>"+
                       "</form>";
     $("#workerform_"+request_id).show().html(worker_modal);
-    $('#2salary'+request_id).append(salarydata); 
-    $('#2salary2'+request_id).append(salarydata); 
-    $('#2timing'+request_id).append(timingdata); 
-    $('#2timing2'+request_id).append(timingdata); 
     $('#2work_time'+request_id).append(hourdata); 
-    $('#birth_date'+request_id).datepicker(); 
+    $('#2birth_date'+request_id).datepicker();
+    $('#2timing'+request_id).timepicker();
+    $('#2timing2'+request_id).timepicker();  
   }
   $.ajax({
     type: "POST",

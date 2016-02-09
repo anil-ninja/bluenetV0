@@ -43,7 +43,7 @@ if(isset($_POST['id'])){
 					</tr>
 					<tr>
 						<td>Salary Criteria</td>
-						<td>".$srsrow['expected_salary']."</td>
+						<td>".$srsrow['min_salary']."-".$srsrow['max_salary']." K </td>
 					</tr>
 					<tr>
 						<td>Timings</td>

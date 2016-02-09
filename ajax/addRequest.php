@@ -22,6 +22,7 @@ if (isset($_POST['name'])) {
 	$skills = $_POST['skills'];
 	$services = $_POST['services'];
 	$newskill = $_POST['newskill'];
+	$priority = $_POST['priority'];
 	$time11 = explode(":", $timing);
 	$time22 = explode(":", $timing2);
 	if($time11[0] < 12) $time1 = $timing." am";
@@ -35,7 +36,6 @@ if (isset($_POST['name'])) {
 		else $time2 = ($time22[0]-12).":".$time22[1]." pm";
 	}
 	$newtime = $time1."-".$time2;
-	$newsalary = $salary."-".$salary2." K";
 	$workerareas = "";
 	if($worker_areas != 0 AND $worker_areas != null AND $worker_areas != "" ){
 		$eachworkerarea = explode(",", $worker_areas);
@@ -61,10 +61,10 @@ if (isset($_POST['name'])) {
 	}
 	else $clientarea .= $newarea;
 	$user_id = $_SESSION['user_id'];
-	mysqli_query ($db_handle, "INSERT INTO service_request (name, mobile, requirements, gender, timings, expected_salary, address, area,
-										remarks, status, worker_area, work_time, created_time, user_id)	
-									VALUES ('$name','$mobile','$services','$gender','$newtime', '$newsalary', '$address', '$clientarea','$remarks', 
-										'$status', '$workerareas', '$time', '$created_time', '$user_id');");
+	mysqli_query ($db_handle, "INSERT INTO service_request (name, mobile, requirements, gender, timings, min_salary, max_salary, address, area,
+										remarks, status, worker_area, work_time, created_time, user_id, priority)	
+									VALUES ('$name','$mobile','$services','$gender','$newtime', '$salary', '$salary2' '$address', '$clientarea','$remarks', 
+										'$status', '$workerareas', '$time', '$created_time', '$user_id', '$priority');");
 	
 	$sr_id = mysqli_insert_id($db_handle);
 	$eachworkarea = explode(",", $workerareas);

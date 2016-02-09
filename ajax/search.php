@@ -15,7 +15,7 @@ if(isset($_POST['phone'])){
                 	  <a  class='list-group-item'> Mobile  <span style='padding-left: 8em'>".$srsrow['phone']."</span></a>
             	      <a  class='list-group-item'> Current Address <span style='padding-left: 5em'>".$srsrow['current_address']."</span></a>
                 	  <a  class='list-group-item'> Permanent Address <span style='padding-left: 5em'>".$srsrow['permanent_address']."</span></a>
-	                  <a  class='list-group-item'> Salary Criteria <span style='padding-left: 8em'>".$srsrow['expected_salary']."</span></a>
+	                  <a  class='list-group-item'> Salary Criteria <span style='padding-left: 8em'>".$srsrow['min_salary']."-".$srsrow['max_salary']." K </span></a>
 	                  <a  class='list-group-item'> Timings <span style='padding-left: 5em'>".$srsrow['timings']." Hours</span></a>
 	                  <a  class='list-group-item'> Working Time <span style='padding-left: 5em'>".$srsrow['work_time']."</span></a>
 	                  <a  class='list-group-item'> Age <span style='padding-left: 7em'>".$srsrow['age']."</span></a>
@@ -41,10 +41,10 @@ if(isset($_POST['phone'])){
                                                       AND b.status = 'open' AND b.type = 'client' AND a.id = b.skill_id ;");
         	$data.= "<div class='list-group'>
 	        	        <p style='font-size:20px;padding-left: 2em;'>
-	            	      <a  class='list-group-item active'> Client Name  <span style='padding-left: 5em'>".$requestRow['name']."</span></a>
+	            	      ".headerColor($requestRow['priority'], $requestRow['name'] )."
 	                	  <a  class='list-group-item'> Mobile  <span style='padding-left: 8em'>".$requestRow['mobile']."</span></a>
 	            	      <a  class='list-group-item'> Address <span style='padding-left: 7em'>".$requestRow['address']."</span></a>
-	                	  <a  class='list-group-item'> Salary Criteria <span style='padding-left: 5em'>".$requestRow['expected_salary']."</span></a>
+	                	  <a  class='list-group-item'> Salary Criteria <span style='padding-left: 5em'>".$requestRow['min_salary']."-".$requestRow['max_salary']." K </span></a>
 		                  <a  class='list-group-item'> Timings <span style='padding-left: 8em'>".$requestRow['timings']."</span></a>
 		                  <a  class='list-group-item'> Working Time <span style='padding-left: 5em'>".$requestRow['work_time']." Hours</span></a>
 		                  <a  class='list-group-item'> Requirements <span style='padding-left: 5em'>". $requestRow['requirements']."</span></a>

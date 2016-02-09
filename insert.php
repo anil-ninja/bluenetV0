@@ -240,22 +240,6 @@ if (!isset($_SESSION['user_id'])) {
                       <div class="input-group-addon">To</div>
                       <input type="number" id ="salary2" class="form-control" placeholder="Enter Salary" />
                     </div>
-                    <!-- <div class="col-md-4">
-                      <select id="salary">
-                        <option value="0" >Select Salary</option>
-                        <?php /*for ($i=2; $i < 15; $i++) { 
-                          echo "<option value='".$i."'>".$i."</option>";
-                        }*/?>
-                      </select>
-                      To
-                      <select id="salary2">
-                        <option value="0" >Select Salary</option>
-                        <?php /*for ($i=3; $i < 20; $i++) { 
-                          echo "<option value='".$i."'>".$i."</option>";
-                        }*/?>
-                      </select>
-                    </div> -->
-            			  <!-- /.col -->
             			</div>
             			<div class="form-group">
             				<label class="col-md-3 control-label">Working Time in Hours</label>
@@ -327,6 +311,17 @@ if (!isset($_SESSION['user_id'])) {
                         ?>
                       </select>
                       <div id="selectedworkerareas"></div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-md-3 control-label">Priority</label>
+                    <div class="col-md-3">
+                      <select id="priority">
+                          <option value="0" >Set Priority</option>
+                          <?php for ($i=1; $i < 11; $i++) { 
+                            echo "<option value='".$i."'>".$i."</option>";
+                          }?>
+                      </select>
                     </div>
                   </div>
             			<div class="form-group">

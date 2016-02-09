@@ -295,15 +295,14 @@ if (isset($_POST['add_note'])) {
         				  </div>
         				  <div class="form-group">
                     <?php 
-                      $salary = $srsrow['expected_salary'];
-                      $salary1 = explode("-", $salary);
-                      $salary2 = explode(" ",$salary1[1]);
+                      $salary = $srsrow['min_salary'];
+                      $salary2 = $srsrow['max_salary'];
                     ?>
                     <label class="col-md-3 control-label">Expected Salary</label>
                     <div class="col-md-4 input-group">
-                      <input type="number" id ="salary" class="form-control" value="<?= $salary1[0] ?>" />
+                      <input type="number" id ="salary" class="form-control" value="<?= $salary ?>" />
                       <div class="input-group-addon">To</div>
-                      <input type="number" id ="salary2" class="form-control" value="<?= $salary2[0] ?>" />
+                      <input type="number" id ="salary2" class="form-control" value="<?= $salary2 ?>" />
                     </div>
         				  </div>
       				    <div class="form-group">
@@ -399,6 +398,19 @@ if (isset($_POST['add_note'])) {
                       foreach ($nawreqire as $val)
                          echo '<input type="checkbox" name = "skill" value ='.$val.'/>&nbsp;&nbsp;&nbsp;'.$val.'<br/>';
                     ?>          
+                    </div>
+                    <label class="col-md-2 control-label">Priority</label>
+                    <div class="col-md-2">
+                      <select id="priority">
+                          <option value="0" >Set Priority</option>
+                          <?php 
+                          $piority = $srsrow['priority'];
+                          for ($i=1; $i < 11; $i++) { 
+                            if($i == $piority) echo "<option value='".$i."' selected>".$i."</option>";
+                            else echo "<option value='".$i."'>".$i."</option>";
+                          }
+                          ?>
+                      </select>
                     </div>
                   </div>
       				    <div class="form-group">

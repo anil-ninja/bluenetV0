@@ -23,6 +23,7 @@ if (isset($_POST['name'])) {
 	$services = $_POST['services'];
 	$newskill = $_POST['newskill'];
 	$sr_id = $_POST['sr_id'];
+	$priority = $_POST['priority'];
 	$time11 = explode(":", $timing);
 	$time22 = explode(":", $timing2);
 	if($time11[0] < 12) $time1 = $timing." am";
@@ -36,7 +37,6 @@ if (isset($_POST['name'])) {
 		else $time2 = ($time22[0]-12).":".$time22[1]." pm";
 	}
 	$newtime = $time1."-".$time2;
-	$newsalary = $salary."-".$salary2." K";
 	$workerareas = "";
 	if($worker_areas != 0 AND $worker_areas != null AND $worker_areas != "" ){
 		$eachworkerarea = explode(",", $worker_areas);
@@ -64,9 +64,9 @@ if (isset($_POST['name'])) {
 	$newdate = date("Y-m-d H:i:s");
 	$user_id = $_SESSION['user_id'];
 	mysqli_query ($db_handle, "UPDATE service_request SET name='$name',mobile='$mobile',requirements='$services',gender='$gender',timings='$newtime',
-										expected_salary='$newsalary',address='$address',area='$clientarea',remarks='$remarks',last_updated='$newdate', 
-										worker_area='$workerareas', work_time='$time', created_time='$created_time', user_id = '$user_id' 
-										WHERE id ='$sr_id' ;");
+										min_salary='$salary',max_salary='$salary2',address='$address',area='$clientarea',remarks='$remarks',
+										last_updated='$newdate',worker_area='$workerareas', work_time='$time', created_time='$created_time', 
+										user_id = '$user_id',priority = '$priority' WHERE id ='$sr_id' ;");
 	
 	$sr_id = mysqli_insert_id($db_handle);
 	$eachworkarea = explode(",", $workerareas);

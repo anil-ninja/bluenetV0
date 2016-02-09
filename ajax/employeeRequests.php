@@ -31,10 +31,10 @@ if(isset($_POST['status'])){
                                                       AND b.status = 'open' AND b.type = 'client' AND a.id = b.skill_id ;");
         $data.= "<div class='list-group'>
 	                <p style='font-size:20px;padding-left: 2em;'>
-	                  <a  class='list-group-item active'> Client Name  <span style='padding-left: 5em>".strtoupper($srsrow['name'])."</span></a>
+	                  '<a  class='list-group-item active'> Client Name  <span style='padding-left: 5em'>".strtoupper($srsrow['name'])."</span></a>'
 	                  <a  class='list-group-item'> Mobile  <span style='padding-left: 8em'>".$srsrow['mobile']."</span></a>
 	                  <a  class='list-group-item'> Address <span style='padding-left: 7em'>".$srsrow['address']."</span></a>
-	                  <a  class='list-group-item'> Salary Criteria <span style='padding-left: 5em'>".$srsrow['expected_salary']."</span></a>
+	                  <a  class='list-group-item'> Salary Criteria <span style='padding-left: 5em'>".$srsrow['min_salary']."-".$srsrow['max_salary']." K </span></a>
 	                  <a  class='list-group-item'> Timings <span style='padding-left: 8em'>".$srsrow['timings']."</span></a>
 	                  <a  class='list-group-item'> Working Time <span style='padding-left: 5em'>".$srsrow['work_time']." Hours</span></a>
 	                  <a  class='list-group-item'> Requirements <span style='padding-left: 5em'>". $srsrow['requirements']."</span></a>

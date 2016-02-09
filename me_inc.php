@@ -23,7 +23,7 @@
                      <a  class="list-group-item">Requirements <span style="padding-left: 5em"><?= $srsrow['requirements'] ?>, <?= strtoupper($srsrow['gender']) ?></span></a>
                      <a  class="list-group-item">Timings <span style="padding-left: 8em"><?= $srsrow['timings'] ?></span></a>
                      <a  class="list-group-item">Working Time <span style="padding-left: 5em"><?= $srsrow['work_time'] ?></span></a>
-                     <a  class="list-group-item">Salary Criteria <span style="padding-left: 5em"><?= $srsrow['expected_salary'] ?></span></a>
+                     <a  class="list-group-item">Salary Criteria <span style="padding-left: 5em"><?php echo $srsrow['min_salary']."-".$srsrow['max_salary']." K "; ?></span></a>
                      <a  class="list-group-item">Remarks <span style="margin-left: 7em;"><?= $srsrow['remarks'] ?></span></a>
                      <a  class="list-group-item">Creation Date <span style="margin-left: 5em;"><?= $srsrow['created_time'] ?></span></a>
                      <?php

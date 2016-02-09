@@ -62,4 +62,63 @@ function countRequest($status, $type, $user_id, $db_handle){
 	echo $data;
 }
 
+function headerColor($value,$name){
+	switch ($value) {
+		case 1:
+			$data = '<a  class="list-group-item" style="background: #63f62d;border-color: #63f62d;font-size:20px;padding-left: 2em;">
+						Client Name  <span style="padding-left: 5em">'.strtoupper($name).'</span></a>';
+			break;
+		
+		case 2:
+			$data = '<a  class="list-group-item" style="background: #8ef62d;border-color: #8ef62d;font-size:20px;padding-left: 2em;"> 
+						Client Name  <span style="padding-left: 5em">'.strtoupper($name).'</span></a>';
+			break;
+
+		case 3:
+			$data = "<a  class='list-group-item' style='background: #c7f62d;border-color: #c7f62d;font-size:20px;padding-left: 2em;'>
+						Client Name  <span style='padding-left: 5em'>".strtoupper($name)."</span></a>";
+			break;
+
+		case 4:
+			$data = "<a  class='list-group-item' style='background: #f6ed2d;border-color: #f6ed2d;font-size:20px;padding-left: 2em;'>
+						Client Name  <span style='padding-left: 5em'>".strtoupper($name)."</span></a>";
+			break;
+
+		case 5:
+			$data = "<a  class='list-group-item' style='background: #fed87d;border-color: #fed87d;font-size:20px;padding-left: 2em;'>
+						Client Name  <span style='padding-left: 5em'>".strtoupper($name)."</span></a>";
+			break;
+
+		case 6:
+			$data = "<a  class='list-group-item' style='background: #feb87d;border-color: #feb87d;font-size:20px;padding-left: 2em;'>
+						Client Name  <span style='padding-left: 5em'>".strtoupper($name)."</span></a>";
+			break;
+
+		case 7:
+			$data = "<a  class='list-group-item' style='background: #fe7d7d;border-color: #fe7d7d;font-size:20px;padding-left: 2em;'>
+						Client Name  <span style='padding-left: 5em'>".strtoupper($name)."</span></a>";
+			break;
+
+		case 8:
+			$data = "<a  class='list-group-item' style='background: #ff5656;border-color: #ff5656;font-size:20px;padding-left: 2em;'>
+						Client Name  <span style='padding-left: 5em'>".strtoupper($name)."</span></a>";
+			break;
+
+		case 9:
+			$data = "<a  class='list-group-item' style='background: #fc2c2c;border-color: #fc2c2c;font-size:20px;padding-left: 2em;'>
+						Client Name  <span style='padding-left: 5em'>".strtoupper($name)."</span></a>";
+			break;
+
+		case 10:
+			$data = "<a  class='list-group-item' style='background: #ff0606;border-color: #ff0606;font-size:20px;padding-left: 2em;'>
+						Client Name  <span style='padding-left: 5em'>".strtoupper($name)."</span></a>";
+			break;
+
+		default:
+			$data = "<a  class='list-group-item' style='background: #0cf806;border-color: #0cf806;font-size:20px;padding-left: 2em;'>
+						Client Name  <span style='padding-left: 5em'>".strtoupper($name)."</span></a>";
+			break;
+	}
+	echo $data ;
+}
 ?>
