@@ -274,7 +274,8 @@ function postRequestDeatils(fields,skillsArray,areasArray,workerareasArray,statu
       + "&newarea=" + newarea + "&created_time=" + date + "&remarks=" + $('#'+fields[4]).val() +"&timing=" + $('#'+fields[5]).val() + "&new_status=" 
       + status + "&gender=" +  gender + "&salary=" +  $('#'+fields[7]).val() + "&work_time=" +  work_time + "&salary2=" +  $('#'+fields[8]).val() + 
       "&worker_area=" + workerareasArray + "&newworkerarea=" + newworkerarea + "&services=" + servicesArray + "&skills=" + skillsArray + "&newskill="
-      + newskill + "&timing2=" + $('#'+fields[6]).val() + "&priority=" + priority; 
+      + newskill + "&timing2=" + $('#'+fields[6]).val() + "&priority=" + priority;
+
   if(validatePhone($('#'+fields[1]).val()) == false){
     alert('Enter valid Phone Number');
   }

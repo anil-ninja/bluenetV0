@@ -63,14 +63,13 @@ if (isset($_POST['name'])) {
 	$user_id = $_SESSION['user_id'];
 	mysqli_query ($db_handle, "INSERT INTO service_request (name, mobile, requirements, gender, timings, min_salary, max_salary, address, area,
 										remarks, status, worker_area, work_time, created_time, user_id, priority)	
-									VALUES ('$name','$mobile','$services','$gender','$newtime', '$salary', '$salary2' '$address', '$clientarea','$remarks', 
-										'$status', '$workerareas', '$time', '$created_time', '$user_id', '$priority');");
-	
+									VALUES ('$name','$mobile','$services','$gender','$newtime', '$salary', '$salary2', '$address', '$clientarea',
+										'$remarks', '$status', '$workerareas', '$time', '$created_time', '$user_id', '$priority');");
 	$sr_id = mysqli_insert_id($db_handle);
 	$eachworkarea = explode(",", $workerareas);
 	foreach ($eachworkarea as $workareas) {
 		$newarea = trim($workareas);
-		if($newarea != null OR $newarea != "" OR $newarea != " "){
+		if($newarea != null AND $newarea != "" AND $newarea != " "){
 			$workarea = mysqli_query ($db_handle, "SELECT * FROM area WHERE name='$newarea');");
 			if(mysqli_num_rows($workarea) != 0){
 				$areas = mysqli_fetch_array($workarea);
@@ -85,7 +84,7 @@ if (isset($_POST['name'])) {
 		}
 	}
 	$newskils = explode(",", $newskill);
-	if($newskils != null OR $newskils != "" OR $newskils != " "){
+	if($newskils != null AND $newskils != "" AND $newskils != " "){
 		foreach ($newskils as $skil){
 			mysqli_query($db_handle,"INSERT INTO skill_name (name) VALUES ('$skil');");
 			$skil_id = mysqli_insert_id($db_handle);
