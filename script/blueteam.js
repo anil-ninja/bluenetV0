@@ -1004,11 +1004,11 @@ function validateSearch() {
   else {
     $.ajax({
       type: "POST",
-      url: "ajax/searchworker.php",
+      url: "ajax/search.php",
       data: "phone="+search,
       cache: false,
       success: function(result){
-        //alert(result);
+        $('#searchworker').val("");
         $(".searchresult").append(result); 
       },
       error: function(result){
