@@ -191,7 +191,8 @@ if (isset($_POST['update_status'])) {
         </ol>
         <div class="clearfix"></div>
       </div>
-      <div class="searchresult"></div>          
+      <?php require_once "requestsearchform.php"; ?>
+      <div class="searchresult"></div>         
       <div class="page-content">
         <div id="tab-general">
           <div class="row mbl">

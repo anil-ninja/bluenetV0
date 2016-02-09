@@ -78,8 +78,8 @@ else header('Location: index.php');
         </ol>
         <div class="clearfix"></div>
       </div>
+      <?php require_once "requestsearchform.php"; ?>
       <div class="searchresult"></div>
-                <!--END TITLE & BREADCRUMB PAGE-->
        <?php require_once "me_inc.php"; ?>
     </div>
   </div>

@@ -102,6 +102,27 @@ function nospaces(t){
   }
 }
 
+function validateRequestSearch() {
+  var dataString = "";
+  var gender = $('#gender').val();
+  var work_time = $('#work_time').val();
+  var salary = $('#salary').val();
+  var skill = $('#skill').val();
+  var area = $('#area').val();
+  dataString = "skill=" + skill + "&gender=" + gender + "&work_time=" + work_time + "&salary=" + salary + "&area=" + area;
+  $.ajax({
+    type: "POST",
+    url: "ajax/searchRequest.php",
+    data: dataString,
+    cache: false,
+    success: function(result){
+      $(".searchresult").html('');
+      $(".searchresult").append(result);
+    }
+  });
+  return false;
+}
+
 function trim(s){
   return s.replace(/^\s+|\s+$/, '');
 }
@@ -1013,6 +1034,7 @@ function validateSearch() {
       cache: false,
       success: function(result){
         $('#searchworker').val("");
+        $(".searchresult").html('');
         $(".searchresult").append(result); 
       },
       error: function(result){
@@ -1022,6 +1044,10 @@ function validateSearch() {
     });
     return false;
   }
+}
+
+function toggleform() {
+  $(".searchform").toggle();
 }
 
 function addworker(request_id, id){

@@ -133,8 +133,8 @@ if (!isset($_SESSION['user_id'])) {
         </ol>
         <div class="clearfix"></div>
       </div>
+      <?php require_once "requestsearchform.php"; ?>
       <div class="searchresult"></div>
-                <!--END TITLE & BREADCRUMB PAGE-->
        <?php require_once "page_contect.php"; ?>
     </div>
   </div>
