@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once "../dbConnection.php";
+require_once "../components/dbConnection.php";
 if(isset($_POST['first_name'])){
 	$first_name = $_POST['first_name'];
 	$last_name = $_POST['last_name'];

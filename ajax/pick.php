@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once "../dbConnection.php";
+require_once "../components/dbConnection.php";
 if(isset($_POST['request_id'])){
 	$request_id = $_POST['request_id'];
 	$me_id = $_SESSION['user_id'];

@@ -11,7 +11,8 @@
                ?>
                <div class="list-group countRequest">
                   <p style="font-size:20px;padding-left: 2em;">
-                     <a  class="list-group-item active"> Client Name  <span style="padding-left: 5em"><?= $srsrow['name'] ?></span></a>
+                     <a  class="list-group-item active"> Client Name  <span style="padding-left: 5em"><?= $srsrow['name'] ?></span>
+                        <span style="padding-left: 5em"> ID : <?= $srsrow['id'] ?></span></a>
                      <a  class="list-group-item "> Mobile  <span style="padding-left: 8em"><?= $srsrow['mobile'] ?></span></a>
                      <a  class="list-group-item"> Requirements<span style="padding-left: 5em"><?= $srsrow['requirements'] ?></span></a>
                      <?php 

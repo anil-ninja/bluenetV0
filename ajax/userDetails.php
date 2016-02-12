@@ -1,8 +1,7 @@
 <?php
 session_start();
 
-require_once "../dbConnection.php";
-require_once "../functions.php";
+require_once "../components/dbConnection.php";
 
 if(isset($_POST['user_id'])){
 	$user_id = $_POST['user_id'];

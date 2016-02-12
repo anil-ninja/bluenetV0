@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once "../dbConnection.php";
+require_once "../components/dbConnection.php";
 if (isset($_POST['name'])) {
 	$name = $_POST['name'];
 	$mobile = $_POST['mobile'];

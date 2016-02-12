@@ -18,7 +18,8 @@
                ?>
                <div class="list-group">
                   <p style="font-size:20px;padding-left: 2em;">
-                     <a  class="list-group-item active"> Worker Area  <span style="padding-left: 5em"><?= $srsrow['worker_area'] ?></span></a>
+                     <a  class="list-group-item active"> Worker Area  <span style="padding-left: 5em"><?= $srsrow['worker_area'] ?></span>
+                        <span style="padding-left: 5em">ID : <?= $srsrow['id'] ?></span></a>
                      <a  class="list-group-item "> Area  <span style="padding-left: 9em"><?= $srsrow['area'] ?></span></a>
                      <a  class="list-group-item">Requirements <span style="padding-left: 5em"><?= $srsrow['requirements'] ?>, <?= strtoupper($srsrow['gender']) ?></span></a>
                      <a  class="list-group-item">Timings <span style="padding-left: 8em"><?= $srsrow['timings'] ?></span></a>

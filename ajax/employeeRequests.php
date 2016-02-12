@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-require_once "../dbConnection.php";
+require_once "../components/dbConnection.php";
 
 if(isset($_POST['status'])){
 	$user_id = $_POST['user_id'];

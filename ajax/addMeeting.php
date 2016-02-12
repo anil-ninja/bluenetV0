@@ -2,7 +2,7 @@
 
 session_start();
 
-require_once "../dbConnection.php";
+require_once "../components/dbConnection.php";
 
 if(isset($_POST['remark'])){
 	$remark = $_POST['remark'];
