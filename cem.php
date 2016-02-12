@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-require_once "dbConnection.php";
+require_once "components/dbConnection.php";
 
 $status = $_GET["status"];
 
@@ -25,9 +25,9 @@ else header('Location: index.php');
   <link rel="shortcut icon" href="images/icons/favicon.ico">
   <link rel="apple-touch-icon" href="images/icons/favicon.png">
  <!--Loading bootstrap css-->
-  <?php include_once "headers.php"; ?>
+  <?php include_once "components/headers.php"; ?>
 <body>
-  <?php require_once "navbar.php"; ?>
+  <?php require_once "components/navbar.php"; ?>
   <div id="wrapper">
    <!--BEGIN SIDEBAR MENU-->
     <nav id="sidebar" role="navigation" data-step="2" data-intro="Template has &lt;b&gt;many navigation styles&lt;/b&gt;" data-position="right" class="navbar-default navbar-static-side">
@@ -89,12 +89,12 @@ else header('Location: index.php');
         </ol>
         <div class="clearfix"></div>
       </div>
-      <?php require_once "requestsearchform.php"; ?>
+      <?php require_once "components/requestsearchform.php"; ?>
       <div class="searchresult"></div>
 
-       <?php require_once "cem_inc.php"; ?>
+       <?php require_once "components/cem_inc.php"; ?>
     </div>
   </div>
-  <?php include_once "footers.php"; ?>
+  <?php include_once "components/footers.php"; ?>
 </body>
 </html>

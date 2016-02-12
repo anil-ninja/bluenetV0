@@ -10,82 +10,162 @@ if(isset($_POST['skill'])){
   $salary = $_POST['salary'];
   $area = $_POST['area'];
   $condition = "";
-  if($area != null && $area != "" && $area != " "){
-  	if($salary != null && $salary != "" && $salary != " "){
-  	  if($work_time != 0){
-  	  	if($gender != 'any'){
-  	  	  $condition = " requirements LIKE '%".$skill."%' AND gender = '$gender' AND work_time >= '$work_time' 
-  	  	  					AND min_salary >= '$salary' AND area LIKE '%".$area."%' ";
-  	  	}
-  	  	else {
-  	  	  $condition = " requirements LIKE '%".$skill."%' AND work_time >= '$work_time' AND min_salary >= '$salary' AND area LIKE '%".$area."%' ";
-  	  	}
-  	  }
-  	  else {
-  	  	if($gender != 'any'){
-  	  	  $condition = " requirements LIKE '%".$skill."%' AND gender = '$gender' AND min_salary >= '$salary' AND area LIKE '%".$area."%' ";
-  	  	}
-  	  	else {
-  	  	  $condition = " requirements LIKE '%".$skill."%' AND min_salary >= '$salary' AND area LIKE '%".$area."%' ";
-  	  	}
-  	  }
-  	}
-  	else{
-  	  if($work_time != 0){
-  	  	if($gender != 'any'){
-  	  	  $condition = " requirements LIKE '%".$skill."%' AND gender = '$gender' AND work_time >= '$work_time' AND area LIKE '%".$area."%' ";
-  	  	}
-  	  	else {
-  	  	  $condition = " requirements LIKE '%".$skill."%' AND work_time >= '$work_time' AND area LIKE '%".$area."%' ";
-  	  	}
-  	  }
-  	  else {
-  	  	if($gender != 'any'){
-  	  	  $condition = " requirements LIKE '%".$skill."%' AND gender = '$gender' AND area LIKE '%".$area."%' ";
-  	  	}
-  	  	else {
-  	  	  $condition = " requirements LIKE '%".$skill."%' AND area LIKE '%".$area."%' ";
-  	  	}
-  	  }
-  	}
+  if($skill != 0) {
+	  if($area != null && $area != "" && $area != " "){
+	  	if($salary != null && $salary != "" && $salary != " "){
+	  	  if($work_time != 0){
+	  	  	if($gender != 'any'){
+	  	  	  $condition = " requirements LIKE '%".$skill."%' AND gender = '$gender' AND work_time >= '$work_time' 
+	  	  	  					AND min_salary >= '$salary' AND area LIKE '%".$area."%' ";
+	  	  	}
+	  	  	else {
+	  	  	  $condition = " requirements LIKE '%".$skill."%' AND work_time >= '$work_time' AND min_salary >= '$salary' AND area LIKE '%".$area."%' ";
+	  	  	}
+	  	  }
+	  	  else {
+	  	  	if($gender != 'any'){
+	  	  	  $condition = " requirements LIKE '%".$skill."%' AND gender = '$gender' AND min_salary >= '$salary' AND area LIKE '%".$area."%' ";
+	  	  	}
+	  	  	else {
+	  	  	  $condition = " requirements LIKE '%".$skill."%' AND min_salary >= '$salary' AND area LIKE '%".$area."%' ";
+	  	  	}
+	  	  }
+	  	}
+	  	else{
+	  	  if($work_time != 0){
+	  	  	if($gender != 'any'){
+	  	  	  $condition = " requirements LIKE '%".$skill."%' AND gender = '$gender' AND work_time >= '$work_time' AND area LIKE '%".$area."%' ";
+	  	  	}
+	  	  	else {
+	  	  	  $condition = " requirements LIKE '%".$skill."%' AND work_time >= '$work_time' AND area LIKE '%".$area."%' ";
+	  	  	}
+	  	  }
+	  	  else {
+	  	  	if($gender != 'any'){
+	  	  	  $condition = " requirements LIKE '%".$skill."%' AND gender = '$gender' AND area LIKE '%".$area."%' ";
+	  	  	}
+	  	  	else {
+	  	  	  $condition = " requirements LIKE '%".$skill."%' AND area LIKE '%".$area."%' ";
+	  	  	}
+	  	  }
+	  	}
+	  }
+	  else {
+	  	if($salary != null && $salary != "" && $salary != " "){
+	  	  if($work_time != 0){
+	  	  	if($gender != 'any'){
+	  	  	  $condition = " requirements LIKE '%".$skill."%' AND gender = '$gender' AND work_time >= '$work_time' AND min_salary >= '$salary' ";
+	  	  	}
+	  	  	else {
+	  	  	  $condition = " requirements LIKE '%".$skill."%' AND work_time >= '$work_time' AND min_salary >= '$salary' ";
+	  	  	}
+	  	  }
+	  	  else {
+	  	  	if($gender != 'any'){
+	  	  	  $condition = " requirements LIKE '%".$skill."%' AND gender = '$gender' ANDmin_salary >= '$salary' ";
+	  	  	}
+	  	  	else {
+	  	  	  $condition = " requirements LIKE '%".$skill."%' AND min_salary >= '$salary' ";
+	  	  	}
+	  	  }
+	  	}
+	  	else{
+	  	  if($work_time != 0){
+	  	  	if($gender != 'any'){
+	  	  	  $condition = " requirements LIKE '%".$skill."%' AND gender = '$gender' AND work_time >= '$work_time' ";
+	  	  	}
+	  	  	else {
+	  	  	  $condition = " requirements LIKE '%".$skill."%' AND work_time >= '$work_time' ";
+	  	  	}
+	  	  }
+	  	  else {
+	  	  	if($gender != 'any'){
+	  	  	  $condition = " requirements LIKE '%".$skill."%' AND gender = '$gender' ";
+	  	  	}
+	  	  	else {
+	  	  	  $condition = " requirements LIKE '%".$skill."%' ";
+	  	  	}
+	  	  }
+	  	}
+	  }
   }
-  else {
-  	if($salary != null && $salary != "" && $salary != " "){
-  	  if($work_time != 0){
-  	  	if($gender != 'any'){
-  	  	  $condition = " requirements LIKE '%".$skill."%' AND gender = '$gender' AND work_time >= '$work_time' AND min_salary >= '$salary' ";
-  	  	}
-  	  	else {
-  	  	  $condition = " requirements LIKE '%".$skill."%' AND work_time >= '$work_time' AND min_salary >= '$salary' ";
-  	  	}
-  	  }
-  	  else {
-  	  	if($gender != 'any'){
-  	  	  $condition = " requirements LIKE '%".$skill."%' AND gender = '$gender' ANDmin_salary >= '$salary' ";
-  	  	}
-  	  	else {
-  	  	  $condition = " requirements LIKE '%".$skill."%' AND min_salary >= '$salary' ";
-  	  	}
-  	  }
-  	}
-  	else{
-  	  if($work_time != 0){
-  	  	if($gender != 'any'){
-  	  	  $condition = " requirements LIKE '%".$skill."%' AND gender = '$gender' AND work_time >= '$work_time' ";
-  	  	}
-  	  	else {
-  	  	  $condition = " requirements LIKE '%".$skill."%' AND work_time >= '$work_time' ";
-  	  	}
-  	  }
-  	  else {
-  	  	if($gender != 'any'){
-  	  	  $condition = " requirements LIKE '%".$skill."%' AND gender = '$gender' ";
-  	  	}
-  	  	else {
-  	  	  $condition = " requirements LIKE '%".$skill."%' ";
-  	  	}
-  	  }
-  	}
+  else{
+  	if($area != null && $area != "" && $area != " "){
+	  	if($salary != null && $salary != "" && $salary != " "){
+	  	  if($work_time != 0){
+	  	  	if($gender != 'any'){
+	  	  	  $condition = " gender = '$gender' AND work_time >= '$work_time' AND min_salary >= '$salary' AND area LIKE '%".$area."%' ";
+	  	  	}
+	  	  	else {
+	  	  	  $condition = " work_time >= '$work_time' AND min_salary >= '$salary' AND area LIKE '%".$area."%' ";
+	  	  	}
+	  	  }
+	  	  else {
+	  	  	if($gender != 'any'){
+	  	  	  $condition = " gender = '$gender' AND min_salary >= '$salary' AND area LIKE '%".$area."%' ";
+	  	  	}
+	  	  	else {
+	  	  	  $condition = " min_salary >= '$salary' AND area LIKE '%".$area."%' ";
+	  	  	}
+	  	  }
+	  	}
+	  	else{
+	  	  if($work_time != 0){
+	  	  	if($gender != 'any'){
+	  	  	  $condition = " gender = '$gender' AND work_time >= '$work_time' AND area LIKE '%".$area."%' ";
+	  	  	}
+	  	  	else {
+	  	  	  $condition = " work_time >= '$work_time' AND area LIKE '%".$area."%' ";
+	  	  	}
+	  	  }
+	  	  else {
+	  	  	if($gender != 'any'){
+	  	  	  $condition = " gender = '$gender' AND area LIKE '%".$area."%' ";
+	  	  	}
+	  	  	else {
+	  	  	  $condition = " area LIKE '%".$area."%' ";
+	  	  	}
+	  	  }
+	  	}
+	  }
+	  else {
+	  	if($salary != null && $salary != "" && $salary != " "){
+	  	  if($work_time != 0){
+	  	  	if($gender != 'any'){
+	  	  	  $condition = " gender = '$gender' AND work_time >= '$work_time' AND min_salary >= '$salary' ";
+	  	  	}
+	  	  	else {
+	  	  	  $condition = " work_time >= '$work_time' AND min_salary >= '$salary' ";
+	  	  	}
+	  	  }
+	  	  else {
+	  	  	if($gender != 'any'){
+	  	  	  $condition = " gender = '$gender' ANDmin_salary >= '$salary' ";
+	  	  	}
+	  	  	else {
+	  	  	  $condition = " min_salary >= '$salary' ";
+	  	  	}
+	  	  }
+	  	}
+	  	else{
+	  	  if($work_time != 0){
+	  	  	if($gender != 'any'){
+	  	  	  $condition = " gender = '$gender' AND work_time >= '$work_time' ";
+	  	  	}
+	  	  	else {
+	  	  	  $condition = " work_time >= '$work_time' ";
+	  	  	}
+	  	  }
+	  	  else {
+	  	  	if($gender != 'any'){
+	  	  	  $condition = " gender = '$gender' ";
+	  	  	}
+	  	  	else {
+	  	  	  $condition = " work_time = 0 ";
+	  	  	}
+	  	  }
+	  	}
+	  }
   }
 	
   $request = mysqli_query($db_handle, "SELECT * FROM service_request WHERE ".$condition." ;");

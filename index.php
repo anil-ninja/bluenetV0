@@ -1,8 +1,7 @@
 <?php
 session_start();
 
-require_once "dbConnection.php";
-include_once "functions.php";
+require_once "components/dbConnection.php";
 if (isset($_SESSION['user_id'])) {  
 	route($_SESSION['employee_type']);
 }
@@ -36,7 +35,7 @@ if (isset($_POST['login'])) {
     <link rel="shortcut icon" href="images/icons/favicon.ico">
     <link rel="apple-touch-icon" href="images/icons/favicon.png">
     <!--Loading bootstrap css-->
-    <?php include_once "headers.php"; ?>
+    <?php include_once "components/headers.php"; ?>
 	
 </head>
 <body>
@@ -118,6 +117,6 @@ if (isset($_POST['login'])) {
             </div>
         </div>  */ ?>
     </div>
-	<?php include_once "footers.php"; ?>
+	<?php include_once "components/footers.php"; ?>
 </body>
 </html>

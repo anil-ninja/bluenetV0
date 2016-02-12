@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once "dbConnection.php";
+require_once "components/dbConnection.php";
 
 if (!isset($_SESSION['user_id'])) {  
 	header('Location: index.php');
@@ -33,10 +33,10 @@ if (isset($_POST['add_note'])) {
   <link rel="shortcut icon" href="images/icons/favicon.ico">
   <link rel="apple-touch-icon" href="images/icons/favicon.png">
  <!--Loading bootstrap css-->
- <?php include_once "headers.php"; ?>
+ <?php include_once "components/headers.php"; ?>
 </head>
 <body>
-	<?php require_once "navbar.php"; ?>
+	<?php require_once "components/navbar.php"; ?>
     <!--BEGIN MODAL CONFIG PORTLET-->
   <div id="addNote" class="modal fade modal-form" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" >
     <div class="modal-dialog">
@@ -437,7 +437,7 @@ if (isset($_POST['add_note'])) {
       </div>
     </div>
   </div>
-  <?php include_once "footers.php"; ?>
+  <?php include_once "components/footers.php"; ?>
   <script type="text/javascript">
     $('#created_time').datepicker();
     $('#timing').timepicker();

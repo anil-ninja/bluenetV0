@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once "dbConnection.php";
+require_once "components/dbConnection.php";
 
 if (!isset($_SESSION['user_id'])) {  
 	header('Location: index.php');
@@ -20,10 +20,10 @@ else header('Location: index.php');
   <link rel="shortcut icon" href="images/icons/favicon.ico">
   <link rel="apple-touch-icon" href="images/icons/favicon.png">
  <!--Loading bootstrap css-->
-  <?php include_once "headers.php"; ?>
+  <?php include_once "components/headers.php"; ?>
 </head>
 <body>
-  <?php require_once "navbar.php"; ?>
+  <?php require_once "components/navbar.php"; ?>
   <div id="wrapper">
    <!--BEGIN SIDEBAR MENU-->
     <nav id="sidebar" role="navigation" data-step="2" data-intro="Template has &lt;b&gt;many navigation styles&lt;/b&gt;" data-position="right" class="navbar-default navbar-static-side">
@@ -186,6 +186,6 @@ else header('Location: index.php');
       </div>
     </div>
   </div>
-  <?php include_once "footers.php"; ?>
+  <?php include_once "components/footers.php"; ?>
 </body>
 </html>
