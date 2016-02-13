@@ -97,7 +97,7 @@
                         else {
                      ?>
                      <a  class="list-group-item">
-                        <button class="btn btn-primary" style="margin-left: 30%" onclick="changeStatus(<?= $srsrow['id'] ?>, 'open', 2);" >Change Status</button>
+                        <button class="btn btn-primary" style="margin-left: 30%" onclick="changeStatus(<?= $srsrow['id'] ?>, 'open', 1);" >Change Status</button>
                         <button class="btn btn-primary"  onclick="addmeeting(<?= $srsrow['id'] ?>, 2);" >Add Meeting</button>
                      </a>
                      <?php }
