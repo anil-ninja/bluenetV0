@@ -17,16 +17,16 @@
                                                             AND b.status = 'open' AND b.type = 'client' AND a.id = b.skill_id ;");
                ?>
                <div class="list-group">
-                  <p style="font-size:20px;padding-left: 2em;">
+                  <p style="font-size:16px;padding-left: 2em;">
                      <a  class="list-group-item active"> Worker Area  <span style="padding-left: 5em"><?= $srsrow['worker_area'] ?></span>
-                        <span style="padding-left: 5em">ID : <?= $srsrow['id'] ?></span></a>
-                     <a  class="list-group-item "> Area  <span style="padding-left: 9em"><?= $srsrow['area'] ?></span></a>
+                        <span style="padding-left: 3em">ID : <?= $srsrow['id'] ?></span>
+                        <span style="padding-left: 3em">Creation Date : <?= $srsrow['created_time'] ?></a>
+                     <a  class="list-group-item "> Area  <span style="padding-left: 7em"><?= $srsrow['area'] ?></span>
+                        <span style="padding-left: 4em">Working Time : <?= $srsrow['work_time'] ?> hour </span></a>
                      <a  class="list-group-item">Requirements <span style="padding-left: 5em"><?= $srsrow['requirements'] ?>, <?= strtoupper($srsrow['gender']) ?></span></a>
-                     <a  class="list-group-item">Timings <span style="padding-left: 8em"><?= $srsrow['timings'] ?></span></a>
-                     <a  class="list-group-item">Working Time <span style="padding-left: 5em"><?= $srsrow['work_time'] ?></span></a>
-                     <a  class="list-group-item">Salary Criteria <span style="padding-left: 5em"><?php echo $srsrow['min_salary']."-".$srsrow['max_salary']." K "; ?></span></a>
+                     <a  class="list-group-item">Timings <span style="padding-left: 6em"><?= $srsrow['timings'] ?></span>
+                        <span style="padding-left: 5em">Salary Criteria : <?php echo $srsrow['min_salary']."-".$srsrow['max_salary']." K "; ?></span></a>
                      <a  class="list-group-item">Remarks <span style="margin-left: 7em;"><?= $srsrow['remarks'] ?></span></a>
-                     <a  class="list-group-item">Creation Date <span style="margin-left: 5em;"><?= $srsrow['created_time'] ?></span></a>
                      <?php
                         if($srsrow['me_id'] != 0){
                            $pickDate = mysqli_query($db_handle, "SELECT * FROM updates WHERE request_id = '$id' AND new_status = 'picked' 

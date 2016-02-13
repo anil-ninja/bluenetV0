@@ -10,22 +10,25 @@ if(isset($_POST['phone'])){
 	if(mysqli_num_rows($srs) != 0){
 		$srsrow = mysqli_fetch_array($srs) ;
 		$data.= "<div class='list-group'>
-        	        <p style='font-size:20px;padding-left: 2em;'>
-            	      <a  class='list-group-item active'> Worker Name  <span style='padding-left: 5em'>".$srsrow['first_name']." ".$srsrow['last_name']."</span></a>
-                	  <a  class='list-group-item'> Mobile  <span style='padding-left: 8em'>".$srsrow['phone']."</span></a>
+        	        <p style='font-size:16px;padding-left: 2em;'>
+            	      <a  class='list-group-item active'> Worker Name  <span style='padding-left: 5em'>
+            	      	".$srsrow['first_name']." ".$srsrow['last_name']."</span>
+            	      	<span style='padding-left: 3em'>ID : ".$srsrow['id']."</span>
+            	      	<span style='padding-left: 3em'>Creation Date : ".$srsrow['creation_date']."</span></a>
+                	  <a  class='list-group-item'> Mobile  <span style='padding-left: 6em'>".$srsrow['phone']."</span>
+                	  	<span style='padding-left: 3em'>Age : ".$srsrow['age']."</span>
+                	  	<span style='padding-left: 3em'>Gender : ".$srsrow['gender']."</span></a>
             	      <a  class='list-group-item'> Current Address <span style='padding-left: 5em'>".$srsrow['current_address']."</span></a>
                 	  <a  class='list-group-item'> Permanent Address <span style='padding-left: 5em'>".$srsrow['permanent_address']."</span></a>
-	                  <a  class='list-group-item'> Salary Criteria <span style='padding-left: 8em'>".$srsrow['min_salary']."-".$srsrow['max_salary']." K </span></a>
-	                  <a  class='list-group-item'> Timings <span style='padding-left: 5em'>".$srsrow['timings']." Hours</span></a>
-	                  <a  class='list-group-item'> Working Time <span style='padding-left: 5em'>".$srsrow['work_time']."</span></a>
-	                  <a  class='list-group-item'> Age <span style='padding-left: 7em'>".$srsrow['age']."</span></a>
+	                  <a  class='list-group-item'> Salary Criteria <span style='padding-left: 3em'>
+	                  	".$srsrow['min_salary']."-".$srsrow['max_salary']." K </span>
+	                  	<span style='padding-left: 3em'>Working Time : ".$srsrow['work_time']." Hours</span>
+	                  	<span style='padding-left: 3em'>Timings : ".$srsrow['timings']."</span></a>
 	                  <a  class='list-group-item'> Remarks <span style='padding-left: 6em'>".$srsrow['remarks']."</span></a>
-	                  <a  class='list-group-item'> Education <span style='padding-left: 5em'>".$srsrow['education']."</span></a>
-	                  <a  class='list-group-item'> Gender <span style='padding-left: 7em'>".$srsrow['gender']."</span></a>       
-	                  <a  class='list-group-item'> Experience <span style='padding-left: 6em'>".$srsrow['experience']."</span></a>       
-	                  <a  class='list-group-item'> Police Varification <span style='padding-left: 5em'>".$srsrow['varification_status']."</span></a>       
-	                  <a  class='list-group-item'> Creation Date <span style='padding-left: 6em'>".$srsrow['creation_date']."</span></a>       
-	                  <a  class='list-group-item'> Services <span style='padding-left: 7em'>".$srsrow['service']."</span></a>       
+	                  <a  class='list-group-item'> Education <span style='padding-left: 5em'>".$srsrow['education']."</span>
+	                  	<span style='padding-left: 3em'>Police Varification : ".$srsrow['varification_status']."</span></a>   
+	                  <a  class='list-group-item'> Services <span style='padding-left: 5em'>".$srsrow['service']."</span>
+	                  	<span style='padding-left: 3em'>Experience : ".$srsrow['experience']."</span></a>       
 	          		</p>
 	          	</div>";
 	}
@@ -40,18 +43,19 @@ if(isset($_POST['phone'])){
         	$skill = mysqli_query($db_handle, "SELECT a.name, a.id FROM skill_name AS a JOIN skills AS b WHERE b.user_id = '$id'
                                                       AND b.status = 'open' AND b.type = 'client' AND a.id = b.skill_id ;");
         	$data.= "<div class='list-group'>
-	        	        <p style='font-size:20px;padding-left: 2em;'>
-	            	      ".headerColor($requestRow['priority'], $requestRow['name'] )."
-	                	  <a  class='list-group-item'> Mobile  <span style='padding-left: 8em'>".$requestRow['mobile']."</span></a>
-	            	      <a  class='list-group-item'> Address <span style='padding-left: 7em'>".$requestRow['address']."</span></a>
-	                	  <a  class='list-group-item'> Salary Criteria <span style='padding-left: 5em'>".$requestRow['min_salary']."-".$requestRow['max_salary']." K </span></a>
-		                  <a  class='list-group-item'> Timings <span style='padding-left: 8em'>".$requestRow['timings']."</span></a>
-		                  <a  class='list-group-item'> Working Time <span style='padding-left: 5em'>".$requestRow['work_time']." Hours</span></a>
-		                  <a  class='list-group-item'> Requirements <span style='padding-left: 5em'>". $requestRow['requirements']."</span></a>
+	        	        <p style='font-size:16px;padding-left: 2em;'>
+		                  <a  class='list-group-item active'> Client Name  <span style='padding-left: 5em'>".strtoupper($requestRow['name'])."</span>
+	                      <span style='padding-left: 3em'> ID : ".$id." </span>
+	                      <span style='padding-left: 3em'> Creation Date : ".$requestRow['created_time']." </span></a>
+		                  <a  class='list-group-item'> Mobile <span style='padding-left: 6em'>".$requestRow['mobile']."</span>
+	                      <span style='padding-left: 3em'> Working Time : ".$requestRow['work_time']." Hours</span></a>
+		                  <a  class='list-group-item'> Address <span style='padding-left: 7em'>".$requestRow['address']."</span></a>
+		                  <a  class='list-group-item'> Timings <span style='padding-left: 6em'>".$requestRow['timings']."</span>
+	                      <span style='padding-left: 3em'>Salary Criteria : ".$requestRow['min_salary']."-".$requestRow['max_salary']." K </span></a>
+		                  <a  class='list-group-item'> Requirements <span style='padding-left: 5em'>". $requestRow['requirements']."</span>
+	                      <span style='padding-left: 3em'>Gender : ".$requestRow['gender']."</a>
 		                  <a  class='list-group-item'> Remarks <span style='padding-left: 7em'>".$requestRow['remarks']."</span></a>
 		                  <a  class='list-group-item'> Worker Area <span style='padding-left: 5em'>".$requestRow['worker_area']."</span></a>
-		                  <a  class='list-group-item'> Gender <span style='padding-left: 7em'>".$requestRow['gender']."</span></a>       
-		                  <a  class='list-group-item'> Creation Date <span style='padding-left: 7em'>".$requestRow['created_time']."</span></a>       
 		                  <a  class='list-group-item'> Picked Date <span style='padding-left: 7em'>".$requestRow['last_updated']."</span></a>       
 		                  <a  class='list-group-item'> Skills <span style='padding-left: 7em'>";
 	        while($skillrow = mysqli_fetch_array($skill)){ 
