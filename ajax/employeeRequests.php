@@ -27,11 +27,13 @@ if(isset($_POST['status'])){
 	$srs = mysqli_query($db_handle, "SELECT * FROM service_request WHERE ".$condition." ; ") ;
     while ($srsrow = mysqli_fetch_array($srs)){
     	$id = $srsrow['id'];
-        $skill = mysqli_query($db_handle, "SELECT a.name, a.id FROM skill_name AS a JOIN skills AS b WHERE b.user_id = '$id'
-                                                      AND b.status = 'open' AND b.type = 'client' AND a.id = b.skill_id ;");
-        $data.= "<div class='list-group'>
+      $skill = mysqli_query($db_handle, "SELECT a.name, a.id FROM skill_name AS a JOIN skills AS b WHERE b.user_id = '$id'
+                                                   AND b.status = 'open' AND b.type = 'client' AND a.id = b.skill_id ;");
+      $color = headerColor($srsrow['priority']);
+      $data.= "<div class='list-group'>
 	                <p style='font-size:16px;padding-left: 2em;'>
-	                  <a  class='list-group-item active'> Client Name  <span style='padding-left: 5em'>".strtoupper($srsrow['name'])."</span>
+	                  <a  class='list-group-item' style='background-color:".$color.";border-color:".$color.";'> 
+                      Client Name  <span style='padding-left: 5em'>".strtoupper($srsrow['name'])."</span>
                       <span style='padding-left: 3em'> ID : ".$id." </span>
                       <span style='padding-left: 3em'> Creation Date : ".$srsrow['created_time']." </span></a>
 	                  <a  class='list-group-item'> Mobile <span style='padding-left: 6em'>".$srsrow['mobile']."</span>

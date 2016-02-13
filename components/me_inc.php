@@ -18,7 +18,8 @@
                ?>
                <div class="list-group">
                   <p style="font-size:16px;padding-left: 2em;">
-                     <a  class="list-group-item active"> Worker Area  <span style="padding-left: 5em"><?= $srsrow['worker_area'] ?></span>
+                     <a  class="list-group-item" style="background-color:<?= headerColor($srsrow['priority']); ?>;border-color:<?= headerColor($srsrow['priority']); ?>;"> 
+                        Worker Area  <span style="padding-left: 5em"><?= $srsrow['worker_area'] ?></span>
                         <span style="padding-left: 3em">ID : <?= $srsrow['id'] ?></span>
                         <span style="padding-left: 3em">Creation Date : <?= $srsrow['created_time'] ?></a>
                      <a  class="list-group-item "> Area  <span style="padding-left: 7em"><?= $srsrow['area'] ?></span>

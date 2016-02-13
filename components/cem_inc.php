@@ -21,7 +21,8 @@
                ?>
                <div class="list-group countRequest">
                   <p style="font-size:16px;padding-left: 1em;">
-                     <a  class="list-group-item active"> Client Name  <span style="padding-left: 5em"><?= $srsrow['name'] ?></span>
+                     <a  class="list-group-item" style="background-color:<?= headerColor($srsrow['priority']); ?>;border-color:<?= headerColor($srsrow['priority']); ?>;">
+                      Client Name  <span style="padding-left: 5em"><?= $srsrow['name'] ?></span>
                        <span style="padding-left: 3em">ID : <?= $srsrow['id'] ?></span>
                        <span style="padding-left: 3em">Creation Date : <?= $srsrow['created_time'] ?></span></a>
                      <a  class="list-group-item "> Mobile  <span style="padding-left: 6em"><?= $srsrow['mobile'] ?></span>
