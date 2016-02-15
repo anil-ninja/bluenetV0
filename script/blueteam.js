@@ -140,7 +140,7 @@ function postWorkerDetails(fields,languagesArray,skillsArray,request_id,id,servi
       $('#'+fields[15]).val() + "&work_time=" +  work_time + "&police=" + police + "&worker_area=" + workerareasArray + "&newworkerarea=" + newworkerarea;
       /*"&address_proof_name=" + $('#'+fields[2]).val() + "&address_proof_id=" + $('#'+fields[3]).val() + 
       "&id_proof_name=" + $('#'+fields[4]).val() + "&id_proof_id=" +  $('#'+fields[5]).val() + */
-  alert(dataString);
+  console.log(dataString);
   if(validatePhone($('#'+fields[2]).val()) == false) alert('Enter valid Phone Number');
   else if(validatePhone($('#'+fields[3]).val()) == false) alert('Enter valid Emergency Phone Number');
   else if(!($('#'+fields[9]).val().isValidDate())) alert('Enter valid Birth date');
