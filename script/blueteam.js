@@ -140,7 +140,7 @@ function postWorkerDetails(fields,languagesArray,skillsArray,request_id,id,servi
       $('#'+fields[15]).val() + "&work_time=" +  work_time + "&police=" + police + "&worker_area=" + workerareasArray + "&newworkerarea=" + newworkerarea;
       /*"&address_proof_name=" + $('#'+fields[2]).val() + "&address_proof_id=" + $('#'+fields[3]).val() + 
       "&id_proof_name=" + $('#'+fields[4]).val() + "&id_proof_id=" +  $('#'+fields[5]).val() + */
-  console.log(dataString);
+  alert(dataString);
   if(validatePhone($('#'+fields[2]).val()) == false) alert('Enter valid Phone Number');
   else if(validatePhone($('#'+fields[3]).val()) == false) alert('Enter valid Emergency Phone Number');
   else if(!($('#'+fields[9]).val().isValidDate())) alert('Enter valid Birth date');
@@ -204,7 +204,7 @@ function validateWorkerDetails(request_id, id){
   else if(id == 2){
     fields = ["2first_name"+request_id,"2last_name"+request_id, "2mobile"+request_id, "2emergancy_mobile"+request_id, "2age"+request_id,  
             "2current_address"+request_id, "2parmanent_address"+request_id, "2education"+request_id, "2experience"+request_id,"2birth_date"+request_id,
-            "2remarks"+request_id, "2services"+request_id,"timing"+request_id,"timing2"+request_id,"salary"+request_id,"salary2"+request_id];
+            "2remarks"+request_id, "2services"+request_id,"2timing"+request_id,"2timing2"+request_id,"2salary"+request_id,"2salary2"+request_id];
             //"2address_proof_name"+request_id, "2address_proof_id"+request_id,"2id_proof_name"+request_id, "2id_proof_id"+request_id,
     var languagesArray = []; 
     $('#2languages'+request_id).each(function(i, selected){ 
@@ -601,7 +601,7 @@ function feedback(id, type){
 function validateStatus(id, oldStatus) {
   var dataString = "";
   var newStatus = $("#new_status"+id).val() ;
-  if(oldStatus == 'meeting'){
+  if(oldStatus == 'demo'){
     var salary = $('#salary'+id).val();
     if(isFinite(salary) && salary != ''){
       dataString = "sr_id=" + id + "&old_status=" + oldStatus + "&new_status=" + newStatus + "&salary=" + salary;
@@ -796,6 +796,10 @@ function changeStatus(id, oldStatus, type){
                           "<option value='followback'>Followback</option>"+
                           "<option value='feedback'>Feedback</option>"+
                         "</select>"+
+                      "</div>"+
+                      "<label class='col-md-3 control-label'>Salary</label>"+
+                      "<div class='col-md-3'>"+
+                        "<input type='text' id ='salary"+id+"' class='form-control' placeholder='Enter Fixed Salary' />"+
                       "</div>"+
                     "</div>"+
                     "<div class='form-group'>"+
