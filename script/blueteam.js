@@ -130,7 +130,7 @@ function trim(s){
 function postWorkerDetails(fields,languagesArray,skillsArray,request_id,id,servicesArray,police,work_time,gender,workerareasArray,newskill,newworkerarea) {
   var dataString = "";
   var d = $('#'+fields[9]).val().split('/');   
-  var date = d[2] +'-'+ d[1] +'-'+ d[0];
+  var date = d[2] +'-'+ d[0] +'-'+ d[1];
   dataString = "first_name=" + $('#'+fields[0]).val() + "&last_name=" + $('#'+fields[1]).val() + "&mobile=" +  $('#'+fields[2]).val() + 
       "&emergancy_mobile=" +  $('#'+fields[3]).val() + "&age=" +  $('#'+fields[4]).val() + "&current_address=" + $('#'+fields[5]).val() + 
       "&parmanent_address=" +  $('#'+fields[6]).val() + "&education=" + $('#'+fields[7]).val() + "&experience=" + $('#'+fields[8]).val()+ 
@@ -140,7 +140,7 @@ function postWorkerDetails(fields,languagesArray,skillsArray,request_id,id,servi
       $('#'+fields[15]).val() + "&work_time=" +  work_time + "&police=" + police + "&worker_area=" + workerareasArray + "&newworkerarea=" + newworkerarea;
       /*"&address_proof_name=" + $('#'+fields[2]).val() + "&address_proof_id=" + $('#'+fields[3]).val() + 
       "&id_proof_name=" + $('#'+fields[4]).val() + "&id_proof_id=" +  $('#'+fields[5]).val() + */
-  console.log(dataString);
+  alert(dataString);
   if(validatePhone($('#'+fields[2]).val()) == false) alert('Enter valid Phone Number');
   else if(validatePhone($('#'+fields[3]).val()) == false) alert('Enter valid Emergency Phone Number');
   else if(!($('#'+fields[9]).val().isValidDate())) alert('Enter valid Birth date');
