@@ -137,10 +137,10 @@ function postWorkerDetails(fields,languagesArray,skillsArray,request_id,id,servi
       "&birth_date=" + date + "&remarks=" + $('#'+fields[10]).val() + "&newskill=" + newskill + "&services=" + servicesArray + 
       "&languages=" + languagesArray + "&skills=" + skillsArray + "&request_id=" + request_id + "&type=" + id + "&gender=" + gender + 
       "&timing=" + $('#'+fields[12]).val() + "&timing2=" + $('#'+fields[13]).val() + "&salary=" +  $('#'+fields[14]).val() + "&salary2=" + 
-      $('#'+fields[15]).val() + "&work_time=" +  work_time + "&police=" + police + "&worker_area=" + workerareasArray + "&newworkerarea=" + newworkerarea;
+      $('#'+fields[15]).val() + "&work_time="+work_time+"&police="+police+"&worker_area=" + workerareasArray + "&newworkerarea=" + newworkerarea;
       /*"&address_proof_name=" + $('#'+fields[2]).val() + "&address_proof_id=" + $('#'+fields[3]).val() + 
       "&id_proof_name=" + $('#'+fields[4]).val() + "&id_proof_id=" +  $('#'+fields[5]).val() + */
-  alert(dataString);
+  console.log(dataString);
   if(validatePhone($('#'+fields[2]).val()) == false) alert('Enter valid Phone Number');
   else if(validatePhone($('#'+fields[3]).val()) == false) alert('Enter valid Emergency Phone Number');
   else if(!($('#'+fields[9]).val().isValidDate())) alert('Enter valid Birth date');
