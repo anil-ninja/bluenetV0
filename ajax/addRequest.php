@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once "../dbConnection.php";
+require_once "../components/dbConnection.php";
 if (isset($_POST['name'])) {
 	$name = $_POST['name'];
 	$mobile = $_POST['mobile'];
@@ -45,7 +45,7 @@ if (isset($_POST['name'])) {
 			$workerareanameRow = mysqli_fetch_array($workerareaname);
 			$workerareas .= $workerareanameRow['name'].",";
 		}
-		if($newworkerarea != null AND $newworkerarea != "" AND $newworkerarea != " ") $workerareas = $workerareas.$newworkerarea;
+		if($newworkerarea != null AND $newworkerarea != "" AND $newworkerarea != " ") $workerareas .= $workerareas.$newworkerarea;
 	}
 	else $workerareas .= $newworkerarea;
 	$clientarea = "";

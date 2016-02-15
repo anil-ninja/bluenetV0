@@ -1,6 +1,6 @@
 <?php
 	session_start();
-	require_once "dbConnection.php";
+	require_once "components/dbConnection.php";
 	//$requestedPage = $_GET['url'] ;
     unset($_SESSION['user_id']);
     unset($_SESSION['first_name']);

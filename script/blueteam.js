@@ -130,7 +130,7 @@ function trim(s){
 function postWorkerDetails(fields,languagesArray,skillsArray,request_id,id,servicesArray,police,work_time,gender,workerareasArray,newskill,newworkerarea) {
   var dataString = "";
   var d = $('#'+fields[9]).val().split('/');   
-  var date = d[2] +'-'+ d[1] +'-'+ d[0];
+  var date = d[2] +'-'+ d[0] +'-'+ d[1];
   dataString = "first_name=" + $('#'+fields[0]).val() + "&last_name=" + $('#'+fields[1]).val() + "&mobile=" +  $('#'+fields[2]).val() + 
       "&emergancy_mobile=" +  $('#'+fields[3]).val() + "&age=" +  $('#'+fields[4]).val() + "&current_address=" + $('#'+fields[5]).val() + 
       "&parmanent_address=" +  $('#'+fields[6]).val() + "&education=" + $('#'+fields[7]).val() + "&experience=" + $('#'+fields[8]).val()+ 
@@ -290,7 +290,8 @@ function validateWorkerDetails(request_id, id){
 function postRequestDeatils(fields,skillsArray,areasArray,workerareasArray,status,servicesArray,work_time,gender,newskill,newarea,newworkerarea,priority) {
   var dataString = "";
   var d = $('#'+fields[3]).val().split('/');   
-  var date = d[2] +'-'+ d[1] +'-'+ d[0];
+  var date = d[2] +'-'+ d[0] +'-'+ d[1];
+  alert(date);
   dataString = "name=" + $('#'+fields[0]).val() + "&mobile=" + $('#'+fields[1]).val() + "&address=" + $('#'+fields[2]).val() + "&area=" +  areasArray 
       + "&newarea=" + newarea + "&created_time=" + date + "&remarks=" + $('#'+fields[4]).val() +"&timing=" + $('#'+fields[5]).val() + "&new_status=" 
       + status + "&gender=" +  gender + "&salary=" +  $('#'+fields[7]).val() + "&work_time=" +  work_time + "&salary2=" +  $('#'+fields[8]).val() + 
@@ -809,7 +810,7 @@ function changeStatus(id, oldStatus, type){
 function postDeatils(fields,skillsArray,areasArray,workerareasArray,servicesArray,work_time,gender,newskill,newarea,newworkerarea,id,priority){
   var dataString = "";
   var d = $('#'+fields[3]).val().split('/');   
-  var date = d[2] +'-'+ d[1] +'-'+ d[0];
+  var date = d[2] +'-'+ d[0] +'-'+ d[1];
   dataString = "name=" + $('#'+fields[0]).val() + "&mobile=" + $('#'+fields[1]).val() + "&address=" + $('#'+fields[2]).val() + "&area=" +  areasArray 
       + "&newarea=" + newarea + "&created_time=" + date + "&remarks=" + $('#'+fields[4]).val() +"&timing=" + $('#'+fields[5]).val() + 
       "&new_status=" + status + "&gender=" +  gender + "&salary=" +  $('#'+fields[7]).val() + "&work_time=" +  work_time + "&salary2=" +  $('#'+fields[8]).val()

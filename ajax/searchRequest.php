@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-require_once "../dbConnection.php";
+require_once "../components/dbConnection.php";
 
 if(isset($_POST['skill'])){
   $skill = $_POST['skill'];
@@ -174,21 +174,24 @@ if(isset($_POST['skill'])){
 		$id = $requestRow['id'];
 		$cem_id = $requestRow['cem_id'];
 		$me_id = $requestRow['me_id'];
+		$color = headerColor($requestRow['priority']);
        	$skill = mysqli_query($db_handle, "SELECT a.name, a.id FROM skill_name AS a JOIN skills AS b WHERE b.user_id = '$id'
                                                       AND b.status = 'open' AND b.type = 'client' AND a.id = b.skill_id ;");
        	$data.= "<div class='list-group'>
-	       	        <p style='font-size:20px;padding-left: 2em;'>
-	               	  <a  class='list-group-item active'> Client Name  <span style='padding-left: 8em'>".$requestRow['name']."</span></a>
-	               	  <a  class='list-group-item'> Mobile  <span style='padding-left: 8em'>".$requestRow['mobile']."</span></a>
-	           	      <a  class='list-group-item'> Address <span style='padding-left: 7em'>".$requestRow['address']."</span></a>
-	               	  <a  class='list-group-item'> Salary Criteria <span style='padding-left: 5em'>".$requestRow['min_salary']."-".$requestRow['max_salary']." K </span></a>
-	                  <a  class='list-group-item'> Timings <span style='padding-left: 8em'>".$requestRow['timings']."</span></a>
-	                  <a  class='list-group-item'> Working Time <span style='padding-left: 5em'>".$requestRow['work_time']." Hours</span></a>
-	                  <a  class='list-group-item'> Requirements <span style='padding-left: 5em'>". $requestRow['requirements']."</span></a>
+	       	        <p style='font-size:16px;padding-left: 2em;'>
+	                  <a  class='list-group-item' style='background-color:".$color.";border-color:".$color.";'>
+	                   	Client Name  <span style='padding-left: 5em'>".strtoupper($requestRow['name'])."</span>
+	                    <span style='padding-left: 3em'> ID : ".$id." </span>
+	                    <span style='padding-left: 3em'> Creation Date : ".$requestRow['created_time']." </span></a>
+	                  <a  class='list-group-item'> Mobile <span style='padding-left: 6em'>".$requestRow['mobile']."</span>
+                        <span style='padding-left: 3em'> Working Time : ".$requestRow['work_time']." Hours</span></a>
+	                  <a  class='list-group-item'> Address <span style='padding-left: 7em'>".$requestRow['address']."</span></a>
+	                  <a  class='list-group-item'> Timings <span style='padding-left: 6em'>".$requestRow['timings']."</span>
+                        <span style='padding-left: 3em'>Salary Criteria : ".$requestRow['min_salary']."-".$requestRow['max_salary']." K </span></a>
+	                  <a  class='list-group-item'> Requirements <span style='padding-left: 5em'>". $requestRow['requirements']."</span>
+                        <span style='padding-left: 3em'>Gender : ".$requestRow['gender']."</a>
 	                  <a  class='list-group-item'> Remarks <span style='padding-left: 7em'>".$requestRow['remarks']."</span></a>
 	                  <a  class='list-group-item'> Worker Area <span style='padding-left: 5em'>".$requestRow['worker_area']."</span></a>
-	                  <a  class='list-group-item'> Gender <span style='padding-left: 7em'>".$requestRow['gender']."</span></a>       
-	                  <a  class='list-group-item'> Creation Date <span style='padding-left: 7em'>".$requestRow['created_time']."</span></a>       
 	                  <a  class='list-group-item'> Picked Date <span style='padding-left: 7em'>".$requestRow['last_updated']."</span></a>       
 	                  <a  class='list-group-item'> Skills <span style='padding-left: 7em'>";
         while($skillrow = mysqli_fetch_array($skill)){ 

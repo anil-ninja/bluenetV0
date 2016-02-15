@@ -20,18 +20,20 @@
                                                          AND b.status = 'open' AND b.type = 'client' AND a.id = b.skill_id ;");
                ?>
                <div class="list-group countRequest">
-                  <p style="font-size:20px;padding-left: 1em;">
-                     <?php headerColor($srsrow['priority'], $srsrow['name']); ?>
-                     <a  class="list-group-item "> Mobile  <span style="padding-left: 8em"><?= $srsrow['mobile'] ?></span></a>
+                  <p style="font-size:16px;padding-left: 1em;">
+                     <a  class="list-group-item" style="background-color:<?= headerColor($srsrow['priority']); ?>;border-color:<?= headerColor($srsrow['priority']); ?>;">
+                      Client Name  <span style="padding-left: 5em"><?= $srsrow['name'] ?></span>
+                       <span style="padding-left: 3em">ID : <?= $srsrow['id'] ?></span>
+                       <span style="padding-left: 3em">Creation Date : <?= $srsrow['created_time'] ?></span></a>
+                     <a  class="list-group-item "> Mobile  <span style="padding-left: 6em"><?= $srsrow['mobile'] ?></span>
+                        <span style="padding-left: 4em">Working Time : <?= $srsrow['work_time'] ?></span></a>
                      <a  class="list-group-item">Address <span style="padding-left: 7em"><?= $srsrow['address'] ?></span></a>
-                     <a  class="list-group-item">Salary Criteria <span style="padding-left: 5em"><?php echo $srsrow['min_salary']."-".$srsrow['max_salary']." K "; ?></span></a>
-                     <a  class="list-group-item">Timings <span style="padding-left: 8em"><?= $srsrow['timings'] ?></span></a>
-                     <a  class="list-group-item">Working Time <span style="padding-left: 5em"><?= $srsrow['work_time'] ?></span></a>
-                     <a  class="list-group-item"> Requirements<span style="padding-left: 5em"><?= $srsrow['requirements'] ?></span></a>
+                     <a  class="list-group-item">Timings <span style="padding-left: 6em"><?= $srsrow['timings'] ?></span>
+                        <span style="padding-left: 5em">Salary Criteria : <?php echo $srsrow['min_salary']."-".$srsrow['max_salary']." K "; ?></span></a>
+                     <a  class="list-group-item"> Requirements<span style="padding-left: 5em"><?= $srsrow['requirements'] ?></span>
+                        <span style="padding-left: 3em">Gender : <?= $srsrow['gender'] ?></a>
                      <a  class="list-group-item">Remarks <span style="padding-left: 7em"><?= $srsrow['remarks'] ?></span></a>
-                     <a  class="list-group-item">Worker Area <span style="padding-left: 5em"><?= $srsrow['worker_area'] ?></span></a>
-                     <a  class="list-group-item "> Gender  <span style="padding-left: 7em"><?= $srsrow['gender'] ?></span></a>
-                     <a  class="list-group-item">Creation Date <span style="margin-left: 5em;"><?= $srsrow['created_time'] ?></span></a>  
+                     <a  class="list-group-item">Worker Area <span style="padding-left: 5em"><?= $srsrow['worker_area'] ?></span></a> 
                      <a  class="list-group-item "> Skills  <span style="padding-left: 7em">
                         <?php 
                            while($skillrow = mysqli_fetch_array($skill)){ 
@@ -95,7 +97,7 @@
                         else {
                      ?>
                      <a  class="list-group-item">
-                        <button class="btn btn-primary" style="margin-left: 30%" onclick="changeStatus(<?= $srsrow['id'] ?>, 'open', 2);" >Change Status</button>
+                        <button class="btn btn-primary" style="margin-left: 30%" onclick="changeStatus(<?= $srsrow['id'] ?>, 'open', 1);" >Change Status</button>
                         <button class="btn btn-primary"  onclick="addmeeting(<?= $srsrow['id'] ?>, 2);" >Add Meeting</button>
                      </a>
                      <?php }

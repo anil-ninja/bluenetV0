@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-require_once "../dbConnection.php";
+require_once "../components/dbConnection.php";
 if (isset($_POST['first_name'])) {
 	
 	$firstname = mysqli_real_escape_string($db_handle, $_POST['first_name']);
