@@ -45,7 +45,7 @@ if (isset($_POST['name'])) {
 			$workerareanameRow = mysqli_fetch_array($workerareaname);
 			$workerareas .= $workerareanameRow['name'].",";
 		}
-		if($newworkerarea != null AND $newworkerarea != "" AND $newworkerarea != " ") $workerareas = $workerareas.$newworkerarea;
+		if($newworkerarea != null AND $newworkerarea != "" AND $newworkerarea != " ") $workerareas .= $workerareas.$newworkerarea;
 	}
 	else $workerareas .= $newworkerarea;
 	$clientarea = "";

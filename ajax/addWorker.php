@@ -33,18 +33,18 @@ if(isset($_POST['first_name'])){
 	$newworkerarea = $_POST['newworkerarea'];
 	$timing = $_POST['timing'];
 	$timing2 = $_POST['timing2'];
-	$areaworker = "";
+	$workerareas = "";
 	if($worker_area != 0 AND $worker_area != null AND $worker_area != "" ){
-		$eachworkarea = explode(",", $worker_area);
-		foreach ($eachworkarea as $workareas) {
-			$newareaid = trim($workareas);
-			$workarea = mysqli_query ($db_handle, "SELECT * FROM area WHERE id='$newareaid');");
-			$areas = mysqli_fetch_array($workarea);
-			$areaworker .= $areas['name'];
+		$eachworkerarea = explode(",", $worker_area);
+		foreach ($eachworkerarea as $workerarea) {
+			$areaid = trim($workerarea);
+			$workerareaname = mysqli_query($db_handle, "SELECT * FROM area WHERE id = '$areaid' ;");
+			$workerareanameRow = mysqli_fetch_array($workerareaname);
+			$workerareas .= $workerareanameRow['name'].",";
 		}
-		if($newworkerarea != null AND $newworkerarea != "") $areaworker = $areaworker.",".$worker_area;
+		if($newworkerarea != null AND $newworkerarea != "" AND $newworkerarea != " ") $workerareas .= $workerareas.$newworkerarea;
 	}
-	else $areaworker = $worker_area;
+	else $workerareas .= $newworkerarea;
 	$time11 = explode(":", $timing);
 	$time22 = explode(":", $timing2);
 	if($time11[0] < 12) $time1 = $timing." am";
@@ -61,7 +61,7 @@ if(isset($_POST['first_name'])){
 	mysqli_query($db_handle,"INSERT INTO workers (first_name, last_name, phone, gender, area, birth_date, age, education, languages, min_salary, 
 										max_salary, current_address, permanent_address, timings, work_time, varification_status, emergency_phone,  
 										experience, remarks, service, me_id) 
-									VALUES ('$first_name', '$last_name', '$mobile', '$gender', '$areaworker', '$birth_date', '$age', '$education', 
+									VALUES ('$first_name', '$last_name', '$mobile', '$gender', '$workerareas', '$birth_date', '$age', '$education', 
 										'$languages', '$salary', '$salary2', '$current_address', '$parmanent_address', '$newtime', '$work_time', 
 										'$police', '$emergancy_mobile', '$experience',	'$remarks', '$services', '$me_id');");
 	$worker_id = mysqli_insert_id($db_handle);
