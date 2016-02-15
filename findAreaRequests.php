@@ -3,14 +3,12 @@
 session_start();
 $area = $_GET['area'];
 
-$mysqli = new mysqli('localhost','root','redhat111111', 'bluenethack');
-	if ($mysqli->connect_errno) {
-    	echo "Failed to connect to MySQL: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
-		return 1;
-	}
-	/*if (!isset($_SESSION['user_id'])) {  
+require_once "components/dbConnection.php";
+
+	if (!isset($_SESSION['user_id'])) {  
 		header('Location: index.php');
-	}*/
+	}
+
 /* 
 
 SELECT * FROM service_request  LEFT JOIN sr_area ON service_request.id=sr_area.sr_id 
