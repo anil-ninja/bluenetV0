@@ -65,12 +65,11 @@
                         elseif($status == "demo") { 
                      ?>
                      <a  class='list-group-item'>
-                        <button class='btn btn-primary' style='margin-left: 70%;' onclick="changeStatus(<?= $srsrow['id'] ?>, 'meeting', 2);">Change Status</button>
+                        <button class='btn btn-primary' style='margin-left: 70%;' onclick="changeStatus(<?= $srsrow['id'] ?>, 'meeting', 3);">Change Status</button>
                      </a>
                      <?php
                         } 
                         elseif($status == "meeting") { 
-                           $id =  $srsrow['id'];
                            $meeting = mysqli_query($db_handle, "SELECT * FROM meetings WHERE match_id = '$id' ORDER BY created_time DESC LIMIT 0 , 1; ") ;
                            $meetingRow = mysqli_fetch_array($meeting); 
                      ?>
@@ -87,20 +86,24 @@
                            if($srsrow['match_id'] != 0) {
                      ?>
                      <a  class="list-group-item">
-                        <button class="btn btn-primary" style="margin-left: 40%" onclick="workerDetails(<?= $srsrow['id'] ?>, 1);" >Worker 1 Details</button>
+                        <button class="btn btn-primary" style="margin-left: 10%" onclick="workerDetails(<?= $srsrow['id'] ?>, 1);" >Worker 1 Details</button>
                         <button class="btn btn-primary"  onclick="addmeeting(<?= $srsrow['id'] ?>, 1);" >Add Meeting</button>
-                     </a>
-                     <?php }
-                        elseif ($srsrow['match2_id'] != 0) {
+                     
+                     <?php 
+                        if ($srsrow['match2_id'] != 0) {
                            echo "<button class='btn btn-primary'  onclick='workerDetails(".$srsrow['id'].", 2);' >Worker 2 Details</button>";
                         }
-                        else {
+                        echo "<button class='btn btn-primary' onclick='changeStatus(".$id.", \"open\", 1);' >Change Status</button></a>";
+                     }
+                     else {
                      ?>
                      <a  class="list-group-item">
                         <button class="btn btn-primary" style="margin-left: 30%" onclick="changeStatus(<?= $srsrow['id'] ?>, 'open', 1);" >Change Status</button>
                         <button class="btn btn-primary"  onclick="addmeeting(<?= $srsrow['id'] ?>, 2);" >Add Meeting</button>
                      </a>
-                     <?php }
+                     <?php } ?>
+
+                     <?php 
                         } 
                         else { 
                      ?>
