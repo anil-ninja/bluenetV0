@@ -5,8 +5,8 @@
             <div class="panel-primary">
                <?php 
                   $condition = "";
-                  if ($status == "picked") $condition = " me_id = " .$user_id." AND (match_id = 0 OR match2_id = 0) AND (status='open' OR status='me_open')" ;
-                  else if ($status == "done") $condition = " me_id = " .$user_id." AND match_id != 0 AND match2_id != 0 " ;
+                  if ($status == "picked") $condition = " me_id = " .$user_id." AND (match_id = 0 OR match2_id = 0) AND (status='open' OR status='me_open' OR status='meeting')" ;
+                  else if ($status == "done") $condition = " me_id = " .$user_id." AND status !='open' AND status!='me_open' And status!='meeting' AND done_worker_id != 0" ;
                   else if ($status == "24") $condition = "  (status='open' OR status='me_open') AND me_id = 0 AND work_time = 24 " ;
                   else $condition = " (status='open' OR status='me_open') AND me_id = 0 AND work_time != 24 " ;
                   $srs = mysqli_query($db_handle, "SELECT * FROM service_request WHERE ".$condition." ;") ;
