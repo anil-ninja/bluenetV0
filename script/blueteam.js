@@ -735,6 +735,7 @@ function changeStatus(id, oldStatus, type){
                           "<option value='not_interested'>Not Interested</option>"+
                           "<option value='just_to_know'>For information Purpose</option>"+
                           "<option value='decay'>Decay</option>"+
+                          "<option value='me_open'>Search Worker</option>"+
                           "<option value='followback'>Followback</option>"+
                         "</select>"+
                       "</div>"+
