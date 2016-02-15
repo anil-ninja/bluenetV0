@@ -25,8 +25,9 @@ if(isset($_POST['remark'])){
 	}
 	mysqli_query ($db_handle, "INSERT INTO meetings ( match_id, meeting_time, remarks, cem_id, worker_id) 
 								VALUES ('$sr_id', '$date', '$remark', '$user_id', '$worker_id') ;");
-	mysqli_query ($db_handle, "UPDATE service_request SET status = 'meeting', done_worker_id = '$worker_id' WHERE id = '$sr_id' ;");
- 
+	if($worker_id != 0){
+		mysqli_query ($db_handle, "UPDATE service_request SET status = 'meeting', done_worker_id = '$worker_id' WHERE id = '$sr_id' ;");
+	} 
 	if(mysqli_error($db_handle)) return mysqli_error($db_handle) ;
 	else return true ;
 }

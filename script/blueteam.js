@@ -810,7 +810,7 @@ function changeStatus(id, oldStatus, type){
 function postDeatils(fields,skillsArray,areasArray,workerareasArray,servicesArray,work_time,gender,newskill,newarea,newworkerarea,id,priority){
   var dataString = "";
   var d = $('#'+fields[3]).val().split('/');   
-  var date = d[2] +'-'+ d[1] +'-'+ d[0];
+  var date = d[2] +'-'+ d[0] +'-'+ d[1];
   dataString = "name=" + $('#'+fields[0]).val() + "&mobile=" + $('#'+fields[1]).val() + "&address=" + $('#'+fields[2]).val() + "&area=" +  areasArray 
       + "&newarea=" + newarea + "&created_time=" + date + "&remarks=" + $('#'+fields[4]).val() +"&timing=" + $('#'+fields[5]).val() + 
       "&new_status=" + status + "&gender=" +  gender + "&salary=" +  $('#'+fields[7]).val() + "&work_time=" +  work_time + "&salary2=" +  $('#'+fields[8]).val()
