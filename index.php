@@ -40,7 +40,11 @@ if (isset($_POST['login'])) {
 </head>
 <body>
     <div class="row" >
-        <div class = "col-xs-3 col-ls-3"></div>
+        <div class = "col-xs-2 col-ls-2"></div>
+        <div class = "col-xs-4 col-ls-4">
+            <img src="images/logo.png" width="420" style=" margin-top:85px; "  alt="BlueTeam"><div class="pull-right"> to give you Relief...</div>
+            
+        </div>
         <div class = "col-xs-2 col-ls-4" style="width:350px; margin-top:85px; background-color: #F8F8F8 ;">
             <ul class="nav nav-tabs" role="tablist" style="font-size:14px; margin-bottom: 0px; margin-top: 12px;">
                 <li role="presentation" class="active" id="signup_modal">
@@ -49,7 +53,7 @@ if (isset($_POST['login'])) {
             </ul>
             <div class="tab-content" style="margin-bottom: 12px">         
                 <div role="tabpanel" class="row tab-pane active" id="tabSignup" style="line-height: 2;" >
-                    <p align="center"><font size="5" >Sign In for Blueteam</font></p></br>
+                    <p align="center"><font size="5" >BlueNet</font></p></br>
                     <form method="post">
                         <div class="input-group">
                             <span class="input-group-addon">Email</span>
@@ -62,6 +66,7 @@ if (isset($_POST['login'])) {
                         </div><br/>
                         <input type="submit" class="btn btn-success btn-lg" name = "login" value = "Log in" >
                     </form>
+                    powered by Shatkon Labs Pvt. Ltd.
                 </div>  
             </div>  
         </div>	<?php /*

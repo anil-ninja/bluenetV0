@@ -1,5 +1,35 @@
 <?php
 
+function sendSMS($to, $message){
+	$username = "shatkonlabs";
+	$password = "blueteam@11111p";
+	$senderid = "";
+
+	return httpGet("http://www.smsjust.com/blank/sms/user/urlsms.php?".
+						"username=".$username.
+						"&pass=".$password.
+						"&senderid=".$senderid.
+						"&message=".$message.
+						"&dest_mobileno=".$to.
+						"&msgtype=TXT");
+
+
+}
+
+function httpGet($url)
+{
+    $ch = curl_init();  
+ 
+    curl_setopt($ch,CURLOPT_URL,$url);
+    curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
+//  curl_setopt($ch,CURLOPT_HEADER, false); 
+ 
+    $output=curl_exec($ch);
+ 
+    curl_close($ch);
+    return $output;
+}
+
 function route($type){
 
 	if($type == 'admin') return header("Location: request.php");
