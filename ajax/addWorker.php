@@ -84,12 +84,12 @@ if(isset($_POST['first_name'])){
 		if(mysqli_num_rows($workarea) != 0){
 			$areas = mysqli_fetch_array($workarea);
 			$area_id = $areas['id'];
-			mysqli_query ($db_handle, "INSERT INTO sr_area (id, sr_id) VALUES ('$area_id', '$sr_id');");
+			mysqli_query ($db_handle, "INSERT INTO sr_area (id, sr_id) VALUES ('$area_id', '$worker_id');");
 		}
 		else {
 			mysqli_query ($db_handle, "INSERT INTO area (name) VALUES ('$newarea');");
 			$area_id = mysqli_insert_id($db_handle);
-			mysqli_query ($db_handle, "INSERT INTO sr_area (id, sr_id) VALUES ('$area_id', '$sr_id');");
+			mysqli_query ($db_handle, "INSERT INTO sr_area (id, sr_id) VALUES ('$area_id', '$worker_id');");
 		}
 	}
 	if($type == 1){
