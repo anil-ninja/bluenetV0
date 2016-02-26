@@ -60,7 +60,8 @@
          elseif($status == "demo") { 
       ?>
       <a  class='list-group-item'>
-         <button class='btn btn-primary' style='margin-left: 70%;' onclick="changeStatus(<?= $srsrow['id'] ?>, 'meeting', 3);">Change Status</button>
+         <button class='btn btn-primary' style='margin-left: 40%;' onclick="changeStatus(<?= $srsrow['id'] ?>, 'meeting', 3);">Change Status</button>
+         <button class='btn btn-primary' onclick="generateBill(<?= $srsrow['id'] ?>);">Change Status</button>
       </a>
       <?php
          } 

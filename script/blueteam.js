@@ -770,6 +770,7 @@ function changeStatus(id, oldStatus, type){
                       "<label class='col-md-3 control-label'>Salary</label>"+
                       "<div class='col-md-3'>"+
                         "<input type='text' id ='salary"+id+"' class='form-control' placeholder='Enter Fixed Salary' />"+
+                        "<span class='small'>Like 3000 or 10000 </span>"+
                       "</div>"+
                     "</div>"+
                     "<div class='form-group'>"+
@@ -986,6 +987,50 @@ function mePick(id) {
       });
     }
   });
+}
+
+function validatebill(id) {
+  var percent = $('#percentage'+id).val();
+  var type = "request";
+  if(percent == 0){
+    alert("Please select Percentage");
+  }
+  else {
+    var dataString = "sr_id=" + id + "&percent=" + percent + "&type=" + type ; 
+    $.ajax({
+      type: "POST",
+      url: "ajax/bills.php",
+      data: dataString,
+      cache: false,
+      success: function(result){
+        $("#userDetails_"+userId).show().html(result);
+      }
+    });
+    return false;
+  }
+}
+
+function generateBill(id) {
+  var meeting = "<form class='form-horizontal' id='bill_form"+id+"' onsubmit='return (validatebill("+id+"));'>" +
+                  "<div class='form-group'>"+
+                    "<label class='col-md-3 control-label'>Select Amount Percentage</label>"+
+                    "<div class='col-md-3'>"+
+                      "<select id='percentage"+id+"'>"+
+                        "<option value='0' >Select Percentage</option>"+
+                        "<option value='20' >20 Percent</option>"+
+                        "<option value='80' >80 Percent</option>"+
+                        "<option value='100' >On-Demand</option>"+
+                      "</select>"+
+                    "</div>"+
+                  "</div>"+
+                  "<div class='form-group'>"+
+                    "<label class='col-md-3 control-label'></label>"+
+                    "<div class='col-md-7'>"+
+                      "<button type='submit' class='btn btn-success pull-right' >Submit Details</button>"+
+                    "</div>"+
+                  "</div>"+
+                "</form>";
+  $("#workerform_"+id).show().html(meeting);
 }
 
 function completeDetails(id, userId) {
