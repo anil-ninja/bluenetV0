@@ -11,10 +11,11 @@ if (isset($_POST['first_name'])) {
     $employee_type = mysqli_real_escape_string($db_handle, $_POST['employee_type']);
     $salary = mysqli_real_escape_string($db_handle, $_POST['salary']);
 	$pas = mysqli_real_escape_string($db_handle, $_POST['password']) ;
+	$head = mysqli_real_escape_string($db_handle, $_POST['head']) ;
 	
 	$pas = md5($pas);
-	mysqli_query($db_handle,"INSERT INTO user (first_name, last_name, email, phone, password, employee_type, base_salary) 
-							   VALUES ('$firstname', '$lastname', '$email', '$phone', '$pas', '$employee_type', '$salary') ; ") ;		
+	mysqli_query($db_handle,"INSERT INTO user (first_name, last_name, email, phone, password, employee_type, base_salary, team_head) 
+							   VALUES ('$firstname', '$lastname', '$email', '$phone', '$pas', '$employee_type', '$salary', '$head') ; ") ;		
 	
     if(mysqli_error($db_handle)) return false ;
     else return true ;

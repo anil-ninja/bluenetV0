@@ -40,51 +40,51 @@ else header('Location: index.php');
             </li>
             <li ><a href="request.php">
               <div class="icon-bg bg-orange"></div><i class="glyphicon glyphicon-home"></i>
-              <span class="menu-title">View All requests</span><?php countRequest('all', $type, $user_id, $db_handle); ?></a>
+              <span class="menu-title">View All requests</span><?php echo countRequest('all', $type, $user_id, $db_handle); ?></a>
             </li>
             <li ><a href="request.php?status=open">
               <div class="icon-bg bg-orange"></div><i class="glyphicon glyphicon-search"></i>
-              <span class="menu-title">Open requests</span><?php countRequest('open', $type, $user_id, $db_handle); ?></a>
+              <span class="menu-title">Open requests</span><?php echo countRequest('open', $type, $user_id, $db_handle); ?></a>
             </li>
             <li><a href="request.php?status=meeting">
               <div class="icon-bg bg-pink"></div><i class="glyphicon glyphicon-calendar"></i>
-              <span class="menu-title">Meetings</span><?php countRequest('meeting', $type, $user_id, $db_handle); ?></a>   
+              <span class="menu-title">Meetings</span><?php echo countRequest('meeting', $type, $user_id, $db_handle); ?></a>   
             </li>
             <li><a href="request.php?status=demo">
               <div class="icon-bg bg-pink"></div><i class="glyphicon glyphicon-asterisk"></i>
-              <span class="menu-title">IN Demo Period</span><?php countRequest('demo', $type, $user_id, $db_handle); ?></a>   
+              <span class="menu-title">IN Demo Period</span><?php echo countRequest('demo', $type, $user_id, $db_handle); ?></a>   
             </li>
             <li><a href="request.php?status=done">
               <div class="icon-bg bg-pink"></div><i class="glyphicon glyphicon-ok"></i>
-              <span class="menu-title">Done requests</span><?php countRequest('done', $type, $user_id, $db_handle); ?></a>   
+              <span class="menu-title">Done requests</span><?php echo countRequest('done', $type, $user_id, $db_handle); ?></a>   
             </li>
             <li><a href="request.php?status=me_open">
               <div class="icon-bg bg-pink"></div><i class="glyphicon glyphicon-search"></i>
-              <span class="menu-title">ME Open</span><?php countRequest('me_open', $type, $user_id, $db_handle); ?></a>   
+              <span class="menu-title">ME Open</span><?php echo countRequest('me_open', $type, $user_id, $db_handle); ?></a>   
             </li>
             <li><a href="request.php?status=cem_open">
               <div class="icon-bg bg-pink"></div><i class="glyphicon glyphicon-search"></i>
-              <span class="menu-title">CEM Open</span><?php countRequest('cem_open', $type, $user_id, $db_handle); ?></a>   
+              <span class="menu-title">CEM Open</span><?php echo countRequest('cem_open', $type, $user_id, $db_handle); ?></a>   
             </li>
             <li><a href="request.php?status=salary_issue">
               <div class="icon-bg bg-blue"></div><i class="glyphicon glyphicon-usd"></i>
-              <span class="menu-title">Salary Issues</span><?php countRequest('salary_issue', $type, $user_id, $db_handle); ?></a>
+              <span class="menu-title">Salary Issues</span><?php echo countRequest('salary_issue', $type, $user_id, $db_handle); ?></a>
             </li>
             <li><a href="request.php?status=delete">
               <div class="icon-bg bg-blue"></div><i class="glyphicon glyphicon-remove"></i>
-              <span class="menu-title">Deleted Requests</span><?php countRequest('delete', $type, $user_id, $db_handle); ?></a>
+              <span class="menu-title">Deleted Requests</span><?php echo countRequest('delete', $type, $user_id, $db_handle); ?></a>
             </li>
             <li><a href="request.php?status=not_interested">
               <div class="icon-bg bg-blue"></div><i class="glyphicon glyphicon-exclamation-sign"></i>
-              <span class="menu-title">Not Interested</span><?php countRequest('not_interested', $type, $user_id, $db_handle); ?></a>
+              <span class="menu-title">Not Interested</span><?php echo countRequest('not_interested', $type, $user_id, $db_handle); ?></a>
             </li>
             <li><a href="request.php?status=decay">
               <div class="icon-bg bg-blue"></div><i class="glyphicon glyphicon-trash"></i>
-              <span class="menu-title">Decay Requests</span><?php countRequest('decay', $type, $user_id, $db_handle); ?></a>
+              <span class="menu-title">Decay Requests</span><?php echo countRequest('decay', $type, $user_id, $db_handle); ?></a>
             </li>
             <li ><a href="request.php?status=24">
               <div class="icon-bg bg-blue"></div><i class=" glyphicon glyphicon-time"></i>
-              <span class="menu-title">View 24hours Requests</span><?php countRequest('24', $type, $user_id, $db_handle); ?></a>
+              <span class="menu-title">View 24hours Requests</span><?php echo countRequest('24', $type, $user_id, $db_handle); ?></a>
             </li>
             <li><a href="area.php">
               <div class="icon-bg bg-blue"></div><i class="glyphicon glyphicon-print"></i>
@@ -152,6 +152,7 @@ else header('Location: index.php');
                         <option value='me' >Marketing Executive</option>
                         <option value='cem' >Customer Engagement Manager</option>
                         <option value='admin' >Admin</option>
+                        <option value='cem_manager' >Manager</option>
                         <option value='accountant' >Accountant</option>
                         <option value='ba' >Business Analyst</option>
                         <option value='dev' >Developer</option>
@@ -171,6 +172,20 @@ else header('Location: index.php');
                     <div class="col-md-3">
                       <input type="password" id ="password2" class="form-control" placeholder="Re-enter password" />
                     </div>               
+                  </div>
+                  <div class="form-group">
+                    <label class="col-md-3 control-label">Select Team Head</label>
+                    <div class="col-md-4">
+                      <select id="teamHead">
+                        <option value='0' SELECTED>Select Team Head </option>
+                        <?php 
+                        $data = mysqli_query($db_handle, "SELECT * from user where employee_type = 'cem_manager' ;");
+                        while($dataRow = mysqli_fetch_array($data)){
+                          echo "<option value=".$dataRow['id'].">".$dataRow['first_name']." ".$dataRow['last_name']."</option>";
+                        }
+                        ?>
+                      </select>
+                    </div>
                   </div>
       				    <div class="form-group">
       					    <label class="col-md-3 control-label"></label>

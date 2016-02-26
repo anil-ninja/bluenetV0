@@ -10,3 +10,4 @@
   <link type="text/css" rel="stylesheet" href="styles/zabuto_calendar.min.css">
   <link type="text/css" rel="stylesheet" href="styles/pace.css">
   <link type="text/css" rel="stylesheet" href="styles/jquery.news-ticker.css">
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.10/css/jquery.dataTables.min.css"/>

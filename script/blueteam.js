@@ -291,7 +291,6 @@ function postRequestDeatils(fields,skillsArray,areasArray,workerareasArray,statu
   var dataString = "";
   var d = $('#'+fields[3]).val().split('/');   
   var date = d[2] +'-'+ d[0] +'-'+ d[1];
-  alert(date);
   dataString = "name=" + $('#'+fields[0]).val() + "&mobile=" + $('#'+fields[1]).val() + "&address=" + $('#'+fields[2]).val() + "&area=" +  areasArray 
       + "&newarea=" + newarea + "&created_time=" + date + "&remarks=" + $('#'+fields[4]).val() +"&timing=" + $('#'+fields[5]).val() + "&new_status=" 
       + status + "&gender=" +  gender + "&salary=" +  $('#'+fields[7]).val() + "&work_time=" +  work_time + "&salary2=" +  $('#'+fields[8]).val() + 
@@ -403,11 +402,11 @@ function validateRequestDetails(){
   return false;
 }
 
-function postUserDeatils(fields, type){
+function postUserDeatils(fields, type, head){
   var dataString = "";
   dataString = "first_name=" + $('#'+fields[0]).val() + "&last_name=" + $('#'+fields[1]).val() + "&email=" + $('#'+fields[2]).val() + 
       "&phone=" + $('#'+fields[3]).val() + "&employee_type=" + type + "&salary=" +  $('#'+fields[4]).val() + 
-      "&password=" +  $('#'+fields[5]).val() ;
+      "&password=" +  $('#'+fields[5]).val() + "&head=" + head ;
   if($('#'+fields[0]).val().length < 3){
     alert("First Name is too short");
   }
@@ -453,10 +452,14 @@ function postUserDeatils(fields, type){
 function validateUserDetails(){
   fields = ["first_name","last_name","email","phone", "salary", "password","password2"];
   var type = $('#employee_type').val();
-  if(genericEmptyFieldValidator(fields)){
-    postUserDeatils(fields, type);
+  var head = $('#teamHead').val();
+  if(head != 0){
+    if(genericEmptyFieldValidator(fields)){
+      postUserDeatils(fields, type, head);
+    }
+    return false;
   }
-  return false;
+  else alert('Please Select Team Head');
 }
 
 function postMeetingDeatils(fields, id, worker) {
@@ -517,8 +520,9 @@ function workerDetails(id, type){
 
 function validateNote(id, type){
   var dataString = "";
+  fields = ["note"+id];
   var note = $("#note"+id).val() ;
-  if(genericEmptyFieldValidator(note)){
+  if(genericEmptyFieldValidator(fields)){
     dataString = "id=" + id + "&type=" + type + "&note=" + note;
     $.ajax({
       type: "POST",
@@ -529,12 +533,10 @@ function validateNote(id, type){
         alert("Added Successfully");
       },
       error: function(result){
-        console.log("inside error");
-        console.log(result);
+        alert(result);
         return false;
       }
     });
-    return false;
   }
   return false;
 }
@@ -768,6 +770,7 @@ function changeStatus(id, oldStatus, type){
                       "<label class='col-md-3 control-label'>Salary</label>"+
                       "<div class='col-md-3'>"+
                         "<input type='text' id ='salary"+id+"' class='form-control' placeholder='Enter Fixed Salary' />"+
+                        "<span class='small'>Like 3000 or 10000 </span>"+
                       "</div>"+
                     "</div>"+
                     "<div class='form-group'>"+
@@ -986,6 +989,63 @@ function mePick(id) {
   });
 }
 
+function validatebill(id) {
+  var percent = $('#percentage'+id).val();
+  var type = "request";
+  if(percent == 0){
+    alert("Please select Percentage");
+  }
+  else {
+    var dataString = "sr_id=" + id + "&percent=" + percent + "&type=" + type ; 
+    $.ajax({
+      type: "POST",
+      url: "ajax/bills.php",
+      data: dataString,
+      cache: false,
+      success: function(result){
+        $("#userDetails_"+userId).show().html(result);
+      }
+    });
+    return false;
+  }
+}
+
+function generateBill(id) {
+  var meeting = "<form class='form-horizontal' id='bill_form"+id+"' onsubmit='return (validatebill("+id+"));'>" +
+                  "<div class='form-group'>"+
+                    "<label class='col-md-3 control-label'>Select Amount Percentage</label>"+
+                    "<div class='col-md-3'>"+
+                      "<select id='percentage"+id+"'>"+
+                        "<option value='0' >Select Percentage</option>"+
+                        "<option value='20' >20 Percent</option>"+
+                        "<option value='80' >80 Percent</option>"+
+                        "<option value='100' >On-Demand</option>"+
+                      "</select>"+
+                    "</div>"+
+                  "</div>"+
+                  "<div class='form-group'>"+
+                    "<label class='col-md-3 control-label'></label>"+
+                    "<div class='col-md-7'>"+
+                      "<button type='submit' class='btn btn-success pull-right' >Submit Details</button>"+
+                    "</div>"+
+                  "</div>"+
+                "</form>";
+  $("#workerform_"+id).show().html(meeting);
+}
+
+function completeDetails(id, userId) {
+  $.ajax({
+    type: "POST",
+    url: "ajax/Requestdetails.php",
+    data: "sr_id="+id,
+    cache: false,
+    success: function(result){
+      $("#userDetails_"+userId).show().html(result);
+    }
+  });
+  return false;
+}
+
 function viewDetails(id, type) {
   $.ajax({
     type: "POST",
@@ -1006,6 +1066,20 @@ function removearea(id) {
 
 function removeskill(id) {
   $('#'+id).remove();
+}
+
+function viewrequests(status, type, userId) {
+  $.ajax({
+    type: "POST",
+    url: "ajax/employeeRequests.php",
+    data: "status="+status +"&type="+type+"&user_id="+userId,
+    cache: false,
+    success: function(result){
+      $("#userDetails_"+userId).show().html(result);
+      $('#example1').DataTable();
+    }
+  });
+  return false;
 }
 
 function viewNotes (Id, type) {
@@ -1053,6 +1127,117 @@ function validateSearch() {
     });
     return false;
   }
+}
+
+function requestData(status) {
+   $.ajax({
+    type: "POST",
+    url: "ajax/requestData.php",
+    data: "status="+ status ,
+    cache: false,
+    success: function(result){
+      $('.middlePanel').html('');
+      $('.middlePanel').append(result);
+    },
+    error: function(result){
+      alert("Error Occured");
+      return false;
+    }
+  });
+}
+
+function getstatics() {
+  $.get('../components/static.php', function(data) {
+    alert(data);
+    $('.middlePanel').html('');
+    $('.middlePanel').append(data);
+  });
+}
+
+function getallprintArea() {
+  $.get('../components/printArea.php', function(data) {
+    alert(data);
+    $('.middlePanel').html('');
+    $('.middlePanel').append(data);
+  });
+}
+
+function insertnewworkerform() {
+  $.get('../components/workerform.php', function(data) {
+    alert(data);
+    $('.middlePanel').html('');
+    $('.middlePanel').append(data);
+    $('#birth_date').datepicker();
+    $('#timing').timepicker();
+    $('#timing2').timepicker();
+  });
+}
+
+function insertnewrequestform() {
+  $.get('../components/requestform.php', function(data) {
+    alert(data);
+    $('.middlePanel').html('');
+    $('.middlePanel').append(data);
+    $('#created_time').datepicker();
+    $('#timing').timepicker();
+    $('#timing2').timepicker();
+  });
+}
+
+function insertnewuserform() {
+  $.get('../components/userform.php', function(data) {
+    alert(data);
+    $('.middlePanel').html('');
+    $('.middlePanel').append(data);
+    $('#created_time').datepicker();
+    $('#timing').timepicker();
+    $('#timing2').timepicker();
+  });
+}
+
+function getRequestData(status){
+  switch(status){
+    case 'addUser':
+      insertnewuserform();
+      document.getElementById('14').setAttribute("class", "active");
+      break; 
+
+    case 'addRequest':
+      insertnewrequestform();
+      document.getElementById('32').setAttribute("class", "active");
+      break;  
+
+    case 'addWorker':
+      insertnewworkerform();
+      document.getElementById('33').setAttribute("class", "active");
+      break;  
+
+    case 'printArea':
+      getallprintArea();
+      document.getElementById('31').setAttribute("class", "active");
+      break;  
+
+    case 'statics':
+      getstatics();
+      document.getElementById('15').setAttribute("class", "active");
+      break; 
+
+    default :
+      requestData(status);
+      break;
+  }
+}
+
+function reportcard(type, id) {
+  $.ajax({
+    type: "POST",
+    url: "ajax/reportcard.php",
+    data: "type="+type+"&id="+id,
+    cache: false,
+    success: function(result){
+      $("#reportcard_"+id).show().html(result);
+    }
+  });
 }
 
 function toggleform() {
