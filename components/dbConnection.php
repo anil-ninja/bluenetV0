@@ -1,5 +1,7 @@
 <?php
-	$db_handle = mysqli_connect("localhost","root","redhat111111","bluenethack_v0");
+
+	$db_handle = mysqli_connect("localhost","root","redhat@11111p","bluenet_v0");
+
 
 //Check connection
 	if (mysqli_connect_errno()) {
