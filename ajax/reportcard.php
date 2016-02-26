@@ -1,7 +1,9 @@
 <?php
 session_start();
 require_once "../components/dbConnection.php";
-
+if (!isset($_SESSION['user_id'])) {  
+    header('Location: index.php');
+}
 if(isset($_POST['type'])){
 	$type = $_POST['type'];
 	$user_id = $_POST['id'];

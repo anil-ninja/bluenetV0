@@ -209,18 +209,18 @@ function getBillFun($customerName, $invoiceDate, $address, $invoicNo, $clientPho
     </TR>
     <TR VALIGN=TOP>
         <TD WIDTH=609>
-            <P LANG='en-US' CLASS='western' ALIGN=RIGHT>Sub Total</P>
-        </TD>
-        <TD WIDTH=101>
-            <P LANG='en-US' CLASS='western'>$subTotal Rs</P>
-        </TD>
-    </TR>
-    <TR VALIGN=TOP>
-        <TD WIDTH=609>
             <P LANG='en-US' CLASS='western'>Service Tax ( 14.5 % )</P>
         </TD>
         <TD WIDTH=101>
             <P LANG='en-US' CLASS='western'>$serviveTax Rs</P>
+        </TD>
+    </TR>
+    <TR VALIGN=TOP>
+        <TD WIDTH=609>
+            <P LANG='en-US' CLASS='western' ALIGN=RIGHT>Sub Total</P>
+        </TD>
+        <TD WIDTH=101>
+            <P LANG='en-US' CLASS='western'>$subTotal Rs</P>
         </TD>
     </TR>
     <TR VALIGN=TOP>
@@ -303,9 +303,7 @@ function getBillFun($customerName, $invoiceDate, $address, $invoicNo, $clientPho
 </TABLE>
 <P CLASS='western' STYLE='margin-bottom: 0in; line-height: 100%'><BR>
 </P>
-<P CLASS='western' STYLE='margin-bottom: 0in; border-top: none; border-bottom: 1px solid #000000; border-left: none; border-right: none; padding-top: 0in; padding-bottom: 0.03in; padding-left: 0in; padding-right: 0in; line-height: 100%'>
-    <IMG SRC='images/0751950001455634707_deepali_soni_html_4d716d1e.gif' NAME='Image2' ALIGN=LEFT WIDTH=33 HEIGHT=32 BORDER=0><BR>
-</P>
+
 <P CLASS='western' STYLE='margin-bottom: 0in; line-height: 100%'><BR>
 </P>
 <TABLE WIDTH=100% BORDER=1 BORDERCOLOR='#000000' CELLPADDING=4 CELLSPACING=0>
@@ -350,10 +348,7 @@ function getBillFun($customerName, $invoiceDate, $address, $invoicNo, $clientPho
         </TD>
     </TR>
 </TABLE>
-<P CLASS='western' STYLE='margin-bottom: 0in; line-height: 100%'><BR>
-</P>
-<P CLASS='western' STYLE='margin-bottom: 0in; line-height: 100%'><BR>
-</P>
+<br/>
 <P CLASS='western' ALIGN=RIGHT STYLE='margin-right: -0.39in; margin-bottom: 0in; line-height: 100%; text-decoration: none'>
     <FONT COLOR='#c0504d'><SPAN STYLE='background: transparent'>  <FONT FACE='Arial, sans-serif'><FONT SIZE=3><I><FONT SIZE=2 STYLE='font-size: 11pt'><SPAN STYLE='font-weight: normal'>A
 product of </SPAN></FONT><FONT SIZE=4><SPAN STYLE='font-weight: normal'>
@@ -365,8 +360,7 @@ product of </SPAN></FONT><FONT SIZE=4><SPAN STYLE='font-weight: normal'>
 <P CLASS='western' ALIGN=CENTER STYLE='margin-bottom: 0in; font-style: normal; line-height: 100%; text-decoration: none'><A NAME='docs-internal-guid-6bd0d196-48e5-5b8d-2731-e1412cf2cb56'></A>
     <FONT FACE='Arial'><FONT SIZE=3 STYLE='font-size: 11pt'><B><SPAN STYLE='background: transparent'>TERMS
 AND CONDITIONS</SPAN></B></FONT></FONT></P>
-<P CLASS='western' STYLE='margin-bottom: 0in; line-height: 100%'><BR>
-</P>
+
 <P CLASS='western' ALIGN=JUSTIFY STYLE='font-style: normal; font-weight: normal; text-decoration: none'><A NAME='docs-internal-guid-6bd0d196-48e3-f488-2361-1c033283fa10'></A>
     <FONT FACE='Times New Roman, serif'><FONT SIZE=2><SPAN STYLE='background: transparent'><B>1)</B>
 BlueTeam.in charges a fees for it&rsquo;s placement services which is
@@ -443,12 +437,11 @@ strongly suggests that the client either himself or ask BlueTeam.in
 to do a POLICE VERIFICATION of the worker. This ensures that the
 worker is free of any criminal charges in the past. If BlueTeam.in is
 asked to do a police verification, then it will chargeable as per
-actuals.</SPAN></SPAN></SPAN></SPAN></FONT></FONT></P>
-<P LANG='en-US' CLASS='western' ALIGN=JUSTIFY STYLE='margin-bottom: 0in; font-style: normal; font-weight: normal; line-height: 138%; text-decoration: none'>
-    <FONT FACE='Times New Roman, serif'><FONT SIZE=2><SPAN STYLE='background: transparent'>BlueTeam
+actuals.<br>
+BlueTeam
 shall not be responsible or liable for any act or omission, either
-Civil or Criminal in nature, of the placed candidate. </SPAN></FONT></FONT>
-</P>
+Civil or Criminal in nature, of the placed candidate. </SPAN></SPAN></SPAN></SPAN></FONT></FONT></P>
+
 <P LANG='en-US' CLASS='western' ALIGN=JUSTIFY STYLE='margin-bottom: 0in; line-height: 138%'>
     <FONT FACE='Times New Roman, serif'><FONT SIZE=2><SPAN STYLE='text-decoration: none'><SPAN STYLE='font-style: normal'><B><SPAN STYLE='background: transparent'>10)</SPAN></B></SPAN></SPAN><SPAN STYLE='text-decoration: none'><SPAN STYLE='background: transparent'>
 </SPAN></SPAN><SPAN STYLE='text-decoration: none'><SPAN STYLE='font-style: normal'><SPAN STYLE='font-weight: normal'><SPAN STYLE='background: transparent'>If
@@ -492,8 +485,7 @@ disputes shall be subject to Delhi Jurisdiction only. </SPAN></SPAN></SPAN></SPA
 due to any circumstance where a refund becomes due to the client, the
 amount shall be refunded within 90 days of the candidate leaving the
 job.</SPAN></SPAN></SPAN></FONT></FONT></SPAN></FONT></P>
-<P CLASS='western' STYLE='margin-bottom: 0in; line-height: 100%'><BR>
-</P>
+
 <P CLASS='western' STYLE='margin-bottom: 0in; line-height: 100%'>Customer
     Signature: _______________________________________</P>
 <P CLASS='western' STYLE='margin-bottom: 0in; line-height: 100%'><BR>

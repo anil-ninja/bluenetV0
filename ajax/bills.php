@@ -1,7 +1,9 @@
 <?php
 
 session_start();
-
+if (!isset($_SESSION['user_id'])) {  
+    header('Location: index.php');
+}
 require_once "../components/dbConnection.php";
 include_once 'getBillFun.php';
 
@@ -54,9 +56,9 @@ if(isset($_GET['sr_id'])){
 		/*echo $invoice_id.",".$clientname.",".$clientmobile.",".$clientaddress.",".$clientarea.",".",".$clientemail.",".$requirements.",".
 				$salary.",".$workername.",".$workermobile.",".$workeraddress.",".$service_tax.",".$subtotal.",".$tobepaid ;*/
 
-		getBillFun($clientname, $invoiceDate, $clientaddress, $invoicNo, $clientPhone, $clientEmail,
-                    $serviceDetails, $workName, $workerAddress, $workMobile, $startingDate, $serverChange,
-                    $subTotal, $serviveTax, $cemDiscount, $toBePaid, $pending, $total, $couponNo);
+		getBillFun($clientname, $invoiceDate, $clientaddress, $invoice_id, $clientmobile, $clientemail,
+                    $requirements, $workername, $workeraddress, $workermobile, $startingDate, $salary,
+                    $subtotal, $service_tax, $cemDiscount, $tobepaid, $pending, $subtotal, $couponNo);
 	}
 }
 mysqli_close($db_handle);

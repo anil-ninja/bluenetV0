@@ -989,13 +989,6 @@ function mePick(id) {
   });
 }
 
-function OpenInNewTab(result) {
-  var win = window.open("bill.php", '_blank');
-  //win.document.write(result)
-  document.getElementById('searchresult').innerHTML(result);
-  win.focus();
-}
-
 function validatebill(id) {
   var percent = $('#percentage'+id).val();
   var type = "request";

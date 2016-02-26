@@ -1,6 +1,8 @@
 <?php
 session_start();
-
+if (!isset($_SESSION['user_id'])) {  
+    header('Location: index.php');
+}
 require_once "../components/dbConnection.php";
 
 if(isset($_POST['skill'])){
