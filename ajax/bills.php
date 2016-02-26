@@ -18,6 +18,8 @@ if(isset($_POST['sr_id'])){
 		$detailsRow = mysqli_fetch_array($details);
 	}
 	else {
+		mysqli_query ($db_handle, "INSERT INTO bills (type, user_id, request_id, details) VALUES ('$type', '$user_id', '$sr_id', '$percent') ;");
+		$invoice_id = date('Y').".".mysql_insert_id($db_handle);
 		$details = mysqli_query ($db_handle, "SELECT * FROM service_request WHERE id = '$sr_id' ;");
 		$detailsRow = mysqli_fetch_array($details);
 		$clientname = $detailsRow['name'];
