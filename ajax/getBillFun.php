@@ -1,5 +1,26 @@
 <?php
 
+/**
+ * @param $customerName STRING
+ * @param $invoiceDate STRING
+ * @param $address STRING
+ * @param $invoicNo STRING
+ * @param $clientPhone STRING
+ * @param $clientEmail STRING
+ * @param $serviceDetails STRING
+ * @param $workName STRING
+ * @param $workerAddress STRING
+ * @param $workMobile STRING
+ * @param $startingDate STRING
+ * @param $serverChange STRING
+ * @param $subTotal STRING
+ * @param $serviveTax STRING
+ * @param $cemDiscount STRING
+ * @param $toBePaid integer
+ * @param $pending integer
+ * @param $total integer
+ * @param $couponNo STRING
+ */
 function getBillFun($customerName, $invoiceDate, $address, $invoicNo, $clientPhone, $clientEmail,
                     $serviceDetails, $workName, $workerAddress, $workMobile, $startingDate, $serverChange,
                     $subTotal, $serviveTax, $cemDiscount, $toBePaid, $pending, $total, $couponNo){
