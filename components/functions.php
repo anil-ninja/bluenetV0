@@ -12,12 +12,9 @@ function sendSMS($to, $message){
 						"&message=".$message.
 						"&dest_mobileno=".$to.
 						"&msgtype=TXT");
-
-
 }
 
-function httpGet($url)
-{
+function httpGet($url){
     $ch = curl_init();  
  
     curl_setopt($ch,CURLOPT_URL,$url);
@@ -36,6 +33,7 @@ function route($type){
 	elseif($type == 'me') return header("Location: me.php");
 	elseif($type == 'cem') return header("Location: cem.php");
 	elseif($type == 'accountant') return header("Location: accounts.php");
+	elseif($type == 'cem_manager') return header("Location: statics.php");
 	elseif($type == 'ba') return header("Location: business.php");
 	elseif($type == 'dev') return header("Location: developer.php");
 	elseif($type == 'operator') return header("Location: insert.php");
@@ -89,7 +87,7 @@ function countRequest($status, $type, $user_id, $db_handle){
 	$countRow = mysqli_fetch_array($count);
 	if ($countRow['count'] != 0) $data = "<span class='badge badge-info'>".$countRow['count']."</span>";
 	else $data = "";
-	echo $data;
+	return $data;
 }
 
 function headerColor($value){

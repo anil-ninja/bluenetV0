@@ -35,11 +35,11 @@ else header('Location: index.php');
           <div class="clearfix"></div>
           <li <?php if (($_GET['status']=='followback') OR !isset($_GET['status'])) echo "class='active'";?>><a href="operator.php?status=followback">
             <div class="icon-bg bg-blue"></div><i class="glyphicon glyphicon-repeat"></i>
-            <span class="menu-title">Follow back Requests</span><?php countRequest('followback', $type, $user_id, $db_handle); ?></a>
+            <span class="menu-title">Follow back Requests</span><?php echo countRequest('followback', $type, $user_id, $db_handle); ?></a>
           </li>
           <li <?php if ($_GET['status']=='feedback') echo "class='active'";?>><a href="operator.php?status=feedback">
             <div class="icon-bg bg-blue"></div><i class="glyphicon glyphicon-repeat"></i>
-            <span class="menu-title">Feedback Requests</span><?php countRequest('feedback', $type, $user_id, $db_handle); ?></a>
+            <span class="menu-title">Feedback Requests</span><?php echo countRequest('feedback', $type, $user_id, $db_handle); ?></a>
           </li>
           <li ><a href="insert.php">
             <div class="icon-bg bg-red"></div><i class="glyphicon glyphicon-plus"></i>
@@ -68,9 +68,18 @@ else header('Location: index.php');
         </ol>
         <div class="clearfix"></div>
       </div>
-      <div class="searchresult"></div>
-                <!--END TITLE & BREADCRUMB PAGE-->
-       <?php require_once "components/operator_inc.php"; ?>
+      <div class="page-content">
+        <div id="tab-general">
+          <div class="row">
+            <div class="col-lg-9">
+              <div class="searchresult"></div>
+              <div class="panel-primary middlePanel">
+                <?php require_once "components/operator_inc.php"; ?>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
   <?php include_once "components/footers.php"; ?>

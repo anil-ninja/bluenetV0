@@ -4,8 +4,6 @@ session_start();
 require_once "components/dbConnection.php";
 
 $status = $_GET["status"];
-if(!isset($status)) $status == "open" ;
-
 $user_id = $_SESSION['user_id'];
 
 if (!isset($_SESSION['user_id'])) {  
@@ -34,14 +32,7 @@ if (!isset($_SESSION['user_id'])) {
       <div class="sidebar-collapse menu-scroll">
         <ul id="side-menu" class="nav">      
           <div class="clearfix"></div>
-          <li ><a href="insert.php">
-            <div class="icon-bg bg-red"></div><i class="glyphicon glyphicon-plus"></i>
-            <span class="menu-title">Insert New Service Request</span></a>
-          </li>
-          <li ><a href="insertworker.php">
-            <div class="icon-bg bg-red"></div><i class="glyphicon glyphicon-plus"></i>
-            <span class="menu-title">Insert New Worker</span></a>
-          </li>
+          <?php include_once "components/sidenav.php"; ?>
         </ul>
       </div>
     </nav>
@@ -49,8 +40,10 @@ if (!isset($_SESSION['user_id'])) {
     <!--BEGIN TITLE & BREADCRUMB PAGE-->
       <div id="title-breadcrumb-option-demo" class="page-title-breadcrumb">
         <div class="page-header pull-left">
-          <div class="page-title">BlueNet Hack</div><!-- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          <a id="menu-toggle" href="#" class="hidden-xs"><i class="glyphicon glyphicon-th-list"></i></a> -->
+          <div class="page-title">BlueNet&nbsp;/
+            <a  href="request.php" ><?= $_SESSION['employee_type'] ?></a>&nbsp;/
+            <a  class="selectedStatus" ></a>
+          </div>
         </div>
         <ol class="breadcrumb page-breadcrumb pull-right">
           <li></li>
@@ -59,19 +52,28 @@ if (!isset($_SESSION['user_id'])) {
         </ol>
         <div class="clearfix"></div>
       </div>
-      <div class="searchresult"></div>
-                <!--END TITLE & BREADCRUMB PAGE-->
-       <?php //require_once "page-contect.php"; ?>
+      <div class="page-content">
+        <div id="tab-general">
+          <div class="row">
+            <div class="col-lg-9">
+              <div class="searchresult"></div>
+              <div class="panel-primary middlePanel">
+                <?php require_once "components/page_contect.php"; ?>
+              </div>
+            </div>
+            <div class="col-lg-3">
+              <?php if($_SESSION['employee_type'] != 'ba' OR $_SESSION['employee_type'] != 'operator') require_once "components/requestsearchform.php"; ?>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
   <?php include_once "components/footers.php"; ?>
   <script type="text/javascript">
-  	/*$(document).ready(function() {
-  	  $('#example1').DataTable({
-        "iDisplayLength": 50
-      });
-  	});*/
-   
+  	$(document).ready(function() {
+  	  getRequestData(<?= $_SESSION['employee_type'] ?>, 0);
+  	});   
 	</script>
 </body>
 </html>

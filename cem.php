@@ -36,31 +36,31 @@ else header('Location: index.php');
           <div class="clearfix"></div>
           <li <?php if (($_GET['status']=='open') OR !isset($_GET['status'])) echo "class='active'";?>><a href="cem.php?status=open">
             <div class="icon-bg bg-pink"></div><i class="glyphicon glyphicon-search"></i>
-            <span class="menu-title">Open requests</span><?php countRequest('open', $type, $user_id, $db_handle); ?></a>   
+            <span class="menu-title">Open requests</span><?php echo countRequest('open', $type, $user_id, $db_handle); ?></a>   
           </li>
           <li <?php if ($_GET['status']=='24') echo "class='active'";?>><a href="cem.php?status=24">
             <div class="icon-bg bg-pink"></div><i class="glyphicon glyphicon-time"></i>
-            <span class="menu-title">24 Hour open requests</span><?php countRequest('24', $type, $user_id, $db_handle); ?></a>   
+            <span class="menu-title">24 Hour open requests</span><?php echo countRequest('24', $type, $user_id, $db_handle); ?></a>   
           </li>
           <li <?php if ($_GET['status']=='match') echo "class='active'";?>><a href="cem.php?status=match">
             <div class="icon-bg bg-pink"></div><i class="glyphicon glyphicon-search"></i>
-            <span class="menu-title">Match requests</span><?php countRequest('match', $type, $user_id, $db_handle); ?></a>   
+            <span class="menu-title">Match requests</span><?php echo countRequest('match', $type, $user_id, $db_handle); ?></a>   
           </li>
-          <li <?php if ($_GET['status']=='picked') echo "class='active'";?>><a href="cem.php?status=picked">
+          <li <?php if ($_GET['status']=='picked') echo "class='acecho tive'";?>><a href="cem.php?status=picked">
             <div class="icon-bg bg-pink"></div><i class="glyphicon glyphicon-user"></i>
-            <span class="menu-title">Picked requests</span><?php countRequest('picked', $type, $user_id, $db_handle); ?></a>   
+            <span class="menu-title">Picked requests</span><?php echo countRequest('picked', $type, $user_id, $db_handle); ?></a>   
           </li>
           <li <?php if ($_GET['status']=='meeting') echo "class='active'";?>><a href="cem.php?status=meeting">
             <div class="icon-bg bg-pink"></div><i class="glyphicon glyphicon-calendar"></i>
-            <span class="menu-title">Meetings</span><?php countRequest('meeting', $type, $user_id, $db_handle); ?></a>   
+            <span class="menu-title">Meetings</span><?php echo countRequest('meeting', $type, $user_id, $db_handle); ?></a>   
           </li>
           <li <?php if ($_GET['status']=='demo') echo "class='active'";?>><a href="cem.php?status=demo">
             <div class="icon-bg bg-pink"></div><i class="glyphicon glyphicon-asterisk"></i>
-            <span class="menu-title">IN Demo Period</span><?php countRequest('demo', $type, $user_id, $db_handle); ?></a>   
+            <span class="menu-title">IN Demo Period</span><?php echo countRequest('demo', $type, $user_id, $db_handle); ?></a>   
           </li>
           <li <?php if ($_GET['status']=='done') echo "class='active'";?>><a href="cem.php?status=done">
             <div class="icon-bg bg-pink"></div><i class="glyphicon glyphicon-ok"></i>
-            <span class="menu-title">Done requests</span><?php countRequest('done', $type, $user_id, $db_handle); ?></a>   
+            <span class="menu-title">Done requests</span><?php echo countRequest('done', $type, $user_id, $db_handle); ?></a>   
           </li>
           <li ><a href="insert.php">
             <div class="icon-bg bg-red"></div><i class="glyphicon glyphicon-plus"></i>
@@ -89,10 +89,21 @@ else header('Location: index.php');
         </ol>
         <div class="clearfix"></div>
       </div>
-      <?php require_once "components/requestsearchform.php"; ?>
-      <div class="searchresult"></div>
-
-       <?php require_once "components/cem_inc.php"; ?>
+      <div class="page-content">
+        <div id="tab-general">
+          <div class="row">
+            <div class="col-lg-9">
+              <div class="searchresult"></div>
+              <div class="panel-primary middlePanel">
+                <?php require_once "components/cem_inc.php"; ?>
+              </div>
+            </div>
+            <div class="col-lg-3">
+              <?php if($_SESSION['employee_type'] != 'ba' OR $_SESSION['employee_type'] != 'operator') require_once "components/requestsearchform.php"; ?>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
   <?php include_once "components/footers.php"; ?>

@@ -3,20 +3,24 @@
   <div class="panel-body pan searchform">
     <form class="form-horizontal" id="request_search_form" onsubmit='return (validateRequestSearch());'>
       <div class="form-group">
-        <label class="col-md-2 control-label">Select Gender</label>
-        <div class="col-md-1">
+        <label class="col-md-6 control-label">Select Gender</label>
+        <div class="col-md-5">
           <select id = "gender" > 
             <option value="male" >Male</option>
             <option value="female" selected>Female</option>
             <option value="any">Any</option>
           </select>
-        </div> <!-- /.col -->
-        <label class="col-md-2 control-label">Min. Salary </label>
-        <div class="col-md-1">
+        </div>
+      </div> 
+      <div class="form-group">
+        <label class="col-md-6 control-label">Min. Salary </label>
+        <div class="col-md-5">
           <input type="number" id ="salary" onkeyup='nospaces(this);' class="form-control" placeholder="Enter number" />
         </div>
-        <label class="col-md-2 control-label">Work Time </label>
-        <div class="col-md-1">
+      </div> 
+      <div class="form-group">
+        <label class="col-md-5 control-label">Work Time </label>
+        <div class="col-md-5">
           <select id="work_time">
             <option value="0" >Select hours</option>
             <?php for ($i=2; $i < 25; $i++) { 
@@ -26,12 +30,14 @@
         </div>
       </div> 
       <div class="form-group">
-        <label class="col-md-2 control-label" >Worker Area</label>
-        <div class="col-md-1">
+        <label class="col-md-6 control-label" >Worker Area</label>
+        <div class="col-md-4">
           <input type="text" id ="area" class="form-control" placeholder="Enter Area" />
         </div>
-       	<label class="col-md-2 control-label">Requirement</label>
-        <div class="col-md-2">
+      </div> 
+      <div class="form-group">
+       	<label class="col-md-5 control-label">Requirement</label>
+        <div class="col-md-6">
 					<select id="skill">
             <option value="0" selected>Select Service</option>
 						<option value="maid">Maid</option>
@@ -45,8 +51,10 @@
 						<option value="patient" >Patient care</option>
 					</select>
 				</div>
-			  <label class="col-md-1 control-label"></label>
-			  <div class="col-md-3">
+      </div> 
+      <div class="form-group">
+			  <label class="col-md-6 control-label"></label>
+			  <div class="col-md-4">
 			    <button type="submit" class="btn btn-success pull-right">Search</button>
 			  </div>
 			</div> 
