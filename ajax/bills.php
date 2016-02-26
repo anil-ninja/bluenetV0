@@ -1,14 +1,18 @@
 <?php
 
 session_start();
-
+if (!isset($_SESSION['user_id'])) {  
+    header('Location: index.php');
+}
 require_once "../components/dbConnection.php";
+include_once 'getBillFun.php';
 
-if(isset($_POST['sr_id'])){
-	$percent = $_POST['percent'];
-	$type = $_POST['type'];
-	$sr_id = $_POST['sr_id'];
+if(isset($_GET['sr_id'])){
+	$percent = $_GET['percent'];
+	$type = $_GET['type'];
+	$sr_id = $_GET['sr_id'];
 	$user_id = $_SESSION['user_id'];
+	var_dump($_GET);
 	if($type == 'worker'){
 		$details = mysqli_query ($db_handle, "SELECT * FROM workers WHERE  id = '$sr_id' ;");
 		$detailsRow = mysqli_fetch_array($details);
@@ -48,8 +52,13 @@ if(isset($_POST['sr_id'])){
 		else {
 			$tobepaid = $salary;
 		}
-		echo $invoice_id.",".$clientname.",".$clientmobile.",".$clientaddress.",".$clientarea.",".",".$clientemail.",".$requirements.",".
-				$salary.",".$workername.",".$workermobile.",".$workeraddress.",".$service_tax.",".$subtotal.",".$tobepaid ;
+		$invoiceDate = date('d-m-Y');
+		/*echo $invoice_id.",".$clientname.",".$clientmobile.",".$clientaddress.",".$clientarea.",".",".$clientemail.",".$requirements.",".
+				$salary.",".$workername.",".$workermobile.",".$workeraddress.",".$service_tax.",".$subtotal.",".$tobepaid ;*/
+
+		getBillFun($clientname, $invoiceDate, $clientaddress, $invoice_id, $clientmobile, $clientemail,
+                    $requirements, $workername, $workeraddress, $workermobile, $startingDate, $salary,
+                    $subtotal, $service_tax, $cemDiscount, $tobepaid, $pending, $subtotal, $couponNo);
 	}
 }
 mysqli_close($db_handle);

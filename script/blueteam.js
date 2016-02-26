@@ -989,13 +989,6 @@ function mePick(id) {
   });
 }
 
-function OpenInNewTab(result) {
-  var win = window.open("bill.php", '_blank');
-  win.document.write(result);
-  document.getElementById('searchresult').innerHTML(result);
-  win.focus();
-}
-
 function validatebill(id) {
   var percent = $('#percentage'+id).val();
   var type = "request";
@@ -1003,17 +996,7 @@ function validatebill(id) {
     alert("Please select Percentage");
   }
   else {
-    var dataString = "sr_id=" + id + "&percent=" + percent + "&type=" + type ; 
-    $.ajax({
-      type: "POST",
-      url: "ajax/bills.php",
-      data: dataString,
-      cache: false,
-      success: function(result){
-        $("#workerform_"+id).show().html(result);
-        OpenInNewTab(result);
-      }
-    });
+    window.open("ajax/bills.php?sr_id="+id+"&percent="+percent+"&type="+type, '_blank')
     return false;
   }
 }

@@ -2,6 +2,9 @@
 session_start();
 
 require_once "../components/dbConnection.php";
+if (!isset($_SESSION['user_id'])) {  
+    header('Location: index.php');
+}
 
 if(isset($_POST['sr_id'])){
 	$sr_id = $_POST['sr_id'];
