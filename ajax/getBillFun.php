@@ -33,7 +33,7 @@ function getBillFun($customerName, $invoiceDate, $address, $invoicNo, $clientPho
     <COL WIDTH=344>
     <TR VALIGN=TOP>
         <TD WIDTH=360>
-            <P LANG='en-US' CLASS='western'><IMG SRC='images/0751950001455634707_deepali_soni_html_160f19bd.png' NAME='Image1' ALIGN=LEFT WIDTH=133 HEIGHT=109 BORDER=0><BR>
+            <P LANG='en-US' CLASS='western'><IMG SRC='../images/0751950001455634707_deepali_soni_html_160f19bd.png' NAME='Image1' ALIGN=LEFT WIDTH=133 HEIGHT=109 BORDER=0><BR>
             </P>
         </TD>
         <TD WIDTH=344>
