@@ -991,12 +991,13 @@ function mePick(id) {
 
 function validatebill(id) {
   var percent = $('#percentage'+id).val();
+  var discount = $('#discount'+id).val();
   var type = "request";
   if(percent == 0){
     alert("Please select Percentage");
   }
   else {
-    window.open("ajax/bills.php?sr_id="+id+"&percent="+percent+"&type="+type, '_blank')
+    window.open("ajax/bills.php?sr_id="+id+"&percent="+percent+"&type="+type+"&discount="+discount, '_blank')
     return false;
   }
 }
@@ -1011,6 +1012,14 @@ function generateBill(id) {
                         "<option value='20' >20 Percent</option>"+
                         "<option value='80' >80 Percent</option>"+
                         "<option value='100' >On-Demand</option>"+
+                      "</select>"+
+                    "</div>"+
+                    "<label class='col-md-3 control-label'>Select CEM Discount</label>"+
+                    "<div class='col-md-3'>"+
+                      "<select id='discount"+id+"'>"+
+                        "<option value='0' selected>No Discount</option>"+
+                        "<option value='5' >5 Percent</option>"+
+                        "<option value='10' >10 Percent</option>"+
                       "</select>"+
                     "</div>"+
                   "</div>"+

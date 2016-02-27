@@ -11,6 +11,7 @@ if(isset($_GET['sr_id'])){
 	$percent = $_GET['percent'];
 	$type = $_GET['type'];
 	$sr_id = $_GET['sr_id'];
+	$discount = $_GET['discount'];
 	$user_id = $_SESSION['user_id'];
 	var_dump($_GET);
 	if($type == 'worker'){
@@ -41,24 +42,47 @@ if(isset($_GET['sr_id'])){
 		$workeraddress = $workerRow['current_address'] ;
 		$service_tax = (($salary*(14.5))/100) ;
 		$subtotal = ($service_tax + $salary);
+		$invoiceDate = date('d-m-Y');
 		if($percent == '20'){
-			$tobepaid = ($subtotal/5);
-			$pending = ($subtotal-$tobepaid);
+			if($discount != 0){
+				$cemDiscount = (($salary*$discount)/100);
+				$tobepaid = (($subtotal-$cemDiscount)/5);
+				$pending = ($tobepaid*4);
+				$finalTotal = ($tobepaid+$pending);
+			}
+			else {
+				$cemDiscount = 0 ;
+				$tobepaid = ($subtotal/5);
+				$pending = ($tobepaid*4);
+				$finalTotal = ($tobepaid+$pending);
+			}
+			gettwentyBillFun($clientname, $invoiceDate, $clientaddress, $invoice_id, $clientarea, $clientmobile, $clientemail,
+                    $requirements, $workername, $workeraddress, $workermobile, $startingDate, $salary,
+                    $subtotal, $service_tax, $discount, $cemDiscount, $tobepaid, $pending, $finalTotal, $couponNo);
 		}
 		else if($percent == '80'){
-			$paid = ($subtotal/5);
-			$tobepaid = ($subtotal-$paid);
+			if($discount != 0){
+				$cemDiscount = (($salary*$discount)/100);
+				$paid = (($subtotal-$cemDiscount)/5);
+				$tobepaid = ($paid*4);
+				$finalTotal = ($tobepaid+$paid);
+			}
+			else {
+				$cemDiscount = 0 ;
+				$paid = ($subtotal/5);
+				$tobepaid = ($paid*4);
+				$finalTotal = ($tobepaid+$paid);
+			}
+			geteightyBillFun($clientname, $invoiceDate, $clientaddress, $invoice_id, $clientarea, $clientmobile, $clientemail,
+                    $requirements, $workername, $workeraddress, $workermobile, $startingDate, $salary,
+                    $subtotal, $service_tax, $discount, $cemDiscount, $paid, $tobepaid, $finalTotal, $couponNo);
 		}
 		else {
 			$tobepaid = $salary;
-		}
-		$invoiceDate = date('d-m-Y');
-		/*echo $invoice_id.",".$clientname.",".$clientmobile.",".$clientaddress.",".$clientarea.",".",".$clientemail.",".$requirements.",".
-				$salary.",".$workername.",".$workermobile.",".$workeraddress.",".$service_tax.",".$subtotal.",".$tobepaid ;*/
-
-		getBillFun($clientname, $invoiceDate, $clientaddress, $invoice_id, $clientmobile, $clientemail,
+			getondemandBillFun($clientname, $invoiceDate, $clientaddress, $invoice_id, $clientarea, $clientmobile, $clientemail,
                     $requirements, $workername, $workeraddress, $workermobile, $startingDate, $salary,
-                    $subtotal, $service_tax, $cemDiscount, $tobepaid, $pending, $subtotal, $couponNo);
+                    $subtotal, $service_tax, $discount, $cemDiscount, $tobepaid, $pending, $subtotal, $couponNo);
+		}
 	}
 }
 mysqli_close($db_handle);
