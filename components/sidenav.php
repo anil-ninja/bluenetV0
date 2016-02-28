@@ -64,13 +64,29 @@
 <?php }
   else if ($_SESSION["employee_type"] ==  "ba" ) { 
 ?>
-  <li id='12'><a onclick="getRequestData('followback');">
-    <div class="icon-bg bg-blue"></div><i class="glyphicon glyphicon-repeat"></i>
-    <span class="menu-title">Follow back Requests</span><?php echo countRequest('followback', $type, $user_id, $db_handle); ?></a>
+  <li ><a onclick="getRequestData('maingraph');">
+    <div class="icon-bg bg-orange"></div><i class="glyphicon glyphicon-home"></i>
+    <span class="menu-title">Request Graph</span></a>
   </li>
-  <li id='13'><a onclick="getRequestData('feedback');">
-    <div class="icon-bg bg-blue"></div><i class="glyphicon glyphicon-repeat"></i>
-    <span class="menu-title">Feedback Requests</span><?php echo countRequest('feedback', $type, $user_id, $db_handle); ?></a>
+  <li ><a onclick="getRequestData('monthlyandondemand');">
+    <div class="icon-bg bg-orange"></div><i class="glyphicon glyphicon-search"></i>
+    <span class="menu-title">Type Graph</span></a>
+  </li>
+  <li><a onclick="getRequestData('typeRequest');">
+    <div class="icon-bg bg-pink"></div><i class="glyphicon glyphicon-calendar"></i>
+    <span class="menu-title">Service Graph</span></a>   
+  </li>
+  <li ><a onclick="getRequestData('collectionRate');">
+    <div class="icon-bg bg-pink"></div><i class="glyphicon glyphicon-asterisk"></i>
+    <span class="menu-title">Collection Rate</span></a>   
+  </li>
+  <li ><a onclick="getRequestData('finencial');">
+    <div class="icon-bg bg-pink"></div><i class="glyphicon glyphicon-ok"></i>
+    <span class="menu-title">Finencial Graph</span></a>   
+  </li>
+  <li ><a onclick="getRequestData('users');">
+    <div class="icon-bg bg-pink"></div><i class="glyphicon glyphicon-search"></i>
+    <span class="menu-title">All Employees</span></a>   
   </li>
 <?php }  
   else { 
@@ -107,13 +123,13 @@
   </li>
   <li id='21'><a onclick="getRequestData('me_open');">
     <div class="icon-bg bg-pink"></div><i class="glyphicon glyphicon-search"></i>
-    <span class="homenu-title">ME Open</span><?php echo countRequest('home_open', $type, $user_id, $db_handle); ?></a>   
+    <span class="homenu-title">ME Open</span><?php echo countRequest('me_open', $type, $user_id, $db_handle); ?></a>   
   </li>
   <li id='22'><a onclick="getRequestData('cem_open');">
     <div class="icon-bg bg-pink"></div><i class="glyphicon glyphicon-search"></i>
-    <span class="homenu-title">CEM Open</span><?php echo countRequest('home_open', $type, $user_id, $db_handle); ?></a>   
+    <span class="homenu-title">CEM Open</span><?php echo countRequest('cem_open', $type, $user_id, $db_handle); ?></a>   
   </li>
-  <li id='23'><a onclick="getRequestData('cem_open');">
+  <li id='23'><a onclick="getRequestData('salary_issue');">
     <div class="icon-bg bg-blue"></div><i class="glyphicon glyphicon-usd"></i>
     <span class="homenu-title">Salary Issues</span><?php echo countRequest('salary_issue', $type, $user_id, $db_handle); ?></a>
   </li>

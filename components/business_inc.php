@@ -1,7 +1,9 @@
 <div id="cchart"></div>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <?php
-  $status = $_GET['status'];
+ 
+  if(!isset($_GET['status'])) $status = "main";
+  else $status = $_GET['status'];
   $user_id = $_SESSION['user_id'];
   switch ($status) {
     case 'monthlyandondemand':
@@ -84,13 +86,13 @@
 
       $oldKey = null;
       $i = 0;
-      function getDatesFromRange($start, $end){
+      /*function getDatesFromRange($start, $end){
         $dates = array($start);
         while(end($dates) < $end){
             $dates[] = date('Y-m-d', strtotime(end($dates).' +1 day'));
         }
         return $dates;
-      }
+      }*/
       $startDate = "";
       $resultDate = array();
       foreach ($data as $date => $statusArr) {
@@ -120,10 +122,10 @@
         }
         $resultDate[] = $date ;
       }
-      end($data);         // move the internal pointer to the end of the array
+      /*end($data);         // move the internal pointer to the end of the array
       $endingDate = key($data);  // fetches the key of the element pointed to by the internal pointer
       $Alldates = getDatesFromRange($startDate, $endingDate);
-      $remainingDates = array_diff($Alldates, $resultDate);
+      $remainingDates = array_diff($Alldates, $resultDate);*/
       //print_r($data);
 
       $sql2 =  mysqli_query($db_handle, "SELECT DISTINCT DATE(date) as date , count(id) AS cnt 
@@ -172,7 +174,9 @@
       }
       $graphData = $graphData ."[new Date($newdate),".$value['open'].",".$value['followback'].",".$value['demo'].",".$value['feedback'].",".$value['done'].",".$value['delete']
         .",".$value['just_to_know'].",".$value['not_interested'].",".$value['decay'].",".$value['meeting'].",".$value['salary_issue']."]";
+      
       break;
+      
   }
 ?>
 <script type="text/javascript">
@@ -207,7 +211,7 @@
           title: 'No. of requests'
         }
       },
-      width: 900,
+      width: 750,
       height: 500
     };
     var formatter_medium = new google.visualization.DateFormat({formatType: 'medium'});
@@ -216,7 +220,4 @@
     var chart = new google.charts.Line(document.getElementById('cchart'));
     chart.draw(data, google.charts.Line.convertOptions(options));
   }
-</script>
-<script type="text/javascript">
-   $('#example1').DataTable();
 </script>

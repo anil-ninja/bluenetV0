@@ -28,8 +28,8 @@ if (!isset($_SESSION['user_id'])) {
   <?php require_once "components/navbar.php"; ?>
   <div id="wrapper">
    <!--BEGIN SIDEBAR MENU-->
-    <nav id="sidebar" role="navigation" data-step="2" data-intro="Template has &lt;b&gt;many navigation styles&lt;/b&gt;" data-position="right" class="navbar-default navbar-static-side">
-      <div class="sidebar-collapse menu-scroll">
+    <nav id="sidebar" role="navigation" data-step="2" data-position="right" class="navbar-default navbar-static-side">
+      <div class="sidebar-collapse menu-scroll" >
         <ul id="side-menu" class="nav">      
           <div class="clearfix"></div>
           <?php include_once "components/sidenav.php"; ?>
@@ -58,11 +58,11 @@ if (!isset($_SESSION['user_id'])) {
             <div class="col-lg-9">
               <div class="searchresult"></div>
               <div class="panel-primary middlePanel">
-                <?php require_once "components/page_contect.php"; ?>
+                <?php //require_once "components/page_contect.php"; ?>
               </div>
             </div>
             <div class="col-lg-3">
-              <?php if($_SESSION['employee_type'] != 'ba' OR $_SESSION['employee_type'] != 'operator') require_once "components/requestsearchform.php"; ?>
+              <?php if(($_SESSION['employee_type'] != 'ba') AND ($_SESSION['employee_type'] != 'operator')) require_once "components/requestsearchform.php"; ?>
             </div>
           </div>
         </div>
@@ -71,9 +71,7 @@ if (!isset($_SESSION['user_id'])) {
   </div>
   <?php include_once "components/footers.php"; ?>
   <script type="text/javascript">
-  	$(document).ready(function() {
-  	  getRequestData(<?= $_SESSION['employee_type'] ?>, 0);
-  	});   
+  	  getDefaultData(<?php echo "\"".$_SESSION['employee_type']."\"" ; ?>); 
 	</script>
 </body>
 </html>
