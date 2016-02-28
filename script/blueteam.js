@@ -632,7 +632,7 @@ function postStatus(dataString) {
     cache: false,
     success: function(result){
       alert("Changed Successfully");
-      location.reload();
+      requestData("this");
     },
     error: function(result){
       alert(result);
@@ -983,7 +983,7 @@ function mePick(id) {
         data: "request_id="+id,
         cache: false,
         success: function(result){
-          location.reload();
+          requestData("this");
         },
         error: function(result){
           console.log("inside error");
@@ -1135,7 +1135,7 @@ function validateSearch() {
 }
 
 function requestData(status) {
-   $.ajax({
+  $.ajax({
     type: "POST",
     url: "ajax/requestData.php",
     data: "status="+ status ,
