@@ -22,3 +22,6 @@
   <script type="text/javascript" src="https://cdn.datatables.net/s/dt/dt-1.10.10/datatables.min.js"></script>
   <!--CORE JAVASCRIPT-->
   <script src="script/main.js"></script>
+  <script type="text/javascript">
+    setTimeout( function() { $(".r1").click(); }, 2000);
+  </script>

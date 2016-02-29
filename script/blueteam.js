@@ -265,6 +265,8 @@ function validateWorkerDetails(request_id, id){
   if(genericEmptyFieldValidator(fields)){
     var x = document.getElementsByClassName("values").length;
     var c = document.getElementsByClassName("workerareavalues").length;
+    var diff1 = time.split(':')[0];
+    var diff2 = time2.split(':')[0];
     if(time == 0 || time2 == 0 || parseInt(time2) < parseInt(time)){
       alert('Enter valid work timing');
     }
@@ -274,6 +276,7 @@ function validateWorkerDetails(request_id, id){
     else if(work_time == 0){
       alert('Enter valid working time');
     }
+    else if((parseInt(diff2)-parseInt(diff1)) != work_time)  alert('Please check worker timings and working time accordingly');
     else if(x == 0 && (newskill == "" || newskill == " " || newskill == null)){
       alert('Please enter or select a Skill');
     }
@@ -374,6 +377,8 @@ function validateRequestDetails(){
     var a = document.getElementsByClassName("values").length;
     var b = document.getElementsByClassName("areavalues").length;
     var c = document.getElementsByClassName("workerareavalues").length;
+    var diff1 = time.split(':')[0];
+    var diff2 = time2.split(':')[0];
     if(time == 0 || time2 == 0 || parseInt(time2) < parseInt(time)){
       alert('Enter valid work timing');
     }
@@ -383,6 +388,7 @@ function validateRequestDetails(){
     else if(work_time == 0){
       alert('Enter valid working time');
     }
+    else if((parseInt(diff2)-parseInt(diff1)) != work_time)  alert('Please check worker timings and working time accordingly');
     else if(a == 0 && (newskill == "" || newskill == " " || newskill == null)){
       alert('Please enter or select a Skill');
     }
@@ -626,7 +632,7 @@ function postStatus(dataString) {
     cache: false,
     success: function(result){
       alert("Changed Successfully");
-      location.reload();
+      requestData("this");
     },
     error: function(result){
       alert(result);
@@ -977,7 +983,7 @@ function mePick(id) {
         data: "request_id="+id,
         cache: false,
         success: function(result){
-          location.reload();
+          requestData("this");
         },
         error: function(result){
           console.log("inside error");
@@ -991,21 +997,13 @@ function mePick(id) {
 
 function validatebill(id) {
   var percent = $('#percentage'+id).val();
+  var discount = $('#discount'+id).val();
   var type = "request";
   if(percent == 0){
     alert("Please select Percentage");
   }
   else {
-    var dataString = "sr_id=" + id + "&percent=" + percent + "&type=" + type ; 
-    $.ajax({
-      type: "POST",
-      url: "ajax/bills.php",
-      data: dataString,
-      cache: false,
-      success: function(result){
-        $("#userDetails_"+userId).show().html(result);
-      }
-    });
+    window.open("ajax/bills.php?sr_id="+id+"&percent="+percent+"&type="+type+"&discount="+discount, '_blank')
     return false;
   }
 }
@@ -1019,7 +1017,14 @@ function generateBill(id) {
                         "<option value='0' >Select Percentage</option>"+
                         "<option value='20' >20 Percent</option>"+
                         "<option value='80' >80 Percent</option>"+
-                        "<option value='100' >On-Demand</option>"+
+                      "</select>"+
+                    "</div>"+
+                    "<label class='col-md-3 control-label'>Select CEM Discount</label>"+
+                    "<div class='col-md-3'>"+
+                      "<select id='discount"+id+"'>"+
+                        "<option value='0' selected>No Discount</option>"+
+                        "<option value='5' >5 Percent</option>"+
+                        "<option value='10' >10 Percent</option>"+
                       "</select>"+
                     "</div>"+
                   "</div>"+
@@ -1130,7 +1135,7 @@ function validateSearch() {
 }
 
 function requestData(status) {
-   $.ajax({
+  $.ajax({
     type: "POST",
     url: "ajax/requestData.php",
     data: "status="+ status ,
@@ -1148,7 +1153,6 @@ function requestData(status) {
 
 function getstatics() {
   $.get('../components/static.php', function(data) {
-    alert(data);
     $('.middlePanel').html('');
     $('.middlePanel').append(data);
   });
@@ -1156,7 +1160,6 @@ function getstatics() {
 
 function getallprintArea() {
   $.get('../components/printArea.php', function(data) {
-    alert(data);
     $('.middlePanel').html('');
     $('.middlePanel').append(data);
   });
@@ -1164,7 +1167,6 @@ function getallprintArea() {
 
 function insertnewworkerform() {
   $.get('../components/workerform.php', function(data) {
-    alert(data);
     $('.middlePanel').html('');
     $('.middlePanel').append(data);
     $('#birth_date').datepicker();
@@ -1175,7 +1177,6 @@ function insertnewworkerform() {
 
 function insertnewrequestform() {
   $.get('../components/requestform.php', function(data) {
-    alert(data);
     $('.middlePanel').html('');
     $('.middlePanel').append(data);
     $('#created_time').datepicker();
@@ -1186,7 +1187,6 @@ function insertnewrequestform() {
 
 function insertnewuserform() {
   $.get('../components/userform.php', function(data) {
-    alert(data);
     $('.middlePanel').html('');
     $('.middlePanel').append(data);
     $('#created_time').datepicker();
@@ -1195,35 +1195,103 @@ function insertnewuserform() {
   });
 }
 
+function getgraphs(type){
+  $.get('../components/business_inc.php?status='+type, function(data) {
+    $('.middlePanel').html('');
+    $('.middlePanel').append(data);
+    if(type = "users") $('#example1').DataTable();
+    //drawChart();
+  });
+}
+
 function getRequestData(status){
   switch(status){
     case 'addUser':
       insertnewuserform();
-      document.getElementById('14').setAttribute("class", "active");
       break; 
 
     case 'addRequest':
       insertnewrequestform();
-      document.getElementById('32').setAttribute("class", "active");
-      break;  
+      break;
+
+    case 'users':
+      getgraphs('users');
+      break;
+
+    case 'finencial':
+      getgraphs('finencial');
+      break;
+
+    case 'collectionRate':
+      getgraphs('collectionRate');
+      break;
+
+    case 'typeRequest':
+      getgraphs('typeRequest');
+      break;
+
+    case 'monthlyandondemand':
+      getgraphs('monthlyandondemand');
+      break;
+
+    case 'maingraph':
+      getgraphs('maingraph');
+      break;
 
     case 'addWorker':
       insertnewworkerform();
-      document.getElementById('33').setAttribute("class", "active");
       break;  
 
     case 'printArea':
       getallprintArea();
-      document.getElementById('31').setAttribute("class", "active");
       break;  
 
     case 'statics':
       getstatics();
-      document.getElementById('15').setAttribute("class", "active");
       break; 
 
     default :
       requestData(status);
+      break;
+  }
+}
+
+function getDefaultData(employee_type) {
+  switch(employee_type){
+    case 'me':
+      requestData("0");
+      break; 
+
+    case 'cem':
+      requestData("0");
+      break;  
+
+    case 'admin':
+      requestData("all");
+      break;  
+
+    case 'cem_manager':
+      getstatics();
+      break; 
+
+    case 'accountant':
+      insertnewuserform();
+      break;
+
+    case 'ba':
+      getgraphs('maingraph');
+      break;
+
+    case 'dev':
+      insertnewuserform();
+      break;
+
+    case 'operator':
+      insertnewuserform();
+      break; 
+
+    default :
+      insertnewuserform();
       break;
   }
 }

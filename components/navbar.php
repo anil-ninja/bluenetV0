@@ -1,7 +1,7 @@
 <div id="header-topbar-option-demo" class="page-header-topbar">
   <nav id="topbar" role="navigation" style="margin-bottom: 0;" data-step="3" class="navbar navbar-default navbar-static-top">
     <div class="navbar-header">
-      <button type="button" data-toggle="collapse" data-target=".sidebar-collapse" class="navbar-toggle">
+      <button type="button" id="toggleSideNav" data-toggle="collapse" data-target=".sidebar-collapse" class="navbar-toggle">
         <span class="sr-only">Toggle navigation</span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
@@ -14,7 +14,7 @@
       </a>
     </div>
     <div class="topbar-main">
-      <a id="menu-toggle" href="#" class="hidden-xs"><i class="fa fa-bars"></i></a>
+      <a id="menu-toggle"  href="#" class="hidden-xs r1"><i class="fa fa-bars"></i></a>
       <form id="topbar-search" onsubmit="return(validateSearch());" class="hidden-sm hidden-xs">
         <div class="input-icon right text-white">
           <a onclick="return(validateSearch());"><i class="fa fa-search"></i></a>

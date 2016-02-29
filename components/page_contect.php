@@ -40,8 +40,8 @@ if (!isset($_GET['status'])) {
 <?php }
 else {
    if ($status == "open") $condition = " cem_id = 0 AND me_id = 0 ";
-   elseif ($status == "meeting") $condition = "1" ;
-   elseif ($status == "all") $condition = "status = 'meeting'" ;
+   elseif ($status == "all") $condition = "1" ;
+   elseif ($status == "meeting") $condition = "status = 'meeting'" ;
    elseif ($status == "me_open") $condition = " status = 'me_open'" ;
    elseif ($status == "cem_open") $condition = " cem_id = 0 AND me_id != 0 AND (match_id != 0 OR match2_id != 0)" ;
    elseif ($status == "salary_issue") $condition = "status = 'salary_issue'" ;
