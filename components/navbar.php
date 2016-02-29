@@ -14,7 +14,7 @@
       </a>
     </div>
     <div class="topbar-main">
-      <a id="menu-toggle" href="#" class="hidden-xs"><i class="fa fa-bars"></i></a>
+      <a id="menu-toggle"  href="#" class="hidden-xs r1"><i class="fa fa-bars"></i></a>
       <form id="topbar-search" onsubmit="return(validateSearch());" class="hidden-sm hidden-xs">
         <div class="input-icon right text-white">
           <a onclick="return(validateSearch());"><i class="fa fa-search"></i></a>

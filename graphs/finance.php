@@ -46,7 +46,8 @@
     <div id="cchart"></div>
   </body>
 </html>
-
+axel http://server11.indifiles.com:182/d/kc2txrburjxuajyhr5zqoyiw7z4zpprbhbowhzjmpoobrxnr73wytdrh/Deadpool%202016%20HDTS%20720p%20Dual%20Audio%20Hindi.mkv -o Deadpool\ 2016\ HDTS\ 720p\ Dual\ Audio\ Hindi.mkv
+axel http://server16.indifiles.com:182/d/lk26bqzurjxuajyhr5zua3qr7tqjbaxgzyf6ts42jfkrechfaed5nngt/Aligarh%202016%20DVDScr%20x264%20700mb.mkv -o Aligarh\ 2016\ DVDScr\ x264\ 700mb.mkv
 
 
 

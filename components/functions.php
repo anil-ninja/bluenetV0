@@ -29,7 +29,7 @@ function httpGet($url){
 
 function route($type){
 	switch ($type) {
-		case 'admin':
+		/*case 'admin':
 			return header("Location: request.php");
 			break;
 		case 'me':
@@ -43,16 +43,16 @@ function route($type){
 			break;
 		case 'cem_manager':
 			return header("Location: statics.php");
-			break;
+			break;*/
 		case 'ba':
 			return header("Location: business.php");
 			break;
-		case 'dev':
+		/*case 'dev':
 			return header("Location: developer.php");
 			break;
 		case 'operator':
 			return header("Location: insert.php");
-			break;
+			break;*/
 		default:
 			return header("Location: home.php");
 			break;
@@ -150,8 +150,9 @@ function countRequest($status, $type, $user_id, $db_handle){
 			return header("Location: developer.php");
 			break;
 		case 'operator':
-			if(!isset($status)) $condition = " status = 'followback' ";
-			else $condition = " status = ".$status." ";
+			if($status == 'followback') $condition = " status = 'followback' ";
+			else if($status == 'feedback') $condition = " status = 'feedback' ";
+			else $condition = " status = 'feedback' ";
 			break;
 		default:
 			$condition = "status = '$status' " ;
@@ -212,4 +213,5 @@ function headerColor($value){
 	}
 	return $data ;
 }
+
 ?>

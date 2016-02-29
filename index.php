@@ -17,7 +17,7 @@ if (isset($_POST['login'])) {
 		$_SESSION['email'] = $responseRow['email'];
         $_SESSION['user_id'] = $responseRow['id'];
 		$_SESSION['employee_type'] = $responseRow['employee_type'];
-        header("Location: home.php");
+        route($_SESSION['employee_type']);
 	}
 	else {
 		echo "<center ><b>Sorry! Invalid username or password!</b></center>";      
