@@ -10,7 +10,7 @@
   <script src="script/jquery.slimscroll.js"></script>
   <script src="script/jquery.cookie.js"></script>
   <script src="script/custom.min.js"></script>
-  <script src="script/jquery.news-ticker.js"></script>
+  
   <script src="script/jquery.menu.js"></script>
   <script src="script/pace.min.js"></script>
   <script src="script/holder.js"></script>
@@ -21,7 +21,7 @@
   <script src="script/jquery-ui-timepicker-addon.js"></script>
   <script type="text/javascript" src="https://cdn.datatables.net/s/dt/dt-1.10.10/datatables.min.js"></script>
   <!--CORE JAVASCRIPT-->
-  <script src="script/main.js"></script>
+  
   <script type="text/javascript">
     setTimeout( function() { $(".r1").click(); }, 2000);
   </script>

@@ -366,9 +366,9 @@ if (!isset($_SESSION['user_id'])) {
                     </div>
                   </div>
                 </form>
-    				  </div>
-    			  </div>
     		  </div>
+    		</div>
+    	  </div>
         </div>
       </div>
     </div>

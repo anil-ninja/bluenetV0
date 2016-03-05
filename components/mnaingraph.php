@@ -1,3 +1,4 @@
+<canvas id="cchart" width="900" height="500"></canvas>
 <?php
   $user_id = $_SESSION['user_id'];
   $data = array();
@@ -13,7 +14,7 @@
     $cnt = $totalreqRow['cnt'];
     foreach($data as $key => $value){
       if($key == $date2){
-        $data[$key] = isset($data[$date2])?array_merge($data[$key],array('Toatal' => $cnt)):array('Total' => $cnt);
+        $data[$key] = isset($data[$date2])?array_merge($data[$key],array('Total' => $cnt)):array('Total' => $cnt);
       }
     }
   }
@@ -56,7 +57,7 @@
       $oldKey = $date;
     }
     else {
-      if(!isset($statusArr['Toatal'])) $statusArr['Toatal'] = 0;
+      if(!isset($statusArr['Total'])) $statusArr['Total'] = 0;
       if(!isset($statusArr['24 hour'])) $statusArr['24 hour'] = 0;
       if(!isset($statusArr['open'])) $statusArr['open'] = 0;
       if(!isset($statusArr['followback'])) $statusArr['followback'] = 0;
@@ -90,7 +91,7 @@
   foreach($data2015 as $key => $value){
     $date = explode('-', $key);
     $newdate = $date[0].",".$date[1].",".$date[2];
-    if(!isset($value['Toatal']))$value['Toatal'] = 0;
+    if(!isset($value['Total']))$value['Total'] = 0;
     if(!isset($value['followback']))$value['followback'] = 0;
     if(!isset($value['done']))$value['done'] = 0;
     if(!isset($value['just_to_know']))$value['just_to_know'] = 0;
@@ -99,10 +100,10 @@
     if(!isset($value['salary_issue']))$value['salary_issue'] = 0;
     if(!isset($value['24 hour']))$value['24 hour'] = 0;
 
-    $graphData2015 .= "[new Date($newdate),".$value['Toatal'].",".$value['followback'].",".$value['done'].",".$value['just_to_know'].",".
+    $graphData2015 .= "[new Date($newdate),".$value['Total'].",".$value['followback'].",".$value['done'].",".$value['just_to_know'].",".
                                 $value['not_interested'].",".$value['decay'].",".$value['salary_issue'].",".$value['24 hour']."],";
   }
-  $graphData2015 = $graphData2015 ."[new Date($newdate),".$value['Toatal'].",".$value['followback'].",".$value['done'].",".$value['just_to_know'].",".
+  $graphData2015 = $graphData2015 ."[new Date($newdate),".$value['Total'].",".$value['followback'].",".$value['done'].",".$value['just_to_know'].",".
                                 $value['not_interested'].",".$value['decay'].",".$value['salary_issue'].",".$value['24 hour']."]";
   */
 
@@ -119,7 +120,7 @@
     //$date = explode('-', $key);
     //$newdate = $date[0].",".($date[1]-1).",".$date[2];
     $graphDates .= "\"".$key."\",";
-    if(!isset($value['Toatal']))$value['Toatal'] = 0;
+    if(!isset($value['Total']))$value['Total'] = 0;
     if(!isset($value['followback']))$value['followback'] = 0;
     if(!isset($value['done']))$value['done'] = 0;
     if(!isset($value['just_to_know']))$value['just_to_know'] = 0;
@@ -127,7 +128,7 @@
     if(!isset($value['decay']))$value['decay'] = 0;
     if(!isset($value['salary_issue']))$value['salary_issue'] = 0;
     if(!isset($value['24 hour']))$value['24 hour'] = 0;
-    $graphDataTotal .= $value['Toatal'].",";
+    $graphDataTotal .= $value['Total'].",";
     $graphDatafollowback .= $value['followback'].",";
     $graphDatadone .= $value['done'].",";
     $graphDataknow .= $value['just_to_know'].",";
@@ -135,10 +136,10 @@
     $graphDatadecay .= $value['decay'].",";
     $graphDataSallary .= $value['salary_issue'].",";
     $graphData24 .= $value['24 hour'].",";
-    /*$graphData .= "[new Date($newdate),".$value['Toatal'].",".$value['followback'].",".$value['done'].",".$value['just_to_know'].",".
+    /*$graphData .= "[new Date($newdate),".$value['Total'].",".$value['followback'].",".$value['done'].",".$value['just_to_know'].",".
                                 $value['not_interested'].",".$value['decay'].",".$value['salary_issue'].",".$value['24 hour']."],";*/
   }
-  $graphDataTotal = $graphDataTotal.$value['Toatal'];
+  $graphDataTotal = $graphDataTotal.$value['Total'];
   $graphDatafollowback = $graphDatafollowback.$value['followback'];
   $graphDatadone = $graphDatadone.$value['done'];
   $graphDataknow = $graphDataknow.$value['just_to_know'];

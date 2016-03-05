@@ -1195,11 +1195,15 @@ function insertnewuserform() {
   });
 }
 
+function showDatable() {
+   setTimeout( function() { $('#example1').DataTable(); }, 5000);
+}
+
 function getgraphs(type){
   $.get('../components/business_inc.php?status='+type, function(data) {
     $('.middlePanel').html('');
     $('.middlePanel').append(data);
-    if(type = "users") $('#example1').DataTable();
+    if(type = "users") showDatable();
     //drawChart();
   });
 }
